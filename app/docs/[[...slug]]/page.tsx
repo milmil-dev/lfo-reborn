@@ -1,4 +1,6 @@
+import type { TOCItemType } from "fumadocs-core/toc";
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/layouts/docs/page";
+import type { MDXContent } from "mdx/types";
 import { notFound } from "next/navigation";
 import { GiscusComments } from "@/components/giscus-comments";
 import { source } from "@/lib/source";
@@ -8,15 +10,16 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 	const page = source.getPage(params.slug);
 	if (!page) notFound();
 
-	const MDXContent = page.data.body;
-	const editUrl = `https://github.com/niskan516/lfo-wiki/edit/main/${page.file.path}`;
+	const data = page.data as typeof page.data & { body: MDXContent; toc: TOCItemType[] };
+	const MDXBody = data.body;
+	const editUrl = `https://github.com/niskan516/lfo-wiki/edit/main/${page.path}`;
 
 	return (
-		<DocsPage toc={page.data.toc}>
-			<DocsTitle>{page.data.title}</DocsTitle>
-			<DocsDescription>{page.data.description}</DocsDescription>
+		<DocsPage toc={data.toc}>
+			<DocsTitle>{data.title}</DocsTitle>
+			<DocsDescription>{data.description}</DocsDescription>
 			<DocsBody>
-				<MDXContent />
+				<MDXBody />
 			</DocsBody>
 			<a
 				href={editUrl}
