@@ -28,8 +28,9 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .env.production.local
 .env.local
 
-# superpowers brainstorm artifacts
+# superpowers
 .superpowers
+.worktrees
 
 # caches
 .eslintcache
