@@ -3,9 +3,9 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
+		"dev": "vite dev",
+		"build": "vite build",
+		"start": "vite preview",
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",
 		"format": "biome format --write ."
@@ -15,22 +15,26 @@
 		"@commitlint/cli": "^20.4.4",
 		"@commitlint/config-conventional": "^20.4.4",
 		"@tailwindcss/postcss": "^4.2.1",
-		"@types/mdx": "^2.0.13",
+		"@tanstack/router-plugin": "^1.166.8",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
 		"lefthook": "^2.1.4",
 		"postcss": "^8.5.8",
 		"tailwindcss": "^4.2.1",
-		"typescript": "^5.9.3"
+		"typescript": "^5.9.3",
+		"vite-tsconfig-paths": "^6.1.1"
 	},
 	"dependencies": {
 		"@giscus/react": "^3.1.0",
+		"@tanstack/react-router": "^1.166.8",
+		"@tanstack/react-start": "^1.166.9",
+		"@vitejs/plugin-react": "^6.0.1",
 		"fumadocs-core": "^16.6.17",
 		"fumadocs-mdx": "^14.2.10",
 		"fumadocs-ui": "^16.6.17",
 		"motion": "^12.36.0",
-		"next": "^16.1.6",
 		"react": "^19.2.4",
-		"react-dom": "^19.2.4"
+		"react-dom": "^19.2.4",
+		"vite": "^8.0.0"
 	}
 }
