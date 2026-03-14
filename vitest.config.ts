@@ -8,8 +8,8 @@ export default defineConfig({
 	},
 	test: {
 		environment: "jsdom",
-		include: ["**/*.test.{ts,tsx}"],
-		exclude: ["node_modules", "dist", ".vinxi", "e2e"],
+		include: ["test/**/*.test.{ts,tsx}", "lib/**/*.test.{ts,tsx}", "components/**/*.test.{ts,tsx}"],
+		exclude: ["node_modules", "dist", ".vinxi", ".worktrees", "e2e"],
 		setupFiles: ["./test/setup.ts"],
 	},
 });
