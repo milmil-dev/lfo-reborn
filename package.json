@@ -14,12 +14,11 @@
 		"@biomejs/biome": "^2.4.7",
 		"@commitlint/cli": "^20.4.4",
 		"@commitlint/config-conventional": "^20.4.4",
-		"@tailwindcss/postcss": "^4.2.1",
+		"@tailwindcss/vite": "^4.2.1",
 		"@tanstack/router-plugin": "^1.166.8",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
 		"lefthook": "^2.1.4",
-		"postcss": "^8.5.8",
 		"tailwindcss": "^4.2.1",
 		"typescript": "^5.9.3",
 		"vite-tsconfig-paths": "^6.1.1"
