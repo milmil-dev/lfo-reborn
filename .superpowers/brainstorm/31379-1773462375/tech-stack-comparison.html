@@ -1,0 +1,73 @@
+<h2>Tech Stack: Which approach fits LFO資料博物館?</h2>
+<p class="subtitle">Static archive site • Dark immersive theme • ~48 characters, 19 sections • Traditional Chinese</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Astro.js (Recommended)</h3>
+      <p><strong>Purpose-built for content-heavy static sites.</strong></p>
+      <ul style="margin:8px 0;padding-left:20px;opacity:0.85;font-size:14px;">
+        <li>Zero JavaScript by default — ships pure HTML/CSS</li>
+        <li>Content Collections for organizing characters, stories, items</li>
+        <li>Markdown/MDX for content — easy to write and maintain</li>
+        <li>Islands architecture — add interactivity only where needed</li>
+        <li>Tiny output bundle — fast on any hosting</li>
+        <li>Built-in image optimization</li>
+        <li>Deploy anywhere: Vercel, Netlify, GitHub Pages, Cloudflare</li>
+      </ul>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Smallest possible output size</li><li>Perfect for static content sites</li><li>Content collections = structured data without DB</li><li>Great DX with hot reload</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Smaller ecosystem than Next.js</li><li>Less familiar if you know React well</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Next.js (Static Export)</h3>
+      <p><strong>Full React framework with static export mode.</strong></p>
+      <ul style="margin:8px 0;padding-left:20px;opacity:0.85;font-size:14px;">
+        <li>React component model — familiar if you know React</li>
+        <li><code>output: 'export'</code> for fully static HTML</li>
+        <li>Rich ecosystem of React component libraries</li>
+        <li>Image optimization with next/image</li>
+        <li>File-based routing</li>
+        <li>Deploy anywhere as static files</li>
+      </ul>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Huge ecosystem & community</li><li>Easy to add interactivity later</li><li>React skills transfer</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Ships more JS than needed for static content</li><li>Heavier build output</li><li>Overkill for a static archive</li><li>React hydration overhead even for static pages</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Astro.js + React Islands</h3>
+      <p><strong>Best of both worlds — Astro for structure, React for interactive bits.</strong></p>
+      <ul style="margin:8px 0;padding-left:20px;opacity:0.85;font-size:14px;">
+        <li>Astro handles routing, content, and static pages</li>
+        <li>Drop in React components only for interactive features (search, filters, gallery lightbox)</li>
+        <li>Content stays as Markdown — easy to manage</li>
+        <li>Minimal JS shipped — only hydrates interactive islands</li>
+        <li>Can use any React UI library where needed</li>
+      </ul>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Lean output with surgical interactivity</li><li>Use React skills where they matter</li><li>Content collections for structured data</li><li>Best performance profile</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Two mental models (Astro + React)</li><li>Slightly more setup</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:24px;padding:16px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.03);">
+  <h3 style="margin-top:0;">My Recommendation: Option C</h3>
+  <p style="opacity:0.8;font-size:14px;margin-bottom:0;">
+    Astro + React Islands gives you the leanest possible static output (solving your GitHub file size concern)
+    while still allowing interactive features like character search/filter, image galleries, and smooth page transitions
+    that will make the immersive dark theme feel alive. Content lives in Markdown files — structured, portable, and tiny compared to the current 540KB HTML blobs.
+  </p>
+</div>
