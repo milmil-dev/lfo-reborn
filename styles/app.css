@@ -8,7 +8,7 @@
 
 :root.dark,
 .dark {
-	--color-fd-background: oklch(0.16 0.005 250);
+	--color-fd-background: oklch(0.21 0 0);
 	--color-fd-foreground: oklch(0.93 0.005 250);
 	--color-fd-muted: oklch(0.22 0.005 250);
 	--color-fd-muted-foreground: oklch(0.65 0.01 250 / 0.8);
