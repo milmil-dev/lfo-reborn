@@ -1,5 +1,6 @@
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/layouts/docs/page";
 import { notFound } from "next/navigation";
+import { GiscusComments } from "@/components/giscus-comments";
 import { source } from "@/lib/source";
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
@@ -8,6 +9,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 	if (!page) notFound();
 
 	const MDXContent = page.data.body;
+	const editUrl = `https://github.com/niskan516/lfo-wiki/edit/main/${page.file.path}`;
 
 	return (
 		<DocsPage toc={page.data.toc}>
@@ -16,6 +18,15 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 			<DocsBody>
 				<MDXContent />
 			</DocsBody>
+			<a
+				href={editUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				className="mt-8 inline-flex items-center gap-1 text-sm text-fd-muted-foreground hover:text-fd-foreground"
+			>
+				在 GitHub 上編輯此頁
+			</a>
+			<GiscusComments />
 		</DocsPage>
 	);
 }
