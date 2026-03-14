@@ -32,9 +32,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .superpowers
 .worktrees
 
-# serwist
-public/sw*
-public/swe-worker*
+# playwright
+playwright-report
+test-results
+blob-report
 
 # caches
 .eslintcache
