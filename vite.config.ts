@@ -1,3 +1,4 @@
+import { serwist } from "@serwist/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
@@ -24,6 +25,13 @@ export default defineConfig({
 			prerender: {
 				enabled: true,
 			},
+		}),
+		serwist({
+			swSrc: "sw.ts",
+			swDest: "sw.js",
+			globDirectory: "dist",
+			injectionPoint: "self.__SW_MANIFEST",
+			rollupFormat: "iife",
 		}),
 		react(),
 	],

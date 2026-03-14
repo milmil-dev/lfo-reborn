@@ -21,6 +21,7 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
+		"types": ["@serwist/vite/typings"],
 		"paths": {
 			"@/*": ["./*"],
 			"collections/*": ["./.source/*"]
