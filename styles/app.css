@@ -8,20 +8,20 @@
 
 :root.dark,
 .dark {
-	--color-fd-background: hsl(30, 15%, 5%);
-	--color-fd-foreground: hsl(40, 20%, 90%);
-	--color-fd-muted: hsl(30, 10%, 12%);
-	--color-fd-muted-foreground: hsla(40, 15%, 65%, 0.8);
-	--color-fd-popover: hsl(30, 12%, 10%);
-	--color-fd-popover-foreground: hsl(40, 18%, 85%);
-	--color-fd-card: hsl(30, 12%, 8%);
-	--color-fd-card-foreground: hsl(40, 20%, 95%);
-	--color-fd-border: hsla(35, 20%, 30%, 30%);
-	--color-fd-primary: hsl(40, 80%, 55%);
-	--color-fd-primary-foreground: hsl(30, 15%, 5%);
-	--color-fd-secondary: hsl(30, 10%, 14%);
-	--color-fd-secondary-foreground: hsl(40, 20%, 88%);
-	--color-fd-accent: hsla(35, 30%, 35%, 40%);
-	--color-fd-accent-foreground: hsl(40, 20%, 88%);
-	--color-fd-ring: hsl(40, 60%, 45%);
+	--color-fd-background: oklch(0.16 0.005 250);
+	--color-fd-foreground: oklch(0.93 0.005 250);
+	--color-fd-muted: oklch(0.22 0.005 250);
+	--color-fd-muted-foreground: oklch(0.65 0.01 250 / 0.8);
+	--color-fd-popover: oklch(0.19 0.005 250);
+	--color-fd-popover-foreground: oklch(0.88 0.005 250);
+	--color-fd-card: oklch(0.18 0.005 250);
+	--color-fd-card-foreground: oklch(0.95 0.005 250);
+	--color-fd-border: oklch(0.32 0.01 250 / 0.3);
+	--color-fd-primary: oklch(0.65 0.16 255);
+	--color-fd-primary-foreground: oklch(0.98 0.005 250);
+	--color-fd-secondary: oklch(0.23 0.005 250);
+	--color-fd-secondary-foreground: oklch(0.9 0.005 250);
+	--color-fd-accent: oklch(0.35 0.04 255 / 0.4);
+	--color-fd-accent-foreground: oklch(0.9 0.005 250);
+	--color-fd-ring: oklch(0.6 0.14 255);
 }
