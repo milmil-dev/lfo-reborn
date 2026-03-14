@@ -37,12 +37,12 @@ export const Route = createRootRoute({
 
 function RootComponent() {
 	return (
-		<html lang="zh-Hant" className="dark" suppressHydrationWarning>
+		<html lang="zh-Hant" suppressHydrationWarning>
 			<head>
 				<HeadContent />
 			</head>
 			<body className="flex min-h-screen flex-col font-sans">
-				<RootProvider theme={{ defaultTheme: "dark" }}>
+				<RootProvider theme={{ defaultTheme: "system" }}>
 					<Outlet />
 				</RootProvider>
 				<Scripts />
