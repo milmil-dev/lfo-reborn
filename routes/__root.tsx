@@ -17,6 +17,15 @@ export const Route = createRootRoute({
 		],
 		links: [
 			{
+				rel: "preconnect",
+				href: "https://fonts.googleapis.com",
+			},
+			{
+				rel: "preconnect",
+				href: "https://fonts.gstatic.com",
+				crossOrigin: "anonymous",
+			},
+			{
 				rel: "stylesheet",
 				href: "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap",
 			},
@@ -32,10 +41,7 @@ function RootComponent() {
 			<head>
 				<HeadContent />
 			</head>
-			<body
-				className="flex min-h-screen flex-col font-sans"
-				style={{ fontFamily: "'Noto Sans TC', sans-serif" }}
-			>
+			<body className="flex min-h-screen flex-col font-sans">
 				<RootProvider theme={{ defaultTheme: "dark", forcedTheme: "dark" }}>
 					<Outlet />
 				</RootProvider>

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 @import "fumadocs-ui/style.css";
 
-:root {
-	--font-sans: "Noto Sans TC", sans-serif;
-	--font-serif: "Noto Serif TC", serif;
+@theme {
+	--font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+	--font-serif: "Noto Serif TC", ui-serif, Georgia, serif;
 }
 
 :root.dark,
