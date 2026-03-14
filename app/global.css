@@ -1,2 +1,40 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/ui.css";
+
+@theme {
+	--color-fd-background: hsl(30, 15%, 5%);
+	--color-fd-foreground: hsl(40, 20%, 90%);
+	--color-fd-muted: hsl(30, 10%, 12%);
+	--color-fd-muted-foreground: hsla(40, 15%, 65%, 0.8);
+	--color-fd-popover: hsl(30, 12%, 10%);
+	--color-fd-popover-foreground: hsl(40, 18%, 85%);
+	--color-fd-card: hsl(30, 12%, 8%);
+	--color-fd-card-foreground: hsl(40, 20%, 95%);
+	--color-fd-border: hsla(35, 20%, 30%, 30%);
+	--color-fd-primary: hsl(40, 80%, 55%);
+	--color-fd-primary-foreground: hsl(30, 15%, 5%);
+	--color-fd-secondary: hsl(30, 10%, 14%);
+	--color-fd-secondary-foreground: hsl(40, 20%, 88%);
+	--color-fd-accent: hsla(35, 30%, 35%, 40%);
+	--color-fd-accent-foreground: hsl(40, 20%, 88%);
+	--color-fd-ring: hsl(40, 60%, 45%);
+}
+
+.dark {
+	--color-fd-background: hsl(30, 15%, 5%);
+	--color-fd-foreground: hsl(40, 20%, 90%);
+	--color-fd-muted: hsl(30, 10%, 12%);
+	--color-fd-muted-foreground: hsla(40, 15%, 65%, 0.8);
+	--color-fd-popover: hsl(30, 12%, 10%);
+	--color-fd-popover-foreground: hsl(40, 18%, 85%);
+	--color-fd-card: hsl(30, 12%, 8%);
+	--color-fd-card-foreground: hsl(40, 20%, 95%);
+	--color-fd-border: hsla(35, 20%, 30%, 30%);
+	--color-fd-primary: hsl(40, 80%, 55%);
+	--color-fd-primary-foreground: hsl(30, 15%, 5%);
+	--color-fd-secondary: hsl(30, 10%, 14%);
+	--color-fd-secondary-foreground: hsl(40, 20%, 88%);
+	--color-fd-accent: hsla(35, 30%, 35%, 40%);
+	--color-fd-accent-foreground: hsl(40, 20%, 88%);
+	--color-fd-ring: hsl(40, 60%, 45%);
+}
