@@ -1,6 +1,5 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { RootProvider } from "fumadocs-ui/provider/tanstack";
-import { useEffect } from "react";
 import "../styles/app.css";
 
 export const Route = createRootRoute({
@@ -28,16 +27,6 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-	useEffect(() => {
-		if ("serviceWorker" in navigator) {
-			import("virtual:serwist").then(({ getSerwist }) => {
-				getSerwist().then((sw) => {
-					sw?.register();
-				});
-			});
-		}
-	}, []);
-
 	return (
 		<html lang="zh-Hant" className="dark" suppressHydrationWarning>
 			<head>
