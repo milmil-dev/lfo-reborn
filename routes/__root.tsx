@@ -13,7 +13,7 @@ export const Route = createRootRoute({
 				name: "description",
 				content: "小朋友齊打交Online遊戲百科全書",
 			},
-			{ name: "theme-color", content: "#0472B9" },
+			{ name: "theme-color", content: "#ffbf00" },
 		],
 		links: [
 			{
@@ -42,7 +42,7 @@ function RootComponent() {
 				<HeadContent />
 			</head>
 			<body className="flex min-h-screen flex-col font-sans">
-				<RootProvider theme={{ defaultTheme: "dark", forcedTheme: "dark" }}>
+				<RootProvider theme={{ defaultTheme: "dark" }}>
 					<Outlet />
 				</RootProvider>
 				<Scripts />
