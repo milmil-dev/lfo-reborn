@@ -26,7 +26,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<body
 				className={`flex min-h-screen flex-col ${notoSans.variable} ${notoSerif.variable} font-sans`}
 			>
-				<RootProvider theme={{ enabled: false }}>{children}</RootProvider>
+				<RootProvider theme={{ defaultTheme: "dark", forcedTheme: "dark" }}>
+					{children}
+				</RootProvider>
 			</body>
 		</html>
 	);
