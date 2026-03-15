@@ -332,7 +332,7 @@ export function MusicPlayer() {
         {playerState === "card" && (
           <motion.div
             key="card"
-            className={`fixed bottom-4 right-4 z-50 w-[420px] max-w-[calc(100vw-32px)] rounded-2xl shadow-2xl overflow-hidden ${glass}`}
+            className={`fixed bottom-4 right-4 max-sm:right-auto max-sm:left-4 z-50 w-[420px] max-sm:w-[calc(100vw-2rem)] rounded-2xl shadow-2xl overflow-hidden ${glass}`}
             style={{ "--media-accent": themeColor } as React.CSSProperties}
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -434,13 +434,13 @@ export function MusicPlayer() {
 
                 {/* Main controls */}
                 <div className="flex items-center justify-center gap-5">
-                  <button onClick={prev} aria-label="上一曲" className="text-white/60 hover:text-white transition-colors">
+                  <button onClick={prev} aria-label="上一曲" className="min-w-[44px] min-h-[44px] max-sm:flex max-sm:items-center max-sm:justify-center text-white/60 hover:text-white transition-colors">
                     <SkipBack size={18} />
                   </button>
                   <button
                     onClick={togglePlay}
                     aria-label={isPlaying ? "暫停" : "播放"}
-                    className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:scale-105 transition-transform"
+                    className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-full bg-white flex items-center justify-center hover:scale-105 transition-transform"
                   >
                     {isBuffering ? (
                       <Loader2 size={20} className="animate-spin text-black" />
@@ -450,7 +450,7 @@ export function MusicPlayer() {
                       <Play size={20} className="text-black ml-0.5" />
                     )}
                   </button>
-                  <button onClick={next} aria-label="下一曲" className="text-white/60 hover:text-white transition-colors">
+                  <button onClick={next} aria-label="下一曲" className="min-w-[44px] min-h-[44px] max-sm:flex max-sm:items-center max-sm:justify-center text-white/60 hover:text-white transition-colors">
                     <SkipForward size={18} />
                   </button>
                 </div>
@@ -477,10 +477,11 @@ export function MusicPlayer() {
                   </div>
 
                   <div className="flex items-center gap-2">
+                    {/* Mute button: always visible; volume slider hidden on mobile */}
                     <button
                       onClick={toggleMute}
                       aria-label="音量"
-                      className="text-white/40 hover:text-white/80 transition-colors"
+                      className="hidden sm:flex text-white/40 hover:text-white/80 transition-colors"
                     >
                       {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
                     </button>
@@ -491,7 +492,7 @@ export function MusicPlayer() {
                       step={0.01}
                       value={isMuted ? 0 : volume}
                       onChange={(e) => setVolume(parseFloat(e.target.value))}
-                      className="music-volume w-16 h-1 appearance-none rounded-full cursor-pointer"
+                      className="music-volume hidden sm:block w-16 h-1 appearance-none rounded-full cursor-pointer"
                       style={
                         {
                           "--pct": `${(isMuted ? 0 : volume) * 100}%`,
@@ -500,6 +501,14 @@ export function MusicPlayer() {
                         } as React.CSSProperties
                       }
                     />
+                    {/* Mobile-only mute toggle */}
+                    <button
+                      onClick={toggleMute}
+                      aria-label="音量"
+                      className="sm:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-white/40 hover:text-white/80 transition-colors"
+                    >
+                      {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                    </button>
                     <button
                       onClick={() => setPlayerState("playlist")}
                       aria-label="播放清單"
@@ -518,7 +527,7 @@ export function MusicPlayer() {
         {playerState === "playlist" && (
           <motion.div
             key="playlist"
-            className={`fixed bottom-4 right-4 z-50 w-[420px] max-w-[calc(100vw-32px)] rounded-2xl shadow-2xl overflow-hidden ${glass}`}
+            className={`fixed bottom-4 right-4 max-sm:right-auto max-sm:left-4 z-50 w-[420px] max-sm:w-[calc(100vw-2rem)] rounded-2xl shadow-2xl overflow-hidden ${glass}`}
             style={{ "--media-accent": themeColor } as React.CSSProperties}
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -588,7 +597,7 @@ export function MusicPlayer() {
 
             {/* Track list */}
             <div className="relative">
-              <div className="max-h-[280px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10">
+              <div className="max-h-[280px] max-sm:max-h-[50vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10">
                 {playlist.map((track, i) => (
                   <button
                     key={track.id}
