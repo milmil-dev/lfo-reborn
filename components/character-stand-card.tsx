@@ -4,6 +4,7 @@ import { ResponsiveRadar } from "@nivo/radar";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { showLightbox } from "@/components/image-lightbox";
 import transformsData from "@/data/transforms.json";
 import {
 	type CharacterSkill,
@@ -535,16 +536,26 @@ export function CharacterStandCard() {
 							角色型像及對話圖
 						</h2>
 						<div className="flex flex-wrap gap-3">
-							{data.portraits.map((p) => (
-								<div key={p.label} className="flex flex-col items-center gap-1">
+							{data.portraits.map((p, idx) => (
+								<button
+									type="button"
+									key={p.label}
+									className="flex flex-col items-center gap-1 transition-transform hover:scale-105"
+									onClick={() =>
+										showLightbox(
+											(data.portraits ?? []).map((pt) => ({ src: pt.url, alt: pt.label })),
+											idx,
+										)
+									}
+								>
 									<img
 										src={p.url}
 										alt={p.label}
-										className="h-28 w-auto rounded-lg border border-fd-border object-contain"
+										className="h-28 w-auto cursor-zoom-in rounded-lg border border-fd-border object-contain"
 										loading="lazy"
 									/>
 									<span className="text-xs text-fd-muted-foreground">{p.label}</span>
-								</div>
+								</button>
 							))}
 						</div>
 					</div>
@@ -557,14 +568,25 @@ export function CharacterStandCard() {
 							對話圖 ({data.dialogs.length})
 						</summary>
 						<div className="grid grid-cols-4 gap-2 border-t border-fd-border p-3 sm:grid-cols-6 md:grid-cols-8">
-							{data.dialogs.map((url) => (
-								<img
+							{data.dialogs.map((url, idx) => (
+								<button
+									type="button"
 									key={url}
-									src={url}
-									alt="對話"
-									className="aspect-square w-full rounded border border-fd-border object-cover"
-									loading="lazy"
-								/>
+									className="transition-transform hover:scale-105"
+									onClick={() =>
+										showLightbox(
+											(data.dialogs ?? []).map((u) => ({ src: u, alt: "對話" })),
+											idx,
+										)
+									}
+								>
+									<img
+										src={url}
+										alt="對話"
+										className="aspect-square w-full cursor-zoom-in rounded border border-fd-border object-cover"
+										loading="lazy"
+									/>
+								</button>
 							))}
 						</div>
 					</details>
@@ -626,8 +648,20 @@ function SkillsPanel({
 								skill={skill}
 								skillImage={skillImageMap.get(skill.name)}
 								color={color}
-								isSelected={selectedSkill === i}
-								onSelect={() => setSelectedSkill(selectedSkill === i ? null : i)}
+								onSelect={() => {
+									setSelectedSkill(selectedSkill === i ? null : i);
+									// Open lightbox with demo GIFs (preferred) or skill images
+									const lightboxImages = skills
+										.map((s) => {
+											const img = s.gif ?? skillImageMap.get(s.name);
+											return img ? { src: img, alt: s.name } : null;
+										})
+										.filter(Boolean) as { src: string; alt: string }[];
+									if (lightboxImages.length > 0) {
+										const currentIdx = lightboxImages.findIndex((img) => img.alt === skill.name);
+										showLightbox(lightboxImages, Math.max(0, currentIdx));
+									}
+								}}
 							/>
 						))}
 					</motion.div>
@@ -678,20 +712,17 @@ function SkillCard({
 	skill,
 	skillImage,
 	color,
-	isSelected,
 	onSelect,
 }: {
 	skill: CharacterSkill;
 	skillImage?: string;
 	color: string;
-	isSelected: boolean;
 	onSelect: () => void;
 }) {
 	const staticImage = skillImage;
 	const demoGif = skill.gif;
 	const hasImage = staticImage || demoGif;
 	const showCost = skill.cost && skill.cost !== "--";
-	const showLP = skill.learnPoints && skill.learnPoints !== "--";
 
 	return (
 		<motion.div
@@ -702,29 +733,10 @@ function SkillCard({
 		>
 			<button
 				type="button"
-				className="group relative w-full overflow-hidden rounded-2xl text-left transition-all duration-300 hover:-translate-y-1"
-				style={{
-					border: isSelected ? `2px solid ${color}` : "2px solid rgba(255,255,255,0.06)",
-					boxShadow: isSelected
-						? `0 8px 32px ${color}30, 0 0 0 1px ${color}20`
-						: "0 2px 8px rgba(0,0,0,0.3)",
-				}}
-				onMouseEnter={(e) => {
-					if (!isSelected) {
-						(e.currentTarget as HTMLElement).style.boxShadow =
-							`0 8px 32px ${color}20, 0 2px 8px rgba(0,0,0,0.4)`;
-						(e.currentTarget as HTMLElement).style.borderColor = `${color}40`;
-					}
-				}}
-				onMouseLeave={(e) => {
-					if (!isSelected) {
-						(e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.3)";
-						(e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)";
-					}
-				}}
+				className="group w-full overflow-hidden rounded-2xl text-left transition-all duration-300 hover:-translate-y-1"
 				onClick={onSelect}
 			>
-				{/* Card image */}
+				{/* Image area */}
 				<div className="relative aspect-[4/3] w-full overflow-hidden bg-fd-muted/20">
 					{hasImage ? (
 						<>
@@ -732,7 +744,7 @@ function SkillCard({
 								<img
 									src={staticImage}
 									alt={skill.name}
-									className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-110 ${demoGif ? "group-hover:opacity-0" : ""}`}
+									className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-105 ${demoGif ? "group-hover:opacity-0" : ""}`}
 									loading="lazy"
 								/>
 							)}
@@ -741,7 +753,7 @@ function SkillCard({
 									src={demoGif}
 									alt={`${skill.name} 演示`}
 									className={`absolute inset-0 h-full w-full object-contain transition-all duration-500 ${staticImage ? "opacity-0 group-hover:opacity-100" : "group-hover:scale-105"}`}
-									style={{ background: "rgba(0,0,0,0.85)" }}
+									style={{ background: "rgba(0,0,0,0.9)" }}
 									loading="lazy"
 								/>
 							)}
@@ -763,66 +775,36 @@ function SkillCard({
 							)}
 						</div>
 					)}
-
-					{/* Top gradient - hidden on hover */}
-					<div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/50 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
-					{/* Bottom gradient - hidden on hover */}
-					<div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/80 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
-
-					{/* Icon badge - hidden on hover */}
-					{skill.icon && hasImage && (
-						<div
-							className="absolute left-2.5 top-2.5 h-8 w-8 overflow-hidden rounded-lg shadow-xl backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-0"
-							style={{
-								border: `1.5px solid ${color}50`,
-								background: "rgba(0,0,0,0.4)",
-							}}
-						>
-							<img src={skill.icon} alt="" className="h-full w-full object-cover" loading="lazy" />
-						</div>
-					)}
-
-					{/* Cost + LP badges - hidden on hover */}
-					<div className="absolute right-2.5 top-2.5 flex flex-col items-end gap-1 transition-opacity duration-300 group-hover:opacity-0">
-						{showCost && (
-							<span className="rounded-lg bg-black/60 px-2 py-0.5 text-[11px] font-extrabold text-white shadow-xl backdrop-blur-md">
-								{skill.cost}
-							</span>
-						)}
-						{showLP && (
-							<span className="rounded-lg bg-black/50 px-1.5 py-0.5 text-[9px] font-bold text-white/70 backdrop-blur-md">
-								{skill.learnPoints}學點
-							</span>
-						)}
-					</div>
-
-					{/* Bottom content - hidden on hover */}
-					<div className="absolute inset-x-0 bottom-0 p-3 transition-opacity duration-300 group-hover:opacity-0">
-						<p className="text-[15px] font-black leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-							{skill.name}
-						</p>
-						<div className="mt-1 flex items-center gap-1.5">
-							{skill.command && skill.command !== "--" && (
-								<span className="rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white/70 backdrop-blur-sm">
-									{skill.command}
-								</span>
-							)}
-							{skill.trigger && skill.trigger !== "--" && (
-								<span
-									className="rounded-md px-1.5 py-0.5 text-[10px] font-bold backdrop-blur-sm"
-									style={{ background: `${color}30`, color: `${color}` }}
-								>
-									{skill.trigger}
-								</span>
-							)}
-						</div>
-						{skill.notes && (
-							<p className="mt-1 line-clamp-2 text-[10px] leading-snug text-white/50">
-								{skill.notes}
-							</p>
-						)}
-					</div>
 				</div>
+
+				{/* Footer - name + cost */}
+				<div className="flex items-center justify-between gap-2 bg-fd-muted/40 px-3 py-2.5">
+					<div className="flex min-w-0 items-center gap-2">
+						{skill.icon && (
+							<img
+								src={skill.icon}
+								alt=""
+								className="h-6 w-6 shrink-0 rounded object-cover"
+								loading="lazy"
+							/>
+						)}
+						<span className="truncate text-base font-bold text-fd-foreground">{skill.name}</span>
+					</div>
+					{showCost && (
+						<span className="shrink-0 text-sm font-bold text-fd-muted-foreground">
+							{skill.cost}
+						</span>
+					)}
+				</div>
+
+				{/* Description row */}
+				{skill.notes && (
+					<div className="border-t border-white/[0.04] bg-fd-muted/20 px-3 py-2">
+						<p className="line-clamp-2 text-xs leading-relaxed text-fd-muted-foreground">
+							{skill.notes}
+						</p>
+					</div>
+				)}
 			</button>
 		</motion.div>
 	);
