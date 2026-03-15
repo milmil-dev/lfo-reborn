@@ -1,6 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { RootProvider } from "fumadocs-ui/provider/tanstack";
 import { ImageLightbox } from "@/components/image-lightbox";
+import { MusicPlayer } from "@/components/music-player";
 import "../styles/app.css";
 
 export const Route = createRootRoute({
@@ -73,6 +74,7 @@ function RootComponent() {
 				<RootProvider theme={{ defaultTheme: "system" }}>
 					<Outlet />
 					<ImageLightbox />
+					<MusicPlayer />
 				</RootProvider>
 				<Scripts />
 			</body>
