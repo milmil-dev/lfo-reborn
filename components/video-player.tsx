@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import { useMediaStore } from "@/lib/media-store";
 
-// Register lite-youtube-embed custom element
-import "lite-youtube-embed";
+// Register lite-youtube-embed custom element (client-only — uses HTMLElement)
+if (typeof window !== "undefined") {
+  import("lite-youtube-embed");
+}
 import "lite-youtube-embed/src/lite-yt-embed.css";
 
 interface VideoPlayerProps {
