@@ -24,6 +24,33 @@ def clean_html(text):
     return text
 
 
+def clean_html_preserve_links(text):
+    """Remove HTML tags but convert <a> tags to markdown links first."""
+    text = re.sub(r'<br\s*/?>', '\n', text)
+    # Convert <a href="...">text</a> to [text](url), normalizing relative URLs
+    def replace_link(m):
+        href = m.group(1)
+        link_text = re.sub(r'<[^>]+>', '', m.group(2)).strip()
+        # Normalize relative URLs
+        href = re.sub(r'^(\.\./)+', '', href)
+        if not href.startswith('http'):
+            href = 'https://' + href
+        if link_text:
+            return f'[{link_text}]({href})'
+        return ''
+    text = re.sub(r'<a[^>]*href=["\']([^"\']*)["\'][^>]*>(.*?)</a>', replace_link, text, flags=re.DOTALL)
+    # Remove remaining HTML tags
+    text = re.sub(r'<[^>]+>', '', text)
+    text = re.sub(r'&gt;', '>', text)
+    text = re.sub(r'&lt;', '<', text)
+    text = re.sub(r'&amp;', '&', text)
+    text = re.sub(r'&nbsp;', ' ', text)
+    text = re.sub(r'&#\d+;', '', text)
+    text = re.sub(r'&[a-z]+;', '', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text
+
+
 def table_to_cells(table_html):
     """Convert table HTML to flat list of cleaned cells."""
     clean = re.sub(r'<[^>]+>', '|', table_html)
@@ -40,6 +67,99 @@ def extract_imgs(html):
             url = "https://" + url.lstrip("./")
         result.append(url)
     return list(set(result))
+
+
+def fix_url(url):
+    """Fix relative imgur URLs to absolute."""
+    if not url.startswith("http"):
+        url = "https://" + url.lstrip("./")
+    url = url.replace("http://i.imgur.com", "https://i.imgur.com")
+    return url
+
+
+def extract_portrait_groups():
+    """Extract portrait groups with associated dialog images from character pages.
+
+    Parses the '角色型像及對話圖' table where each row has:
+    - Left column: portrait image + label
+    - Right column: associated dialog images
+    """
+    print("Extracting portrait groups...")
+    char_dir = os.path.join(ORIGINAL_DIR, "character")
+    all_groups = {}
+
+    img_pattern = r'<img[^>]*src="([^"]*imgur[^"]*?)"[^>]*>'
+
+    for filepath in sorted(glob.glob(os.path.join(char_dir, "*.html"))):
+        slug = os.path.basename(filepath).replace(".html", "")
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        # Find the portrait/dialog section
+        section_start = content.find("角色型像及對話圖")
+        if section_start < 0:
+            continue
+
+        # Find the table within this section
+        table_start = content.find("<table", section_start)
+        if table_start < 0:
+            continue
+
+        # Find matching </table>
+        table_end = content.find("</table>", table_start)
+        if table_end < 0:
+            continue
+        table_html = content[table_start:table_end + len("</table>")]
+
+        # Split into rows
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', table_html, re.DOTALL)
+
+        portrait_groups = []
+        for row in rows:
+            # Split into cells
+            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+            if len(cells) < 2:
+                continue
+
+            left_cell = cells[0]
+            right_cell = cells[1]
+
+            # Skip header row (型像圖片及名稱 / 相關對話圖)
+            left_text = re.sub(r'<[^>]+>', ' ', left_cell).strip()
+            if "型像圖片" in left_text or "相關對話" in left_text:
+                continue
+
+            # Extract portrait image from left cell
+            portrait_match = re.search(img_pattern, left_cell)
+            if not portrait_match:
+                continue
+            portrait_url = fix_url(portrait_match.group(1))
+
+            # Extract label from left cell (text after <br> or after the image)
+            # Remove img tags and extract remaining text
+            label_text = re.sub(r'<img[^>]*>', '', left_cell)
+            label_text = re.sub(r'<[^>]+>', ' ', label_text)
+            label_text = re.sub(r'&[a-z]+;', ' ', label_text)
+            label_text = label_text.strip()
+            if not label_text:
+                label_text = "型像"
+
+            # Extract dialog images from right cell
+            dialog_urls = []
+            for m in re.finditer(img_pattern, right_cell):
+                dialog_urls.append(fix_url(m.group(1)))
+
+            portrait_groups.append({
+                "label": label_text,
+                "portrait": portrait_url,
+                "dialogs": dialog_urls,
+            })
+
+        if portrait_groups:
+            all_groups[slug] = portrait_groups
+
+    print(f"  Extracted portrait groups for {len(all_groups)} characters")
+    return all_groups
 
 
 # ============================================================
@@ -300,12 +420,21 @@ def extract_character_skills():
             if val_start + 4 < len(cells):
                 skill["trigger"] = cells[val_start + 4]
 
-            # Extract P.S. notes
-            for j, cell in enumerate(cells):
-                if cell == "P.S.":
-                    ps_text = " ".join(cells[j + 1:])
-                    skill["notes"] = clean_html(ps_text)
-                    break
+            # Extract P.S. notes - use raw HTML to preserve <a> links
+            ps_match = re.search(
+                r'P\.S\.</b></td><td[^>]*>(.*?)</td>\s*</tr>',
+                table_html, re.DOTALL
+            )
+            if ps_match:
+                ps_html = ps_match.group(1)
+                skill["notes"] = clean_html_preserve_links(ps_html)
+            else:
+                # Fallback: extract from cells (no links)
+                for j, cell in enumerate(cells):
+                    if cell == "P.S.":
+                        ps_text = " ".join(cells[j + 1:])
+                        skill["notes"] = clean_html(ps_text)
+                        break
 
             # Add GIF demo URL and icon
             if skill.get("name"):
@@ -347,6 +476,185 @@ def extract_character_skills():
         char_data["skills"] = normal_skills
         if transform_skills:
             char_data["transformSkills"] = transform_skills
+
+        # Post-process: find P.S. notes with <a> links in the raw HTML
+        # The non-greedy table regex misses outer tables with nested tables,
+        # so we scan the full content for P.S. <td> cells containing links.
+        for ps_m in re.finditer(
+            r'P\.S\.</b></td><td[^>]*>(.*?)</td>\s*</tr>\s*</tbody>',
+            content, re.DOTALL
+        ):
+            ps_html = ps_m.group(1)
+            if '<a ' not in ps_html:
+                continue
+            # Find the skill name by looking backward for the value row
+            # after 招式名稱 header
+            before = content[:ps_m.start()]
+            # Find the last skill name in a value row
+            name_matches = re.findall(
+                r'</tr>\s*<tr>.*?<td[^>]*>(?:<[^>]*>)*([^<]{1,30}?)(?:<[^>]*>)*\s*</td>',
+                before[-3000:], re.DOTALL
+            )
+            # Also try extracting from <a> links (skill name as link text)
+            link_names = re.findall(
+                r'</tr>\s*<tr>.*?<td[^>]*>.*?<a[^>]*>(?:<[^>]*>)*([^<]{1,30})',
+                before[-3000:], re.DOTALL
+            )
+            skill_name = None
+            if link_names:
+                skill_name = link_names[-1].strip()
+            elif name_matches:
+                skill_name = name_matches[-1].strip()
+            if not skill_name:
+                continue
+
+            enriched_notes = clean_html_preserve_links(ps_html)
+            # Match to an existing skill - find best match by scoring
+            def name_score(sn, target):
+                """Score how well skill name sn matches target. Higher = better.
+                Prioritizes shared prefix length and penalizes length difference."""
+                if not sn or not target:
+                    return 0
+                if sn == target:
+                    return 100
+                # Count shared characters from start (prefix match)
+                prefix_len = 0
+                for c1, c2 in zip(sn, target):
+                    if c1 == c2:
+                        prefix_len += 1
+                    else:
+                        break
+                # Shared prefix is weighted heavily (x3)
+                score = prefix_len * 3
+                # Bonus for same ending
+                if sn[-1] == target[-1]:
+                    score += 2
+                # Penalty for length difference
+                score -= abs(len(sn) - len(target))
+                return score
+
+            all_skill_lists = [normal_skills, transform_skills]
+            best_skill = None
+            best_score = 0
+            for skill_list in all_skill_lists:
+                for skill in skill_list:
+                    sn = skill.get("name", "")
+                    score = name_score(sn, skill_name)
+                    if score > best_score:
+                        best_score = score
+                        best_skill = skill
+            if best_skill and best_score >= 3:
+                if '[' in enriched_notes and '](' in enriched_notes:
+                    best_skill["notes"] = enriched_notes
+
+        # Extract hidden skills (隱藏動作/技能資料)
+        hidden_idx = content.find('隱藏動作')
+        if hidden_idx >= 0:
+            # Check if section has actual data (not 無相關數據)
+            hidden_chunk = content[hidden_idx:hidden_idx + 15000]
+            if '無相關數據' not in hidden_chunk[:200]:
+                # Extract hidden skill entries from the table with 動作名稱 headers
+                hidden_table_match = re.search(
+                    r'<table[^>]*>(.*?)</table>', hidden_chunk, re.DOTALL
+                )
+                if hidden_table_match:
+                    hidden_table = hidden_table_match.group(1)
+                    # Find all <td> cells containing category + link pairs
+                    cells = re.findall(r'<td[^>]*>(.*?)</td>', hidden_table, re.DOTALL)
+                    hidden_skills = []
+                    for cell in cells:
+                        # Skip header cells
+                        if '動作名稱' in cell:
+                            continue
+                        # Strip HTML tags first, then extract category 【...】
+                        cell_text = re.sub(r'<[^>]+>', '', cell)
+                        cat_match = re.search(r'【(.*?)】', cell_text)
+                        # Extract link with GIF
+                        link_match = re.search(
+                            r'<a[^>]*href=["\']([^"\']*\.gif)["\'][^>]*>(.*?)</a>',
+                            cell, re.DOTALL
+                        )
+                        if cat_match and link_match:
+                            category = cat_match.group(1).strip()
+                            gif_url = link_match.group(1)
+                            gif_url = re.sub(r'^(\.\./)+', '', gif_url)
+                            if not gif_url.startswith('http'):
+                                gif_url = 'https://' + gif_url
+                            name_raw = link_match.group(2)
+                            name = re.sub(r'<[^>]+>', '', name_raw).strip()
+                            # Some names have trailing text like (轉載)
+                            hidden_skills.append({
+                                "category": category,
+                                "name": name,
+                                "gif": gif_url,
+                            })
+                    if hidden_skills:
+                        char_data["hiddenSkills"] = hidden_skills
+
+                # Extract 附加說明 notes
+                # The header "附加說明" is often split across HTML tags
+                # e.g. "附加</b><b>說明" or "附加</b><b style=...>說明"
+                # Strategy: find "附加" followed by "說明" with HTML tags in between,
+                # then extract the notes content from the following table row(s)
+                notes_match = re.search(
+                    r'附加(?:</[^>]*>\s*<[^>]*>)*說明.*?</td>\s*</tr>\s*<tr[^>]*>\s*<td[^>]*>(.*?)(?:</table>|</tbody>)',
+                    hidden_chunk, re.DOTALL
+                )
+                if not notes_match:
+                    # Fallback: try exact "附加說明" (davis format)
+                    notes_match = re.search(
+                        r'附加說明.*?</td>.*?<td[^>]*>(.*?)(?:</table>|</tbody>)',
+                        hidden_chunk, re.DOTALL
+                    )
+                if notes_match:
+                    notes_html = notes_match.group(1)
+                    # Preserve colored/highlighted text by converting font color
+                    # tags to {{color:text}} format before stripping HTML.
+                    # Handles <font color="#00ff00">text</font> and nested tags
+                    # inside the font element.
+                    def replace_font_color(m):
+                        color = m.group(1).lstrip('#').lower()
+                        inner = re.sub(r'<[^>]+>', '', m.group(2))
+                        inner = inner.strip()
+                        if inner:
+                            return '{{#' + color + ':' + inner + '}}'
+                        return ''
+                    notes_html = re.sub(
+                        r'<font[^>]*color=["\']#?([0-9a-fA-F]+)["\'][^>]*>(.*?)</font>',
+                        replace_font_color, notes_html, flags=re.DOTALL
+                    )
+                    # Also handle <span style="color:rgb(r,g,b)">text</span>
+                    def replace_span_color(m):
+                        r, g, b = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                        color = f'{r:02x}{g:02x}{b:02x}'
+                        inner = re.sub(r'<[^>]+>', '', m.group(4))
+                        inner = inner.strip()
+                        if inner:
+                            return '{{#' + color + ':' + inner + '}}'
+                        return ''
+                    notes_html = re.sub(
+                        r'<span[^>]*style="[^"]*color:\s*rgb\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\)[^"]*"[^>]*>(.*?)</span>',
+                        replace_span_color, notes_html, flags=re.DOTALL
+                    )
+                    # Split by ⊕ or ‧ markers or <div> blocks
+                    # First, replace <br> and </div><div> with newlines
+                    notes_text = re.sub(r'<br\s*/?>', '\n', notes_html)
+                    notes_text = re.sub(r'</div>\s*<div[^>]*>', '\n', notes_text)
+                    notes_text = re.sub(r'<[^>]+>', '', notes_text)
+                    notes_text = re.sub(r'&[a-z]+;', '', notes_text)
+                    notes_text = re.sub(r'&#\d+;', '', notes_text)
+                    # Split by ⊕ or ‧ markers and clean
+                    parts = re.split(r'[⊕‧]', notes_text)
+                    hidden_notes = []
+                    for part in parts:
+                        line = part.strip().replace('\u3000', ' ').strip()
+                        # Merge continuation lines (starting with spaces)
+                        line = re.sub(r'\n\s+', '', line)
+                        line = re.sub(r'\s+', ' ', line).strip()
+                        if line:
+                            hidden_notes.append(line)
+                    if hidden_notes:
+                        char_data["hiddenNotes"] = hidden_notes
 
         all_skills[slug] = char_data
 
@@ -516,6 +824,22 @@ def extract_transforms():
                     relic = lines[i + 1]
                     if relic and not relic.startswith("~") and not relic.startswith("角色"):
                         transform["relic"] = relic
+
+                # Extract relicImage: image immediately before 轉信物 in raw HTML (gif, jpg, or png)
+                relic_idx = content.find('轉信物')
+                if relic_idx >= 0:
+                    before_relic = content[max(0, relic_idx - 1000):relic_idx]
+                    relic_imgs = re.findall(
+                        r'src=["\']([^"\']*\.(gif|jpg|jpeg|png))["\']',
+                        before_relic, re.IGNORECASE
+                    )
+                    if relic_imgs:
+                        relic_img_url = relic_imgs[-1][0]
+                        if not relic_img_url.startswith("http"):
+                            relic_img_url = re.sub(r'^(\.\./)+', '', relic_img_url)
+                            if not relic_img_url.startswith("http"):
+                                relic_img_url = "https://" + relic_img_url
+                        transform["relicImage"] = relic_img_url
             # Description (after ~角色簡介~)
             if line == "~角色簡介~" and i + 1 < len(lines):
                 transform["description"] = lines[i + 1]
@@ -531,6 +855,11 @@ def extract_transforms():
             elif '.png' in url or '.jpg' in url or '.jpeg' in url:
                 skill_imgs.append(url)
 
+        # Exclude relicImage from actionGifs
+        relic_img = transform.get("relicImage")
+        if relic_img:
+            action_gifs = [u for u in action_gifs if u != relic_img]
+
         # Try to get labeled action gifs
         gif_labels = ["普攻", "跑攻", "跳攻", "跑步", "滾動", "武器", "跳躍揮動武器"]
         labeled_gifs = []
@@ -541,25 +870,66 @@ def extract_transforms():
             transform["actionGifs"] = labeled_gifs
 
         # Try to get labeled skill images
-        # Find skill image names from text
+        # Find skill image names from text - stop at metadata boundaries
         skill_names = []
+        # Set of names that are metadata, not actual skill names
+        garbage_names = {
+            "角色專用武器", "角色專用裝備", "角色基本動作", "角色型像及對話圖",
+            "角色型像", "查看詳細招式表", "暫無圖片", "圖片", "名稱", "成份",
+            "附加", "能力", "生命值", "元力值", "氣力值", "攻擊力", "防禦力",
+            "敏捷度", "需求", "耐久", "說明", "型像圖片及名稱", "相關對話圖",
+            "異轉型像",
+        }
         for i, line in enumerate(lines):
             if line == "角色必殺技圖片" or line == "~僅收錄在網上流傳的圖片~":
                 # Collect skill names after this
                 for j in range(i + 1, min(i + 20, len(lines))):
                     l = lines[j]
-                    if l.startswith("角色基本動作") or l.startswith("角色型像"):
+                    # Stop at section boundaries
+                    if l.startswith("角色基本動作") or l.startswith("角色型像") or \
+                       l.startswith("角色專用武器") or l.startswith("角色專用裝備"):
                         break
-                    if re.match(r'^[\u4e00-\u9fff]', l) and len(l) < 15 and l != "查看詳細招式表":
+                    if re.match(r'^[\u4e00-\u9fff]', l) and len(l) < 15 and l not in garbage_names \
+                       and not l.startswith("~"):
                         skill_names.append(l)
 
+        # Extract skill images from the HTML section between 角色必殺技圖片 and the next section
+        # This avoids picking up weapon/equipment table images
+        skill_section_start = content.find("角色必殺技圖片")
+        # Find the end of the skill images section
+        skill_section_end = len(content)
+        for boundary in ["角色專用武器", "角色專用裝備", "角色基本動作", "角色型像"]:
+            idx = content.find(boundary, skill_section_start + 1) if skill_section_start >= 0 else -1
+            if idx >= 0 and idx < skill_section_end:
+                skill_section_end = idx
+
         labeled_skills = []
-        non_gif_imgs = [u for u in imgs if not u.endswith('.gif')]
-        # Skill images are typically after profile image
-        skill_img_candidates = non_gif_imgs[1:] if len(non_gif_imgs) > 1 else []
-        for i, url in enumerate(skill_img_candidates):
-            name = skill_names[i] if i < len(skill_names) else f"技能{i+1}"
-            labeled_skills.append({"url": url, "name": name})
+        if skill_section_start >= 0 and skill_names:
+            skill_section = content[skill_section_start:skill_section_end]
+            # Extract non-gif images from just the skill section
+            skill_section_imgs = re.findall(r'(?:src|href)="([^"]*imgur\.com[^"]*)"', skill_section)
+            skill_img_urls = []
+            for url in skill_section_imgs:
+                if not url.startswith("http"):
+                    url = "https://" + url.lstrip("./")
+                if not url.endswith('.gif'):
+                    skill_img_urls.append(url)
+            # Deduplicate while preserving order
+            seen = set()
+            unique_skill_imgs = []
+            for url in skill_img_urls:
+                if url not in seen:
+                    seen.add(url)
+                    unique_skill_imgs.append(url)
+            # Exclude relicImage
+            relic_img = transform.get("relicImage")
+            if relic_img:
+                unique_skill_imgs = [u for u in unique_skill_imgs if u != relic_img]
+            # Only pair up to the number of skill names we found
+            for i, name in enumerate(skill_names):
+                if i < len(unique_skill_imgs):
+                    labeled_skills.append({"url": unique_skill_imgs[i], "name": name})
+
         if labeled_skills:
             transform["skillImages"] = labeled_skills
 
@@ -839,6 +1209,9 @@ def main():
     with open(chars_path, "r", encoding="utf-8") as f:
         existing = json.load(f)
 
+    # 1b. Portrait groups
+    portrait_groups = extract_portrait_groups()
+
     for char in existing["characters"]:
         slug = char["slug"]
         if slug in profiles:
@@ -846,6 +1219,8 @@ def main():
             for key in ["birthplace", "identity", "combatStyle", "weapon", "equipment", "skillNames"]:
                 if p.get(key):
                     char[key] = p[key]
+        if slug in portrait_groups:
+            char["portraitGroups"] = portrait_groups[slug]
 
     with open(chars_path, "w", encoding="utf-8") as f:
         json.dump(existing, f, ensure_ascii=False, indent=2)

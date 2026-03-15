@@ -1,0 +1,2672 @@
+{
+  "anya": {
+    "slug": "anya",
+    "transformGif": "https://i.imgur.com/UGtXx63.gif",
+    "birthplace": "魔界",
+    "identity": "不明",
+    "combatStyle": "超級元力",
+    "version": "v10.0 勇闖魔界篇",
+    "description": "擁有魔界皇族血統的安雅，自少已跟隨「上帝之手」蓮娜學習武術，外表雖然十分冷漠，但內里卻是一個十分重情義的女子。",
+    "relic": "黑印封帶",
+    "relicImage": "https://i.imgur.com/wscvyqm.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/RDUQmtB.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/iLmvAta.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/UGtXx63.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/cyCDjj0.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/ZuGlhgJ.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/cqt8XvH.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/xcqXfnQ.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/Fi6nHN9.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/fZVK8Mz.jpg",
+        "name": "血獄魔爪"
+      }
+    ]
+  },
+  "ava": {
+    "slug": "ava",
+    "transformGif": "https://i.imgur.com/8DUiVT1.gif",
+    "birthplace": "納米亞國",
+    "identity": "撒旦教古龍騎士",
+    "combatStyle": "兇獸元力",
+    "version": "v12.0 元力覺醒篇",
+    "description": "傳說中的古龍騎士團的其中一員，也是納米亞族的成員之一，擅長使用弓箭作超遠程攻擊。",
+    "relic": "吾主的魂",
+    "relicImage": "https://i.imgur.com/3I1dwqp.jpg",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/MVHRshM.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/SmhPVdw.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/1T0vPLe.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/HKkIwKm.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/HRbmcmE.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/8DUiVT1.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/DtYhMiP.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/MgtXRYR.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/xpBIGVL.jpg",
+        "name": "納米矢"
+      }
+    ],
+    "equipment": {
+      "name": "納米亞笛",
+      "stats": {
+        "hp": "(+500)",
+        "mp": "氣力值",
+        "sp": "攻擊力",
+        "str": "防禦力",
+        "def": "(+500)"
+      }
+    }
+  },
+  "bat": {
+    "slug": "bat",
+    "transformGif": "https://i.imgur.com/J9KCKY9.gif",
+    "birthplace": "不明",
+    "identity": "撒旦教成員",
+    "combatStyle": "超級元力",
+    "version": "v7.0 最強武者篇",
+    "description": "邪鬼的弟弟，小時因為一場意外令生命危在旦夕，幸得龐士相助才能生存，所以對龐士十分忠心。",
+    "relic": "終極魔心臟",
+    "relicImage": "https://i.imgur.com/UM9VtkQ.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/VLBt4Uk.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/XoKflCy.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/0NHzwiq.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/bL0IpQB.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/ewebHXB.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/WXdcrUv.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/J9KCKY9.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/qrzhKd7.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/mnkbFkJ.jpg",
+        "name": "血蝠之災"
+      }
+    ],
+    "equipment": {
+      "name": "新生比提服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+600)",
+        "def": "(+600)",
+        "agi": "(+600)"
+      }
+    }
+  },
+  "blake": {
+    "slug": "blake",
+    "transformGif": "https://i.imgur.com/CrdSsh3.gif",
+    "birthplace": "納米亞國",
+    "identity": "撒旦教古龍騎士",
+    "combatStyle": "兇獸元力",
+    "version": "v12.0 元力覺醒篇",
+    "description": "傳說中的古龍騎士團的其中一員，善長使用長矛攻擊中距離的敵人，實力非凡。",
+    "relic": "真主的心",
+    "relicImage": "https://i.imgur.com/Ge9vXMn.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/kdaaVqs.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/VDvGzG5.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/SMJa5YB.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/rfVIoCl.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/OJ1Wls0.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/hHdHl0t.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/CrdSsh3.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/xnuYORq.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/x04opYu.jpg",
+        "name": "白龍突刺"
+      }
+    ],
+    "equipment": {
+      "name": "納米亞笛",
+      "stats": {
+        "hp": "(+500)",
+        "mp": "氣力值",
+        "sp": "攻擊力",
+        "str": "防禦力",
+        "def": "(+500)"
+      }
+    }
+  },
+  "bloodraven": {
+    "slug": "bloodraven",
+    "transformGif": "https://i.imgur.com/bYVx3Xl.gif",
+    "birthplace": "魔界",
+    "identity": "惱的手下",
+    "combatStyle": "暗黑元力/血液/超界力量",
+    "version": "v13.0 宿命死敵篇",
+    "description": "【亂】其中一名成員，體內的血液擁有超強力腐蝕性，擅長使用身體的血液攻擊敵人。",
+    "relic": "屍毒血素",
+    "relicImage": "https://i.imgur.com/cwl3lUU.jpg",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/khFvLMI.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/h3V4DgW.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/2RFYrZN.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/Y7C7wav.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/GtEvvH2.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/zUOKdyC.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/mJi7xAH.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/bYVx3Xl.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "chester": {
+    "slug": "chester",
+    "transformGif": "https://i.imgur.com/vBhRKNA.gif",
+    "birthplace": "不明",
+    "identity": "上帝之手成員",
+    "combatStyle": "核子暗黑元力",
+    "version": "v6.0 決戰聖域篇",
+    "description": "突然出現在迪雲等人面前的迷之敵人，是神秘組織「上帝之手」其中一員，為人十分冷酷。",
+    "relic": "五百萬匹引擎",
+    "relicImage": "https://i.imgur.com/TAnHG2U.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/vBhRKNA.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/QWSzxqP.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/nodOqxs.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/MVG2EXG.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/5SG0YMn.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/SnpaifM.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/WupbmCs.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/5OgzBa7.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/2Dl18mi.jpg",
+        "name": "米迦勒粒子炮"
+      },
+      {
+        "url": "https://i.imgur.com/2q0kthS.jpg",
+        "name": "極光刺擊"
+      },
+      {
+        "url": "https://i.imgur.com/LPiDW8Z.jpg",
+        "name": "流星子彈"
+      }
+    ]
+  },
+  "chiyua": {
+    "slug": "chiyua",
+    "transformGif": "https://i.imgur.com/JIRyitW.gif",
+    "birthplace": "中國",
+    "identity": "九黎族首領",
+    "combatStyle": "超級元力",
+    "version": "v10.5 魔界外傳",
+    "description": "相傳是遠古時代的三位超人類之一，為了確定自己的實力在眾人之上，於是便和另一位實力旗鼓相當的超人類黃帝展開世紀之戰，就在激戰過程中誤將魔界之門打開，為了阻止妖魔降臨，於是便和黃帝、女媧合力將魔界之門封印。",
+    "relic": "炎帝真元",
+    "relicImage": "https://i.imgur.com/NdtHXkc.jpg",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/C1UXNkq.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/xGekQmN.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/JIRyitW.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/zWzMlcM.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/SxYNXt9.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/M0ClPY6.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/f5PIaXY.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/ziuM3cO.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "cuite": {
+    "slug": "cuite",
+    "transformGif": "https://i.imgur.com/3GvSlSq.gif",
+    "birthplace": "香港",
+    "identity": "大魔導使",
+    "combatStyle": "超級元力/魔導之光",
+    "version": "v5.0 超級元力篇",
+    "description": "文光中學搏擊社的總務，也是新一代的大魔導士；為人開朗活潑，喜歡小動物，是一個很有愛心的女孩。",
+    "relic": "女媧遺書",
+    "relicImage": "https://i.imgur.com/lSo0Kgl.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/RTZZ4pu.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/uvk6hwx.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/dpZLNXq.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/H7iHjFN.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/FMeYrgd.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/6xnRHK3.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/RXaPwxC.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/3GvSlSq.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/1yP1282.jpg",
+        "name": "愛心光波"
+      },
+      {
+        "url": "https://i.imgur.com/8K6U4SN.jpg",
+        "name": "聖女的祈禱"
+      },
+      {
+        "url": "https://i.imgur.com/6X1homN.jpg",
+        "name": "聖天使降臨"
+      },
+      {
+        "url": "https://i.imgur.com/DwkmNS5.jpg",
+        "name": "天使的擁抱"
+      }
+    ],
+    "equipment": {
+      "name": "新生米兒服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+400)",
+        "def": "(+1000)",
+        "agi": "(+400)"
+      }
+    }
+  },
+  "davis": {
+    "slug": "davis",
+    "transformGif": "https://i.imgur.com/XtWQcfJ.gif",
+    "birthplace": "香港",
+    "identity": "元鬥士/米迦勒合成體",
+    "combatStyle": "超級元力/突變元能",
+    "version": "v5.0 超級元力篇",
+    "description": "文光中學搏擊社的隊長，為人成熟穩重，做事細心，領導才能高，深受各同學愛戴。",
+    "relic": "迪氏全家福",
+    "relicImage": "https://i.imgur.com/malbhOG.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/N1F1w9n.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/PDNyjfW.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/WY0eixw.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/5XUERan.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/W4RaM8c.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/klEYY50.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/XtWQcfJ.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/B9bOpi3.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/bwuA1zC.jpg",
+        "name": "終極超昇龍"
+      },
+      {
+        "url": "https://i.imgur.com/Am4IabE.jpg",
+        "name": "地龍波"
+      },
+      {
+        "url": "https://i.imgur.com/Qv9vHol.jpg",
+        "name": "爆裂真龍波"
+      },
+      {
+        "url": "https://i.imgur.com/J65V1DN.jpg",
+        "name": "奧義昇龍霸"
+      }
+    ],
+    "equipment": {
+      "name": "新生迪雲服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+600)",
+        "def": "(+600)",
+        "agi": "(+600)"
+      }
+    }
+  },
+  "deep": {
+    "slug": "deep",
+    "transformGif": "https://i.imgur.com/QnpfTDy.gif",
+    "birthplace": "埃及",
+    "identity": "元鬥士",
+    "combatStyle": "超級元力",
+    "version": "v5.0 超級元力篇",
+    "description": "迪雲等人在參加元武會考試時認識的其中一位參加者，精通各類刀術，視刀為第二生命的熱血男子。",
+    "relic": "天刀秘笈",
+    "relicImage": "https://i.imgur.com/1mRthld.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/N9D2n5W.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/28lPKV1.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/eLrKdVf.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/QnpfTDy.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/vTlOrSz.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/ypwt3f4.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/nZzAIKl.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/ObzzR65.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/RbDfZZA.jpg",
+        "name": "烈寒刀"
+      },
+      {
+        "url": "https://i.imgur.com/eXXLPnb.jpg",
+        "name": "狂龍亂舞"
+      },
+      {
+        "url": "https://i.imgur.com/Bpbrty9.jpg",
+        "name": "滑翔刀"
+      }
+    ]
+  },
+  "dennis": {
+    "slug": "dennis",
+    "transformGif": "https://i.imgur.com/CCZfSg0.gif",
+    "birthplace": "香港",
+    "identity": "元鬥士",
+    "combatStyle": "超級元力",
+    "version": "v5.0 超級元力篇",
+    "description": "文光中學搏擊社的副隊長，為人活潑好動，喜歡幫助同學，是個充滿運動細胞的陽光少年。",
+    "relic": "璇瓏的手帕",
+    "relicImage": "https://i.imgur.com/0WB7U3G.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/d08rqov.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/Z6Eitrl.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/IEZ7UFu.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/VyV7u0Y.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/J9HmcHU.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/CCZfSg0.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/vN8uNOw.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/jGQYnW2.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/uWZEiwo.jpg",
+        "name": "音速射球"
+      },
+      {
+        "url": "https://i.imgur.com/LBh50lO.jpg",
+        "name": "豹皇疾風腿"
+      },
+      {
+        "url": "http://imgur.com/ZnFyV3O",
+        "name": "銀河旋風"
+      },
+      {
+        "url": "https://i.imgur.com/ZnFyV3O.jpg",
+        "name": "倒掛流星"
+      },
+      {
+        "url": "https://i.imgur.com/jA4kT1L.jpg",
+        "name": "光流百裂腳"
+      },
+      {
+        "url": "https://i.imgur.com/XvWBM3u.jpg",
+        "name": "音速射球"
+      }
+    ],
+    "equipment": {
+      "name": "新生小丹服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+500)",
+        "def": "(+600)",
+        "agi": "(+700)"
+      }
+    }
+  },
+  "dilun": {
+    "slug": "dilun",
+    "transformGif": "https://i.imgur.com/WWdXN4X.gif",
+    "birthplace": "香港",
+    "identity": "上帝之手成員",
+    "combatStyle": "突變元能",
+    "version": "v7.0 最強武者篇",
+    "description": "迪雲的哥哥，也是「文光中學」前任搏擊社的隊長，為人成熟穩重，十分愛護弟弟迪雲，但為了陪同父親迪諾夫尋找合適的魔獸，於是便消失在迪雲的面前。",
+    "relic": "完美基因強化液",
+    "relicImage": "https://i.imgur.com/sHkQ1rl.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/gmT2XcJ.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/epykxAx.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/lw8m3F2.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/InWW5dJ.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/WWdXN4X.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/Q8qGinU.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/VdB0YEt.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/HACg6zj.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/szDsl6M.jpg",
+        "name": "昇龍殺"
+      },
+      {
+        "url": "https://i.imgur.com/ghd3pee.jpg",
+        "name": "吞天噬日"
+      },
+      {
+        "url": "https://i.imgur.com/Gdu805C.jpg",
+        "name": "黃金之蒼龍"
+      }
+    ],
+    "weapon": {
+      "name": "蒼龍戟",
+      "durability": "2000",
+      "description": "一代最強武者-迪倫之專用武器"
+    }
+  },
+  "firen": {
+    "slug": "firen",
+    "transformGif": "https://i.imgur.com/puaGSLb.gif",
+    "birthplace": "不明",
+    "identity": "元武會火尊者",
+    "combatStyle": "超級元力",
+    "version": "v6.0 決戰聖域篇",
+    "description": "四大元素尊者之一，擁有操控火元素的力量，是冰尊者－菲沙的弟弟，為人火爆自大，雖然常常因為小小事而大發脾氣，但其實他是一個很會照顧別人的人",
+    "relic": "祝融匕首",
+    "relicImage": "https://i.imgur.com/d4ZZFKI.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/BumijEI.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/0FRsqRD.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/puaGSLb.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/w59MKcS.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/f5Ptq6a.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/Ype7S0D.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/3nCuNAa.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/9jG5He4.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/Q8PxwGy.jpg",
+        "name": "審判之火"
+      },
+      {
+        "url": "https://i.imgur.com/SgVKboU.jpg",
+        "name": "赤道之炎"
+      }
+    ],
+    "equipment": {
+      "name": "強化菲雲服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+600)",
+        "def": "(+600)",
+        "agi": "(+600)"
+      }
+    }
+  },
+  "firzen": {
+    "slug": "firzen",
+    "transformGif": "https://i.imgur.com/XWSD22K.gif",
+    "birthplace": "不明",
+    "identity": "合體人",
+    "combatStyle": "超級元力",
+    "version": "v8.0 摩摩星人篇",
+    "description": "由冰尊者和火尊者合體而成的天魔，同時擁有冰，火的能力，實力極強。",
+    "relic": "天火結晶體",
+    "relicImage": "https://i.imgur.com/5DX80ZE.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/zSIpxDm.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/Ku9O4oq.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/wSCLuSK.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/hZQ3TsU.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/Iq9b0Pv.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/XWSD22K.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/k3QIvrB.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/Lk01Lgz.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/IUPUS7a.jpg",
+        "name": "寒極天火"
+      },
+      {
+        "url": "https://i.imgur.com/TZAWn0F.jpg",
+        "name": "穿天轟炸"
+      },
+      {
+        "url": "https://i.imgur.com/rqOGrMm.jpg",
+        "name": "冰火世界"
+      }
+    ]
+  },
+  "fox": {
+    "slug": "fox",
+    "transformGif": "https://i.imgur.com/sfduLgR.gif",
+    "birthplace": "不明",
+    "identity": "元武會雷尊者",
+    "combatStyle": "超級元力",
+    "version": "v7.0 最強武者篇",
+    "description": "四大元素尊者之一，擁有操控雷元素的力量，長期處於大嶼山佛寺內的實驗室中研究，為人博學多才，善用策略，是個不可多得的人才。",
+    "relic": "黑洞原子粒",
+    "relicImage": "https://i.imgur.com/OC50AEP.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/OC6BHYU.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/9FN5OF3.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/dxWJlbg.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/zeQ4JeL.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/CjzVQwq.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/umiazAD.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/geXJ1pW.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/sfduLgR.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/vgR0n1v.jpg",
+        "name": "爆旋陀螺"
+      },
+      {
+        "url": "https://i.imgur.com/OA73bQ3.jpg",
+        "name": "雷鳥昇空"
+      },
+      {
+        "url": "https://i.imgur.com/yJU214D.jpg",
+        "name": "失樂的雷嗚"
+      }
+    ]
+  },
+  "freeze": {
+    "slug": "freeze",
+    "transformGif": "https://i.imgur.com/iD6TVoB.gif",
+    "birthplace": "不明",
+    "identity": "元武會冰尊者",
+    "combatStyle": "超級元力",
+    "version": "v6.0 決戰聖域篇",
+    "description": "四大元素尊者之一，擁有操控冰元素的力量，雖然外表冷酷，但其實內心充滿熱誠，加上戰鬥力高，是可以依靠的伙伴。",
+    "relic": "原始冰塊",
+    "relicImage": "https://i.imgur.com/7uNnHAs.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/in3mg1i.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/wYdKkJi.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/SXQGQGQ.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/5jbkrqF.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/sx5h4Bv.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/ScYPyxD.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/iD6TVoB.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/JPpbU5v.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/8wvoPtO.jpg",
+        "name": "冰寒穿心戟"
+      },
+      {
+        "url": "https://i.imgur.com/yuUHLBU.jpg",
+        "name": "絕對零度"
+      },
+      {
+        "url": "https://i.imgur.com/0TziMzG.jpg",
+        "name": "連環冷凍錐"
+      }
+    ],
+    "equipment": {
+      "name": "強化菲沙服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+600)",
+        "def": "(+600)",
+        "agi": "(+600)"
+      }
+    }
+  },
+  "fuku": {
+    "slug": "fuku",
+    "transformGif": "https://i.imgur.com/zr1G1cR.gif",
+    "birthplace": "香港",
+    "identity": "傳教士(?)",
+    "combatStyle": "信仰(?)",
+    "version": "v9.5 忍法王之戰",
+    "description": "是大嶼山佛寺的主持，為人友善，樂於助人，本身也是元武會的成員，懂得使用元力。",
+    "relic": "永恒信心",
+    "relicImage": "https://i.imgur.com/tcTwjYQ.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/fhXZYoR.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/zr1G1cR.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/KpPzBGS.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/aQpD1wb.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/EHQgXwz.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/d3MSpqL.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/3AqPZI7.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/cn92WDr.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/kczLrEb.jpg",
+        "name": "聖光鴿子"
+      }
+    ]
+  },
+  "gaia": {
+    "slug": "gaia",
+    "transformGif": "https://i.imgur.com/hsyUAuR.gif",
+    "birthplace": "不明",
+    "identity": "不明",
+    "combatStyle": "超級元力",
+    "version": "v10.0 勇闖魔界篇",
+    "description": "外號地尊者的蓋亞，也是元武會七大尊者之一，為人沉默寡言，喜愛單獨行事。",
+    "relic": "閻王面具",
+    "relicImage": "https://i.imgur.com/De2pbde.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/6RuaoPJ.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/Ebj0EUD.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/JHnN9xX.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/hsyUAuR.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/hxAfSXQ.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/8bLutCF.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/3qwW3qv.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/HZKbSxc.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/bkqIz5Z.jpg",
+        "name": "半月破"
+      }
+    ]
+  },
+  "hector": {
+    "slug": "hector",
+    "transformGif": "https://i.imgur.com/PvIvQci.gif",
+    "birthplace": "魔界",
+    "identity": "撒旦教成員",
+    "combatStyle": "暗黑元力",
+    "version": "v10.0 勇闖魔界篇",
+    "description": "魔人組織【亂】的首領，因一些理由必須要打開魔界之門，於是便與迪諾夫博士合作一起奪取元武會的玄通器。",
+    "relic": "重組份子",
+    "relicImage": "https://i.imgur.com/U9e1TnQ.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/SfHKc08.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/U0TQFmm.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/ZkwLu43.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/9wOWuBx.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/zQQafHa.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/PvIvQci.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/35S9p75.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/fkMiyFq.gif",
+        "label": "動作8"
+      },
+      {
+        "url": "https://i.imgur.com/4tQnVtX.gif",
+        "label": "動作9"
+      }
+    ]
+  },
+  "henry": {
+    "slug": "henry",
+    "transformGif": "https://i.imgur.com/cs7euWE.gif",
+    "birthplace": "不明",
+    "identity": "元鬥士",
+    "combatStyle": "超級元力",
+    "version": "v5.0 超級元力篇",
+    "description": "在埃及負責混入元武會考生中的監考員，為人不拘小節，平易近人，是一個可靠的好伙伴。",
+    "relic": "后羿的眼睛",
+    "relicImage": "https://i.imgur.com/a7MPsfX.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/F2xAJa5.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/EdSYvtE.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/ADa8Jz4.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/4rkjonJ.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/cs7euWE.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/FlUZHmF.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/x6xLXSV.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/Q6Id1fH.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/nlRMegz.jpg",
+        "name": "地龍追命箭"
+      },
+      {
+        "url": "https://i.imgur.com/xZ7wI2d.jpg",
+        "name": "翔天穿空矢"
+      }
+    ],
+    "weapon": {
+      "name": "射日",
+      "durability": "800",
+      "description": "【無】"
+    }
+  },
+  "jagr": {
+    "slug": "jagr",
+    "transformGif": "https://i.imgur.com/6BDaMDZ.gif",
+    "birthplace": "魔界",
+    "identity": "惱的手下",
+    "combatStyle": "暗黑元力",
+    "version": "v13.0 宿命死敵篇",
+    "description": "【亂】十三魔人之一，雖然身體看起來非常脆弱，但防御力竟以外地驚人，更被稱為【亂】中擁有最高防御力的魔人。",
+    "relic": "屍鬼魔棺",
+    "relicImage": "https://i.imgur.com/TZa3pxc.jpg",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/HWnc6rE.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/Gu5FDU0.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/2nQq8yQ.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/HIbdqoP.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/6BDaMDZ.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/2r6Dxfe.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/sYWNMln.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/YnDdr8i.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "jessie": {
+    "slug": "jessie",
+    "transformGif": "https://i.imgur.com/eKEA0WH.gif",
+    "birthplace": "香港",
+    "identity": "元鬥士",
+    "combatStyle": "超級元力",
+    "version": "v8.0 摩摩星人篇",
+    "description": "就讀耀昇書院，是馬龍的妹妹，跟隨雷尊者霍雷學習元力。為了不成為小丹等人的負擔，璇瓏每天都努力練習。",
+    "relic": "馬龍的日記",
+    "relicImage": "https://i.imgur.com/SXOlokM.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/JUVVnTG.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/dCnlF2s.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/3W0GbAK.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/KLyKGil.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/SvXYkkS.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/5cXYXj9.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/khzylBZ.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/eKEA0WH.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/YDb6IbU.jpg",
+        "name": "疾風連打"
+      },
+      {
+        "url": "https://i.imgur.com/2KDQuHf.jpg",
+        "name": "旋龍焰舞"
+      }
+    ]
+  },
+  "john": {
+    "slug": "john",
+    "transformGif": "https://i.imgur.com/2ZVg4Kr.gif",
+    "birthplace": "不明",
+    "identity": "元鬥士",
+    "combatStyle": "超級元力",
+    "version": "v5.0 超級元力篇",
+    "description": "迪雲等人在參加元武會考試時認識的其中一位參加者，為人斯文有禮，熱愛研究，喜歡和人交談。",
+    "relic": "魔法皇密碼",
+    "relicImage": "https://i.imgur.com/OUQBNXj.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/bFlBKpU.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/0d03cig.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/8D6KeuC.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/BYOqHzH.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/V5hIc5I.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/zSvfy0G.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/yPeDZi6.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/2ZVg4Kr.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/qaVOFjc.jpg",
+        "name": "魔法皇的咒詛"
+      },
+      {
+        "url": "https://i.imgur.com/N2MC0Gt.jpg",
+        "name": "魔法光斬刀"
+      },
+      {
+        "url": "https://i.imgur.com/X8oXRtH.jpg",
+        "name": "魔法破邪彈"
+      }
+    ]
+  },
+  "julian": {
+    "slug": "julian",
+    "transformGif": "https://i.imgur.com/jlSwobD.gif",
+    "birthplace": "不明",
+    "identity": "浪人",
+    "combatStyle": "超級元力",
+    "version": "v5.0 超級元力篇",
+    "description": "雖然是龐士的手下，但實力絕不在龐士之下，為了最愛的弟弟才甘愿幫助龐士征服世界。",
+    "relic": "比堤墨鏡",
+    "relicImage": "https://i.imgur.com/5u9dOme.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/LIRxxmJ.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/jlSwobD.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/6eeoqFq.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/Qqx6R5Z.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/huEen0Q.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/kkHRqr1.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/LPqYiyi.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/0AWi6A6.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/BWVUp6E.jpg",
+        "name": "戰之道"
+      },
+      {
+        "url": "https://i.imgur.com/3lsGplC.jpg",
+        "name": "戰神昇龍霸"
+      },
+      {
+        "url": "https://i.imgur.com/k05VJqm.jpg",
+        "name": "巨大戰魂"
+      }
+    ],
+    "equipment": {
+      "name": "新生邪鬼服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+600)",
+        "def": "(+600)",
+        "agi": "(+600)"
+      }
+    }
+  },
+  "kiki": {
+    "slug": "kiki",
+    "transformGif": "https://i.imgur.com/Lcx6GOL.gif",
+    "birthplace": "香港",
+    "identity": "不明",
+    "combatStyle": "超級元力?",
+    "version": "v9.0 撒旦降臨篇",
+    "description": "就讀文光中學附屬的文光小學的三年級生，是小丹的表妹，性格古惑任性，雖然年紀小小，但說話卻十分老成，而且十分喜歡星仔。",
+    "relic": "亞空間時光機",
+    "relicImage": "https://i.imgur.com/n8OExL0.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/RkUzyPa.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/Oset5SF.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/ygWoqEq.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/gVXyaod.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/3afCGXp.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/Lcx6GOL.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/WLa4Htd.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/4pxaEZC.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/QQ950Jw.jpg",
+        "name": "粉紅脈衝"
+      },
+      {
+        "url": "https://i.imgur.com/16bKe8v.jpg",
+        "name": "粉紅絲帶"
+      }
+    ]
+  },
+  "king": {
+    "slug": "king",
+    "transformGif": "https://i.imgur.com/JWAJLoo.gif",
+    "birthplace": "中國",
+    "identity": "華夏族首領",
+    "combatStyle": "超級元力",
+    "version": "v10.5 魔界外傳",
+    "description": "相傳是遠古時代的三位超人類之一，也是遠古時代的霸主，因為接受了另一位實力旗鼓相當的超人類蚩尤挑戰而展開了世紀之戰，就在激戰過程中二人誤將魔界之門打開，最後為了阻止妖魔降臨，於是便和蚩尤、女媧聯手，合力將魔界之門封印。",
+    "relic": "黃帝內經",
+    "relicImage": "https://i.imgur.com/CdQYD5K.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/YhngIC6.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/a9TaTsH.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/0RWNFo1.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/ZERKzKr.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/mGO85bi.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/JWAJLoo.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/yZsfmsw.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/6FPoP0z.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "knight": {
+    "slug": "knight",
+    "transformGif": "https://i.imgur.com/6NYqvgZ.gif",
+    "birthplace": "不明",
+    "identity": "親衛兵",
+    "combatStyle": "超級元力",
+    "version": "v8.0 摩摩星人篇",
+    "description": "是邪鬼親手訓練的近衛隊的其中一員，劍術了得，身手不凡，專門負責守護羅剎堡。",
+    "relic": "戰神面具",
+    "relicImage": "https://i.imgur.com/dyhhoAx.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/6NYqvgZ.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/CpQ6kZp.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/kPya0mp.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/XK4iB5A.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/lDV0Pj9.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/u7huhUw.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/zriBgqn.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/1QgPDbp.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/VJgKdyd.jpg",
+        "name": "黃龍咆哮"
+      }
+    ]
+  },
+  "kovalchuk": {
+    "slug": "kovalchuk",
+    "transformGif": "https://i.imgur.com/M25B1sO.gif",
+    "birthplace": "魔界",
+    "identity": "惱的手下",
+    "combatStyle": "暗黑元力/超界力量",
+    "version": "v13.0 宿命死敵篇",
+    "description": "魔人組織【亂】其中一名成員，性格暴戾，對人類抱有極輕視的態度，是因此對於組織與「上帝之手」合作一事一直深存不滿。",
+    "relic": "屍殼針球",
+    "relicImage": "https://i.imgur.com/nJf9j6j.png",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/2FqQ9Ft.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/oIpE6u3.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/kjRMKVk.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/K2Y6Bos.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/RQ8f9Sn.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/JZlXggA.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/M25B1sO.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/ru5KQC6.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "lit": {
+    "slug": "lit",
+    "transformGif": "https://i.imgur.com/YeosXMY.gif",
+    "birthplace": "中國",
+    "identity": "武將",
+    "combatStyle": "暗黑元力",
+    "version": "v11.5 魔塔風雲",
+    "description": "遠古中國將軍烈追風，附身於一個涉足到康州鬼城的老人身上，誤以為米兒是其妻子恩潔的轉世而與眾人交戰。",
+    "relic": "妻子的愛",
+    "relicImage": "https://i.imgur.com/26OAXia.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/cH67nsP.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/AWabIb6.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/zFxmfO9.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/YeosXMY.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/FqOfz6H.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/177D3M5.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/KlqBV2e.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/b0jvWCI.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "louis": {
+    "slug": "louis",
+    "transformGif": "https://i.imgur.com/wYEPPW8.gif",
+    "birthplace": "不明",
+    "identity": "龍翼的良心",
+    "combatStyle": "超級元力",
+    "version": "v8.5 龍翼外傳",
+    "description": "虎山派龍武的親生兒子，也是悟地的師弟，由於天資聰敏，自小已練成一身好武功，但性格自私冷漠，就因為龍翼這種性格令龍武不肯將虎山派絕學「虎翔霸」傳授給他，龍翼一怒之下便離家出走。",
+    "relic": "極光之魂",
+    "relicImage": "https://i.imgur.com/Dj8BFcv.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/HXaRZR6.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/qE9gPCY.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/5dpPzRD.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/s3tWXRr.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/wYEPPW8.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/bbmUKgt.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/v134Afg.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/kZCSxdg.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/wfHqUIP.jpg",
+        "name": "破獄猛虎拳"
+      },
+      {
+        "url": "https://i.imgur.com/W2bsOIe.jpg",
+        "name": "光速矛"
+      }
+    ]
+  },
+  "louisex": {
+    "slug": "louisex",
+    "transformGif": "https://i.imgur.com/Xf2OHUC.gif",
+    "birthplace": "香港",
+    "identity": "撒旦教古龍騎士",
+    "combatStyle": "兇獸元力",
+    "version": "v5.0 超級元力篇",
+    "description": "為了擊倒宿敵悟地，龍翼便將自己的靈魂賣給龐士，來換取一套元力增幅盔甲。",
+    "relic": "極惡邪靈",
+    "relicImage": "https://i.imgur.com/yOE1aaM.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/7EG7M1v.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/JmSfZzQ.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/oWwWRfU.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/Xf2OHUC.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/cTZVKnm.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/ZFTSMR2.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/MofKPid.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/YqHRhKt.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/mHZdqU5.jpg",
+        "name": "超．猛虎拳EX"
+      },
+      {
+        "url": "https://i.imgur.com/Vi7av3C.jpg",
+        "name": "鬼神震怒"
+      }
+    ]
+  },
+  "milo": {
+    "slug": "milo",
+    "transformGif": "https://i.imgur.com/7rw3Geo.gif",
+    "birthplace": "香港",
+    "identity": "元鬥士",
+    "combatStyle": "超級元力/軍火",
+    "version": "v6.0 決戰聖域篇",
+    "description": "寶瑪莉中學的搏擊社的隊長，也是「青狗社」的頭目，為人霸道，好勝心強，但十分重情重義，幫助兄弟時更會義不容辭。成為元鬥士後更加倍鍛煉元力，希望日後能為元武會作出貢獻。",
+    "relic": "英雄勳章",
+    "relicImage": "https://i.imgur.com/cUR0Qmh.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/dpILkzZ.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/ye6kI51.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/kXxAN92.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/ixcPk4j.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/jThKQzs.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/7rw3Geo.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/q3jbv9q.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/uVJ0BBo.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/xP3QVlx.jpg",
+        "name": "密集導彈"
+      },
+      {
+        "url": "https://i.imgur.com/ZbQjew1.jpg",
+        "name": "機關炮轟炸"
+      },
+      {
+        "url": "https://i.imgur.com/aoSM2eG.jpg",
+        "name": "真獨龍鑽"
+      }
+    ]
+  },
+  "molson": {
+    "slug": "molson",
+    "transformGif": "https://i.imgur.com/QSPMt9z.gif",
+    "birthplace": "魔界",
+    "identity": "惱的手下",
+    "combatStyle": "暗黑元力/巫術/超界力量",
+    "version": "v13.0 宿命死敵篇",
+    "description": "魔人組織【亂】其中一名成員，性格高傲，對人類抱有極強的敵意，善長使用失傳已久的巫術直接攻擊對手的大腦神經，使其產生嚴重的幻覺，最後因精神崩潰而死。",
+    "relic": "屍骸瘴氣",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/4UgpAvU.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/9yKpoh6.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/XjxOIUN.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/Fl05OI8.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/QSPMt9z.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/IYjRhu7.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/J5kxFki.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/unmToT5.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "nina": {
+    "slug": "nina",
+    "transformGif": "https://i.imgur.com/CwfCF50.gif",
+    "birthplace": "魔界",
+    "identity": "上帝之手成員/「亂」成員",
+    "combatStyle": "暗黑元力/超界力量",
+    "version": "v7.0 最強武者篇",
+    "description": "神秘組織『上帝之手』的組員，性格冷靜，善長分析敵人能力，而且擁有極快的速度。",
+    "relic": "魔獸骨頭",
+    "relicImage": "https://i.imgur.com/nP2AME5.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/gvKH4HG.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/m8uo2Y5.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/tQy6HcE.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/7fHVDJv.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/eWBeYvh.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/CwfCF50.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/Y7MoMfu.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/tdKa9fS.gif",
+        "label": "動作8"
+      },
+      {
+        "url": "https://i.imgur.com/9FxmT38.gif",
+        "label": "動作9"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/uFur8qN.jpg",
+        "name": "異角之門"
+      }
+    ]
+  },
+  "odom": {
+    "slug": "odom",
+    "transformGif": "https://i.imgur.com/RevVShV.gif",
+    "birthplace": "魔界",
+    "identity": "守護神",
+    "combatStyle": "元力/超界力量",
+    "version": "v10.5 魔界外傳",
+    "description": "被稱為魔界中最強的戰士，為了找尋好友索特獨自來到人類世界，後來被同伴奧龍及蓮娜的奸計出賣，落入迪諾夫的手中...",
+    "relic": "宇宙最強戰鎧",
+    "relicImage": "https://i.imgur.com/RlBowqd.jpg",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/br8kVlA.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/cfNUDFM.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/hC056AY.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/HamHe0p.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/fUUfWFG.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/RevVShV.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/ilZJlQo.gif",
+        "label": "跳躍揮動武器"
+      }
+    ]
+  },
+  "omegah": {
+    "slug": "omegah",
+    "transformGif": "https://i.imgur.com/AMCr2HH.gif",
+    "birthplace": "魔界",
+    "identity": "血骷髏軍團成員",
+    "combatStyle": "暗黑元力",
+    "version": "v2.0 勇者誕生篇",
+    "description": "邪惡組織「血骷髏軍團」首領，性格陰險奸詐，為了達到目的，犧牲同伴的性命也沒所謂，創立組織的最大目的，就是要打開人界和魔界的通道，從而使魔族統治人界。",
+    "relic": "龐士心臟",
+    "relicImage": "https://i.imgur.com/cEWtjh1.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/PXzqC4C.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/I63CCqp.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/WlT5tHl.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/rJijq4W.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/PbOFd12.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/NHjYBln.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/XbikT5N.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/AMCr2HH.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/7XXnBnU.jpg",
+        "name": "煉獄之門"
+      },
+      {
+        "url": "https://i.imgur.com/1cW204t.jpg",
+        "name": "暗黑石破天驚"
+      }
+    ]
+  },
+  "owen": {
+    "slug": "owen",
+    "transformGif": "https://i.imgur.com/HD8KTRX.gif",
+    "birthplace": "魔界",
+    "identity": "上帝之手成員/「亂」成員/惱的手下",
+    "combatStyle": "暗黑元力/超界力量",
+    "version": "v7.0 最強武者篇",
+    "description": "神秘組織『上帝之手』的組員，性格火爆，容易生氣，而且腕力極高，輕輕一拳已能將敵人打至斷骨，是破壞力極強的人物。",
+    "relic": "兇獸血漿",
+    "relicImage": "https://i.imgur.com/Z5vSKMf.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/TNtzHKK.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/iy5nFyv.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/5Ey1iQg.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/r9ZYlPV.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/vQswrPG.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/hmXe7ur.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/HD8KTRX.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/9ccg2oM.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/PtDgrC5.jpg",
+        "name": "狂獸怒吼炮"
+      },
+      {
+        "url": "https://i.imgur.com/rWyhl4W.jpg",
+        "name": "絕對粉碎"
+      }
+    ]
+  },
+  "ricky": {
+    "slug": "ricky",
+    "transformGif": "https://i.imgur.com/3ioczDU.gif",
+    "birthplace": "香港",
+    "identity": "青狗社社員",
+    "combatStyle": "超級元力",
+    "version": "v9.0 撒旦降臨篇",
+    "description": "就讀文光中學，是校內的壞份子，也是「青狗社」的一員，為人單純蠢鈍，做事不經大腦，常常要域多提醒。",
+    "relic": "青狗授權書",
+    "relicImage": "https://i.imgur.com/KVgnAIM.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/1CRwB3k.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/oQgBhI4.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/3ioczDU.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/iU6UKkl.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/DsdOsA4.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/pjVb4Wm.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/IqtAn4T.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/tlCSfQL.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/TUXVSfT.jpg",
+        "name": "神風裂震"
+      }
+    ]
+  },
+  "rova": {
+    "slug": "rova",
+    "transformGif": "https://i.imgur.com/weNAArF.gif",
+    "birthplace": "不明",
+    "identity": "惡魔?",
+    "combatStyle": "暗黑元力?",
+    "version": "v9.5 忍法王之戰",
+    "description": "元武會七大尊者之一，人稱人尊者。 樂雲性格樂觀，喜歡到處流浪。",
+    "relic": "蘿拉耳環",
+    "relicImage": "https://i.imgur.com/MZtGppv.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/weNAArF.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/jBNTPqj.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/SFVJkDa.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/uRzwFJj.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/L1ccgwi.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/o3uu8o7.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/2OWYEjH.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/q1iNzjn.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/scZqbXp.jpg",
+        "name": "忘我之道"
+      }
+    ]
+  },
+  "rudolf": {
+    "slug": "rudolf",
+    "transformGif": "https://i.imgur.com/ezLspZ3.gif",
+    "birthplace": "日本",
+    "identity": "元鬥士/忍者",
+    "combatStyle": "超級元力/忍術",
+    "version": "v5.0 超級元力篇",
+    "description": "迪雲等人在參加元武會考試時認識的其中一位參加者， 是甲賀派唯一的傳人，為了報殺父之仇，一路到處流浪修練，有一天聽聞學習元力可以令自己變得更強，便參加了元武會的考試。",
+    "relic": "阿修羅的慈愛",
+    "relicImage": "https://i.imgur.com/msAih5S.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/HuXZbGU.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/95Iheg2.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/tzE5cqw.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/ErxjhG6.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/qDxFB2W.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/ezLspZ3.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/HlzOzTc.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/GlaOj7x.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/RFFxrII.jpg",
+        "name": "甲賀三分斬"
+      }
+    ],
+    "weapon": {
+      "name": "索命劍",
+      "durability": "300",
+      "description": "被封印的凶劍，相傳會吸蝕使用者的靈魂。"
+    }
+  },
+  "stinky": {
+    "slug": "stinky",
+    "transformGif": "https://i.imgur.com/gKA726g.gif",
+    "birthplace": "中國",
+    "identity": "元鬥士/龍神",
+    "combatStyle": "超級元力/超界力量",
+    "version": "v5.0 超級元力篇",
+    "description": "剛轉校來文光中學的插班生，也是搏擊社的新隊員，為人沖動火爆，十分自大，對米兒一見鐘情，加入搏擊社的最大原因，都是為了親近米兒",
+    "relic": "終極魔靈魂",
+    "relicImage": "https://i.imgur.com/ORgHjUE.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/6BceHos.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/fDZE9Sc.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/DuTSTnQ.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/JcB9mSQ.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/M1ZW6os.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/m1wVumE.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/gKA726g.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/0hbxA8O.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/XUnR3BZ.jpg",
+        "name": "魔界地獄"
+      },
+      {
+        "url": "https://i.imgur.com/kw9bD3e.jpg",
+        "name": "狂獸狙擊"
+      },
+      {
+        "url": "https://i.imgur.com/XQYXMoE.jpg",
+        "name": "十字烈風拳"
+      },
+      {
+        "url": "https://i.imgur.com/2c26IIc.jpg",
+        "name": "終極魔龍噬"
+      },
+      {
+        "url": "https://i.imgur.com/rO6UO84.jpg",
+        "name": "魔獸之怒火"
+      },
+      {
+        "url": "https://i.imgur.com/vqVH3HD.jpg",
+        "name": "超界旋風拳"
+      }
+    ],
+    "equipment": {
+      "name": "新生星奇服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+1000)",
+        "def": "(+600)",
+        "agi": "(+200)"
+      }
+    }
+  },
+  "uranus": {
+    "slug": "uranus",
+    "transformGif": "https://i.imgur.com/39cUIKj.gif",
+    "birthplace": "不明",
+    "identity": "元武會天尊者",
+    "combatStyle": "元力",
+    "version": "v4.0 邪魔亂世篇",
+    "description": "元武會七大尊者之一，自小已擁有極高的習武潛質，由於天資聰敏的關系，宇歷斯從不聽取別人意見，只要他認為是對的事，就沒人能改變他的想法。",
+    "relic": "武元訣",
+    "relicImage": "https://i.imgur.com/XSfGsIS.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/rPK04gA.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/39cUIKj.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/jXRJoHJ.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/7VU0ekW.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/Fs3l1YG.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/dgH1H5G.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/PlFTmqi.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/Xa7sk3Q.gif",
+        "label": "動作8"
+      },
+      {
+        "url": "https://i.imgur.com/wAMyCbg.gif",
+        "label": "動作9"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/vyH8D9N.jpg",
+        "name": "天羅地網"
+      }
+    ]
+  },
+  "victor": {
+    "slug": "victor",
+    "transformGif": "https://i.imgur.com/vIzmSWR.gif",
+    "birthplace": "香港",
+    "identity": "青狗社社員",
+    "combatStyle": "超級元力",
+    "version": "v7.0 最強武者篇",
+    "description": "就讀文光中學，是校內的壞份子，也是「青狗社」的一員，為人欺善怕惡，十分喜愛出風頭，暗戀著米兒。",
+    "relic": "青狗大哥皮帶",
+    "relicImage": "https://i.imgur.com/ZL9KnJX.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/sNgdQwR.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/ST0Fx4z.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/nm54XUg.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/vIzmSWR.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/A8JC5ge.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/sC7mBDj.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/WehSx7I.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/Nb1VICz.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/FwL9x80.jpg",
+        "name": "鎖定追擊"
+      },
+      {
+        "url": "https://i.imgur.com/ad7ppwR.jpg",
+        "name": "穿梭破空閃"
+      }
+    ]
+  },
+  "windy": {
+    "slug": "windy",
+    "transformGif": "https://i.imgur.com/zOeS0uQ.gif",
+    "birthplace": "不明",
+    "identity": "元武會風尊者",
+    "combatStyle": "超級元力",
+    "version": "v7.0 最強武者篇",
+    "description": "四大元素尊者之一，擁有操控風元素的力量，也是文光中學搏擊社的代教練，為人十分溫柔，做事又細心，是一個十分得人喜歡的大姐姐。",
+    "relic": "鏡心婆婆的項鏈",
+    "relicImage": "https://i.imgur.com/sGqkWLo.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/vPEh6xy.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/sOayOr4.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/Y4XiiPp.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/WKoer9M.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/UEheDdR.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/Snvwmxt.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/soGT55X.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/zOeS0uQ.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/PcCR1ot.jpg",
+        "name": "絕地龍捲"
+      },
+      {
+        "url": "https://i.imgur.com/GgyXpsK.jpg",
+        "name": "風神之咒"
+      },
+      {
+        "url": "https://i.imgur.com/tJqcw0G.jpg",
+        "name": "天災風暴"
+      }
+    ]
+  },
+  "witch": {
+    "slug": "witch",
+    "transformGif": "https://i.imgur.com/A7hRe8C.gif",
+    "birthplace": "不明",
+    "identity": "戰鬥方式",
+    "combatStyle": "巫術",
+    "version": "v10.5 魔界外傳",
+    "description": "是邪鬼手下的一名猛將，心手狠毒，喜歡偷襲對手，善長操控別人，是個十分難纏的對手。",
+    "relic": "潔凈的聖服",
+    "relicImage": "https://i.imgur.com/r2wX1kd.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/4PzOlKb.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/A7hRe8C.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/U0VVhmN.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/Y9r4pjn.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/cJiON4j.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/RQ3wwCF.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/19Ox1l6.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/RMGd8PR.gif",
+        "label": "動作8"
+      }
+    ]
+  },
+  "woody": {
+    "slug": "woody",
+    "transformGif": "https://i.imgur.com/KUF4nHd.gif",
+    "birthplace": "香港",
+    "identity": "虎山派成員/元鬥士",
+    "combatStyle": "超級元力",
+    "version": "v5.0 超級元力篇",
+    "description": "耀昇書院的搏擊社的隊長，為人心思細密，觀察力強，處情冷靜，加上俊俏的臉孔，深受女同學熱烈歡迎。",
+    "relic": "虎山派掌門令",
+    "relicImage": "https://i.imgur.com/FxnPC0V.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/WA4QUH0.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/2LwiHIu.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/y3UwYKt.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/bHnPkd6.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/KUF4nHd.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/XASnB3Y.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/GtTA875.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/InZlTjE.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/puMp9Uq.jpg",
+        "name": "超虎斬"
+      },
+      {
+        "url": "https://i.imgur.com/V5J4Pu6.jpg",
+        "name": "絕地音速刀"
+      },
+      {
+        "url": "https://i.imgur.com/UUkBg8k.jpg",
+        "name": "絕地猛虎"
+      }
+    ],
+    "equipment": {
+      "name": "新生悟地服裝",
+      "stats": {
+        "hp": "+300",
+        "mp": "+300",
+        "sp": "+300",
+        "str": "(+700)",
+        "def": "(+600)",
+        "agi": "(+500)"
+      }
+    }
+  },
+  "zack": {
+    "slug": "zack",
+    "transformGif": "https://i.imgur.com/7mMwIJ3.gif",
+    "birthplace": "香港",
+    "identity": "撒旦教教主",
+    "combatStyle": "兇獸元力",
+    "version": "v9.0 撒旦降臨篇",
+    "description": "出身於軍人世家， 是【高立軍校】拳擊部的隊長，自小便接受嚴格的軍人訓練，身手非凡。上陣42次均大獲全勝。",
+    "relic": "兇獸基因",
+    "relicImage": "https://i.imgur.com/xkidQMX.gif",
+    "actionGifs": [
+      {
+        "url": "https://i.imgur.com/3dNp4Kh.gif",
+        "label": "普攻"
+      },
+      {
+        "url": "https://i.imgur.com/kYJrf8V.gif",
+        "label": "跑攻"
+      },
+      {
+        "url": "https://i.imgur.com/CQOdJVi.gif",
+        "label": "跳攻"
+      },
+      {
+        "url": "https://i.imgur.com/CRFJMwf.gif",
+        "label": "跑步"
+      },
+      {
+        "url": "https://i.imgur.com/6tFDDjX.gif",
+        "label": "滾動"
+      },
+      {
+        "url": "https://i.imgur.com/QsuBYta.gif",
+        "label": "武器"
+      },
+      {
+        "url": "https://i.imgur.com/7mMwIJ3.gif",
+        "label": "跳躍揮動武器"
+      },
+      {
+        "url": "https://i.imgur.com/ahsmQxn.gif",
+        "label": "動作8"
+      }
+    ],
+    "skillImages": [
+      {
+        "url": "https://i.imgur.com/UxBYZ7T.jpg",
+        "name": "凶狼絕閃"
+      },
+      {
+        "url": "https://i.imgur.com/jV9l1cs.jpg",
+        "name": "三重殺奏"
+      }
+    ]
+  }
+}
