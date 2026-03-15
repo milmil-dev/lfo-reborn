@@ -313,28 +313,28 @@ export function MusicPlayer() {
                   </button>
                 </div>
 
-                {/* Album art area */}
-                <div className="relative aspect-[4/3] max-h-[140px] w-full rounded-xl overflow-hidden border border-white/[0.06]"
-                  style={{ background: `linear-gradient(145deg, ${themeColor}15, rgba(0,0,0,0.4) 50%, ${themeColor}08)` }}>
-                  {/* LFO logo */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-3xl font-black tracking-[0.2em] select-none" style={{ color: `${themeColor}30` }}>LFO</span>
-                  </div>
-                  {/* Waveform visualization at bottom */}
-                  <div className="absolute bottom-0 inset-x-0 h-10 flex items-end justify-center gap-[2px] px-4 pb-2"
-                    style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.5))" }}>
+                {/* Album art */}
+                <div className="relative aspect-square w-full rounded-xl overflow-hidden border border-white/[0.06]">
+                  <img
+                    src="/images/lfo-album.jpg"
+                    alt="LFO Online"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  {/* Waveform overlay at bottom */}
+                  <div className="absolute bottom-0 inset-x-0 h-8 flex items-end justify-center gap-[2px] px-4 pb-1.5"
+                    style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.6))" }}>
                     {Array.from({ length: 24 }).map((_, i) => {
                       const h = isPlaying
-                        ? Math.sin((i * 0.4) + (currentTime * 3) + i) * 8 + 10
-                        : 3 + Math.sin(i * 0.5) * 2;
+                        ? Math.sin((i * 0.4) + (currentTime * 3) + i) * 6 + 8
+                        : 2 + Math.sin(i * 0.5) * 1.5;
                       return (
                         <div
                           key={i}
-                          className="w-[2.5px] rounded-full transition-all"
+                          className="w-[2px] rounded-full transition-all"
                           style={{
                             height: `${h}px`,
-                            backgroundColor: themeColor,
-                            opacity: 0.4 + Math.sin(i * 0.3) * 0.2,
+                            backgroundColor: "#fff",
+                            opacity: 0.3 + Math.sin(i * 0.3) * 0.15,
                             transitionDuration: prefersReducedMotion ? "0ms" : "150ms",
                           }}
                         />
