@@ -559,7 +559,7 @@ export function CharacterStandCard() {
 								<img
 									key={url}
 									src={url}
-									alt={`對話 ${i + 1}`}
+									alt="對話"
 									className="aspect-square w-full rounded border border-fd-border object-cover"
 									loading="lazy"
 								/>
