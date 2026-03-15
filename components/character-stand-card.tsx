@@ -753,7 +753,7 @@ function SkillCard({
 					<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
 					{/* Icon badge */}
-					{skill.icon && cardImage && (
+					{skill.icon && hasImage && (
 						<div
 							className="absolute left-2 top-2 h-7 w-7 overflow-hidden rounded-lg shadow-lg"
 							style={{ border: `1px solid ${color}40` }}
