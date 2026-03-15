@@ -11,31 +11,31 @@
     "relicImage": "https://i.imgur.com/wscvyqm.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/RDUQmtB.gif",
+        "url": "https://i.imgur.com/iLmvAta.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/iLmvAta.gif",
+        "url": "https://i.imgur.com/cyCDjj0.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/UGtXx63.gif",
+        "url": "https://i.imgur.com/ZuGlhgJ.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/cyCDjj0.gif",
+        "url": "https://i.imgur.com/xcqXfnQ.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/ZuGlhgJ.gif",
+        "url": "https://i.imgur.com/cqt8XvH.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/cqt8XvH.gif",
+        "url": "https://i.imgur.com/UGtXx63.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/xcqXfnQ.gif",
+        "url": "https://i.imgur.com/RDUQmtB.gif",
         "label": "跳躍揮動武器"
       },
       {
@@ -62,19 +62,19 @@
     "relicImage": "https://i.imgur.com/3I1dwqp.jpg",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/MVHRshM.gif",
+        "url": "https://i.imgur.com/DtYhMiP.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/SmhPVdw.gif",
+        "url": "https://i.imgur.com/MgtXRYR.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/1T0vPLe.gif",
+        "url": "https://i.imgur.com/SmhPVdw.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/HKkIwKm.gif",
+        "url": "https://i.imgur.com/1T0vPLe.gif",
         "label": "跑步"
       },
       {
@@ -82,15 +82,15 @@
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/8DUiVT1.gif",
+        "url": "https://i.imgur.com/MVHRshM.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/DtYhMiP.gif",
+        "url": "https://i.imgur.com/8DUiVT1.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/MgtXRYR.gif",
+        "url": "https://i.imgur.com/HKkIwKm.gif",
         "label": "動作8"
       }
     ],
@@ -109,7 +109,18 @@
         "str": "防禦力",
         "def": "(+500)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/QllSC1R.png",
+        "dialogs": [
+          "https://i.imgur.com/Lk53oGk.png",
+          "https://i.imgur.com/4lzmQ8U.png",
+          "https://i.imgur.com/j4sENij.png"
+        ]
+      }
+    ]
   },
   "bat": {
     "slug": "bat",
@@ -127,31 +138,31 @@
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/XoKflCy.gif",
+        "url": "https://i.imgur.com/J9KCKY9.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/0NHzwiq.gif",
+        "url": "https://i.imgur.com/qrzhKd7.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/bL0IpQB.gif",
+        "url": "https://i.imgur.com/XoKflCy.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/ewebHXB.gif",
+        "url": "https://i.imgur.com/bL0IpQB.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/WXdcrUv.gif",
+        "url": "https://i.imgur.com/0NHzwiq.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/J9KCKY9.gif",
+        "url": "https://i.imgur.com/ewebHXB.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/qrzhKd7.gif",
+        "url": "https://i.imgur.com/WXdcrUv.gif",
         "label": "動作8"
       }
     ],
@@ -171,7 +182,20 @@
         "def": "(+600)",
         "agi": "(+600)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/by9Nsst.png",
+        "dialogs": [
+          "https://i.imgur.com/bJFVQTV.png",
+          "https://i.imgur.com/Wnzd20r.png",
+          "https://i.imgur.com/JLD8o1i.png",
+          "https://i.imgur.com/w1WjQfP.png",
+          "https://i.imgur.com/WfBTqCq.png"
+        ]
+      }
+    ]
   },
   "blake": {
     "slug": "blake",
@@ -185,35 +209,35 @@
     "relicImage": "https://i.imgur.com/Ge9vXMn.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/kdaaVqs.gif",
+        "url": "https://i.imgur.com/hHdHl0t.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/VDvGzG5.gif",
+        "url": "https://i.imgur.com/xnuYORq.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/SMJa5YB.gif",
+        "url": "https://i.imgur.com/rfVIoCl.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/rfVIoCl.gif",
+        "url": "https://i.imgur.com/VDvGzG5.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/OJ1Wls0.gif",
+        "url": "https://i.imgur.com/kdaaVqs.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/hHdHl0t.gif",
+        "url": "https://i.imgur.com/SMJa5YB.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/CrdSsh3.gif",
+        "url": "https://i.imgur.com/OJ1Wls0.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/xnuYORq.gif",
+        "url": "https://i.imgur.com/CrdSsh3.gif",
         "label": "動作8"
       }
     ],
@@ -232,7 +256,18 @@
         "str": "防禦力",
         "def": "(+500)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/oEIrdTB.png",
+        "dialogs": [
+          "https://i.imgur.com/X8OJ2hQc4ca.png?1",
+          "https://i.imgur.com/WBhpHsk.png",
+          "https://i.imgur.com/hSxplhI.png"
+        ]
+      }
+    ]
   },
   "bloodraven": {
     "slug": "bloodraven",
@@ -246,36 +281,46 @@
     "relicImage": "https://i.imgur.com/cwl3lUU.jpg",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/khFvLMI.gif",
+        "url": "https://i.imgur.com/zUOKdyC.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/h3V4DgW.gif",
+        "url": "https://i.imgur.com/2RFYrZN.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/2RFYrZN.gif",
+        "url": "https://i.imgur.com/h3V4DgW.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/Y7C7wav.gif",
+        "url": "https://i.imgur.com/bYVx3Xl.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/GtEvvH2.gif",
+        "url": "https://i.imgur.com/Y7C7wav.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/zUOKdyC.gif",
+        "url": "https://i.imgur.com/GtEvvH2.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/mJi7xAH.gif",
+        "url": "https://i.imgur.com/khFvLMI.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/bYVx3Xl.gif",
+        "url": "https://i.imgur.com/mJi7xAH.gif",
         "label": "動作8"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/sEJoqcj.png",
+        "dialogs": [
+          "https://i.imgur.com/EHGnVN9.png",
+          "https://i.imgur.com/gmmsp9d.png"
+        ]
       }
     ]
   },
@@ -291,35 +336,35 @@
     "relicImage": "https://i.imgur.com/TAnHG2U.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/vBhRKNA.gif",
+        "url": "https://i.imgur.com/nodOqxs.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/QWSzxqP.gif",
+        "url": "https://i.imgur.com/WupbmCs.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/nodOqxs.gif",
+        "url": "https://i.imgur.com/vBhRKNA.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/MVG2EXG.gif",
+        "url": "https://i.imgur.com/5SG0YMn.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/5SG0YMn.gif",
+        "url": "https://i.imgur.com/SnpaifM.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/SnpaifM.gif",
+        "url": "https://i.imgur.com/MVG2EXG.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/WupbmCs.gif",
+        "url": "https://i.imgur.com/5OgzBa7.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/5OgzBa7.gif",
+        "url": "https://i.imgur.com/QWSzxqP.gif",
         "label": "動作8"
       }
     ],
@@ -336,6 +381,24 @@
         "url": "https://i.imgur.com/LPiDW8Z.jpg",
         "name": "流星子彈"
       }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/acOZTei.png",
+        "dialogs": [
+          "https://i.imgur.com/u2HMtEn.png",
+          "https://i.imgur.com/YNfMycy.png",
+          "https://i.imgur.com/6J7AnfC.png",
+          "https://i.imgur.com/y3IENkb.png",
+          "https://i.imgur.com/ezhzOS9.png",
+          "https://i.imgur.com/dOWtSgF.png",
+          "https://i.imgur.com/2Xf3aiJ.png",
+          "https://i.imgur.com/rFELsjE.png",
+          "https://i.imgur.com/Fb17UOr.png",
+          "https://i.imgur.com/S3eQKNY.png"
+        ]
+      }
     ]
   },
   "chiyua": {
@@ -350,36 +413,50 @@
     "relicImage": "https://i.imgur.com/NdtHXkc.jpg",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/C1UXNkq.gif",
+        "url": "https://i.imgur.com/zWzMlcM.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/xGekQmN.gif",
+        "url": "https://i.imgur.com/SxYNXt9.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/JIRyitW.gif",
+        "url": "https://i.imgur.com/M0ClPY6.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/zWzMlcM.gif",
+        "url": "https://i.imgur.com/f5PIaXY.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/SxYNXt9.gif",
+        "url": "https://i.imgur.com/xGekQmN.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/M0ClPY6.gif",
+        "url": "https://i.imgur.com/JIRyitW.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/f5PIaXY.gif",
+        "url": "https://i.imgur.com/C1UXNkq.gif",
         "label": "跳躍揮動武器"
       },
       {
         "url": "https://i.imgur.com/ziuM3cO.gif",
         "label": "動作8"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/bcE5Uyt.png",
+        "dialogs": [
+          "https://i.imgur.com/SuZgDVf.png",
+          "https://i.imgur.com/bJ44fpS.png",
+          "https://i.imgur.com/KY9OvBO.png",
+          "https://i.imgur.com/gEedGGF.png",
+          "https://i.imgur.com/Gb3THRG.png",
+          "https://i.imgur.com/wwy9GkD.png"
+        ]
       }
     ]
   },
@@ -395,23 +472,23 @@
     "relicImage": "https://i.imgur.com/lSo0Kgl.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/RTZZ4pu.gif",
+        "url": "https://i.imgur.com/H7iHjFN.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/uvk6hwx.gif",
+        "url": "https://i.imgur.com/FMeYrgd.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/dpZLNXq.gif",
+        "url": "https://i.imgur.com/uvk6hwx.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/H7iHjFN.gif",
+        "url": "https://i.imgur.com/RXaPwxC.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/FMeYrgd.gif",
+        "url": "https://i.imgur.com/3GvSlSq.gif",
         "label": "滾動"
       },
       {
@@ -419,11 +496,11 @@
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/RXaPwxC.gif",
+        "url": "https://i.imgur.com/dpZLNXq.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/3GvSlSq.gif",
+        "url": "https://i.imgur.com/RTZZ4pu.gif",
         "label": "動作8"
       }
     ],
@@ -455,7 +532,29 @@
         "def": "(+1000)",
         "agi": "(+400)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/10dQb9O.png",
+        "dialogs": [
+          "https://i.imgur.com/N69evuZ.png",
+          "https://i.imgur.com/vThouEt.png",
+          "https://i.imgur.com/3lqEPGF.png",
+          "https://i.imgur.com/PqsDFE7.png",
+          "https://i.imgur.com/GsqDezu.png",
+          "https://i.imgur.com/Pi9UNm5.png",
+          "https://i.imgur.com/cTTNz4V.png",
+          "https://i.imgur.com/Bp0Fc9J.png",
+          "https://i.imgur.com/IxEFK24.png",
+          "https://i.imgur.com/HDQVVeZ.png",
+          "https://i.imgur.com/jGvVPyy.png",
+          "https://i.imgur.com/J1j1Hzo.png",
+          "https://i.imgur.com/ZcZYCQh.png",
+          "https://i.imgur.com/SUXotxE.png"
+        ]
+      }
+    ]
   },
   "davis": {
     "slug": "davis",
@@ -469,35 +568,35 @@
     "relicImage": "https://i.imgur.com/malbhOG.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/N1F1w9n.gif",
+        "url": "https://i.imgur.com/B9bOpi3.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/PDNyjfW.gif",
+        "url": "https://i.imgur.com/5XUERan.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/WY0eixw.gif",
+        "url": "https://i.imgur.com/klEYY50.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/5XUERan.gif",
+        "url": "https://i.imgur.com/WY0eixw.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/W4RaM8c.gif",
+        "url": "https://i.imgur.com/XtWQcfJ.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/klEYY50.gif",
+        "url": "https://i.imgur.com/W4RaM8c.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/XtWQcfJ.gif",
+        "url": "https://i.imgur.com/PDNyjfW.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/B9bOpi3.gif",
+        "url": "https://i.imgur.com/N1F1w9n.gif",
         "label": "動作8"
       }
     ],
@@ -529,7 +628,38 @@
         "def": "(+600)",
         "agi": "(+600)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/6vdT5sE.png",
+        "dialogs": [
+          "https://i.imgur.com/GiiTIQj.png",
+          "https://i.imgur.com/Fu0SS5Y.png",
+          "https://i.imgur.com/ZKotbiW.png",
+          "https://i.imgur.com/kpaGaSP.png",
+          "https://i.imgur.com/qsRk08s.png",
+          "https://i.imgur.com/N22nq6h.png",
+          "https://i.imgur.com/ntZcaGg.png",
+          "https://i.imgur.com/ZAuS2lH.png",
+          "https://i.imgur.com/oUEXho8.png",
+          "https://i.imgur.com/ijOd7Et.png",
+          "https://i.imgur.com/0aI1BxD.png",
+          "https://i.imgur.com/EvIkBfG.png",
+          "https://i.imgur.com/m4DwQev.png",
+          "https://i.imgur.com/LZshSQ4.png",
+          "https://i.imgur.com/bsLa2mY.png",
+          "https://i.imgur.com/2xXe3rK.png",
+          "https://i.imgur.com/ZlmUuIC.png",
+          "https://i.imgur.com/wizjnZu.png",
+          "https://i.imgur.com/xYctNqK.png",
+          "https://i.imgur.com/cXWTmgl.png",
+          "https://i.imgur.com/Q9taN7y.png",
+          "https://i.imgur.com/uG0ecP3.png",
+          "https://i.imgur.com/8FQo8Q7.png"
+        ]
+      }
+    ]
   },
   "deep": {
     "slug": "deep",
@@ -543,27 +673,27 @@
     "relicImage": "https://i.imgur.com/1mRthld.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/N9D2n5W.gif",
+        "url": "https://i.imgur.com/ObzzR65.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/28lPKV1.gif",
+        "url": "https://i.imgur.com/vTlOrSz.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/eLrKdVf.gif",
+        "url": "https://i.imgur.com/28lPKV1.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/QnpfTDy.gif",
+        "url": "https://i.imgur.com/N9D2n5W.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/vTlOrSz.gif",
+        "url": "https://i.imgur.com/eLrKdVf.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/ypwt3f4.gif",
+        "url": "https://i.imgur.com/QnpfTDy.gif",
         "label": "武器"
       },
       {
@@ -571,7 +701,7 @@
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/ObzzR65.gif",
+        "url": "https://i.imgur.com/ypwt3f4.gif",
         "label": "動作8"
       }
     ],
@@ -588,6 +718,22 @@
         "url": "https://i.imgur.com/Bpbrty9.jpg",
         "name": "滑翔刀"
       }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/YKO2rWl.png",
+        "dialogs": [
+          "https://i.imgur.com/yYfJN9a.png",
+          "https://i.imgur.com/Dg4DaE7.png",
+          "https://i.imgur.com/GZVakA3.png",
+          "https://i.imgur.com/b7Q1dhO.png",
+          "https://i.imgur.com/rIvCjCI.png",
+          "https://i.imgur.com/zqhzVvl.png",
+          "https://i.imgur.com/o6vCLcy.png",
+          "https://i.imgur.com/lAqQ5UE.png"
+        ]
+      }
     ]
   },
   "dennis": {
@@ -602,35 +748,35 @@
     "relicImage": "https://i.imgur.com/0WB7U3G.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/d08rqov.gif",
+        "url": "https://i.imgur.com/vN8uNOw.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/Z6Eitrl.gif",
+        "url": "https://i.imgur.com/IEZ7UFu.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/IEZ7UFu.gif",
+        "url": "https://i.imgur.com/jGQYnW2.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/VyV7u0Y.gif",
+        "url": "https://i.imgur.com/CCZfSg0.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/J9HmcHU.gif",
+        "url": "https://i.imgur.com/d08rqov.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/CCZfSg0.gif",
+        "url": "https://i.imgur.com/J9HmcHU.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/vN8uNOw.gif",
+        "url": "https://i.imgur.com/VyV7u0Y.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/jGQYnW2.gif",
+        "url": "https://i.imgur.com/Z6Eitrl.gif",
         "label": "動作8"
       }
     ],
@@ -670,7 +816,28 @@
         "def": "(+600)",
         "agi": "(+700)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/n1tO1ET.png",
+        "dialogs": [
+          "https://i.imgur.com/bhvi8CO.png",
+          "https://i.imgur.com/tTmBUfj.png",
+          "https://i.imgur.com/khLSyQt.png",
+          "https://i.imgur.com/kmvXH9M.png",
+          "https://i.imgur.com/XDRyvYk.png",
+          "https://i.imgur.com/OMDUlrV.png",
+          "https://i.imgur.com/pQeUV1y.png",
+          "https://i.imgur.com/8oysWik.png",
+          "https://i.imgur.com/7UltutI.png",
+          "https://i.imgur.com/AXEo6hn.png",
+          "https://i.imgur.com/tebQwjD.png",
+          "https://i.imgur.com/x4qkR28.png",
+          "https://i.imgur.com/oWgzhTv.png"
+        ]
+      }
+    ]
   },
   "dilun": {
     "slug": "dilun",
@@ -684,35 +851,35 @@
     "relicImage": "https://i.imgur.com/sHkQ1rl.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/gmT2XcJ.gif",
+        "url": "https://i.imgur.com/VdB0YEt.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/epykxAx.gif",
+        "url": "https://i.imgur.com/InWW5dJ.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/lw8m3F2.gif",
+        "url": "https://i.imgur.com/WWdXN4X.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/InWW5dJ.gif",
+        "url": "https://i.imgur.com/gmT2XcJ.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/WWdXN4X.gif",
+        "url": "https://i.imgur.com/lw8m3F2.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/Q8qGinU.gif",
+        "url": "https://i.imgur.com/epykxAx.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/VdB0YEt.gif",
+        "url": "https://i.imgur.com/HACg6zj.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/HACg6zj.gif",
+        "url": "https://i.imgur.com/Q8qGinU.gif",
         "label": "動作8"
       }
     ],
@@ -734,7 +901,68 @@
       "name": "蒼龍戟",
       "durability": "2000",
       "description": "一代最強武者-迪倫之專用武器"
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/6I4sLWb.png",
+        "dialogs": [
+          "https://i.imgur.com/6Q0hpeL.png",
+          "https://i.imgur.com/5Vgi4y0.png",
+          "https://i.imgur.com/pcV3c7w.png",
+          "https://i.imgur.com/Qs7uo5w.png",
+          "https://i.imgur.com/LB44LAI.png",
+          "https://i.imgur.com/wyxaLg6.png",
+          "https://i.imgur.com/uOtjQgT.png",
+          "https://i.imgur.com/dxcIPqE.png",
+          "https://i.imgur.com/80rsDOp.png"
+        ]
+      },
+      {
+        "label": "神秘人迪倫",
+        "portrait": "https://i.imgur.com/z3I9ODW.png",
+        "dialogs": [
+          "https://i.imgur.com/FoCgh1Z.png"
+        ]
+      },
+      {
+        "label": "燃燒生命的迪倫",
+        "portrait": "https://i.imgur.com/z1y79Lr.png",
+        "dialogs": [
+          "https://i.imgur.com/TQ7OKQn.png",
+          "https://i.imgur.com/rv5LSrS.png",
+          "https://i.imgur.com/fhbkr9P.png",
+          "https://i.imgur.com/ZRU2phl.png",
+          "https://i.imgur.com/KJ1I1Q6.png",
+          "https://i.imgur.com/EBjXJz8.png",
+          "https://i.imgur.com/xUZDip1.png",
+          "https://i.imgur.com/jLTIi1k.png"
+        ]
+      },
+      {
+        "label": "燃燒生命的迪倫(二)",
+        "portrait": "https://i.imgur.com/VvDNCDh.png",
+        "dialogs": [
+          "https://i.imgur.com/3Q9iO9u.png",
+          "https://i.imgur.com/JMP8AIF.png",
+          "https://i.imgur.com/H3x7HDm.png",
+          "https://i.imgur.com/vS5mb3m.png",
+          "https://i.imgur.com/iMi601N.png",
+          "https://i.imgur.com/Les6SV5.png",
+          "https://i.imgur.com/N1gLjNL.png",
+          "https://i.imgur.com/INI3c7e.png",
+          "https://i.imgur.com/KGvX1uk.png"
+        ]
+      },
+      {
+        "label": "老化迪倫",
+        "portrait": "https://i.imgur.com/PvkgnSS.png",
+        "dialogs": [
+          "https://i.imgur.com/H6uHdIn.png",
+          "https://i.imgur.com/TAsIP48.png"
+        ]
+      }
+    ]
   },
   "firen": {
     "slug": "firen",
@@ -748,35 +976,35 @@
     "relicImage": "https://i.imgur.com/d4ZZFKI.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/BumijEI.gif",
+        "url": "https://i.imgur.com/3nCuNAa.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/0FRsqRD.gif",
+        "url": "https://i.imgur.com/Ype7S0D.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/puaGSLb.gif",
+        "url": "https://i.imgur.com/w59MKcS.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/w59MKcS.gif",
+        "url": "https://i.imgur.com/0FRsqRD.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/f5Ptq6a.gif",
+        "url": "https://i.imgur.com/9jG5He4.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/Ype7S0D.gif",
+        "url": "https://i.imgur.com/puaGSLb.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/3nCuNAa.gif",
+        "url": "https://i.imgur.com/BumijEI.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/9jG5He4.gif",
+        "url": "https://i.imgur.com/f5Ptq6a.gif",
         "label": "動作8"
       }
     ],
@@ -800,7 +1028,22 @@
         "def": "(+600)",
         "agi": "(+600)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/togGvAT.png",
+        "dialogs": [
+          "https://i.imgur.com/zyXa5L1.png",
+          "https://i.imgur.com/bEiYKSU.png",
+          "https://i.imgur.com/R8GhuKZ.png",
+          "https://i.imgur.com/phzi5aM.png",
+          "https://i.imgur.com/tdKxzJw.png",
+          "https://i.imgur.com/ZlsDBhY.png",
+          "https://i.imgur.com/oFAy2U2.png"
+        ]
+      }
+    ]
   },
   "firzen": {
     "slug": "firzen",
@@ -814,7 +1057,7 @@
     "relicImage": "https://i.imgur.com/5DX80ZE.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/zSIpxDm.gif",
+        "url": "https://i.imgur.com/wSCLuSK.gif",
         "label": "普攻"
       },
       {
@@ -822,15 +1065,15 @@
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/wSCLuSK.gif",
+        "url": "https://i.imgur.com/Iq9b0Pv.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/hZQ3TsU.gif",
+        "url": "https://i.imgur.com/Lk01Lgz.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/Iq9b0Pv.gif",
+        "url": "https://i.imgur.com/k3QIvrB.gif",
         "label": "滾動"
       },
       {
@@ -838,11 +1081,11 @@
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/k3QIvrB.gif",
+        "url": "https://i.imgur.com/hZQ3TsU.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/Lk01Lgz.gif",
+        "url": "https://i.imgur.com/zSIpxDm.gif",
         "label": "動作8"
       }
     ],
@@ -859,6 +1102,21 @@
         "url": "https://i.imgur.com/rqOGrMm.jpg",
         "name": "冰火世界"
       }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/P1v0mJ7.png",
+        "dialogs": [
+          "https://i.imgur.com/2qrePNS.png",
+          "https://i.imgur.com/um16jDh.png",
+          "https://i.imgur.com/5a6ztBe.png",
+          "https://i.imgur.com/miLLLkE.png",
+          "https://i.imgur.com/som5Hfw.png",
+          "https://i.imgur.com/Z8NUIat.png",
+          "https://i.imgur.com/u9E1V5w.png"
+        ]
+      }
     ]
   },
   "fox": {
@@ -873,35 +1131,35 @@
     "relicImage": "https://i.imgur.com/OC50AEP.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/OC6BHYU.gif",
+        "url": "https://i.imgur.com/sfduLgR.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/9FN5OF3.gif",
+        "url": "https://i.imgur.com/zeQ4JeL.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/dxWJlbg.gif",
+        "url": "https://i.imgur.com/geXJ1pW.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/zeQ4JeL.gif",
+        "url": "https://i.imgur.com/dxWJlbg.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/CjzVQwq.gif",
+        "url": "https://i.imgur.com/OC6BHYU.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/umiazAD.gif",
+        "url": "https://i.imgur.com/CjzVQwq.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/geXJ1pW.gif",
+        "url": "https://i.imgur.com/umiazAD.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/sfduLgR.gif",
+        "url": "https://i.imgur.com/9FN5OF3.gif",
         "label": "動作8"
       }
     ],
@@ -932,35 +1190,35 @@
     "relicImage": "https://i.imgur.com/7uNnHAs.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/in3mg1i.gif",
+        "url": "https://i.imgur.com/ScYPyxD.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/wYdKkJi.gif",
+        "url": "https://i.imgur.com/sx5h4Bv.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/SXQGQGQ.gif",
+        "url": "https://i.imgur.com/JPpbU5v.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/5jbkrqF.gif",
+        "url": "https://i.imgur.com/SXQGQGQ.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/sx5h4Bv.gif",
+        "url": "https://i.imgur.com/5jbkrqF.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/ScYPyxD.gif",
+        "url": "https://i.imgur.com/in3mg1i.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/iD6TVoB.gif",
+        "url": "https://i.imgur.com/wYdKkJi.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/JPpbU5v.gif",
+        "url": "https://i.imgur.com/iD6TVoB.gif",
         "label": "動作8"
       }
     ],
@@ -988,7 +1246,21 @@
         "def": "(+600)",
         "agi": "(+600)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/4vgz9vc.png",
+        "dialogs": [
+          "https://i.imgur.com/7g12X6g.png",
+          "https://i.imgur.com/vHtkgrV.png",
+          "https://i.imgur.com/OY6nAsZ.png",
+          "https://i.imgur.com/mOvMZ5y.png",
+          "https://i.imgur.com/0S0BOKL.png",
+          "https://i.imgur.com/JhDZIHu.png"
+        ]
+      }
+    ]
   },
   "fuku": {
     "slug": "fuku",
@@ -1006,27 +1278,27 @@
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/zr1G1cR.gif",
+        "url": "https://i.imgur.com/aQpD1wb.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/KpPzBGS.gif",
+        "url": "https://i.imgur.com/zr1G1cR.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/aQpD1wb.gif",
+        "url": "https://i.imgur.com/d3MSpqL.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/EHQgXwz.gif",
+        "url": "https://i.imgur.com/3AqPZI7.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/d3MSpqL.gif",
+        "url": "https://i.imgur.com/KpPzBGS.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/3AqPZI7.gif",
+        "url": "https://i.imgur.com/EHQgXwz.gif",
         "label": "跳躍揮動武器"
       },
       {
@@ -1053,35 +1325,35 @@
     "relicImage": "https://i.imgur.com/De2pbde.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/6RuaoPJ.gif",
+        "url": "https://i.imgur.com/JHnN9xX.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/Ebj0EUD.gif",
+        "url": "https://i.imgur.com/8bLutCF.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/JHnN9xX.gif",
+        "url": "https://i.imgur.com/hsyUAuR.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/hsyUAuR.gif",
+        "url": "https://i.imgur.com/Ebj0EUD.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/hxAfSXQ.gif",
+        "url": "https://i.imgur.com/6RuaoPJ.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/8bLutCF.gif",
+        "url": "https://i.imgur.com/3qwW3qv.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/3qwW3qv.gif",
+        "url": "https://i.imgur.com/HZKbSxc.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/HZKbSxc.gif",
+        "url": "https://i.imgur.com/hxAfSXQ.gif",
         "label": "動作8"
       }
     ],
@@ -1104,40 +1376,51 @@
     "relicImage": "https://i.imgur.com/U9e1TnQ.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/SfHKc08.gif",
+        "url": "https://i.imgur.com/zQQafHa.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/U0TQFmm.gif",
+        "url": "https://i.imgur.com/SfHKc08.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/ZkwLu43.gif",
+        "url": "https://i.imgur.com/U0TQFmm.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/9wOWuBx.gif",
+        "url": "https://i.imgur.com/PvIvQci.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/zQQafHa.gif",
+        "url": "https://i.imgur.com/ZkwLu43.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/PvIvQci.gif",
+        "url": "https://i.imgur.com/35S9p75.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/35S9p75.gif",
+        "url": "https://i.imgur.com/9wOWuBx.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/fkMiyFq.gif",
+        "url": "https://i.imgur.com/4tQnVtX.gif",
         "label": "動作8"
       },
       {
-        "url": "https://i.imgur.com/4tQnVtX.gif",
+        "url": "https://i.imgur.com/fkMiyFq.gif",
         "label": "動作9"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/pxHjRF4.png",
+        "dialogs": [
+          "https://i.imgur.com/1MHDn8Y.png",
+          "https://i.imgur.com/Axaov6b.png",
+          "https://i.imgur.com/NzKtgPf.png"
+        ]
       }
     ]
   },
@@ -1153,23 +1436,23 @@
     "relicImage": "https://i.imgur.com/a7MPsfX.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/F2xAJa5.gif",
+        "url": "https://i.imgur.com/4rkjonJ.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/EdSYvtE.gif",
+        "url": "https://i.imgur.com/cs7euWE.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/ADa8Jz4.gif",
+        "url": "https://i.imgur.com/Q6Id1fH.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/4rkjonJ.gif",
+        "url": "https://i.imgur.com/EdSYvtE.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/cs7euWE.gif",
+        "url": "https://i.imgur.com/F2xAJa5.gif",
         "label": "滾動"
       },
       {
@@ -1181,7 +1464,7 @@
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/Q6Id1fH.gif",
+        "url": "https://i.imgur.com/ADa8Jz4.gif",
         "label": "動作8"
       }
     ],
@@ -1199,7 +1482,22 @@
       "name": "射日",
       "durability": "800",
       "description": "【無】"
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/CPKJfkH.png",
+        "dialogs": [
+          "https://i.imgur.com/PPkVj6C.png",
+          "https://i.imgur.com/jqQ9DND.png",
+          "https://i.imgur.com/AtxO9nN.png",
+          "https://i.imgur.com/tHplHuZ.png",
+          "https://i.imgur.com/O0ECg6Z.png",
+          "https://i.imgur.com/JurSSap.png",
+          "https://i.imgur.com/X6eQZ9t.png"
+        ]
+      }
+    ]
   },
   "jagr": {
     "slug": "jagr",
@@ -1213,36 +1511,46 @@
     "relicImage": "https://i.imgur.com/TZa3pxc.jpg",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/HWnc6rE.gif",
+        "url": "https://i.imgur.com/sYWNMln.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/Gu5FDU0.gif",
+        "url": "https://i.imgur.com/YnDdr8i.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/2nQq8yQ.gif",
+        "url": "https://i.imgur.com/2r6Dxfe.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/HIbdqoP.gif",
+        "url": "https://i.imgur.com/2nQq8yQ.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/6BDaMDZ.gif",
+        "url": "https://i.imgur.com/HWnc6rE.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/2r6Dxfe.gif",
+        "url": "https://i.imgur.com/6BDaMDZ.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/sYWNMln.gif",
+        "url": "https://i.imgur.com/HIbdqoP.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/YnDdr8i.gif",
+        "url": "https://i.imgur.com/Gu5FDU0.gif",
         "label": "動作8"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/QoIh2hB.png",
+        "dialogs": [
+          "https://i.imgur.com/1Zs2Cd4.png",
+          "https://i.imgur.com/PoUelKA.png"
+        ]
       }
     ]
   },
@@ -1258,35 +1566,35 @@
     "relicImage": "https://i.imgur.com/SXOlokM.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/JUVVnTG.gif",
+        "url": "https://i.imgur.com/eKEA0WH.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/dCnlF2s.gif",
+        "url": "https://i.imgur.com/5cXYXj9.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/3W0GbAK.gif",
+        "url": "https://i.imgur.com/SvXYkkS.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/KLyKGil.gif",
+        "url": "https://i.imgur.com/dCnlF2s.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/SvXYkkS.gif",
+        "url": "https://i.imgur.com/3W0GbAK.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/5cXYXj9.gif",
+        "url": "https://i.imgur.com/khzylBZ.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/khzylBZ.gif",
+        "url": "https://i.imgur.com/KLyKGil.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/eKEA0WH.gif",
+        "url": "https://i.imgur.com/JUVVnTG.gif",
         "label": "動作8"
       }
     ],
@@ -1313,35 +1621,35 @@
     "relicImage": "https://i.imgur.com/OUQBNXj.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/bFlBKpU.gif",
+        "url": "https://i.imgur.com/yPeDZi6.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/0d03cig.gif",
+        "url": "https://i.imgur.com/bFlBKpU.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/8D6KeuC.gif",
+        "url": "https://i.imgur.com/2ZVg4Kr.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/BYOqHzH.gif",
+        "url": "https://i.imgur.com/0d03cig.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/V5hIc5I.gif",
+        "url": "https://i.imgur.com/zSvfy0G.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/zSvfy0G.gif",
+        "url": "https://i.imgur.com/BYOqHzH.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/yPeDZi6.gif",
+        "url": "https://i.imgur.com/V5hIc5I.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/2ZVg4Kr.gif",
+        "url": "https://i.imgur.com/8D6KeuC.gif",
         "label": "動作8"
       }
     ],
@@ -1358,6 +1666,20 @@
         "url": "https://i.imgur.com/X8oXRtH.jpg",
         "name": "魔法破邪彈"
       }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/jhMt5FV.png",
+        "dialogs": [
+          "https://i.imgur.com/jfss3pe.png",
+          "https://i.imgur.com/rJkSIBZ.png",
+          "https://i.imgur.com/hHnkv1U.png",
+          "https://i.imgur.com/ug5bIpd.png",
+          "https://i.imgur.com/jjwIbAR.png",
+          "https://i.imgur.com/PlzrKHZ.png"
+        ]
+      }
     ]
   },
   "julian": {
@@ -1372,15 +1694,15 @@
     "relicImage": "https://i.imgur.com/5u9dOme.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/LIRxxmJ.gif",
+        "url": "https://i.imgur.com/6eeoqFq.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/jlSwobD.gif",
+        "url": "https://i.imgur.com/huEen0Q.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/6eeoqFq.gif",
+        "url": "https://i.imgur.com/LPqYiyi.gif",
         "label": "跳攻"
       },
       {
@@ -1388,15 +1710,15 @@
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/huEen0Q.gif",
+        "url": "https://i.imgur.com/kkHRqr1.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/kkHRqr1.gif",
+        "url": "https://i.imgur.com/jlSwobD.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/LPqYiyi.gif",
+        "url": "https://i.imgur.com/LIRxxmJ.gif",
         "label": "跳躍揮動武器"
       },
       {
@@ -1428,7 +1750,28 @@
         "def": "(+600)",
         "agi": "(+600)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/uL7bJfM.png",
+        "dialogs": [
+          "https://i.imgur.com/Je21kQi.png",
+          "https://i.imgur.com/fDCWnCe.png",
+          "https://i.imgur.com/3iVnpC0.png",
+          "https://i.imgur.com/dsMxwov.png",
+          "https://i.imgur.com/YBsSOWT.png",
+          "https://i.imgur.com/5AzujsA.png",
+          "https://i.imgur.com/bcCArXw.png",
+          "https://i.imgur.com/QdrlHlJ.png",
+          "https://i.imgur.com/6WHXjTY.png",
+          "https://i.imgur.com/Jbx0JKO.png",
+          "https://i.imgur.com/swrLqUq.png",
+          "https://i.imgur.com/DmGembd.png",
+          "https://i.imgur.com/qdtK0Zd.png"
+        ]
+      }
+    ]
   },
   "kiki": {
     "slug": "kiki",
@@ -1442,35 +1785,35 @@
     "relicImage": "https://i.imgur.com/n8OExL0.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/RkUzyPa.gif",
+        "url": "https://i.imgur.com/Lcx6GOL.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/Oset5SF.gif",
+        "url": "https://i.imgur.com/WLa4Htd.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/ygWoqEq.gif",
+        "url": "https://i.imgur.com/3afCGXp.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/gVXyaod.gif",
+        "url": "https://i.imgur.com/ygWoqEq.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/3afCGXp.gif",
+        "url": "https://i.imgur.com/Oset5SF.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/Lcx6GOL.gif",
+        "url": "https://i.imgur.com/gVXyaod.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/WLa4Htd.gif",
+        "url": "https://i.imgur.com/4pxaEZC.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/4pxaEZC.gif",
+        "url": "https://i.imgur.com/RkUzyPa.gif",
         "label": "動作8"
       }
     ],
@@ -1482,6 +1825,21 @@
       {
         "url": "https://i.imgur.com/16bKe8v.jpg",
         "name": "粉紅絲帶"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/Dj9wBAE.png",
+        "dialogs": [
+          "https://i.imgur.com/ePY9T65.png",
+          "https://i.imgur.com/y9hswVY.png",
+          "https://i.imgur.com/duKbNUP.png",
+          "https://i.imgur.com/K485SMs.png",
+          "https://i.imgur.com/A5XsIYm.png",
+          "https://i.imgur.com/7BgtCfw.png",
+          "https://i.imgur.com/x8YdgCc.png"
+        ]
       }
     ]
   },
@@ -1497,36 +1855,48 @@
     "relicImage": "https://i.imgur.com/CdQYD5K.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/YhngIC6.gif",
+        "url": "https://i.imgur.com/mGO85bi.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/a9TaTsH.gif",
+        "url": "https://i.imgur.com/0RWNFo1.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/0RWNFo1.gif",
+        "url": "https://i.imgur.com/6FPoP0z.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/ZERKzKr.gif",
+        "url": "https://i.imgur.com/yZsfmsw.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/mGO85bi.gif",
+        "url": "https://i.imgur.com/ZERKzKr.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/JWAJLoo.gif",
+        "url": "https://i.imgur.com/YhngIC6.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/yZsfmsw.gif",
+        "url": "https://i.imgur.com/JWAJLoo.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/6FPoP0z.gif",
+        "url": "https://i.imgur.com/a9TaTsH.gif",
         "label": "動作8"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/Hq1evpU.png",
+        "dialogs": [
+          "https://i.imgur.com/ZggrZet.png",
+          "https://i.imgur.com/mEUuHXd.png",
+          "https://i.imgur.com/Xi0nsMV.png",
+          "https://i.imgur.com/SypQuRp.png"
+        ]
       }
     ]
   },
@@ -1542,11 +1912,11 @@
     "relicImage": "https://i.imgur.com/dyhhoAx.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/6NYqvgZ.gif",
+        "url": "https://i.imgur.com/XK4iB5A.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/CpQ6kZp.gif",
+        "url": "https://i.imgur.com/zriBgqn.gif",
         "label": "跑攻"
       },
       {
@@ -1554,19 +1924,19 @@
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/XK4iB5A.gif",
+        "url": "https://i.imgur.com/6NYqvgZ.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/lDV0Pj9.gif",
+        "url": "https://i.imgur.com/u7huhUw.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/u7huhUw.gif",
+        "url": "https://i.imgur.com/CpQ6kZp.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/zriBgqn.gif",
+        "url": "https://i.imgur.com/lDV0Pj9.gif",
         "label": "跳躍揮動武器"
       },
       {
@@ -1578,6 +1948,15 @@
       {
         "url": "https://i.imgur.com/VJgKdyd.jpg",
         "name": "黃龍咆哮"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/xLB0tz7.png",
+        "dialogs": [
+          "https://i.imgur.com/BRdCdin.png"
+        ]
       }
     ]
   },
@@ -1593,36 +1972,45 @@
     "relicImage": "https://i.imgur.com/nJf9j6j.png",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/2FqQ9Ft.gif",
+        "url": "https://i.imgur.com/oIpE6u3.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/oIpE6u3.gif",
+        "url": "https://i.imgur.com/JZlXggA.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/kjRMKVk.gif",
+        "url": "https://i.imgur.com/K2Y6Bos.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/K2Y6Bos.gif",
+        "url": "https://i.imgur.com/kjRMKVk.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/RQ8f9Sn.gif",
+        "url": "https://i.imgur.com/2FqQ9Ft.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/JZlXggA.gif",
+        "url": "https://i.imgur.com/M25B1sO.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/M25B1sO.gif",
+        "url": "https://i.imgur.com/RQ8f9Sn.gif",
         "label": "跳躍揮動武器"
       },
       {
         "url": "https://i.imgur.com/ru5KQC6.gif",
         "label": "動作8"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/luavkfi.png",
+        "dialogs": [
+          "https://i.imgur.com/o3jn1kt.png"
+        ]
       }
     ]
   },
@@ -1638,27 +2026,27 @@
     "relicImage": "https://i.imgur.com/26OAXia.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/cH67nsP.gif",
+        "url": "https://i.imgur.com/YeosXMY.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/AWabIb6.gif",
+        "url": "https://i.imgur.com/zFxmfO9.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/zFxmfO9.gif",
+        "url": "https://i.imgur.com/cH67nsP.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/YeosXMY.gif",
+        "url": "https://i.imgur.com/FqOfz6H.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/FqOfz6H.gif",
+        "url": "https://i.imgur.com/AWabIb6.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/177D3M5.gif",
+        "url": "https://i.imgur.com/b0jvWCI.gif",
         "label": "武器"
       },
       {
@@ -1666,8 +2054,21 @@
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/b0jvWCI.gif",
+        "url": "https://i.imgur.com/177D3M5.gif",
         "label": "動作8"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像(舊)   異轉型像(新)",
+        "portrait": "https://i.imgur.com/T2EUpTe.png",
+        "dialogs": [
+          "https://i.imgur.com/1HVuYj7.png",
+          "https://i.imgur.com/D6xkcnT.png",
+          "https://i.imgur.com/EgDvjUM.png",
+          "https://i.imgur.com/DaVTqXf.png",
+          "https://i.imgur.com/7ydb0MO.png"
+        ]
       }
     ]
   },
@@ -1683,35 +2084,35 @@
     "relicImage": "https://i.imgur.com/Dj8BFcv.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/HXaRZR6.gif",
+        "url": "https://i.imgur.com/qE9gPCY.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/qE9gPCY.gif",
+        "url": "https://i.imgur.com/bbmUKgt.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/5dpPzRD.gif",
+        "url": "https://i.imgur.com/s3tWXRr.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/s3tWXRr.gif",
+        "url": "https://i.imgur.com/wYEPPW8.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/wYEPPW8.gif",
+        "url": "https://i.imgur.com/HXaRZR6.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/bbmUKgt.gif",
+        "url": "https://i.imgur.com/5dpPzRD.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/v134Afg.gif",
+        "url": "https://i.imgur.com/kZCSxdg.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/kZCSxdg.gif",
+        "url": "https://i.imgur.com/v134Afg.gif",
         "label": "動作8"
       }
     ],
@@ -1723,6 +2124,17 @@
       {
         "url": "https://i.imgur.com/W2bsOIe.jpg",
         "name": "光速矛"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/hvil4LX.png",
+        "dialogs": [
+          "https://i.imgur.com/YgBsbpE.png",
+          "https://i.imgur.com/KNWTE8O.png",
+          "https://i.imgur.com/ggTddiW.png"
+        ]
       }
     ]
   },
@@ -1738,35 +2150,35 @@
     "relicImage": "https://i.imgur.com/yOE1aaM.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/7EG7M1v.gif",
+        "url": "https://i.imgur.com/YqHRhKt.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/JmSfZzQ.gif",
+        "url": "https://i.imgur.com/cTZVKnm.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/oWwWRfU.gif",
+        "url": "https://i.imgur.com/7EG7M1v.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/Xf2OHUC.gif",
+        "url": "https://i.imgur.com/oWwWRfU.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/cTZVKnm.gif",
+        "url": "https://i.imgur.com/ZFTSMR2.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/ZFTSMR2.gif",
+        "url": "https://i.imgur.com/MofKPid.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/MofKPid.gif",
+        "url": "https://i.imgur.com/Xf2OHUC.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/YqHRhKt.gif",
+        "url": "https://i.imgur.com/JmSfZzQ.gif",
         "label": "動作8"
       }
     ],
@@ -1778,6 +2190,22 @@
       {
         "url": "https://i.imgur.com/Vi7av3C.jpg",
         "name": "鬼神震怒"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/EB0yoOf.png",
+        "dialogs": [
+          "https://i.imgur.com/hAlvrrs.png",
+          "https://i.imgur.com/8cuY0dO.png",
+          "https://i.imgur.com/bjcE8gq.png",
+          "https://i.imgur.com/cRpMWEM.png",
+          "https://i.imgur.com/zM5JHU3.png",
+          "https://i.imgur.com/5dhBM72.png",
+          "https://i.imgur.com/9OBEIuB.png",
+          "https://i.imgur.com/l2Prl81.png"
+        ]
       }
     ]
   },
@@ -1793,7 +2221,7 @@
     "relicImage": "https://i.imgur.com/cUR0Qmh.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/dpILkzZ.gif",
+        "url": "https://i.imgur.com/ixcPk4j.gif",
         "label": "普攻"
       },
       {
@@ -1801,27 +2229,27 @@
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/kXxAN92.gif",
+        "url": "https://i.imgur.com/uVJ0BBo.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/ixcPk4j.gif",
+        "url": "https://i.imgur.com/jThKQzs.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/jThKQzs.gif",
+        "url": "https://i.imgur.com/7rw3Geo.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/7rw3Geo.gif",
+        "url": "https://i.imgur.com/dpILkzZ.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/q3jbv9q.gif",
+        "url": "https://i.imgur.com/kXxAN92.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/uVJ0BBo.gif",
+        "url": "https://i.imgur.com/q3jbv9q.gif",
         "label": "動作8"
       }
     ],
@@ -1838,6 +2266,26 @@
         "url": "https://i.imgur.com/aoSM2eG.jpg",
         "name": "真獨龍鑽"
       }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/ERksOhw.png",
+        "dialogs": [
+          "https://i.imgur.com/TeAzPdO.png",
+          "https://i.imgur.com/R8pAugK.png",
+          "https://i.imgur.com/nogfaF1.png",
+          "https://i.imgur.com/DSWjO2Q.png",
+          "https://i.imgur.com/EpkbeOq.png",
+          "https://i.imgur.com/bBUQJDC.png",
+          "https://i.imgur.com/VIL8nE7.png",
+          "https://i.imgur.com/gABskd3.png",
+          "https://i.imgur.com/i02zr1l.png",
+          "https://i.imgur.com/SK8E8ns.png",
+          "https://i.imgur.com/22sI9bE.png",
+          "https://i.imgur.com/vzuamyi.png"
+        ]
+      }
     ]
   },
   "molson": {
@@ -1851,15 +2299,15 @@
     "relic": "屍骸瘴氣",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/4UgpAvU.gif",
+        "url": "https://i.imgur.com/J5kxFki.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/9yKpoh6.gif",
+        "url": "https://i.imgur.com/IYjRhu7.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/XjxOIUN.gif",
+        "url": "https://i.imgur.com/9yKpoh6.gif",
         "label": "跳攻"
       },
       {
@@ -1867,20 +2315,29 @@
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/QSPMt9z.gif",
+        "url": "https://i.imgur.com/XjxOIUN.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/IYjRhu7.gif",
+        "url": "https://i.imgur.com/QSPMt9z.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/J5kxFki.gif",
+        "url": "https://i.imgur.com/4UgpAvU.gif",
         "label": "跳躍揮動武器"
       },
       {
         "url": "https://i.imgur.com/unmToT5.gif",
         "label": "動作8"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/Fsb29Gr.png",
+        "dialogs": [
+          "https://i.imgur.com/t3Rn8Z2.png"
+        ]
       }
     ]
   },
@@ -1896,39 +2353,39 @@
     "relicImage": "https://i.imgur.com/nP2AME5.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/gvKH4HG.gif",
+        "url": "https://i.imgur.com/tdKa9fS.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/m8uo2Y5.gif",
+        "url": "https://i.imgur.com/7fHVDJv.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/tQy6HcE.gif",
+        "url": "https://i.imgur.com/m8uo2Y5.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/7fHVDJv.gif",
+        "url": "https://i.imgur.com/Y7MoMfu.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/eWBeYvh.gif",
+        "url": "https://i.imgur.com/tQy6HcE.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/CwfCF50.gif",
+        "url": "https://i.imgur.com/9FxmT38.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/Y7MoMfu.gif",
+        "url": "https://i.imgur.com/eWBeYvh.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/tdKa9fS.gif",
+        "url": "https://i.imgur.com/CwfCF50.gif",
         "label": "動作8"
       },
       {
-        "url": "https://i.imgur.com/9FxmT38.gif",
+        "url": "https://i.imgur.com/gvKH4HG.gif",
         "label": "動作9"
       }
     ],
@@ -1936,6 +2393,20 @@
       {
         "url": "https://i.imgur.com/uFur8qN.jpg",
         "name": "異角之門"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/6D3AOTS.png",
+        "dialogs": [
+          "https://i.imgur.com/3vx8SmM.png",
+          "https://i.imgur.com/L9ukKiN.png",
+          "https://i.imgur.com/qvETUIt.png",
+          "https://i.imgur.com/8xQpeyh.png",
+          "https://i.imgur.com/ZJRzlwd.png",
+          "https://i.imgur.com/tWySHkA.png"
+        ]
       }
     ]
   },
@@ -1951,7 +2422,7 @@
     "relicImage": "https://i.imgur.com/RlBowqd.jpg",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/br8kVlA.gif",
+        "url": "https://i.imgur.com/HamHe0p.gif",
         "label": "普攻"
       },
       {
@@ -1959,24 +2430,39 @@
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/hC056AY.gif",
+        "url": "https://i.imgur.com/fUUfWFG.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/HamHe0p.gif",
+        "url": "https://i.imgur.com/RevVShV.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/fUUfWFG.gif",
+        "url": "https://i.imgur.com/hC056AY.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/RevVShV.gif",
+        "url": "https://i.imgur.com/br8kVlA.gif",
         "label": "武器"
       },
       {
         "url": "https://i.imgur.com/ilZJlQo.gif",
         "label": "跳躍揮動武器"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/ICcTKff.png",
+        "dialogs": [
+          "https://i.imgur.com/DhEbZTT.png",
+          "https://i.imgur.com/Uwk96tx.png",
+          "https://i.imgur.com/etCH01L.png",
+          "https://i.imgur.com/oHc4ms3.png",
+          "https://i.imgur.com/vdd2lmZ.png",
+          "https://i.imgur.com/I7Rb4du.png",
+          "https://i.imgur.com/hBrpyh8.png"
+        ]
       }
     ]
   },
@@ -1992,35 +2478,35 @@
     "relicImage": "https://i.imgur.com/cEWtjh1.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/PXzqC4C.gif",
+        "url": "https://i.imgur.com/rJijq4W.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/I63CCqp.gif",
+        "url": "https://i.imgur.com/NHjYBln.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/WlT5tHl.gif",
+        "url": "https://i.imgur.com/I63CCqp.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/rJijq4W.gif",
+        "url": "https://i.imgur.com/XbikT5N.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/PbOFd12.gif",
+        "url": "https://i.imgur.com/AMCr2HH.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/NHjYBln.gif",
+        "url": "https://i.imgur.com/WlT5tHl.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/XbikT5N.gif",
+        "url": "https://i.imgur.com/PXzqC4C.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/AMCr2HH.gif",
+        "url": "https://i.imgur.com/PbOFd12.gif",
         "label": "動作8"
       }
     ],
@@ -2032,6 +2518,18 @@
       {
         "url": "https://i.imgur.com/1cW204t.jpg",
         "name": "暗黑石破天驚"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/wOYQmgD.png",
+        "dialogs": [
+          "https://i.imgur.com/wpUMxYl.png",
+          "https://i.imgur.com/3v0pCYa.png",
+          "https://i.imgur.com/xoJadP5.png",
+          "https://i.imgur.com/kYDRCxp.png"
+        ]
       }
     ]
   },
@@ -2047,23 +2545,23 @@
     "relicImage": "https://i.imgur.com/Z5vSKMf.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/TNtzHKK.gif",
+        "url": "https://i.imgur.com/vQswrPG.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/iy5nFyv.gif",
+        "url": "https://i.imgur.com/HD8KTRX.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/5Ey1iQg.gif",
+        "url": "https://i.imgur.com/TNtzHKK.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/r9ZYlPV.gif",
+        "url": "https://i.imgur.com/9ccg2oM.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/vQswrPG.gif",
+        "url": "https://i.imgur.com/iy5nFyv.gif",
         "label": "滾動"
       },
       {
@@ -2071,11 +2569,11 @@
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/HD8KTRX.gif",
+        "url": "https://i.imgur.com/r9ZYlPV.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/9ccg2oM.gif",
+        "url": "https://i.imgur.com/5Ey1iQg.gif",
         "label": "動作8"
       }
     ],
@@ -2087,6 +2585,21 @@
       {
         "url": "https://i.imgur.com/rWyhl4W.jpg",
         "name": "絕對粉碎"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/mp86Y3u.png",
+        "dialogs": [
+          "https://i.imgur.com/BYibKIc.png",
+          "https://i.imgur.com/TB8kOV5.png",
+          "https://i.imgur.com/ehpxZk7.png",
+          "https://i.imgur.com/5dlRJIi.png",
+          "https://i.imgur.com/wwc7fyX.png",
+          "https://i.imgur.com/CNd5zqb.png",
+          "https://i.imgur.com/6Xo3Umz.png"
+        ]
       }
     ]
   },
@@ -2102,35 +2615,35 @@
     "relicImage": "https://i.imgur.com/KVgnAIM.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/1CRwB3k.gif",
+        "url": "https://i.imgur.com/iU6UKkl.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/oQgBhI4.gif",
+        "url": "https://i.imgur.com/pjVb4Wm.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/3ioczDU.gif",
+        "url": "https://i.imgur.com/1CRwB3k.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/iU6UKkl.gif",
+        "url": "https://i.imgur.com/IqtAn4T.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/DsdOsA4.gif",
+        "url": "https://i.imgur.com/oQgBhI4.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/pjVb4Wm.gif",
+        "url": "https://i.imgur.com/DsdOsA4.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/IqtAn4T.gif",
+        "url": "https://i.imgur.com/tlCSfQL.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/tlCSfQL.gif",
+        "url": "https://i.imgur.com/3ioczDU.gif",
         "label": "動作8"
       }
     ],
@@ -2153,7 +2666,7 @@
     "relicImage": "https://i.imgur.com/MZtGppv.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/weNAArF.gif",
+        "url": "https://i.imgur.com/SFVJkDa.gif",
         "label": "普攻"
       },
       {
@@ -2161,11 +2674,11 @@
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/SFVJkDa.gif",
+        "url": "https://i.imgur.com/uRzwFJj.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/uRzwFJj.gif",
+        "url": "https://i.imgur.com/o3uu8o7.gif",
         "label": "跑步"
       },
       {
@@ -2173,7 +2686,7 @@
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/o3uu8o7.gif",
+        "url": "https://i.imgur.com/q1iNzjn.gif",
         "label": "武器"
       },
       {
@@ -2181,7 +2694,7 @@
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/q1iNzjn.gif",
+        "url": "https://i.imgur.com/weNAArF.gif",
         "label": "動作8"
       }
     ],
@@ -2189,6 +2702,17 @@
       {
         "url": "https://i.imgur.com/scZqbXp.jpg",
         "name": "忘我之道"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/c2reMCz.png",
+        "dialogs": [
+          "https://i.imgur.com/0suqGhG.png",
+          "https://i.imgur.com/vOfbzGJ.png",
+          "https://i.imgur.com/q39Hfr7.png"
+        ]
       }
     ]
   },
@@ -2204,11 +2728,11 @@
     "relicImage": "https://i.imgur.com/msAih5S.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/HuXZbGU.gif",
+        "url": "https://i.imgur.com/ErxjhG6.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/95Iheg2.gif",
+        "url": "https://i.imgur.com/qDxFB2W.gif",
         "label": "跑攻"
       },
       {
@@ -2216,23 +2740,23 @@
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/ErxjhG6.gif",
+        "url": "https://i.imgur.com/95Iheg2.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/qDxFB2W.gif",
+        "url": "https://i.imgur.com/HlzOzTc.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/ezLspZ3.gif",
+        "url": "https://i.imgur.com/GlaOj7x.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/HlzOzTc.gif",
+        "url": "https://i.imgur.com/HuXZbGU.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/GlaOj7x.gif",
+        "url": "https://i.imgur.com/ezLspZ3.gif",
         "label": "動作8"
       }
     ],
@@ -2246,7 +2770,18 @@
       "name": "索命劍",
       "durability": "300",
       "description": "被封印的凶劍，相傳會吸蝕使用者的靈魂。"
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/rat5RaO.png",
+        "dialogs": [
+          "https://i.imgur.com/lJg32CK.png",
+          "https://i.imgur.com/OYS1YfE.png",
+          "https://i.imgur.com/CW4QvUe.png"
+        ]
+      }
+    ]
   },
   "stinky": {
     "slug": "stinky",
@@ -2260,35 +2795,35 @@
     "relicImage": "https://i.imgur.com/ORgHjUE.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/6BceHos.gif",
+        "url": "https://i.imgur.com/JcB9mSQ.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/fDZE9Sc.gif",
+        "url": "https://i.imgur.com/m1wVumE.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/DuTSTnQ.gif",
+        "url": "https://i.imgur.com/gKA726g.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/JcB9mSQ.gif",
+        "url": "https://i.imgur.com/DuTSTnQ.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/M1ZW6os.gif",
+        "url": "https://i.imgur.com/fDZE9Sc.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/m1wVumE.gif",
+        "url": "https://i.imgur.com/0hbxA8O.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/gKA726g.gif",
+        "url": "https://i.imgur.com/6BceHos.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/0hbxA8O.gif",
+        "url": "https://i.imgur.com/M1ZW6os.gif",
         "label": "動作8"
       }
     ],
@@ -2328,7 +2863,42 @@
         "def": "(+600)",
         "agi": "(+200)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/4nEQ9Zb.png",
+        "dialogs": [
+          "https://i.imgur.com/e297yJp.png",
+          "https://i.imgur.com/1iZtgDX.png",
+          "https://i.imgur.com/86l869a.png",
+          "https://i.imgur.com/JuvntQA.png",
+          "https://i.imgur.com/HBlqCf7.png",
+          "https://i.imgur.com/bNAtn77.png",
+          "https://i.imgur.com/eKGbthx.png",
+          "https://i.imgur.com/4ynFeJm.png",
+          "https://i.imgur.com/ESDDhZM.png"
+        ]
+      },
+      {
+        "label": "龍神星奇(人型)",
+        "portrait": "https://i.imgur.com/4nEQ9Zb.png",
+        "dialogs": [
+          "https://i.imgur.com/dKV1TEi.png",
+          "https://i.imgur.com/UHIqmfh.png",
+          "https://i.imgur.com/4fT9ufj.png",
+          "https://i.imgur.com/ei7oERU.png"
+        ]
+      },
+      {
+        "label": "龍神(繭型)",
+        "portrait": "https://i.imgur.com/Gq5pqrD.png",
+        "dialogs": [
+          "https://i.imgur.com/d8iRwp3.png",
+          "https://i.imgur.com/qgmehan.png"
+        ]
+      }
+    ]
   },
   "uranus": {
     "slug": "uranus",
@@ -2342,35 +2912,35 @@
     "relicImage": "https://i.imgur.com/XSfGsIS.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/rPK04gA.gif",
+        "url": "https://i.imgur.com/7VU0ekW.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/39cUIKj.gif",
+        "url": "https://i.imgur.com/dgH1H5G.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/jXRJoHJ.gif",
+        "url": "https://i.imgur.com/Xa7sk3Q.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/7VU0ekW.gif",
+        "url": "https://i.imgur.com/PlFTmqi.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/Fs3l1YG.gif",
+        "url": "https://i.imgur.com/rPK04gA.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/dgH1H5G.gif",
+        "url": "https://i.imgur.com/jXRJoHJ.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/PlFTmqi.gif",
+        "url": "https://i.imgur.com/Fs3l1YG.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/Xa7sk3Q.gif",
+        "url": "https://i.imgur.com/39cUIKj.gif",
         "label": "動作8"
       },
       {
@@ -2382,6 +2952,20 @@
       {
         "url": "https://i.imgur.com/vyH8D9N.jpg",
         "name": "天羅地網"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/fSVT1Vg.png",
+        "dialogs": [
+          "https://i.imgur.com/bGbC0sA.png",
+          "https://i.imgur.com/cdQGIws.png",
+          "https://i.imgur.com/cX87r8q.png",
+          "https://i.imgur.com/WpA5uo0.png",
+          "https://i.imgur.com/xeKteX9.png",
+          "https://i.imgur.com/zbTRmWb.png"
+        ]
       }
     ]
   },
@@ -2397,15 +2981,15 @@
     "relicImage": "https://i.imgur.com/ZL9KnJX.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/sNgdQwR.gif",
+        "url": "https://i.imgur.com/sC7mBDj.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/ST0Fx4z.gif",
+        "url": "https://i.imgur.com/nm54XUg.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/nm54XUg.gif",
+        "url": "https://i.imgur.com/ST0Fx4z.gif",
         "label": "跳攻"
       },
       {
@@ -2413,11 +2997,11 @@
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/A8JC5ge.gif",
+        "url": "https://i.imgur.com/Nb1VICz.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/sC7mBDj.gif",
+        "url": "https://i.imgur.com/sNgdQwR.gif",
         "label": "武器"
       },
       {
@@ -2425,7 +3009,7 @@
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/Nb1VICz.gif",
+        "url": "https://i.imgur.com/A8JC5ge.gif",
         "label": "動作8"
       }
     ],
@@ -2437,6 +3021,20 @@
       {
         "url": "https://i.imgur.com/ad7ppwR.jpg",
         "name": "穿梭破空閃"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/jlDAhZa.png",
+        "dialogs": [
+          "https://i.imgur.com/E0CeQL9.png",
+          "https://i.imgur.com/NUN8er1.png",
+          "https://i.imgur.com/QeBmZLi.png",
+          "https://i.imgur.com/Q7EzYZt.png",
+          "https://i.imgur.com/tngxmG5.png",
+          "https://i.imgur.com/JXKnHSp.png"
+        ]
       }
     ]
   },
@@ -2452,35 +3050,35 @@
     "relicImage": "https://i.imgur.com/sGqkWLo.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/vPEh6xy.gif",
+        "url": "https://i.imgur.com/soGT55X.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/sOayOr4.gif",
+        "url": "https://i.imgur.com/WKoer9M.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/Y4XiiPp.gif",
+        "url": "https://i.imgur.com/vPEh6xy.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/WKoer9M.gif",
+        "url": "https://i.imgur.com/Snvwmxt.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/UEheDdR.gif",
+        "url": "https://i.imgur.com/sOayOr4.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/Snvwmxt.gif",
+        "url": "https://i.imgur.com/zOeS0uQ.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/soGT55X.gif",
+        "url": "https://i.imgur.com/UEheDdR.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/zOeS0uQ.gif",
+        "url": "https://i.imgur.com/Y4XiiPp.gif",
         "label": "動作8"
       }
     ],
@@ -2515,31 +3113,31 @@
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/A7hRe8C.gif",
+        "url": "https://i.imgur.com/U0VVhmN.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/U0VVhmN.gif",
+        "url": "https://i.imgur.com/RQ3wwCF.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/Y9r4pjn.gif",
+        "url": "https://i.imgur.com/cJiON4j.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/cJiON4j.gif",
+        "url": "https://i.imgur.com/19Ox1l6.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/RQ3wwCF.gif",
+        "url": "https://i.imgur.com/A7hRe8C.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/19Ox1l6.gif",
+        "url": "https://i.imgur.com/RMGd8PR.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/RMGd8PR.gif",
+        "url": "https://i.imgur.com/Y9r4pjn.gif",
         "label": "動作8"
       }
     ]
@@ -2556,35 +3154,35 @@
     "relicImage": "https://i.imgur.com/FxnPC0V.gif",
     "actionGifs": [
       {
-        "url": "https://i.imgur.com/WA4QUH0.gif",
+        "url": "https://i.imgur.com/bHnPkd6.gif",
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/2LwiHIu.gif",
+        "url": "https://i.imgur.com/InZlTjE.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/y3UwYKt.gif",
+        "url": "https://i.imgur.com/GtTA875.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/bHnPkd6.gif",
+        "url": "https://i.imgur.com/KUF4nHd.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/KUF4nHd.gif",
+        "url": "https://i.imgur.com/2LwiHIu.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/XASnB3Y.gif",
+        "url": "https://i.imgur.com/y3UwYKt.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/GtTA875.gif",
+        "url": "https://i.imgur.com/WA4QUH0.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/InZlTjE.gif",
+        "url": "https://i.imgur.com/XASnB3Y.gif",
         "label": "動作8"
       }
     ],
@@ -2612,7 +3210,31 @@
         "def": "(+600)",
         "agi": "(+500)"
       }
-    }
+    },
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/gOlmbiS.png",
+        "dialogs": [
+          "https://i.imgur.com/cNbINNF.png",
+          "https://i.imgur.com/rdHa8yb.png",
+          "https://i.imgur.com/LGFMeV9.png",
+          "https://i.imgur.com/dJu7CFy.png",
+          "https://i.imgur.com/ha0bS4Z.png",
+          "https://i.imgur.com/tykNpFr.png",
+          "https://i.imgur.com/L8GDo1v.png",
+          "https://i.imgur.com/fYX9Okw.png",
+          "https://i.imgur.com/lG80Ohe.png",
+          "https://i.imgur.com/A5XOU3v.png",
+          "https://i.imgur.com/1dMkiXH.png",
+          "https://i.imgur.com/ShKwVSQ.png",
+          "https://i.imgur.com/VrSzwW9.png",
+          "https://i.imgur.com/ZYM6LJq.png",
+          "https://i.imgur.com/MJHTFJ9.png",
+          "https://i.imgur.com/UBiwcC3.png"
+        ]
+      }
+    ]
   },
   "zack": {
     "slug": "zack",
@@ -2630,31 +3252,31 @@
         "label": "普攻"
       },
       {
-        "url": "https://i.imgur.com/kYJrf8V.gif",
+        "url": "https://i.imgur.com/6tFDDjX.gif",
         "label": "跑攻"
       },
       {
-        "url": "https://i.imgur.com/CQOdJVi.gif",
+        "url": "https://i.imgur.com/kYJrf8V.gif",
         "label": "跳攻"
       },
       {
-        "url": "https://i.imgur.com/CRFJMwf.gif",
+        "url": "https://i.imgur.com/QsuBYta.gif",
         "label": "跑步"
       },
       {
-        "url": "https://i.imgur.com/6tFDDjX.gif",
+        "url": "https://i.imgur.com/CRFJMwf.gif",
         "label": "滾動"
       },
       {
-        "url": "https://i.imgur.com/QsuBYta.gif",
+        "url": "https://i.imgur.com/CQOdJVi.gif",
         "label": "武器"
       },
       {
-        "url": "https://i.imgur.com/7mMwIJ3.gif",
+        "url": "https://i.imgur.com/ahsmQxn.gif",
         "label": "跳躍揮動武器"
       },
       {
-        "url": "https://i.imgur.com/ahsmQxn.gif",
+        "url": "https://i.imgur.com/7mMwIJ3.gif",
         "label": "動作8"
       }
     ],
@@ -2666,6 +3288,36 @@
       {
         "url": "https://i.imgur.com/jV9l1cs.jpg",
         "name": "三重殺奏"
+      }
+    ],
+    "portraitGroups": [
+      {
+        "label": "異轉型像",
+        "portrait": "https://i.imgur.com/zkUe4PQ.png",
+        "dialogs": [
+          "https://i.imgur.com/XskFzVm.png",
+          "https://i.imgur.com/qPmJJVl.png",
+          "https://i.imgur.com/fHTpEMT.png",
+          "https://i.imgur.com/Aq22n3I.png",
+          "https://i.imgur.com/9Nrw3zM.png",
+          "https://i.imgur.com/Z5vvRP6.png",
+          "https://i.imgur.com/Yrk45vI.png",
+          "https://i.imgur.com/Z2tYLa8.png"
+        ]
+      },
+      {
+        "label": "神秘人 (遊戲)",
+        "portrait": "https://i.imgur.com/xwqlbLg.png",
+        "dialogs": [
+          "https://i.imgur.com/0TjfxVp.png"
+        ]
+      },
+      {
+        "label": "神秘人 (宣傳圖)",
+        "portrait": "https://i.imgur.com/mgAuBfZ.png",
+        "dialogs": [
+          "https://i.imgur.com/2XdqBOT.png"
+        ]
       }
     ]
   }

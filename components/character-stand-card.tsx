@@ -161,6 +161,7 @@ export function CharacterStandCard() {
 							transformGif?: string;
 							transformName?: string;
 							equipmentImage?: string;
+							portraitGroups?: { label: string; portrait: string; dialogs: string[] }[];
 							equipment?: {
 								name: string;
 								stats?: Record<string, string>;
@@ -203,7 +204,7 @@ export function CharacterStandCard() {
 			actionGifs: isTransformPage ? (transform?.actionGifs ?? []) : char.actionGifs,
 			portraits: isTransformPage ? undefined : char.portraits,
 			dialogs: isTransformPage ? undefined : char.dialogs,
-			portraitGroups: isTransformPage ? undefined : (char as any).portraitGroups,
+			portraitGroups: isTransformPage ? transform?.portraitGroups : (char as any).portraitGroups,
 			hasTransform: isTransformPage ? false : char.hasTransform,
 			relic: isTransformPage ? transform?.relic : undefined,
 			relicImage: isTransformPage ? transform?.relicImage : undefined,

@@ -966,6 +966,42 @@ def extract_transforms():
                     else:
                         transform["equipment"] = equip
 
+        # Extract portrait groups (角色型像及對話圖) from r.html
+        img_pat = r'<img[^>]*src="([^"]*imgur[^"]*?)"[^>]*>'
+        section_start = content.find("角色型像及對話圖")
+        if section_start >= 0:
+            table_start = content.find("<table", section_start)
+            table_end = content.find("</table>", table_start) if table_start >= 0 else -1
+            if table_start >= 0 and table_end >= 0:
+                table_html = content[table_start:table_end + len("</table>")]
+                rows = re.findall(r'<tr[^>]*>(.*?)</tr>', table_html, re.DOTALL)
+                portrait_groups = []
+                for row in rows:
+                    cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+                    if len(cells) < 2:
+                        continue
+                    left_cell, right_cell = cells[0], cells[1]
+                    left_text = re.sub(r'<[^>]+>', ' ', left_cell).strip()
+                    if "型像圖片" in left_text or "相關對話" in left_text:
+                        continue
+                    portrait_match = re.search(img_pat, left_cell)
+                    if not portrait_match:
+                        continue
+                    portrait_url = fix_url(portrait_match.group(1))
+                    label_text = re.sub(r'<img[^>]*>', '', left_cell)
+                    label_text = re.sub(r'<[^>]+>', ' ', label_text)
+                    label_text = re.sub(r'&[a-z]+;', ' ', label_text).strip()
+                    if not label_text:
+                        label_text = "異轉型像"
+                    dialog_urls = [fix_url(m.group(1)) for m in re.finditer(img_pat, right_cell)]
+                    portrait_groups.append({
+                        "label": label_text,
+                        "portrait": portrait_url,
+                        "dialogs": dialog_urls,
+                    })
+                if portrait_groups:
+                    transform["portraitGroups"] = portrait_groups
+
         transforms[slug] = transform
 
     print(f"  Extracted {len(transforms)} transforms")
