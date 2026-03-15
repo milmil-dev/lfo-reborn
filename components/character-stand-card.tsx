@@ -764,15 +764,15 @@ function SkillCard({
 						</div>
 					)}
 
-					{/* Top gradient */}
-					<div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/50 to-transparent" />
-					{/* Bottom gradient */}
-					<div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/80 to-transparent" />
+					{/* Top gradient - hidden on hover */}
+					<div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/50 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
+					{/* Bottom gradient - hidden on hover */}
+					<div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/80 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
 
-					{/* Icon badge */}
+					{/* Icon badge - hidden on hover */}
 					{skill.icon && hasImage && (
 						<div
-							className="absolute left-2.5 top-2.5 h-8 w-8 overflow-hidden rounded-lg shadow-xl backdrop-blur-sm"
+							className="absolute left-2.5 top-2.5 h-8 w-8 overflow-hidden rounded-lg shadow-xl backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-0"
 							style={{
 								border: `1.5px solid ${color}50`,
 								background: "rgba(0,0,0,0.4)",
@@ -782,13 +782,10 @@ function SkillCard({
 						</div>
 					)}
 
-					{/* Cost + LP badges */}
-					<div className="absolute right-2.5 top-2.5 flex flex-col items-end gap-1">
+					{/* Cost + LP badges - hidden on hover */}
+					<div className="absolute right-2.5 top-2.5 flex flex-col items-end gap-1 transition-opacity duration-300 group-hover:opacity-0">
 						{showCost && (
-							<span
-								className="rounded-lg px-2 py-0.5 text-[11px] font-extrabold text-white shadow-xl backdrop-blur-md"
-								style={{ background: `${color}dd` }}
-							>
+							<span className="rounded-lg bg-black/60 px-2 py-0.5 text-[11px] font-extrabold text-white shadow-xl backdrop-blur-md">
 								{skill.cost}
 							</span>
 						)}
@@ -799,8 +796,8 @@ function SkillCard({
 						)}
 					</div>
 
-					{/* Bottom content */}
-					<div className="absolute inset-x-0 bottom-0 p-3">
+					{/* Bottom content - hidden on hover */}
+					<div className="absolute inset-x-0 bottom-0 p-3 transition-opacity duration-300 group-hover:opacity-0">
 						<p className="text-[15px] font-black leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
 							{skill.name}
 						</p>
