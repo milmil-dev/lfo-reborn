@@ -98,15 +98,17 @@ export function CharacterStandCard() {
 		const char = getCharacter(slug);
 		if (!char) return;
 
-		// Hide duplicate title elements
+		// Hide duplicate content - CharacterStandCard renders everything from JSON
 		const article = document.querySelector("article");
 		if (article) {
+			// Hide the entire prose/body content since we render it all from data
+			const proseBody =
+				article.querySelector("[class*='prose']") ?? article.querySelector("[class*='body']");
+			if (proseBody) (proseBody as HTMLElement).style.display = "none";
 			const docsTitle = article.querySelector(":scope > h1");
 			const docsDesc = article.querySelector(":scope > p");
 			if (docsTitle) (docsTitle as HTMLElement).style.display = "none";
 			if (docsDesc) (docsDesc as HTMLElement).style.display = "none";
-			const bodyH1 = article.querySelector("[class*='prose'] h1, [class*='body'] h1");
-			if (bodyH1) (bodyH1 as HTMLElement).style.display = "none";
 		}
 
 		// Get real stats from skills data
