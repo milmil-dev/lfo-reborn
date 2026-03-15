@@ -50,6 +50,10 @@ function nearestCorner(x: number, y: number): Corner {
 }
 
 // ── WaveformBars ─────────────────────────────────────────────────────
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 function WaveformBars({ playing, color }: { playing: boolean; color: string }) {
   return (
     <div className="flex items-end gap-[3px] h-6">
@@ -59,12 +63,14 @@ function WaveformBars({ playing, color }: { playing: boolean; color: string }) {
           className="w-[3px] rounded-full"
           style={{ backgroundColor: color }}
           animate={
-            playing
+            playing && !prefersReducedMotion
               ? { height: ["6px", "20px", "10px", "24px", "6px"] }
-              : { height: "6px" }
+              : { height: playing ? "14px" : "6px" }
           }
           transition={
-            playing
+            prefersReducedMotion
+              ? { duration: 0 }
+              : playing
               ? {
                   duration: 1.2,
                   repeat: Infinity,
@@ -271,9 +277,10 @@ export function MusicPlayer() {
             key="fab"
             className="fixed z-50 cursor-pointer select-none"
             style={{ width: 56, height: 56, left: fabPos.x, top: fabPos.y }}
-            initial={{ scale: 0.5, opacity: 0 }}
+            initial={{ scale: prefersReducedMotion ? 1 : 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.5, opacity: 0 }}
+            exit={{ scale: prefersReducedMotion ? 1 : 0.5, opacity: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : undefined}
             drag
             dragMomentum={false}
             onDragEnd={(_, info) => {
@@ -308,7 +315,7 @@ export function MusicPlayer() {
                 strokeDashoffset={circumference * (1 - progress)}
                 strokeLinecap="round"
                 transform="rotate(-90 28 28)"
-                style={{ transition: "stroke-dashoffset 0.3s" }}
+                style={{ transition: prefersReducedMotion ? "none" : "stroke-dashoffset 0.3s" }}
               />
             </svg>
             <div
@@ -334,10 +341,10 @@ export function MusicPlayer() {
             key="card"
             className={`fixed bottom-4 right-4 max-sm:right-auto max-sm:left-4 z-50 w-[420px] max-sm:w-[calc(100vw-2rem)] rounded-2xl shadow-2xl overflow-hidden ${glass}`}
             style={{ "--media-accent": themeColor } as React.CSSProperties}
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            initial={{ scale: prefersReducedMotion ? 1 : 0.9, opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            exit={{ scale: prefersReducedMotion ? 1 : 0.9, opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", damping: 25, stiffness: 300 }}
           >
             {/* Error banner */}
             <AnimatePresence>
@@ -346,6 +353,7 @@ export function MusicPlayer() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
+                  transition={prefersReducedMotion ? { duration: 0 } : undefined}
                   className="bg-red-500/90 text-white text-xs px-3 py-1.5 text-center overflow-hidden"
                 >
                   {errorMessage}
@@ -529,10 +537,10 @@ export function MusicPlayer() {
             key="playlist"
             className={`fixed bottom-4 right-4 max-sm:right-auto max-sm:left-4 z-50 w-[420px] max-sm:w-[calc(100vw-2rem)] rounded-2xl shadow-2xl overflow-hidden ${glass}`}
             style={{ "--media-accent": themeColor } as React.CSSProperties}
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            initial={{ scale: prefersReducedMotion ? 1 : 0.9, opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            exit={{ scale: prefersReducedMotion ? 1 : 0.9, opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", damping: 25, stiffness: 300 }}
           >
             {/* Compact header */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.06]">
