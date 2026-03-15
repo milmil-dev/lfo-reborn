@@ -778,12 +778,48 @@ function SkillCard({
 				</div>
 
 				{/* Footer */}
-				<div className="flex items-center justify-between gap-3 rounded-b-2xl bg-fd-muted/60 px-3 py-2">
-					<span className="truncate text-sm font-bold text-fd-foreground">{skill.name}</span>
-					<span className="shrink-0 font-mono text-xs text-fd-muted-foreground">
-						{skill.command && skill.command !== "--" ? skill.command : ""}
-						{showCost ? ` · ${skill.cost}` : ""}
-					</span>
+				<div className="rounded-b-2xl bg-fd-muted/60 px-3 py-2.5">
+					{/* Name + icon */}
+					<div className="flex items-center gap-2">
+						{skill.icon && (
+							<img
+								src={skill.icon}
+								alt=""
+								className="h-6 w-6 shrink-0 rounded object-cover"
+								loading="lazy"
+							/>
+						)}
+						<span className="truncate text-sm font-bold text-fd-foreground">{skill.name}</span>
+					</div>
+					{/* Cost | Command | LP | Trigger */}
+					<div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+						{showCost && (
+							<span className="rounded bg-fd-muted px-1.5 py-0.5 text-[11px] font-bold text-fd-foreground">
+								{skill.cost}
+							</span>
+						)}
+						{skill.command && skill.command !== "--" && (
+							<span className="rounded bg-fd-muted px-1.5 py-0.5 font-mono text-[11px] text-fd-muted-foreground">
+								{skill.command}
+							</span>
+						)}
+						{skill.learnPoints && skill.learnPoints !== "--" && (
+							<span className="rounded bg-fd-muted px-1.5 py-0.5 text-[11px] text-fd-muted-foreground">
+								{skill.learnPoints}學點
+							</span>
+						)}
+						{skill.trigger && skill.trigger !== "--" && (
+							<span className="rounded bg-fd-muted px-1.5 py-0.5 text-[11px] text-fd-muted-foreground">
+								觸發: {skill.trigger}
+							</span>
+						)}
+					</div>
+					{/* P.S. notes */}
+					{skill.notes && (
+						<p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-fd-muted-foreground">
+							{skill.notes}
+						</p>
+					)}
 				</div>
 			</button>
 		</motion.div>
