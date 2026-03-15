@@ -183,7 +183,14 @@ export function CharacterStandCard() {
 			combatStyle:
 				isTransformPage && transform?.combatStyle ? transform.combatStyle : char.combatStyle,
 			stats,
-			skills: skillData?.skills ?? [],
+			skills: isTransformPage
+				? (() => {
+						const transformSkillNames = new Set(
+							(transform?.skillImages ?? []).map((si) => si.name),
+						);
+						return (skillData?.skills ?? []).filter((s) => transformSkillNames.has(s.name));
+					})()
+				: (skillData?.skills ?? []),
 			weapon: isTransformPage ? transform?.weapon : char.weapon,
 			equipment: isTransformPage ? (transform?.equipment ?? char.equipment) : char.equipment,
 			weaponImage: isTransformPage ? undefined : char.weaponImage,
@@ -707,7 +714,6 @@ function SkillsTab({
 							className="w-full cursor-pointer overflow-hidden rounded-lg border text-left transition-colors"
 							style={{
 								borderColor: isExpanded ? `${color}30` : "var(--color-fd-border)",
-								background: isExpanded ? `${color}08` : "transparent",
 							}}
 							onClick={() => setExpandedSkill(isExpanded ? null : i)}
 						>
