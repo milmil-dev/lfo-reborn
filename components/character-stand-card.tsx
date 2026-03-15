@@ -777,29 +777,42 @@ function SkillCard({
 					)}
 				</div>
 
-				{/* Footer - name + cost */}
-				<div className="flex items-center justify-between gap-2 bg-fd-muted/40 px-3 py-2.5">
-					<div className="flex min-w-0 items-center gap-2">
-						{skill.icon && (
-							<img
-								src={skill.icon}
-								alt=""
-								className="h-6 w-6 shrink-0 rounded object-cover"
-								loading="lazy"
-							/>
+				{/* Footer */}
+				<div className="bg-fd-card px-3 py-2.5">
+					{/* Row 1: name + cost */}
+					<div className="flex items-center justify-between gap-2">
+						<div className="flex min-w-0 items-center gap-2">
+							{skill.icon && (
+								<img
+									src={skill.icon}
+									alt=""
+									className="h-6 w-6 shrink-0 rounded object-cover"
+									loading="lazy"
+								/>
+							)}
+							<span className="truncate text-base font-bold text-fd-foreground">{skill.name}</span>
+						</div>
+						{showCost && (
+							<span className="shrink-0 text-sm font-bold text-fd-muted-foreground">
+								{skill.cost}
+							</span>
 						)}
-						<span className="truncate text-base font-bold text-fd-foreground">{skill.name}</span>
 					</div>
-					{showCost && (
-						<span className="shrink-0 text-sm font-bold text-fd-muted-foreground">
-							{skill.cost}
-						</span>
-					)}
+					{/* Row 2: command + learn points */}
+					<div className="mt-1 flex items-center gap-2 text-xs text-fd-muted-foreground">
+						{skill.command && skill.command !== "--" && (
+							<span className="font-mono">{skill.command}</span>
+						)}
+						{skill.learnPoints && skill.learnPoints !== "--" && (
+							<span>{skill.learnPoints}學點</span>
+						)}
+						{skill.trigger && skill.trigger !== "--" && <span>觸發: {skill.trigger}</span>}
+					</div>
 				</div>
 
-				{/* Description row */}
+				{/* P.S. row */}
 				{skill.notes && (
-					<div className="border-t border-white/[0.04] bg-fd-muted/20 px-3 py-2">
+					<div className="border-t border-fd-border/30 bg-fd-card px-3 py-2">
 						<p className="line-clamp-2 text-xs leading-relaxed text-fd-muted-foreground">
 							{skill.notes}
 						</p>
