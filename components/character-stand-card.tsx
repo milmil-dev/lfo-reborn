@@ -691,42 +691,57 @@ function SkillCard({
 	const demoGif = skill.gif;
 	const hasImage = staticImage || demoGif;
 	const showCost = skill.cost && skill.cost !== "--";
+	const showLP = skill.learnPoints && skill.learnPoints !== "--";
 
 	return (
 		<motion.div
 			variants={{
-				hidden: { opacity: 0, y: 12 },
-				visible: { opacity: 1, y: 0 },
+				hidden: { opacity: 0, y: 12, scale: 0.95 },
+				visible: { opacity: 1, y: 0, scale: 1 },
 			}}
 		>
 			<button
 				type="button"
-				className="group relative w-full overflow-hidden rounded-xl text-left transition-all duration-300"
+				className="group relative w-full overflow-hidden rounded-2xl text-left transition-all duration-300 hover:-translate-y-1"
 				style={{
-					border: isSelected ? `1.5px solid ${color}` : "1.5px solid transparent",
-					boxShadow: isSelected ? `0 0 20px ${color}20` : "none",
+					border: isSelected ? `2px solid ${color}` : "2px solid rgba(255,255,255,0.06)",
+					boxShadow: isSelected
+						? `0 8px 32px ${color}30, 0 0 0 1px ${color}20`
+						: "0 2px 8px rgba(0,0,0,0.3)",
+				}}
+				onMouseEnter={(e) => {
+					if (!isSelected) {
+						(e.currentTarget as HTMLElement).style.boxShadow =
+							`0 8px 32px ${color}20, 0 2px 8px rgba(0,0,0,0.4)`;
+						(e.currentTarget as HTMLElement).style.borderColor = `${color}40`;
+					}
+				}}
+				onMouseLeave={(e) => {
+					if (!isSelected) {
+						(e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.3)";
+						(e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)";
+					}
 				}}
 				onClick={onSelect}
 			>
-				{/* Card image area */}
-				<div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-fd-muted/30">
+				{/* Card image */}
+				<div className="relative aspect-[4/3] w-full overflow-hidden bg-fd-muted/20">
 					{hasImage ? (
 						<>
-							{/* Static skill image (default) */}
 							{staticImage && (
 								<img
 									src={staticImage}
 									alt={skill.name}
-									className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${demoGif ? "group-hover:opacity-0" : ""}`}
+									className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-110 ${demoGif ? "group-hover:opacity-0" : ""}`}
 									loading="lazy"
 								/>
 							)}
-							{/* Demo GIF (shown on hover) */}
 							{demoGif && (
 								<img
 									src={demoGif}
 									alt={`${skill.name} 演示`}
-									className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${staticImage ? "opacity-0 group-hover:opacity-100" : ""}`}
+									className={`absolute inset-0 h-full w-full object-contain transition-all duration-500 ${staticImage ? "opacity-0 group-hover:opacity-100" : "group-hover:scale-105"}`}
+									style={{ background: "rgba(0,0,0,0.85)" }}
 									loading="lazy"
 								/>
 							)}
@@ -734,53 +749,80 @@ function SkillCard({
 					) : (
 						<div
 							className="flex h-full w-full items-center justify-center"
-							style={{ background: `linear-gradient(135deg, ${color}12, ${color}05)` }}
+							style={{ background: `linear-gradient(145deg, ${color}15, ${color}05)` }}
 						>
 							{skill.icon ? (
 								<img
 									src={skill.icon}
 									alt=""
-									className="h-16 w-16 object-contain opacity-60"
+									className="h-14 w-14 object-contain opacity-50"
 									loading="lazy"
 								/>
 							) : (
-								<span className="text-3xl opacity-20">⚔</span>
+								<span className="text-3xl opacity-15">⚔</span>
 							)}
 						</div>
 					)}
 
-					{/* Gradient overlay */}
-					<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+					{/* Top gradient */}
+					<div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/50 to-transparent" />
+					{/* Bottom gradient */}
+					<div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/80 to-transparent" />
 
 					{/* Icon badge */}
 					{skill.icon && hasImage && (
 						<div
-							className="absolute left-2 top-2 h-7 w-7 overflow-hidden rounded-lg shadow-lg"
-							style={{ border: `1px solid ${color}40` }}
+							className="absolute left-2.5 top-2.5 h-8 w-8 overflow-hidden rounded-lg shadow-xl backdrop-blur-sm"
+							style={{
+								border: `1.5px solid ${color}50`,
+								background: "rgba(0,0,0,0.4)",
+							}}
 						>
 							<img src={skill.icon} alt="" className="h-full w-full object-cover" loading="lazy" />
 						</div>
 					)}
 
-					{/* Cost badge */}
-					{showCost && (
-						<span
-							className="absolute right-2 top-2 rounded-md px-1.5 py-0.5 text-[10px] font-bold text-white shadow-lg backdrop-blur-sm"
-							style={{ background: `${color}cc` }}
-						>
-							{skill.cost}
-						</span>
-					)}
+					{/* Cost + LP badges */}
+					<div className="absolute right-2.5 top-2.5 flex flex-col items-end gap-1">
+						{showCost && (
+							<span
+								className="rounded-lg px-2 py-0.5 text-[11px] font-extrabold text-white shadow-xl backdrop-blur-md"
+								style={{ background: `${color}dd` }}
+							>
+								{skill.cost}
+							</span>
+						)}
+						{showLP && (
+							<span className="rounded-lg bg-black/50 px-1.5 py-0.5 text-[9px] font-bold text-white/70 backdrop-blur-md">
+								{skill.learnPoints}學點
+							</span>
+						)}
+					</div>
 
-					{/* Bottom content overlay */}
-					<div className="absolute inset-x-0 bottom-0 p-2.5">
-						<p className="text-sm font-bold leading-tight text-white drop-shadow-lg">
+					{/* Bottom content */}
+					<div className="absolute inset-x-0 bottom-0 p-3">
+						<p className="text-[15px] font-black leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
 							{skill.name}
 						</p>
-						{skill.command && skill.command !== "--" && (
-							<span className="mt-0.5 inline-block rounded bg-white/15 px-1.5 py-0.5 font-mono text-[10px] text-white/80 backdrop-blur-sm">
-								{skill.command}
-							</span>
+						<div className="mt-1 flex items-center gap-1.5">
+							{skill.command && skill.command !== "--" && (
+								<span className="rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white/70 backdrop-blur-sm">
+									{skill.command}
+								</span>
+							)}
+							{skill.trigger && skill.trigger !== "--" && (
+								<span
+									className="rounded-md px-1.5 py-0.5 text-[10px] font-bold backdrop-blur-sm"
+									style={{ background: `${color}30`, color: `${color}` }}
+								>
+									{skill.trigger}
+								</span>
+							)}
+						</div>
+						{skill.notes && (
+							<p className="mt-1 line-clamp-2 text-[10px] leading-snug text-white/50">
+								{skill.notes}
+							</p>
 						)}
 					</div>
 				</div>
