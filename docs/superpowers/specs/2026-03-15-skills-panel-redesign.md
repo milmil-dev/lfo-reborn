@@ -21,7 +21,7 @@ Replace 3 existing sections in `CharacterStandCard` (`components/character-stand
 
 ### Architecture
 
-Extract a new `SkillsPanel` component (inline in `character-stand-card.tsx` or a separate file) that replaces these 3 sections:
+Extract a new `SkillsPanel` component inline in `character-stand-card.tsx` (co-located with existing types `SkillImage`, `ActionGif`, `CharacterSkill`) that replaces these 3 sections:
 
 1. **招式技能** (Skills Table) — lines ~434-467
 2. **角色必殺技圖片** (Skill Images) — lines ~469-489
@@ -55,25 +55,27 @@ Vertical list of skill cards, one per skill from `CharacterSkill[]`.
 **Collapsed state (default):**
 - Left: skill image thumbnail (36x36, rounded-lg) — matched by skill name from `skillImages[]`, fallback to accent-colored placeholder
 - Center: skill name (font-bold, accent color), below it nothing
-- Right side badges: MP cost (blue-tinted badge), learn points (muted badge), command input (monospace, dark background pill)
-- Chevron indicator (▸)
+- Right side badges: cost displayed as-is from `skill.cost` string (accent-tinted badge; if "--" or undefined, hide badge), learn points (muted badge; if "--" or undefined, hide), command input (monospace, dark background pill)
+- Chevron indicator (▸), rotates to (▾) when expanded via CSS `rotate(90deg)` transition
 
 **Expanded state (on click):**
 - Card border shifts to accent color
 - Below the header row, a divider + expanded content area appears
-- Left: skill image from `skillImages[]` (200px wide, aspect-video, rounded)
+- Left: skill image from `skillImages[]` (`max-w-[200px] w-full`, aspect-video, rounded — scales down on mobile)
 - Right: trigger/notes info as small badges, plus any description text
 - Animated with `AnimatePresence` — height + opacity transition (250ms ease-out)
 
-**Skill name matching:** Match `skill.name` against `skillImages[].name` to find the corresponding image. If no match, show a gradient placeholder with accent color.
+**Skill name matching:** Exact string match of `skill.name` against `skillImages[].name`. If no match, show a gradient placeholder with accent color. (Data is extracted from the same source so names should match exactly.)
+
+**Accordion behavior:** Only one skill card can be expanded at a time. Expanding a card auto-collapses any previously expanded card.
 
 #### Tab 2: 基本動作 (Action GIFs Grid)
 
-4-column responsive grid (`grid-cols-3 sm:grid-cols-4 md:grid-cols-7` to match current responsive behavior).
+Responsive grid matching current breakpoints: `grid-cols-3 sm:grid-cols-4 md:grid-cols-7`.
 
 Each cell:
 - Bordered card with rounded corners
-- GIF image (object-contain, ~72px height)
+- GIF image (object-contain, `h-20` / 80px — same as current)
 - Label below (small text, accent color)
 - Hover: `translateY(-2px)` + border color shifts to accent (CSS transition, 150ms)
 
@@ -99,7 +101,7 @@ All animations use `motion/react` (already imported in the file).
 | Card stagger on mount | Initial render | 50ms stagger | easeOut |
 | Action GIF hover lift | Mouse enter | 150ms | CSS ease |
 
-**Tab switch animation:** Wrap tab content in `AnimatePresence mode="wait"`. Entering content: `opacity: 0, y: 8` → `opacity: 1, y: 0`. Exiting: `opacity: 0, y: -4`.
+**Tab switch animation:** Wrap tab content in `AnimatePresence mode="wait"` with `key={activeTab}`. Entering content: `opacity: 0, y: 8` → `opacity: 1, y: 0`. Exiting: `opacity: 0, y: -4`.
 
 **Skill expand animation:** Use `motion.div` with `initial={{ height: 0, opacity: 0 }}` and `animate={{ height: 'auto', opacity: 1 }}`. The `layout` prop is NOT needed since only one card expands at a time.
 
@@ -126,9 +128,11 @@ No changes to data model or data loading. The `CharacterStandCard` component alr
 
 ### Edge Cases
 
-- Character with no skills (empty `skills[]`) — hide the entire panel
-- Character with skills but no skill images — show placeholder thumbnails
+- All three arrays empty — hide the entire panel
+- Character with skills but no skill images — show placeholder thumbnails in skill cards
 - Character with no action GIFs — hide the 基本動作 tab
-- Character with no skill images — hide the 必殺技圖片 tab
-- Only one tab has data — show panel without tab bar, just the content
+- Character with no skill images array — hide the 必殺技圖片 tab
+- Only one tab has data — show panel without tab bar, just the content directly
 - Skill name doesn't match any skill image name — show gradient placeholder
+- Image fails to load — use `onError` to swap to gradient placeholder
+- All images use `loading="lazy"` to match existing behavior
