@@ -90,10 +90,10 @@ export function CharacterStandCard() {
 
 	useEffect(() => {
 		const path = window.location.pathname;
-		const normalMatch = path.match(/\/docs\/character\/([^/]+)$/);
 		const transformMatch = path.match(/\/docs\/character\/([^/]+)\/r$/);
+		const normalMatch = path.match(/\/docs\/character\/([^/]+)$/);
 		const isTransformPage = !!transformMatch;
-		const slug = (normalMatch ?? transformMatch)?.[1];
+		const slug = isTransformPage ? transformMatch[1] : normalMatch?.[1];
 		if (!slug) return;
 		const char = getCharacter(slug);
 		if (!char) return;
