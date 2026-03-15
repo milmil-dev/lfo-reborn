@@ -1,0 +1,19 @@
+/* Video.js wiki theme — import base + minimal overrides */
+@import "video.js/dist/video-js.css";
+
+.video-js.vjs-wiki {
+  border-radius: 2rem;
+  overflow: hidden;
+  border: 1px solid oklch(0.28 0.008 265 / 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  font-family: "Noto Sans TC", system-ui, sans-serif;
+}
+
+.video-js.vjs-wiki .vjs-play-progress,
+.video-js.vjs-wiki .vjs-volume-level {
+  background: var(--media-accent, #ffbf00);
+}
+
+.video-js.vjs-wiki .vjs-play-progress .vjs-time-tooltip {
+  background: var(--media-accent, #ffbf00);
+}
