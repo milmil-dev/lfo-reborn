@@ -690,7 +690,10 @@ function SkillsTab({
 		>
 			{skills.map((skill, i) => {
 				const isExpanded = expandedSkill === i;
-				const imageUrl = skill.gif ?? skillImageMap.get(skill.name);
+				const iconUrl = skill.icon;
+				const demoGif = skill.gif;
+				const skillImage = skillImageMap.get(skill.name);
+				const expandedImage = demoGif ?? skillImage;
 				const showCost = skill.cost && skill.cost !== "--";
 				const showLP = skill.learnPoints && skill.learnPoints !== "--";
 
@@ -711,7 +714,7 @@ function SkillsTab({
 							onClick={() => setExpandedSkill(isExpanded ? null : i)}
 						>
 							<div className="flex items-center gap-3 p-3">
-								<SkillThumbnail url={imageUrl} color={color} />
+								<SkillThumbnail url={iconUrl} color={color} />
 
 								<div className="min-w-0 flex-1">
 									<span className="text-sm font-bold" style={{ color }}>
@@ -764,9 +767,9 @@ function SkillsTab({
 											className="flex gap-4 border-t px-3 pb-3 pt-3"
 											style={{ borderColor: `${color}15` }}
 										>
-											{imageUrl ? (
+											{expandedImage ? (
 												<img
-													src={imageUrl}
+													src={expandedImage}
 													alt={skill.name}
 													className="aspect-video w-full max-w-[200px] rounded-lg object-cover"
 													loading="lazy"

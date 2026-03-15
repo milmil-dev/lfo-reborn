@@ -44,6 +44,7 @@ export interface CharacterSkill {
 	trigger?: string;
 	notes?: string;
 	gif?: string;
+	icon?: string;
 }
 
 export interface CharacterSkillData {

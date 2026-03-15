@@ -235,11 +235,33 @@ def extract_character_skills():
             name = re.sub(r'<[^>]+>', '', text).strip()
             if name:
                 url = href
-                # Normalize relative paths to absolute URLs
                 url = re.sub(r'^(\.\./)+', '', url)
                 if not url.startswith('http'):
                     url = 'https://' + url
                 skill_gif_map[name] = url
+
+        # Build a map of skill name -> icon URL from img tags with title
+        skill_icon_map = {}
+        # Match src before title
+        for src, title in re.findall(
+            r'<img[^>]*src=["\']([^"\']*\.png)["\'][^>]*title=["\']([^"\']*)["\'][^>]*/?\s*>',
+            content
+        ):
+            if title and len(title) < 30:
+                url = re.sub(r'^(\.\./)+', '', src)
+                if not url.startswith('http'):
+                    url = 'https://' + url
+                skill_icon_map[title] = url
+        # Match title before src
+        for title, src in re.findall(
+            r'<img[^>]*title=["\']([^"\']*)["\'][^>]*src=["\']([^"\']*\.png)["\'][^>]*/?\s*>',
+            content
+        ):
+            if title and len(title) < 30:
+                url = re.sub(r'^(\.\./)+', '', src)
+                if not url.startswith('http'):
+                    url = 'https://' + url
+                skill_icon_map[title] = url
 
         # Split content into normal and transform sections
         # The page has two "技能資料" headings - the second one starts the transform section
@@ -285,9 +307,12 @@ def extract_character_skills():
                     skill["notes"] = clean_html(ps_text)
                     break
 
-            # Add GIF demo URL
-            if skill.get("name") and skill["name"] in skill_gif_map:
-                skill["gif"] = skill_gif_map[skill["name"]]
+            # Add GIF demo URL and icon
+            if skill.get("name"):
+                if skill["name"] in skill_gif_map:
+                    skill["gif"] = skill_gif_map[skill["name"]]
+                if skill["name"] in skill_icon_map:
+                    skill["icon"] = skill_icon_map[skill["name"]]
 
             return skill if skill.get("name") else None
 
