@@ -687,7 +687,9 @@ function SkillCard({
 	isSelected: boolean;
 	onSelect: () => void;
 }) {
-	const cardImage = skillImage ?? skill.gif;
+	const staticImage = skillImage;
+	const demoGif = skill.gif;
+	const hasImage = staticImage || demoGif;
 	const showCost = skill.cost && skill.cost !== "--";
 
 	return (
@@ -708,13 +710,27 @@ function SkillCard({
 			>
 				{/* Card image area */}
 				<div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-fd-muted/30">
-					{cardImage ? (
-						<img
-							src={cardImage}
-							alt={skill.name}
-							className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-							loading="lazy"
-						/>
+					{hasImage ? (
+						<>
+							{/* Static skill image (default) */}
+							{staticImage && (
+								<img
+									src={staticImage}
+									alt={skill.name}
+									className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${demoGif ? "group-hover:opacity-0" : ""}`}
+									loading="lazy"
+								/>
+							)}
+							{/* Demo GIF (shown on hover) */}
+							{demoGif && (
+								<img
+									src={demoGif}
+									alt={`${skill.name} 演示`}
+									className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${staticImage ? "opacity-0 group-hover:opacity-100" : ""}`}
+									loading="lazy"
+								/>
+							)}
+						</>
 					) : (
 						<div
 							className="flex h-full w-full items-center justify-center"
