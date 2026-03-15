@@ -183,7 +183,7 @@ export function CharacterStandCard() {
 			combatStyle:
 				isTransformPage && transform?.combatStyle ? transform.combatStyle : char.combatStyle,
 			stats,
-			skills: isTransformPage ? [] : (skillData?.skills ?? []),
+			skills: isTransformPage ? (skillData?.transformSkills ?? []) : (skillData?.skills ?? []),
 			weapon: isTransformPage ? transform?.weapon : char.weapon,
 			equipment: isTransformPage ? (transform?.equipment ?? char.equipment) : char.equipment,
 			weaponImage: isTransformPage ? undefined : char.weaponImage,
@@ -690,7 +690,7 @@ function SkillsTab({
 		>
 			{skills.map((skill, i) => {
 				const isExpanded = expandedSkill === i;
-				const imageUrl = skillImageMap.get(skill.name);
+				const imageUrl = skill.gif ?? skillImageMap.get(skill.name);
 				const showCost = skill.cost && skill.cost !== "--";
 				const showLP = skill.learnPoints && skill.learnPoints !== "--";
 
