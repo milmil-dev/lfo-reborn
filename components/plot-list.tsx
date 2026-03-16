@@ -202,7 +202,7 @@ function StoriesGrid() {
 							{arcStories.map((story) => (
 								<a
 									key={story.id}
-									href={`/docs/plot/story/${story.id}`}
+									href={`/docs/plot/story/${String(arcNum).padStart(3, "0")}/${story.id}`}
 									className="inline-flex items-center gap-2 rounded-lg border border-fd-border bg-fd-card/80 px-3 py-2 text-sm backdrop-blur-sm transition-all hover:border-fd-primary/40 hover:bg-fd-muted/50"
 								>
 									<span className="font-medium text-fd-foreground">
@@ -387,7 +387,7 @@ export function PlotDetail() {
 		const stories = storiesData as Story[];
 		const missions = missionsData as Mission[];
 
-		const storyMatch = path.match(/\/docs\/plot\/story\/([^/]+)$/);
+		const storyMatch = path.match(/\/docs\/plot\/story\/\d{3}\/([^/]+)$/);
 		if (storyMatch) {
 			const id = storyMatch[1];
 			const story = stories.find((s) => s.id === id);
@@ -398,7 +398,7 @@ export function PlotDetail() {
 					.map((s) => ({
 						id: s.id,
 						label: s.characterLine ?? s.title ?? s.id,
-						href: `/docs/plot/story/${s.id}`,
+						href: `/docs/plot/story/${String(story.arc).padStart(3, "0")}/${s.id}`,
 						isCurrent: s.id === id,
 					}));
 				setData({
