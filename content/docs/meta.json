@@ -1,8 +1,7 @@
 {
 	"pages": [
 		"character",
-		"storyindex",
-		"missionindex",
+		"plot",
 		"dex",
 		"items",
 		"beast",

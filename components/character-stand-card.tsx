@@ -235,10 +235,10 @@ export function CharacterStandCard() {
 						// Remove duplicate ID from CharacterStandCard element
 						target.removeAttribute("id");
 					}
-					// Make heading a 0-height anchor
+					// Make heading a near-invisible anchor (1px so IntersectionObserver works)
 					Object.assign(el.style, {
 						display: "block",
-						height: "0",
+						height: "1px",
 						margin: "0",
 						padding: "0",
 						overflow: "hidden",
@@ -598,130 +598,147 @@ export function CharacterStandCard() {
 						</div>
 					)}
 
-					{/* Weapon & Equipment — Compact Inline Design */}
-					{(data.items?.length || data.weapon || data.equipment) && (
-						<div>
-							<h2 id="角色專用武器" className="mb-3 scroll-mt-28 text-lg font-bold">
-								角色專用武器 / 裝備
-							</h2>
-							<div className="flex flex-col gap-2.5">
-								{(data.items ?? []).map((item, idx) => {
-									const isWeapon = item.type === "weapon";
-									const accentColor = isWeapon ? "#ffbf00" : "#00bfff";
-									const accentBg = isWeapon ? "rgba(255,191,0,0.12)" : "rgba(0,191,255,0.12)";
-									const label = isWeapon ? "武器" : "裝備";
-									return (
-										<div
-											key={`${item.name}-${idx}`}
-											id={idx === 0 && !isWeapon ? "角色專用裝備" : undefined}
-											className="group overflow-hidden rounded-xl border border-fd-border/60 bg-fd-card/80 backdrop-blur-sm transition-colors hover:border-fd-border"
+					{/* Weapons Section */}
+					{(() => {
+						const weapons = (data.items ?? []).filter((i) => i.type === "weapon");
+						const equipment = (data.items ?? []).filter((i) => i.type === "equipment");
+						const renderItem = (item: CharacterItem, idx: number) => {
+							const isWeapon = item.type === "weapon";
+							const accentColor = isWeapon ? "#ffbf00" : "#00bfff";
+							const accentBg = isWeapon ? "rgba(255,191,0,0.12)" : "rgba(0,191,255,0.12)";
+							const label = isWeapon ? "武器" : "裝備";
+							return (
+								<div
+									key={`${item.name}-${idx}`}
+									className="group overflow-hidden rounded-xl border border-fd-border/60 bg-fd-card/80 backdrop-blur-sm transition-colors hover:border-fd-border"
+								>
+									<div className="flex gap-3.5 p-3.5">
+										<button
+											type="button"
+											className="flex h-14 w-14 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-opacity hover:opacity-80"
+											onClick={() =>
+												item.image && showLightbox([{ src: item.image, alt: item.name }], 0)
+											}
+											disabled={!item.image}
 										>
-											<div className="flex gap-3.5 p-3.5">
-												{/* Item image */}
-												<button
-													type="button"
-													className="flex h-14 w-14 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-opacity hover:opacity-80"
-													onClick={() =>
-														item.image && showLightbox([{ src: item.image, alt: item.name }], 0)
-													}
-													disabled={!item.image}
+											{item.image ? (
+												<img
+													src={item.image}
+													alt={item.name}
+													className="h-12 w-12 rounded object-contain drop-shadow-md"
+													loading="lazy"
+												/>
+											) : (
+												<span className="text-xl">{isWeapon ? "⚔️" : "🛡️"}</span>
+											)}
+										</button>
+										<div className="min-w-0 flex-1">
+											<div className="flex items-center gap-2">
+												<span className="text-[13px] font-extrabold text-fd-foreground">
+													{item.name}
+												</span>
+												<span
+													className="rounded px-1.5 py-px text-[9px] font-bold uppercase tracking-wider"
+													style={{ background: accentBg, color: accentColor }}
 												>
-													{item.image ? (
-														<img
-															src={item.image}
-															alt={item.name}
-															className="h-12 w-12 rounded object-contain drop-shadow-md"
-															loading="lazy"
-														/>
-													) : (
-														<span className="text-xl">{isWeapon ? "⚔️" : "🛡️"}</span>
-													)}
-												</button>
-												{/* Item info */}
-												<div className="min-w-0 flex-1">
-													<div className="flex items-center gap-2">
-														<span className="text-[13px] font-extrabold text-fd-foreground">
-															{item.name}
-														</span>
-														<span
-															className="rounded px-1.5 py-px text-[9px] font-bold uppercase tracking-wider"
-															style={{ background: accentBg, color: accentColor }}
-														>
-															{label}
-														</span>
-													</div>
-													{item.description && (
-														<p className="mt-0.5 text-[11px] italic leading-relaxed text-fd-muted-foreground">
-															{item.description}
-														</p>
-													)}
-													{/* Stat bonuses for equipment */}
-													{item.stats && Object.keys(item.stats).length > 0 && (
-														<div className="mt-1.5 flex flex-wrap gap-1">
-															{Object.entries(item.stats).map(([key, val]) => (
-																<span
-																	key={key}
-																	className="inline-flex items-center gap-0.5 rounded bg-fd-muted/80 px-1.5 py-px text-[10px]"
-																>
-																	<span className="text-fd-muted-foreground">
-																		{STAT_KEY_MAP[key] ?? key}
-																	</span>
-																	<span
-																		className={`font-bold font-mono ${(val as string).includes("+") || (val as string).includes("(+") ? "text-green-500" : (val as string).includes("-") ? "text-red-500" : "text-fd-foreground"}`}
-																	>
-																		{val as string}
-																	</span>
-																</span>
-															))}
-														</div>
-													)}
-													{/* Inline meta row */}
-													<div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10px] text-fd-muted-foreground">
-														{item.effect && (
-															<span>
-																⚡ <b style={{ color: accentColor }}>{item.effect}</b>
-															</span>
-														)}
-														{item.material && (
-															<span>
-																成份 <b className="text-fd-foreground">{item.material}</b>
-															</span>
-														)}
-														{item.cost && (
-															<span>
-																消耗 <b className="text-fd-foreground">{item.cost}</b>
-															</span>
-														)}
-														{item.durability && (
-															<span>
-																耐久 <b className="text-fd-foreground">{item.durability}</b>
-															</span>
-														)}
-														{item.price && (
-															<span>
-																價格 <b className="text-fd-foreground">{item.price}</b>
-															</span>
-														)}
-													</div>
-													{/* Requirements for equipment */}
-													{item.requirements && Object.keys(item.requirements).length > 0 && (
-														<div className="mt-1 flex flex-wrap items-center gap-x-2 text-[9px] text-fd-muted-foreground/70">
-															<span className="font-semibold">需求:</span>
-															{Object.entries(item.requirements).map(([key, val]) => (
-																<span key={key}>
-																	{STAT_KEY_MAP[key] ?? key} {val as string}
-																</span>
-															))}
-														</div>
-													)}
-												</div>
+													{label}
+												</span>
 											</div>
+											{item.description && (
+												<p className="mt-0.5 text-[11px] italic leading-relaxed text-fd-muted-foreground">
+													{item.description}
+												</p>
+											)}
+											{item.stats && Object.keys(item.stats).length > 0 && (
+												<div className="mt-1.5 flex flex-wrap gap-1">
+													{Object.entries(item.stats).map(([key, val]) => (
+														<span
+															key={key}
+															className="inline-flex items-center gap-0.5 rounded bg-fd-muted/80 px-1.5 py-px text-[10px]"
+														>
+															<span className="text-fd-muted-foreground">
+																{STAT_KEY_MAP[key] ?? key}
+															</span>
+															<span
+																className={`font-bold font-mono ${(val as string).includes("+") || (val as string).includes("(+") ? "text-green-500" : (val as string).includes("-") ? "text-red-500" : "text-fd-foreground"}`}
+															>
+																{val as string}
+															</span>
+														</span>
+													))}
+												</div>
+											)}
+											<div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10px] text-fd-muted-foreground">
+												{item.effect && (
+													<span>
+														⚡ <b style={{ color: accentColor }}>{item.effect}</b>
+													</span>
+												)}
+												{item.material && (
+													<span>
+														成份 <b className="text-fd-foreground">{item.material}</b>
+													</span>
+												)}
+												{item.cost && (
+													<span>
+														消耗 <b className="text-fd-foreground">{item.cost}</b>
+													</span>
+												)}
+												{item.durability && (
+													<span>
+														耐久 <b className="text-fd-foreground">{item.durability}</b>
+													</span>
+												)}
+												{item.price && (
+													<span>
+														價格 <b className="text-fd-foreground">{item.price}</b>
+													</span>
+												)}
+											</div>
+											{item.requirements && Object.keys(item.requirements).length > 0 && (
+												<div className="mt-1 flex flex-wrap items-center gap-x-2 text-[9px] text-fd-muted-foreground/70">
+													<span className="font-semibold">需求:</span>
+													{Object.entries(item.requirements).map(([key, val]) => (
+														<span key={key}>
+															{STAT_KEY_MAP[key] ?? key} {val as string}
+														</span>
+													))}
+												</div>
+											)}
 										</div>
-									);
-								})}
-							</div>
-						</div>
-					)}
+									</div>
+								</div>
+							);
+						};
+						return (
+							<>
+								<div>
+									<h2 id="角色專用武器" className="mb-3 scroll-mt-28 text-lg font-bold">
+										角色專用武器
+									</h2>
+									{weapons.length > 0 ? (
+										<div className="flex flex-col gap-2.5">
+											{weapons.map((item, idx) => renderItem(item, idx))}
+										</div>
+									) : (
+										<p className="text-sm italic text-fd-muted-foreground">不適用（無專用武器）</p>
+									)}
+								</div>
+								<div>
+									<h2 id="角色專用裝備" className="mb-3 scroll-mt-28 text-lg font-bold">
+										角色專用裝備
+									</h2>
+									{equipment.length > 0 ? (
+										<div className="flex flex-col gap-2.5">
+											{equipment.map((item, idx) => renderItem(item, idx))}
+										</div>
+									) : (
+										<p className="text-sm italic text-fd-muted-foreground">不適用（無專用裝備）</p>
+									)}
+								</div>
+							</>
+						);
+					})()}
 
 					{/* Skills, Actions & Gallery Panel */}
 					<SkillsPanel

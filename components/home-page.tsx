@@ -3,8 +3,8 @@ import { motion } from "motion/react";
 
 const gameData = [
 	{ title: "角色資料", count: 105, href: "/docs/character" },
-	{ title: "故事連載", count: 131, href: "/docs/storyindex" },
-	{ title: "任務連載", count: 65, href: "/docs/missionindex" },
+	{ title: "故事連載", count: 131, href: "/docs/plot/story" },
+	{ title: "任務連載", count: 65, href: "/docs/plot/mission" },
 	{ title: "技能圖鑑", count: 104, href: "/docs/dex" },
 	{ title: "道具圖鑑", count: 21, href: "/docs/items" },
 	{ title: "死亡之塔", count: 15, href: "/docs/towers" },
