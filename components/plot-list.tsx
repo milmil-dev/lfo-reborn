@@ -94,13 +94,13 @@ export function PlotLanding() {
    ───────────────────────────────────────────── */
 
 export function PlotIndex() {
-	const [mode, setMode] = useState<"story" | "mission" | null>(null);
-
-	useEffect(() => {
+	const [mode] = useState<"story" | "mission" | null>(() => {
+		if (typeof window === "undefined") return null;
 		const path = window.location.pathname;
-		if (path.includes("/plot/mission")) setMode("mission");
-		else if (path.includes("/plot/story")) setMode("story");
-	}, []);
+		if (path.includes("/plot/mission")) return "mission";
+		if (path.includes("/plot/story")) return "story";
+		return null;
+	});
 
 	if (mode === "story") return <StoriesGrid />;
 	if (mode === "mission") return <MissionsGrid />;
@@ -109,7 +109,7 @@ export function PlotIndex() {
 
 /* ── Stories grid grouped by arc ── */
 
-const VERSION_MAP: Record<number, { ver: string; name: string; firstArc: number }> = {
+export const VERSION_MAP: Record<number, { ver: string; name: string; firstArc: number }> = {
 	1: { ver: "1.0", name: "始祖力量篇", firstArc: 1 },
 	5: { ver: "2.0", name: "勇者誕生篇", firstArc: 5 },
 	14: { ver: "3.0", name: "合成戰體篇", firstArc: 14 },
@@ -120,6 +120,32 @@ const VERSION_MAP: Record<number, { ver: string; name: string; firstArc: number 
 	42: { ver: "8.0", name: "摩摩星人篇", firstArc: 42 },
 	45: { ver: "9.0", name: "撒旦降臨篇", firstArc: 45 },
 };
+
+export const STORY_VERSIONS = Object.values(VERSION_MAP).map((v) => ({
+	title: `v${v.ver} ${v.name}`,
+	url: `#v${v.ver.replace(/\./g, "-")}`,
+	depth: 2,
+}));
+
+export const MISSION_VERSIONS = (() => {
+	const missions = (missionsData as Mission[]).filter((m) => m.id.startsWith("m") && m.id !== "m");
+	const seen = new Set<string>();
+	const result: { title: string; url: string; depth: number }[] = [];
+	for (const m of missions) {
+		if (!m.version) continue;
+		const verMatch = `${m.version} ${m.versionName ?? ""}`.trim().match(/^v([\d.]+)\s*(.*)/);
+		if (!verMatch) continue;
+		const key = `v${verMatch[1].replace(/\./g, "-")}`;
+		if (seen.has(key)) continue;
+		seen.add(key);
+		result.push({
+			title: `v${verMatch[1]} ${verMatch[2] ?? ""}`.trim(),
+			url: `#${key}`,
+			depth: 2,
+		});
+	}
+	return result;
+})();
 
 function StoriesGrid() {
 	const stories = storiesData as Story[];
@@ -145,7 +171,10 @@ function StoriesGrid() {
 					<section key={arcNum}>
 						{/* Version divider */}
 						{version && (
-							<div className="mb-6 flex items-center gap-3">
+							<h2
+								id={`v${version.ver.replace(/\./g, "-")}`}
+								className="mb-6 flex scroll-mt-20 items-center gap-3 text-base font-normal"
+							>
 								<div className="h-px flex-1 bg-fd-border" />
 								<span className="text-sm font-bold tracking-wider text-fd-primary">
 									version {version.ver}
@@ -156,7 +185,7 @@ function StoriesGrid() {
 									</span>
 								)}
 								<div className="h-px flex-1 bg-fd-border" />
-							</div>
+							</h2>
 						)}
 						{/* Arc banner with title overlay */}
 						{banner && (
@@ -247,7 +276,10 @@ function MissionsGrid() {
 				return (
 					<section key={versionLabel}>
 						{/* Version divider */}
-						<div className="mb-4 flex items-center gap-3">
+						<h2
+							id={verMatch ? `v${verMatch[1].replace(/\./g, "-")}` : versionLabel}
+							className="mb-4 flex scroll-mt-20 items-center gap-3 text-base font-normal"
+						>
 							<div className="h-px flex-1 bg-fd-border" />
 							<span className="text-sm font-bold tracking-wider text-fd-primary">
 								{verMatch ? `version ${verMatch[1]}` : versionLabel}
@@ -256,7 +288,7 @@ function MissionsGrid() {
 								<span className="text-sm font-medium text-fd-muted-foreground">{verMatch[2]}</span>
 							)}
 							<div className="h-px flex-1 bg-fd-border" />
-						</div>
+						</h2>
 						{/* Mission cards with banners */}
 						<div className="space-y-3">
 							{groupMissions.map((mission) => {

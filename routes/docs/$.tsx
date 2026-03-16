@@ -10,7 +10,14 @@ import { CharacterStandCard } from "@/components/character-stand-card";
 import { GiscusComments } from "@/components/giscus-comments";
 import { ItemsIndex, ItemsTable } from "@/components/items-table";
 import { getMDXComponents } from "@/components/mdx";
-import { PlotDetail, PlotIndex, PlotLanding } from "@/components/plot-list";
+import {
+	MISSION_VERSIONS,
+	PlotDetail,
+	PlotIndex,
+	PlotLanding,
+	STORY_VERSIONS,
+} from "@/components/plot-list";
+import { SettingsButton } from "@/components/settings-dialog";
 import { getCharacterColor } from "@/lib/characters";
 import { baseOptions } from "@/lib/layout.shared";
 import { source } from "@/lib/source";
@@ -49,8 +56,8 @@ const clientLoader = browserCollections.docs.createClientLoader({
 			}
 		}, [frontmatter.title]);
 
-		const editUrl = `https://github.com/niskan516/lfo-wiki/edit/main/${frontmatter._file?.path ?? ""}`;
-		const path = typeof window !== "undefined" ? window.location.pathname : "";
+		const editUrl = `https://github.com/niskan516/lfo-wiki/edit/main/`;
+		const path = globalThis.window?.location?.pathname ?? "";
 		const depth = path
 			.replace(/^\/docs\//, "")
 			.split("/")
@@ -68,14 +75,25 @@ const clientLoader = browserCollections.docs.createClientLoader({
 			path.endsWith("/plot/mission/");
 		const isPlotPage =
 			(path.includes("/plot/story/") || path.includes("/plot/mission/")) && depth >= 3;
+		// SSR-safe: hide title/description on character/beast pages using frontmatter
+		const hideTitle =
+			frontmatter.description?.startsWith("角色資料") ||
+			frontmatter.description?.startsWith("兇獸檔案") ||
+			isPlotPage;
+		const isStoryIndex = path.endsWith("/plot/story") || path.endsWith("/plot/story/");
+		const isMissionIndex = path.endsWith("/plot/mission") || path.endsWith("/plot/mission/");
+
+		// Custom TOC for plot index pages (version anchors)
+		const plotToc = isStoryIndex ? STORY_VERSIONS : isMissionIndex ? MISSION_VERSIONS : undefined;
 
 		return (
 			<DocsPage
-				toc={isPlotPage ? undefined : toc}
+				toc={isPlotPage ? undefined : (plotToc ?? toc)}
+				tableOfContent={{ style: "clerk" }}
 				breadcrumb={depth > 1 ? { includePage: true } : { enabled: false }}
 			>
-				<DocsTitle>{frontmatter.title}</DocsTitle>
-				{!isPlotPage && <DocsDescription>{frontmatter.description}</DocsDescription>}
+				{!hideTitle && <DocsTitle>{frontmatter.title}</DocsTitle>}
+				{!hideTitle && <DocsDescription>{frontmatter.description}</DocsDescription>}
 				{isCharacterPage && <CharacterStandCard />}
 				{isBeastPage && <BeastCard />}
 				{isItemsIndex && <ItemsIndex />}
@@ -85,9 +103,9 @@ const clientLoader = browserCollections.docs.createClientLoader({
 				{!isPlotPage && (
 					<DocsBody>
 						<MDX components={getMDXComponents()} />
+						{isPlotIndex && <PlotIndex />}
 					</DocsBody>
 				)}
-				{isPlotIndex && <PlotIndex />}
 				<a
 					href={editUrl}
 					target="_blank"
@@ -152,7 +170,11 @@ function Page() {
 	useCharacterTheme(data.path);
 
 	return (
-		<DocsLayout {...baseOptions()} tree={data.pageTree}>
+		<DocsLayout
+			{...baseOptions()}
+			tree={data.pageTree}
+			nav={{ title: "LFO Wiki", children: <SettingsButton /> }}
+		>
 			<Suspense fallback={<DocsPageSkeleton />}>{clientLoader.useContent(data.path)}</Suspense>
 		</DocsLayout>
 	);
