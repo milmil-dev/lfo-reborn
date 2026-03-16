@@ -87,6 +87,18 @@
 				"真昇龍霸",
 				"真龍怒嚎"
 			],
+			"weapons": [
+				{
+					"name": "冰封之劍",
+					"effect": "劍氣+凍結",
+					"durability": "20",
+					"description": "由菲沙的招式所製造出來的冰凍之刃。",
+					"image": "https://i.imgur.com/Cs2jE4g.png",
+					"material": "布料",
+					"cost": "--",
+					"price": "0"
+				}
+			],
 			"equipmentImage": "https://i.imgur.com/Ig6AK4X.png",
 			"skillImages": [
 				{
@@ -266,6 +278,17 @@
 			],
 			"items": [
 				{
+					"type": "weapon",
+					"name": "冰封之劍",
+					"image": "https://i.imgur.com/Cs2jE4g.png",
+					"description": "由菲沙的招式所製造出來的冰凍之刃。",
+					"effect": "劍氣+凍結",
+					"durability": "20",
+					"material": "布料",
+					"cost": "--",
+					"price": "0"
+				},
+				{
 					"type": "equipment",
 					"name": "學長襟章(迪雲專用)",
 					"image": "https://i.imgur.com/Ig6AK4X.png",
@@ -280,7 +303,8 @@
 						"agi": "+5"
 					}
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "stinky",
@@ -548,7 +572,8 @@
 					"description": "星奇，我希望你能夠快快樂樂地成長下去。",
 					"image": "https://i.imgur.com/ofVolTS.png"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "cuite",
@@ -762,7 +787,8 @@
 					"price": "3000",
 					"image": "https://i.imgur.com/AeE0Sd9.png"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "dennis",
@@ -964,7 +990,8 @@
 						"agi": "+20"
 					}
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "woody",
@@ -1135,7 +1162,8 @@
 						"sp": "+30"
 					}
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "jessie",
@@ -1275,7 +1303,8 @@
 						"https://i.imgur.com/fFmtOCY.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "milo",
@@ -1394,7 +1423,8 @@
 						"https://i.imgur.com/LlSjGIg.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "ricky",
@@ -1507,7 +1537,8 @@
 						"https://i.imgur.com/9ewhEB0.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "victor",
@@ -1624,7 +1655,8 @@
 						"https://i.imgur.com/RFyJ2GP.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "fuku",
@@ -1737,7 +1769,8 @@
 						"agi": "+10"
 					}
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "heng",
@@ -1815,7 +1848,8 @@
 					"portrait": "https://i.imgur.com/UUac9DF.png",
 					"dialogs": ["https://i.imgur.com/ZrAjxjP.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "judi",
@@ -1887,7 +1921,8 @@
 					"url": "https://i.imgur.com/QwBxgE3.gif",
 					"label": "武器"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "freeze",
@@ -1903,7 +1938,11 @@
 				"name": "冰封之劍",
 				"effect": "劍氣+凍結",
 				"durability": "20",
-				"description": "由菲沙的招式所製造出來的冰凍之刃。"
+				"description": "由菲沙的招式所製造出來的冰凍之刃。",
+				"image": "https://i.imgur.com/Cs2jE4g.png",
+				"material": "布料",
+				"cost": "--",
+				"price": "0"
 			},
 			"skillNames": [
 				"冷凍波",
@@ -2210,7 +2249,8 @@
 					"portrait": "https://i.imgur.com/HD0kwdG.png",
 					"dialogs": ["https://i.imgur.com/oZX1Ii9.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "windy",
@@ -2358,7 +2398,8 @@
 					"portrait": "https://i.imgur.com/iWghGbg.png",
 					"dialogs": ["https://i.imgur.com/2TUPfb7.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "fox",
@@ -2522,7 +2563,8 @@
 						"def": "+300"
 					}
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "john",
@@ -2619,7 +2661,8 @@
 						"https://i.imgur.com/1uBGVqt.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "deep",
@@ -2724,7 +2767,8 @@
 						"https://i.imgur.com/XC25uZA.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "henry",
@@ -2825,7 +2869,8 @@
 						"https://i.imgur.com/gdVoqq2.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "rudolf",
@@ -2931,7 +2976,8 @@
 						"https://i.imgur.com/PMeUFYW.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "knight",
@@ -3006,7 +3052,8 @@
 					"portrait": "https://i.imgur.com/wzM4WNr.png",
 					"dialogs": ["https://i.imgur.com/AcuU4jD.png", "https://i.imgur.com/ls6tTqr.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "jan",
@@ -3090,7 +3137,8 @@
 						"https://i.imgur.com/txXuB5c.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "witch",
@@ -3189,7 +3237,8 @@
 						"https://i.imgur.com/iHbnx4T.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "lava",
@@ -3253,7 +3302,8 @@
 					"url": "https://i.imgur.com/RLhPyVm.gif",
 					"label": "武器"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "bat",
@@ -3399,7 +3449,8 @@
 						"https://i.imgur.com/LlrzbmN.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "julian",
@@ -3571,7 +3622,8 @@
 						"sp": "+30"
 					}
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "firzen",
@@ -3666,7 +3718,8 @@
 						"https://i.imgur.com/eSdq3l6.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "louis",
@@ -3682,7 +3735,11 @@
 				"name": "火鳳戟",
 				"effect": "電擊",
 				"durability": "5",
-				"description": "由龍翼的招式所製造出來的武器。"
+				"description": "由龍翼的招式所製造出來的武器。",
+				"image": "https://i.imgur.com/TCfWsTI.png",
+				"material": "布料",
+				"cost": "--",
+				"price": "0"
 			},
 			"skillNames": ["超猛虎拳", "火鳳凰", "狂虎彈", "我行我道", "虎牙炮轟", "怒虎震空彈"],
 			"weaponImage": "https://i.imgur.com/TCfWsTI.png",
@@ -3930,7 +3987,8 @@
 						"https://i.imgur.com/oV9VxR8.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "omegah",
@@ -4053,7 +4111,8 @@
 						"https://i.imgur.com/3jNc3b2.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "kiki",
@@ -4156,7 +4215,8 @@
 						"https://i.imgur.com/3fLezcw.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "paco",
@@ -4256,7 +4316,8 @@
 						"https://i.imgur.com/PtaE5Zx.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "jace",
@@ -4357,7 +4418,8 @@
 					"portrait": "https://i.imgur.com/W3RsiF8.png",
 					"dialogs": ["https://i.imgur.com/WdHCNzK.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "chester",
@@ -4478,7 +4540,8 @@
 						"https://i.imgur.com/JsjN5Nj.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "sun",
@@ -4568,7 +4631,8 @@
 						"https://i.imgur.com/XwKZM1Z.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "yuenmu",
@@ -4656,7 +4720,8 @@
 						"https://i.imgur.com/QDfFx8o.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "tobi",
@@ -4758,7 +4823,8 @@
 						"https://i.imgur.com/HKQU3uy.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "anya",
@@ -4865,7 +4931,8 @@
 						"https://i.imgur.com/9RBmlol.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "rova",
@@ -5001,7 +5068,8 @@
 					"portrait": "https://i.imgur.com/91wOPPN.png",
 					"dialogs": ["https://i.imgur.com/gMjc4NA.png", "https://i.imgur.com/ZQLDONc.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "gaia",
@@ -5122,7 +5190,8 @@
 						"https://i.imgur.com/ti0JklI.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "uranus",
@@ -5249,7 +5318,8 @@
 					"portrait": "https://i.imgur.com/D67Bwym.png",
 					"dialogs": ["https://i.imgur.com/kdTxfXI.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "tiga",
@@ -5265,7 +5335,11 @@
 				"name": "冰封之劍",
 				"effect": "劍氣+凍結",
 				"durability": "20",
-				"description": "由泰加的招式所製造出來的冰凍之刃。"
+				"description": "由泰加的招式所製造出來的冰凍之刃。",
+				"image": "https://i.imgur.com/Cs2jE4g.png",
+				"material": "布料",
+				"cost": "--",
+				"price": "0"
 			},
 			"skillNames": ["烈焰狂奔", "連環旋風閃", "唯我獨尊", "真虎翔霸"],
 			"weaponImage": "https://i.imgur.com/Cs2jE4g.png",
@@ -5447,7 +5521,8 @@
 					"portrait": "https://i.imgur.com/z3I9ODW.png",
 					"dialogs": ["https://i.imgur.com/qa4CPLo.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "owen",
@@ -5545,7 +5620,8 @@
 					"portrait": "https://i.imgur.com/z3I9ODW.png",
 					"dialogs": ["https://i.imgur.com/QpxTWZd.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "dilun",
@@ -5629,7 +5705,8 @@
 					"portrait": "https://i.imgur.com/CN0A5AC.png",
 					"dialogs": ["https://i.imgur.com/btP0jXvc4ca.png?1"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "zack",
@@ -5738,7 +5815,8 @@
 						"https://i.imgur.com/P1HZBIM.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "stmary",
@@ -5815,7 +5893,8 @@
 						"https://i.imgur.com/4aiuGMG.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "odom",
@@ -5898,7 +5977,8 @@
 						"https://i.imgur.com/2wvdQdF.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "sola",
@@ -6041,7 +6121,8 @@
 					"price": "1000",
 					"description": "本名「龍嚎笛」，只有懂得吹奏「龍的心」才能起動作用。"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "habo",
@@ -6169,7 +6250,8 @@
 					"price": "1000",
 					"description": "本名「龍嚎笛」，只有懂得吹奏「龍的心」才能起動作用。"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "king",
@@ -6311,7 +6393,8 @@
 						"def": "+400"
 					}
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "chiyua",
@@ -6405,7 +6488,8 @@
 					"portrait": "https://i.imgur.com/9l6fWqm.png",
 					"dialogs": ["https://i.imgur.com/ZRQzTbf.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "ruwa",
@@ -6482,7 +6566,8 @@
 					"portrait": "https://i.imgur.com/zbvyeBI.png",
 					"dialogs": ["https://i.imgur.com/UzkTpSb.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "hector",
@@ -6573,7 +6658,8 @@
 					"portrait": "https://i.imgur.com/9zr3zby.png",
 					"dialogs": ["https://i.imgur.com/Gb6oWQI.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "molson",
@@ -6661,7 +6747,8 @@
 					"portrait": "https://i.imgur.com/ewogaUR.png",
 					"dialogs": ["https://i.imgur.com/clhhkQP.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "jagr",
@@ -6755,7 +6842,8 @@
 						"https://i.imgur.com/kTBWN35.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "kovalchuk",
@@ -6837,7 +6925,8 @@
 					"portrait": "https://i.imgur.com/II1DiGc.png",
 					"dialogs": ["https://i.imgur.com/j9FHpP5.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "marek",
@@ -6916,7 +7005,8 @@
 						"https://i.imgur.com/i1Dakbj.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "bloodraven",
@@ -7004,7 +7094,8 @@
 					"portrait": "https://i.imgur.com/kZw3tWM.png",
 					"dialogs": ["https://i.imgur.com/t27bRQt.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "blake",
@@ -7152,7 +7243,8 @@
 					"price": "1000",
 					"description": "本名「龍嚎笛」，只有懂得吹奏「龍的心」才能起動作用。"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "ava",
@@ -7279,7 +7371,8 @@
 					"price": "1000",
 					"description": "本名「龍嚎笛」，只有懂得吹奏「龍的心」才能起動作用。"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "yungsum",
@@ -7357,7 +7450,8 @@
 						"https://i.imgur.com/4fYDq0o.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "android",
@@ -7439,7 +7533,8 @@
 						"https://i.imgur.com/hXlNdCG.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "tasuke",
@@ -7455,7 +7550,11 @@
 				"name": "索命劍",
 				"effect": "紅劍氣x3",
 				"durability": "300",
-				"description": "被封印的凶劍，相傳會吸蝕使用者的靈魂。"
+				"description": "被封印的凶劍，相傳會吸蝕使用者的靈魂。",
+				"image": "https://i.imgur.com/Y2798DA.png",
+				"material": "鋼",
+				"cost": "0MP",
+				"price": "50000"
 			},
 			"skillNames": [
 				"浮月",
@@ -7662,7 +7761,8 @@
 					"portrait": "https://i.imgur.com/2zdvrCB.png",
 					"dialogs": ["https://i.imgur.com/ro7dCGV.png", "https://i.imgur.com/G7nE0Xe.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "jaro",
@@ -7742,7 +7842,8 @@
 						"https://i.imgur.com/ZOsKcTz.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "yuki",
@@ -7814,7 +7915,8 @@
 						"https://i.imgur.com/7pkaxkn.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "tuka",
@@ -7884,7 +7986,8 @@
 						"https://i.imgur.com/43h1ljL.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "kigai",
@@ -7958,7 +8061,8 @@
 						"https://i.imgur.com/sVQusUc.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "fire_apostle",
@@ -8000,7 +8104,8 @@
 					"url": "https://i.imgur.com/FCAk4j6.gif",
 					"label": "武器"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "ice_apostle",
@@ -8042,7 +8147,8 @@
 					"url": "https://i.imgur.com/ZSgSZuA.gif",
 					"label": "武器"
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "lit",
@@ -8111,7 +8217,8 @@
 						"https://i.imgur.com/tC74W3w.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "shark",
@@ -8167,7 +8274,8 @@
 					"portrait": "https://i.imgur.com/UWfARLz.png",
 					"dialogs": ["https://i.imgur.com/IWwrl1o.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkdavis",
@@ -8241,7 +8349,8 @@
 						"https://i.imgur.com/4vNXrOw.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkstinky",
@@ -8315,7 +8424,8 @@
 						"https://i.imgur.com/6O1XUgq.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkcutie",
@@ -8385,7 +8495,8 @@
 						"https://i.imgur.com/U91sJ88.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkfiren",
@@ -8441,7 +8552,8 @@
 					"portrait": "https://i.imgur.com/6WpH88r.png",
 					"dialogs": ["https://i.imgur.com/UXF0wQt.png", "https://i.imgur.com/SHSGgei.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkfreeze",
@@ -8511,7 +8623,8 @@
 						"https://i.imgur.com/5SFI6PH.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkruwa",
@@ -8575,7 +8688,8 @@
 						"https://i.imgur.com/URnxNJW.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkking",
@@ -8639,7 +8753,8 @@
 						"https://i.imgur.com/W6JURHC.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darkchiyua",
@@ -8703,7 +8818,8 @@
 						"https://i.imgur.com/HWtKqP7.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "darklastevil",
@@ -8769,7 +8885,8 @@
 						"https://i.imgur.com/3Ew0q8v.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "hanzou",
@@ -8781,12 +8898,28 @@
 			"birthplace": "日本",
 			"identity": "忍者",
 			"combatStyle": "忍術",
-			"weapon": {
-				"name": "破邪劍",
-				"effect": "特殊揮動動作",
-				"durability": "600",
-				"description": "[稀有]甲賀流派傳下的名劍，專殺一般兵器傷不了的妖魔邪靈"
-			},
+			"weapon": [
+				{
+					"name": "破邪劍",
+					"image": "https://i.imgur.com/MYzTxux.png",
+					"material": "合金",
+					"effect": "特殊揮動動作",
+					"cost": "200MP",
+					"durability": "600",
+					"description": "[稀有]甲賀流派傳下的名劍，專殺一般兵器傷不了的妖魔邪靈",
+					"price": "50000"
+				},
+				{
+					"name": "斬魂刀",
+					"image": "https://i.imgur.com/tW5huG6.png",
+					"material": "合金",
+					"effect": "特殊揮動動作",
+					"cost": "200MP",
+					"durability": "600",
+					"description": "[稀有]忍者王-服部半藏之配刀，揮舞時散發出藍色的刀光氣勁。",
+					"price": "50000"
+				}
+			],
 			"weapons": [
 				{
 					"name": "破邪劍",
@@ -8906,12 +9039,28 @@
 			"birthplace": "日本",
 			"identity": "鬼神",
 			"combatStyle": "妖術",
-			"weapon": {
-				"name": "血祭",
-				"effect": "魔．閃捲刀 (吸近)",
-				"durability": "600",
-				"description": "[稀有]謎之人物-阿修羅的配兵之一，殺傷力極高,「以敵人之鮮血祭天地」。"
-			},
+			"weapon": [
+				{
+					"name": "血祭",
+					"image": "https://i.imgur.com/JvqkFoc.png",
+					"material": "合金",
+					"effect": "魔．閃捲刀 (吸近)",
+					"cost": "200MP",
+					"durability": "600",
+					"description": "[稀有]謎之人物-阿修羅的配兵之一，殺傷力極高,「以敵人之鮮血祭天地」。",
+					"price": "50000"
+				},
+				{
+					"name": "鬼彈",
+					"image": "https://i.imgur.com/MQkFQrS.png",
+					"material": "合金",
+					"effect": "夜重天‧鬼斬 (焚燒)",
+					"cost": "200MP",
+					"durability": "600",
+					"description": "[稀有]謎之人物-阿修羅的配兵之一，殺傷力極高,「力如鬼影般彈珠擊出」。",
+					"price": "50000"
+				}
+			],
 			"weapons": [
 				{
 					"name": "血祭",
@@ -9089,7 +9238,8 @@
 					"portrait": "https://i.imgur.com/CeVGJdm.png",
 					"dialogs": ["https://i.imgur.com/pOQa1aT.png", "https://i.imgur.com/xgJCV6w.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "marcus",
@@ -9155,7 +9305,8 @@
 						"https://i.imgur.com/mMxipZ1.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "zhida",
@@ -9221,7 +9372,8 @@
 						"https://i.imgur.com/y50tPat.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "phoenix",
@@ -9269,7 +9421,8 @@
 					"portrait": "https://i.imgur.com/EwFQVXx.png",
 					"dialogs": ["https://i.imgur.com/4Dk7Rlw.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "shiloh",
@@ -9342,7 +9495,8 @@
 					"portrait": "https://i.imgur.com/9JvjcIL.png",
 					"dialogs": ["https://i.imgur.com/P9qcuHY.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "mudi",
@@ -9398,7 +9552,8 @@
 					"portrait": "https://i.imgur.com/SHp5Vj1.png",
 					"dialogs": ["https://i.imgur.com/XvFYkAr.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "sora",
@@ -9462,7 +9617,8 @@
 						"https://i.imgur.com/frLgGys.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "bone",
@@ -9475,7 +9631,8 @@
 			"identity": "「亂」成員/惱的手下",
 			"combatStyle": "暗黑元力/超界力量",
 			"skillNames": ["暫無圖片", "角色專用武器", "角色專用裝備"],
-			"dialogs": ["https://i.imgur.com/mnp6JX1.png"]
+			"dialogs": ["https://i.imgur.com/mnp6JX1.png"],
+			"weapon": null
 		},
 		{
 			"slug": "rowan",
@@ -9542,7 +9699,8 @@
 						"https://i.imgur.com/e1KF7wm.png"
 					]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "diluns",
@@ -9687,7 +9845,8 @@
 					"portrait": "https://i.imgur.com/PvkgnSS.png",
 					"dialogs": ["https://i.imgur.com/H6uHdIn.png", "https://i.imgur.com/TAsIP48.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "gm",
@@ -9739,7 +9898,8 @@
 					"portrait": "https://i.imgur.com/iBZj86T.png",
 					"dialogs": ["https://i.imgur.com/Gdkqmks.png"]
 				}
-			]
+			],
+			"weapon": null
 		},
 		{
 			"slug": "duncun",
@@ -9747,7 +9907,8 @@
 			"icon": "https://i.imgur.com/A2DCr.png",
 			"version": "v11.0 合體戰神篇",
 			"color": "#009fff",
-			"description": "合體戰神篇登場的角色，詳細資料不明。"
+			"description": "合體戰神篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "banick",
@@ -9755,7 +9916,8 @@
 			"icon": "https://i.imgur.com/0R4Ug.png",
 			"version": "v11.0 合體戰神篇",
 			"color": "#009fff",
-			"description": "合體戰神篇登場的角色，詳細資料不明。"
+			"description": "合體戰神篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "olivia",
@@ -9763,7 +9925,8 @@
 			"icon": "https://i.imgur.com/c3tW2.png",
 			"version": "v11.0 合體戰神篇",
 			"color": "#009fff",
-			"description": "合體戰神篇登場的角色，詳細資料不明。"
+			"description": "合體戰神篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "xander",
@@ -9771,7 +9934,8 @@
 			"icon": "https://i.imgur.com/7W6AS.png",
 			"version": "v11.0 合體戰神篇",
 			"color": "#009fff",
-			"description": "合體戰神篇登場的角色，詳細資料不明。"
+			"description": "合體戰神篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "code",
@@ -9779,7 +9943,8 @@
 			"icon": "https://i.imgur.com/RxWwo.png",
 			"version": "v11.0 合體戰神篇",
 			"color": "#009fff",
-			"description": "合體戰神篇登場的角色，詳細資料不明。"
+			"description": "合體戰神篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "damian",
@@ -9787,7 +9952,8 @@
 			"icon": "https://i.imgur.com/EzzlD.png",
 			"version": "v11.0 合體戰神篇",
 			"color": "#009fff",
-			"description": "合體戰神篇登場的角色，詳細資料不明。"
+			"description": "合體戰神篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "pokai",
@@ -9795,7 +9961,8 @@
 			"icon": "https://i.imgur.com/tPWJu.png",
 			"version": "v11.0 合體戰神篇",
 			"color": "#009fff",
-			"description": "合體戰神篇登場的角色，詳細資料不明。"
+			"description": "合體戰神篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "karl",
@@ -9803,7 +9970,8 @@
 			"icon": "https://i.imgur.com/z4gf7.png",
 			"version": "v13.0 宿命死敵篇",
 			"color": "#009fff",
-			"description": "宿命死敵篇登場的角色，詳細資料不明。"
+			"description": "宿命死敵篇登場的角色，詳細資料不明。",
+			"weapon": null
 		},
 		{
 			"slug": "landon",
@@ -9811,7 +9979,8 @@
 			"icon": "https://i.imgur.com/onQVx.png",
 			"version": "v13.0 宿命死敵篇",
 			"color": "#009fff",
-			"description": "宿命死敵篇登場的角色，詳細資料不明。"
+			"description": "宿命死敵篇登場的角色，詳細資料不明。",
+			"weapon": null
 		}
 	]
 }
