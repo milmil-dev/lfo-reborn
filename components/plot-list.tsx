@@ -379,7 +379,7 @@ export function PlotDetail() {
 		title: string;
 		type: "story" | "mission";
 		id: string;
-		siblings?: { id: string; label: string; href: string }[];
+		siblings?: { id: string; label: string; href: string; isCurrent: boolean }[];
 	} | null>(null);
 
 	useEffect(() => {
@@ -394,11 +394,12 @@ export function PlotDetail() {
 			if (story?.images?.length) {
 				// Find sibling branches (same arc)
 				const siblings = stories
-					.filter((s) => s.arc === story.arc && s.id !== id)
+					.filter((s) => s.arc === story.arc)
 					.map((s) => ({
 						id: s.id,
 						label: s.characterLine ?? s.title ?? s.id,
 						href: `/docs/plot/story/${s.id}`,
+						isCurrent: s.id === id,
 					}));
 				setData({
 					images: story.images,
@@ -432,14 +433,17 @@ export function PlotDetail() {
 	return (
 		<div className="space-y-4">
 			{/* Branch switcher for stories */}
-			{data.siblings && data.siblings.length > 0 && (
+			{data.siblings && data.siblings.length > 1 && (
 				<div className="flex flex-wrap items-center gap-2">
-					<span className="text-xs text-fd-muted-foreground">分支線切換</span>
 					{data.siblings.map((s) => (
 						<a
 							key={s.id}
 							href={s.href}
-							className="rounded-lg border border-fd-border px-2.5 py-1 text-xs text-fd-muted-foreground transition-colors hover:border-fd-primary/40 hover:text-fd-foreground"
+							className={`rounded-lg px-2.5 py-1 text-xs transition-colors ${
+								s.isCurrent
+									? "bg-fd-primary/20 font-bold text-fd-primary border border-fd-primary/40"
+									: "border border-fd-border text-fd-muted-foreground hover:border-fd-primary/40 hover:text-fd-foreground"
+							}`}
 						>
 							{s.label}
 						</a>
