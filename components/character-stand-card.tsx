@@ -10,11 +10,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import transformsData from "@/data/transforms.json";
 import {
+	type CharacterItem,
 	type CharacterSkill,
-	type HiddenSkill,
 	getCharacter,
 	getCharacterProfileImage,
 	getCharacterSkillData,
+	type HiddenSkill,
 } from "@/lib/characters";
 
 const STAT_KEYS = ["HP", "MP", "SP", "STR", "AGI", "DEF"] as const;
@@ -76,7 +77,15 @@ interface CharacterData {
 	combatStyle?: string;
 	stats: { stat: string; grade: string; value: number; base?: string; growth?: string }[];
 	skills: CharacterSkill[];
+	items?: CharacterItem[];
 	weapon?: { name: string; effect?: string; durability?: string; description?: string };
+	weapons?: {
+		name: string;
+		effect?: string;
+		durability?: string;
+		description?: string;
+		image?: string;
+	}[];
 	equipment?: { name: string; stats?: Record<string, string> };
 	weaponImage?: string;
 	equipmentImage?: string;
@@ -93,6 +102,84 @@ interface CharacterData {
 	hiddenNotes?: string[];
 }
 
+/** Build a unified items array from legacy weapon/equipment fields */
+// biome-ignore lint/suspicious/noExplicitAny: legacy data shapes
+function buildItems(char: any, transform: any, isTransform: boolean): CharacterItem[] {
+	const items: CharacterItem[] = [];
+
+	// Prefer new `items` array if present
+	if (isTransform && transform?.items) return transform.items;
+	if (!isTransform && char.items) return char.items;
+
+	// Build from legacy fields
+	if (!isTransform) {
+		// Weapons
+		if (char.weapons?.length) {
+			for (const w of char.weapons) {
+				items.push({
+					type: "weapon",
+					name: w.name,
+					image: w.image,
+					description: w.description,
+					effect: w.effect,
+					durability: w.durability,
+					cost: w.cost,
+					material: w.material,
+					price: w.price,
+				});
+			}
+		} else if (char.weapon) {
+			items.push({
+				type: "weapon",
+				name: char.weapon.name,
+				image: char.weaponImage,
+				description: char.weapon.description,
+				effect: char.weapon.effect,
+				durability: char.weapon.durability,
+				cost: char.weapon.cost,
+				material: char.weapon.material,
+				price: char.weapon.price,
+			});
+		}
+		// Equipment
+		if (char.equipment) {
+			items.push({
+				type: "equipment",
+				name: char.equipment.name,
+				image: char.equipmentImage,
+				stats: char.equipment.stats,
+				durability: char.equipment.durability,
+				description: char.equipment.description,
+				material: char.equipment.material,
+				price: char.equipment.price,
+			});
+		}
+	} else {
+		// Transform weapon
+		if (transform?.weapon) {
+			items.push({
+				type: "weapon",
+				name: transform.weapon.name,
+				description: transform.weapon.description,
+				effect: transform.weapon.effect,
+				durability: transform.weapon.durability,
+			});
+		}
+		// Transform equipment
+		if (transform?.equipment) {
+			items.push({
+				type: "equipment",
+				name: transform.equipment.name,
+				image: transform.equipmentImage,
+				stats: transform.equipment.stats,
+				durability: transform.equipment.durability,
+				description: transform.equipment.description,
+			});
+		}
+	}
+	return items;
+}
+
 export function CharacterStandCard() {
 	const [data, setData] = useState<CharacterData | null>(null);
 	const [showStats, setShowStats] = useState(false);
@@ -107,17 +194,67 @@ export function CharacterStandCard() {
 		const char = getCharacter(slug);
 		if (!char) return;
 
-		// Hide duplicate content - CharacterStandCard renders everything from JSON
+		// Hide MDX body and relocate its headings as 0-height scroll-spy anchors
+		// The fumadocs IntersectionObserver already watches these MDX headings.
+		// By moving them next to the CharacterStandCard sections, the observer
+		// tracks the correct scroll positions for TOC highlighting.
 		const article = document.querySelector("article");
 		if (article) {
-			// Hide the entire prose/body content since we render it all from data
-			const proseBody =
-				article.querySelector("[class*='prose']") ?? article.querySelector("[class*='body']");
-			if (proseBody) (proseBody as HTMLElement).style.display = "none";
 			const docsTitle = article.querySelector(":scope > h1");
 			const docsDesc = article.querySelector(":scope > p");
 			if (docsTitle) (docsTitle as HTMLElement).style.display = "none";
 			if (docsDesc) (docsDesc as HTMLElement).style.display = "none";
+
+			const proseBody =
+				article.querySelector("[class*='prose']") ?? article.querySelector("[class*='body']");
+			if (proseBody) {
+				// Collect MDX headings and build a map of CharacterStandCard targets
+				const mdxHeadings = Array.from(proseBody.querySelectorAll("h1[id], h2[id], h3[id]"));
+				const mdxIds = new Set(mdxHeadings.map((h) => h.id));
+
+				// Find CharacterStandCard elements with matching IDs (outside prose body)
+				const cardTargets = new Map<string, Element>();
+				for (const id of mdxIds) {
+					const all = article.querySelectorAll(`[id="${id}"]`);
+					for (const el of Array.from(all)) {
+						if (!proseBody.contains(el)) {
+							cardTargets.set(id, el);
+							break;
+						}
+					}
+				}
+
+				// Hide the entire prose body
+				(proseBody as HTMLElement).style.display = "none";
+
+				// Move each MDX heading next to its CharacterStandCard counterpart
+				for (const h of mdxHeadings) {
+					const el = h as HTMLElement;
+					const target = cardTargets.get(el.id);
+					if (target) {
+						// Remove duplicate ID from CharacterStandCard element
+						target.removeAttribute("id");
+					}
+					// Make heading a 0-height anchor
+					Object.assign(el.style, {
+						display: "block",
+						height: "0",
+						margin: "0",
+						padding: "0",
+						overflow: "hidden",
+						opacity: "0",
+						fontSize: "0",
+						lineHeight: "0",
+					});
+					// Insert before the CharacterStandCard section
+					if (target) {
+						target.before(el);
+					} else {
+						// No matching section - place just before the hidden prose body
+						proseBody.before(el);
+					}
+				}
+			}
 		}
 
 		// Get real stats from skills data
@@ -196,7 +333,9 @@ export function CharacterStandCard() {
 				isTransformPage && transform?.combatStyle ? transform.combatStyle : char.combatStyle,
 			stats,
 			skills: isTransformPage ? (skillData?.transformSkills ?? []) : (skillData?.skills ?? []),
+			items: buildItems(char, transform, isTransformPage),
 			weapon: isTransformPage ? transform?.weapon : char.weapon,
+			weapons: isTransformPage ? undefined : char.weapons,
 			equipment: isTransformPage ? (transform?.equipment ?? char.equipment) : char.equipment,
 			weaponImage: isTransformPage ? undefined : char.weaponImage,
 			equipmentImage: isTransformPage ? transform?.equipmentImage : char.equipmentImage,
@@ -220,421 +359,463 @@ export function CharacterStandCard() {
 
 	return (
 		<>
-		<AnimatePresence mode="wait">
-			<motion.div
-				key={motionKey}
-				className="mb-8 space-y-6"
-				initial={{ opacity: 0, y: 12 }}
-				animate={{ opacity: 1, y: 0 }}
-				exit={{ opacity: 0, y: -12 }}
-				transition={{ duration: 0.3, ease: "easeOut" }}
-			>
-				{/* Top: Character image + Radar chart */}
-				<div className="relative flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-8">
-					{data.hasTransform && (
-						<Link
-							to="/docs/$"
-							params={{ _splat: `character/${data.slug}/r` }}
-							className="absolute left-0 top-0 z-20 h-6 w-6 overflow-hidden rounded-full shadow-md transition-transform hover:scale-110"
-							title="異轉"
-						>
-							<img
-								src="https://i.imgur.com/In66guv.png"
-								alt="異轉"
-								className="h-6 w-6 rounded-full object-cover"
-							/>
-						</Link>
-					)}
-					{data.isTransform && (
-						<Link
-							to="/docs/$"
-							params={{ _splat: `character/${data.slug}` }}
-							className="absolute left-0 top-0 z-20 h-6 w-6 overflow-hidden rounded-full shadow-md transition-transform hover:scale-110"
-							title="按下可解除異轉"
-						>
-							<img
-								src="https://i.imgur.com/Xznrw8N.png"
-								alt="解除異轉"
-								className="h-6 w-6 rounded-full object-cover"
-							/>
-						</Link>
-					)}
-					{/* Left: Character image */}
-					<motion.div
-						className="relative flex flex-1 flex-col items-center"
-						initial={{ opacity: 0, scale: 0.9 }}
-						animate={{ opacity: 1, scale: 1 }}
-						transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
-					>
-						<div
-							className="pointer-events-none absolute bottom-4 left-1/2 h-24 w-40 -translate-x-1/2 rounded-full opacity-25 blur-3xl"
-							style={{ backgroundColor: data.color }}
-						/>
-						<img
-							src={data.src}
-							alt={data.name}
-							className="relative z-10 h-52 w-auto object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)] sm:h-60"
-						/>
-						<h2
-							className="mt-1 text-center text-2xl font-black uppercase tracking-[0.15em] sm:text-3xl"
-							style={{
-								color: data.color,
-								textShadow: `0 0 24px ${data.color}50, 0 0 48px ${data.color}20`,
-								WebkitTextStroke: `0.5px ${data.color}80`,
-							}}
-						>
-							{data.name}
-						</h2>
-					</motion.div>
-
-					{/* Right: Radar chart with grade labels */}
-					{!data.isTransform && (
-						<motion.div
-							className="flex shrink-0 flex-col items-center gap-3"
-							initial={{ opacity: 0, x: 20 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.4, ease: "easeOut", delay: 0.25 }}
-						>
-							<div className="h-56 w-64">
-								<ResponsiveRadar
-									data={data.stats}
-									keys={["value"]}
-									indexBy="stat"
-									maxValue={100}
-									margin={{ top: 28, right: 48, bottom: 28, left: 48 }}
-									gridLevels={5}
-									gridShape="linear"
-									borderColor={data.color}
-									borderWidth={2}
-									gridLabelOffset={16}
-									dotSize={8}
-									dotColor={data.color}
-									dotBorderWidth={0}
-									colors={[data.color]}
-									fillOpacity={0.3}
-									blendMode="normal"
-									animate={true}
-									motionConfig="gentle"
-									theme={{
-										text: { fontSize: 11, fontWeight: 700, fill: "currentColor" },
-										grid: { line: { stroke: "currentColor", strokeOpacity: 0.1 } },
-									}}
-									sliceTooltip={({ index }) => {
-										const statItem = data.stats.find((s) => s.stat === index);
-										return (
-											<div
-												style={{
-													background: "var(--color-fd-popover, #1a1a2e)",
-													color: "var(--color-fd-popover-foreground, #fff)",
-													borderRadius: 8,
-													boxShadow: `0 4px 20px ${data.color}30`,
-													border: `1px solid ${data.color}40`,
-													padding: "6px 12px",
-													fontSize: 13,
-												}}
-											>
-												<strong>{index}</strong>
-												{statItem?.base && (
-													<span style={{ marginLeft: 8 }}>
-														<span style={{ fontWeight: 900 }}>{statItem.base}</span>
-														<span
-															style={{
-																marginLeft: 4,
-																fontWeight: 700,
-																color: statItem.growth?.includes("+")
-																	? "#22c55e"
-																	: statItem.growth?.includes("-")
-																		? "#ef4444"
-																		: "inherit",
-															}}
-														>
-															{statItem.growth}
-														</span>
-													</span>
-												)}
-											</div>
-										);
-									}}
+			<AnimatePresence mode="wait">
+				<motion.div
+					key={motionKey}
+					className="mb-8 space-y-6"
+					initial={{ opacity: 0, y: 12 }}
+					animate={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: -12 }}
+					transition={{ duration: 0.3, ease: "easeOut" }}
+				>
+					{/* Top: Character image + Radar chart */}
+					<div className="relative flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-8">
+						{data.hasTransform && (
+							<Link
+								to="/docs/$"
+								params={{ _splat: `character/${data.slug}/r` }}
+								className="absolute left-0 top-0 z-20 h-6 w-6 overflow-hidden rounded-full shadow-md transition-transform hover:scale-110"
+								title="異轉"
+							>
+								<img
+									src="https://i.imgur.com/In66guv.png"
+									alt="異轉"
+									className="h-6 w-6 rounded-full object-cover"
 								/>
-							</div>
-
-							<div className="flex items-center gap-3">
-								{data.stats.map((s) => (
-									<div key={s.stat} className="flex flex-col items-center">
-										<span className="text-[10px] font-bold opacity-50">{s.stat}</span>
-										<span
-											className="text-lg font-black leading-tight"
-											style={{ color: data.color }}
-										>
-											{s.grade}
-										</span>
-									</div>
-								))}
-								<button
-									type="button"
-									className="ml-1 flex h-7 w-7 items-center justify-center rounded-full border border-fd-border/50 bg-fd-card/80 text-fd-muted-foreground backdrop-blur-xl transition-all hover:border-fd-border hover:text-fd-foreground"
-									title="查看詳細能力值"
-									onClick={() => setShowStats(true)}
-								>
-									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-6"/></svg>
-								</button>
-							</div>
+							</Link>
+						)}
+						{data.isTransform && (
+							<Link
+								to="/docs/$"
+								params={{ _splat: `character/${data.slug}` }}
+								className="absolute left-0 top-0 z-20 h-6 w-6 overflow-hidden rounded-full shadow-md transition-transform hover:scale-110"
+								title="按下可解除異轉"
+							>
+								<img
+									src="https://i.imgur.com/Xznrw8N.png"
+									alt="解除異轉"
+									className="h-6 w-6 rounded-full object-cover"
+								/>
+							</Link>
+						)}
+						{/* Left: Character image */}
+						<motion.div
+							className="relative flex flex-1 flex-col items-center"
+							initial={{ opacity: 0, scale: 0.9 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+						>
+							<div
+								className="pointer-events-none absolute bottom-4 left-1/2 h-24 w-40 -translate-x-1/2 rounded-full opacity-25 blur-3xl"
+								style={{ backgroundColor: data.color }}
+							/>
+							<img
+								src={data.src}
+								alt={data.name}
+								className="relative z-10 h-52 w-auto object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)] sm:h-60"
+							/>
+							<h2
+								className="mt-1 text-center text-2xl font-black uppercase tracking-[0.15em] sm:text-3xl"
+								style={{
+									color: data.color,
+									textShadow: `0 0 24px ${data.color}50, 0 0 48px ${data.color}20`,
+									WebkitTextStroke: `0.5px ${data.color}80`,
+								}}
+							>
+								{data.name}
+							</h2>
 						</motion.div>
-					)}
-				</div>
 
-				{/* 角色簡介 + Profile Info */}
-				{(data.description || data.birthplace || data.identity || data.combatStyle) && (
-					<div className="overflow-hidden rounded-xl border border-fd-border bg-fd-card">
-						{/* Profile tags row */}
-						{(data.birthplace || data.identity || data.combatStyle) && (
-							<div className="flex flex-wrap items-center gap-2 border-b border-fd-border px-4 py-3">
-								{data.birthplace && (
-									<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
-										<span className="text-fd-muted-foreground">出生地</span>
-										<span className="font-bold">{data.birthplace}</span>
-									</span>
-								)}
-								{data.identity && (
-									<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
-										<span className="text-fd-muted-foreground">身份</span>
-										<span className="font-bold">{data.identity}</span>
-									</span>
-								)}
-								{data.combatStyle && (
-									<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
-										<span className="text-fd-muted-foreground">戰鬥方式</span>
-										<span className="font-bold">{data.combatStyle}</span>
-									</span>
-								)}
-								<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
-									<span className="text-fd-muted-foreground">實裝版本</span>
-									<span className="font-bold">{data.version}</span>
-								</span>
-							</div>
-						)}
-						{/* Description */}
-						{data.description && (
-							<div className="px-4 py-3">
-								<p className="text-sm leading-relaxed text-fd-foreground/90">{data.description}</p>
-							</div>
-						)}
-						{data.relic && (
-							<div className="flex items-center gap-3 border-t border-fd-border px-4 py-3">
-								{data.relicImage && (
-									<img
-										src={data.relicImage}
-										alt={data.relic}
-										className="h-24 w-auto rounded-lg object-contain"
+						{/* Right: Radar chart with grade labels */}
+						{!data.isTransform && (
+							<motion.div
+								className="flex shrink-0 flex-col items-center gap-3"
+								initial={{ opacity: 0, x: 20 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ duration: 0.4, ease: "easeOut", delay: 0.25 }}
+							>
+								<div className="h-56 w-64">
+									<ResponsiveRadar
+										data={data.stats}
+										keys={["value"]}
+										indexBy="stat"
+										maxValue={100}
+										margin={{ top: 28, right: 48, bottom: 28, left: 48 }}
+										gridLevels={5}
+										gridShape="linear"
+										borderColor={data.color}
+										borderWidth={2}
+										gridLabelOffset={16}
+										dotSize={8}
+										dotColor={data.color}
+										dotBorderWidth={0}
+										colors={[data.color]}
+										fillOpacity={0.3}
+										blendMode="normal"
+										animate={true}
+										motionConfig="gentle"
+										theme={{
+											text: { fontSize: 11, fontWeight: 700, fill: "currentColor" },
+											grid: { line: { stroke: "currentColor", strokeOpacity: 0.1 } },
+										}}
+										sliceTooltip={({ index }) => {
+											const statItem = data.stats.find((s) => s.stat === index);
+											return (
+												<div
+													style={{
+														background: "var(--color-fd-popover, #1a1a2e)",
+														color: "var(--color-fd-popover-foreground, #fff)",
+														borderRadius: 8,
+														boxShadow: `0 4px 20px ${data.color}30`,
+														border: `1px solid ${data.color}40`,
+														padding: "6px 12px",
+														fontSize: 13,
+													}}
+												>
+													<strong>{index}</strong>
+													{statItem?.base && (
+														<span style={{ marginLeft: 8 }}>
+															<span style={{ fontWeight: 900 }}>{statItem.base}</span>
+															<span
+																style={{
+																	marginLeft: 4,
+																	fontWeight: 700,
+																	color: statItem.growth?.includes("+")
+																		? "#22c55e"
+																		: statItem.growth?.includes("-")
+																			? "#ef4444"
+																			: "inherit",
+																}}
+															>
+																{statItem.growth}
+															</span>
+														</span>
+													)}
+												</div>
+											);
+										}}
 									/>
-								)}
-								<div>
-									<span className="text-[10px] font-bold uppercase tracking-widest text-fd-muted-foreground">
-										異轉信物
-									</span>
-									<p className="text-sm font-bold" style={{ color: data.color }}>
-										{data.relic}
-									</p>
 								</div>
-							</div>
+
+								<div className="flex items-center gap-3">
+									{data.stats.map((s) => (
+										<div key={s.stat} className="flex flex-col items-center">
+											<span className="text-[10px] font-bold opacity-50">{s.stat}</span>
+											<span
+												className="text-lg font-black leading-tight"
+												style={{ color: data.color }}
+											>
+												{s.grade}
+											</span>
+										</div>
+									))}
+									<button
+										type="button"
+										className="ml-1 flex h-7 w-7 items-center justify-center rounded-full border border-fd-border/50 bg-fd-card/80 text-fd-muted-foreground backdrop-blur-xl transition-all hover:border-fd-border hover:text-fd-foreground"
+										title="查看詳細能力值"
+										onClick={() => setShowStats(true)}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="14"
+											height="14"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path d="M3 3v18h18" />
+											<path d="M7 16l4-8 4 4 4-6" />
+										</svg>
+									</button>
+								</div>
+							</motion.div>
 						)}
 					</div>
-				)}
 
-				{/* Weapon & Equipment */}
-				{(data.weapon || data.equipment) && (
-					<div>
-						<h2 id="weapon-equipment" className="mb-3 text-lg font-bold">
-							角色專用武器 / 裝備
-						</h2>
-						<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-							{data.weapon && (
-								<div className="overflow-hidden rounded-xl border border-fd-border">
-									<div className="flex gap-4 p-4">
-										{data.weaponImage && (
-											<div className="flex shrink-0 items-center justify-center rounded-lg bg-fd-muted/50 p-2">
-												<img
-													src={data.weaponImage}
-													alt={data.weapon.name}
-													className="h-20 w-auto rounded-lg object-contain drop-shadow-md"
-													loading="lazy"
-												/>
-											</div>
-										)}
-										<div className="min-w-0 flex-1">
-											<div className="mb-1 flex items-center gap-2">
-												<span className="text-[10px] font-bold uppercase tracking-widest text-fd-muted-foreground">
-													武器
-												</span>
-											</div>
-											<p className="text-base font-black text-fd-foreground">
-												{data.weapon.name}
-											</p>
-											{data.weapon.description && (
-												<p className="mt-1 text-xs leading-relaxed text-fd-foreground/70">
-													{data.weapon.description}
-												</p>
-											)}
-											<div className="mt-2 flex flex-wrap gap-1.5">
-												{data.weapon.effect && (
-													<span className="inline-flex items-center gap-1 rounded-md bg-fd-muted px-2 py-0.5 text-[11px]">
-														<span className="text-fd-muted-foreground">特效</span>
-														<span className="font-bold text-fd-foreground">
-															{data.weapon.effect}
-														</span>
-													</span>
-												)}
-												{data.weapon.durability && (
-													<span className="inline-flex items-center gap-1 rounded-md bg-fd-muted px-2 py-0.5 text-[11px]">
-														<span className="text-fd-muted-foreground">耐久</span>
-														<span className="font-bold">{data.weapon.durability}</span>
-													</span>
-												)}
-											</div>
-										</div>
-									</div>
+					{/* 角色簡介 + Profile Info */}
+					{(data.description || data.birthplace || data.identity || data.combatStyle) && (
+						<div
+							id="角色簡介"
+							className="scroll-mt-28 overflow-hidden rounded-xl border border-fd-border bg-fd-card"
+						>
+							{/* Profile tags row */}
+							{(data.birthplace || data.identity || data.combatStyle) && (
+								<div className="flex flex-wrap items-center gap-2 border-b border-fd-border px-4 py-3">
+									{data.birthplace && (
+										<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
+											<span className="text-fd-muted-foreground">出生地</span>
+											<span className="font-bold">{data.birthplace}</span>
+										</span>
+									)}
+									{data.identity && (
+										<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
+											<span className="text-fd-muted-foreground">身份</span>
+											<span className="font-bold">{data.identity}</span>
+										</span>
+									)}
+									{data.combatStyle && (
+										<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
+											<span className="text-fd-muted-foreground">戰鬥方式</span>
+											<span className="font-bold">{data.combatStyle}</span>
+										</span>
+									)}
+									<span className="flex items-center gap-1.5 rounded-full bg-fd-muted px-2.5 py-0.5 text-[11px]">
+										<span className="text-fd-muted-foreground">實裝版本</span>
+										<span className="font-bold">{data.version}</span>
+									</span>
 								</div>
 							)}
-							{data.equipment && (
-								<div className="overflow-hidden rounded-xl border border-fd-border">
-									<div className="flex gap-4 p-4">
-										{data.equipmentImage && (
-											<div className="flex shrink-0 items-center justify-center rounded-lg bg-fd-muted/50 p-2">
-												<img
-													src={data.equipmentImage}
-													alt={data.equipment.name}
-													className="h-20 w-auto rounded-lg object-contain drop-shadow-md"
-													loading="lazy"
-												/>
-											</div>
-										)}
-										<div className="min-w-0 flex-1">
-											<div className="mb-1 flex items-center gap-2">
-												<span className="text-[10px] font-bold uppercase tracking-widest text-fd-muted-foreground">
-													裝備
-												</span>
-											</div>
-											<p className="text-base font-black text-fd-foreground">
-												{data.equipment.name}
-											</p>
-											{data.equipment.stats && (
-												<div className="mt-2 flex flex-wrap gap-1.5">
-													{Object.entries(data.equipment.stats).map(([key, val]) => (
-														<span
-															key={key}
-															className="inline-flex items-center gap-1 rounded-md bg-fd-muted px-2 py-0.5 text-[11px]"
-														>
-															<span className="text-fd-muted-foreground">
-																{STAT_KEY_MAP[key] ?? key}
-															</span>
-															<span
-																className={`font-bold font-mono ${val.includes("+") || val.includes("(+") ? "text-green-500" : val.includes("-") ? "text-red-500" : ""}`}
-															>
-																{val}
-															</span>
-														</span>
-													))}
-												</div>
-											)}
-										</div>
+							{/* Description */}
+							{data.description && (
+								<div className="px-4 py-3">
+									<p className="text-sm leading-relaxed text-fd-foreground/90">
+										{data.description}
+									</p>
+								</div>
+							)}
+							{data.relic && (
+								<div className="flex items-center gap-3 border-t border-fd-border px-4 py-3">
+									{data.relicImage && (
+										<img
+											src={data.relicImage}
+											alt={data.relic}
+											className="h-24 w-auto rounded-lg object-contain"
+										/>
+									)}
+									<div>
+										<span className="text-[10px] font-bold uppercase tracking-widest text-fd-muted-foreground">
+											異轉信物
+										</span>
+										<p className="text-sm font-bold" style={{ color: data.color }}>
+											{data.relic}
+										</p>
 									</div>
 								</div>
 							)}
 						</div>
-					</div>
-				)}
+					)}
 
-				{/* Skills, Actions & Gallery Panel */}
-				<SkillsPanel
-					skills={data.skills}
-					skillImages={data.skillImages ?? []}
-					actionGifs={data.actionGifs ?? []}
-					hiddenSkills={data.hiddenSkills ?? []}
-					hiddenNotes={data.hiddenNotes ?? []}
-					color={data.color}
-				/>
-
-				{/* Portraits & Dialogs — Grouped Tabs */}
-				{data.portraitGroups && data.portraitGroups.length > 0 && (
-					<div>
-						<h2 id="portraits" className="mb-3 text-lg font-bold">
-							角色型像及對話圖
-						</h2>
-						<Tabs defaultValue={data.portraitGroups[0].label} className="overflow-hidden rounded-2xl border border-fd-border/50 bg-fd-card/80 backdrop-blur-xl">
-							<TabsList className="w-full justify-start gap-0 rounded-none border-b border-fd-border/30 bg-transparent px-2">
-								{data.portraitGroups.map((g) => (
-									<TabsTrigger
-										key={g.label}
-										value={g.label}
-										className="rounded-none border-b-2 border-transparent text-xs data-[state=active]:border-fd-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-									>
-										{g.label}
-									</TabsTrigger>
-								))}
-							</TabsList>
-							{data.portraitGroups.map((g) => {
-								const allImages = [
-									{ src: g.portrait, alt: g.label },
-									...g.dialogs.map((d) => ({ src: d, alt: g.label })),
-								];
-								return (
-									<TabsContent key={g.label} value={g.label} className="p-3">
-										<div className="flex gap-6">
-											{/* Portrait */}
-											<button
-												type="button"
-												className="group shrink-0 overflow-hidden rounded-xl transition-transform hover:scale-105"
-												onClick={() => showLightbox(allImages, 0)}
-											>
-												<img
-													src={g.portrait}
-													alt={g.label}
-													className="h-32 w-auto cursor-zoom-in rounded-xl object-contain"
-													loading="lazy"
-												/>
-											</button>
-											{/* Dialog images */}
-											{g.dialogs.length > 0 && (
-												<div className="flex flex-wrap gap-1.5">
-													{g.dialogs.map((url, idx) => (
-														<button
-															type="button"
-															key={url}
-															className="overflow-hidden rounded-lg transition-transform hover:scale-105"
-															onClick={() => showLightbox(allImages, idx + 1)}
+					{/* Weapon & Equipment — Compact Inline Design */}
+					{(data.items?.length || data.weapon || data.equipment) && (
+						<div>
+							<h2 id="角色專用武器" className="mb-3 scroll-mt-28 text-lg font-bold">
+								角色專用武器 / 裝備
+							</h2>
+							<div className="flex flex-col gap-2.5">
+								{(data.items ?? []).map((item, idx) => {
+									const isWeapon = item.type === "weapon";
+									const accentColor = isWeapon ? "#ffbf00" : "#00bfff";
+									const accentBg = isWeapon ? "rgba(255,191,0,0.12)" : "rgba(0,191,255,0.12)";
+									const label = isWeapon ? "武器" : "裝備";
+									return (
+										<div
+											key={`${item.name}-${idx}`}
+											id={idx === 0 && !isWeapon ? "角色專用裝備" : undefined}
+											className="group overflow-hidden rounded-xl border border-fd-border/60 bg-fd-card/80 backdrop-blur-sm transition-colors hover:border-fd-border"
+										>
+											<div className="flex gap-3.5 p-3.5">
+												{/* Item image */}
+												<button
+													type="button"
+													className="flex h-14 w-14 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-opacity hover:opacity-80"
+													onClick={() =>
+														item.image && showLightbox([{ src: item.image, alt: item.name }], 0)
+													}
+													disabled={!item.image}
+												>
+													{item.image ? (
+														<img
+															src={item.image}
+															alt={item.name}
+															className="h-12 w-12 rounded object-contain drop-shadow-md"
+															loading="lazy"
+														/>
+													) : (
+														<span className="text-xl">{isWeapon ? "⚔️" : "🛡️"}</span>
+													)}
+												</button>
+												{/* Item info */}
+												<div className="min-w-0 flex-1">
+													<div className="flex items-center gap-2">
+														<span className="text-[13px] font-extrabold text-fd-foreground">
+															{item.name}
+														</span>
+														<span
+															className="rounded px-1.5 py-px text-[9px] font-bold uppercase tracking-wider"
+															style={{ background: accentBg, color: accentColor }}
 														>
-															<img
-																src={url}
-																alt={g.label}
-																className="h-20 w-auto cursor-zoom-in rounded-lg object-cover sm:h-24"
-																loading="lazy"
-															/>
-														</button>
-													))}
+															{label}
+														</span>
+													</div>
+													{item.description && (
+														<p className="mt-0.5 text-[11px] italic leading-relaxed text-fd-muted-foreground">
+															{item.description}
+														</p>
+													)}
+													{/* Stat bonuses for equipment */}
+													{item.stats && Object.keys(item.stats).length > 0 && (
+														<div className="mt-1.5 flex flex-wrap gap-1">
+															{Object.entries(item.stats).map(([key, val]) => (
+																<span
+																	key={key}
+																	className="inline-flex items-center gap-0.5 rounded bg-fd-muted/80 px-1.5 py-px text-[10px]"
+																>
+																	<span className="text-fd-muted-foreground">
+																		{STAT_KEY_MAP[key] ?? key}
+																	</span>
+																	<span
+																		className={`font-bold font-mono ${(val as string).includes("+") || (val as string).includes("(+") ? "text-green-500" : (val as string).includes("-") ? "text-red-500" : "text-fd-foreground"}`}
+																	>
+																		{val as string}
+																	</span>
+																</span>
+															))}
+														</div>
+													)}
+													{/* Inline meta row */}
+													<div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10px] text-fd-muted-foreground">
+														{item.effect && (
+															<span>
+																⚡ <b style={{ color: accentColor }}>{item.effect}</b>
+															</span>
+														)}
+														{item.material && (
+															<span>
+																成份 <b className="text-fd-foreground">{item.material}</b>
+															</span>
+														)}
+														{item.cost && (
+															<span>
+																消耗 <b className="text-fd-foreground">{item.cost}</b>
+															</span>
+														)}
+														{item.durability && (
+															<span>
+																耐久 <b className="text-fd-foreground">{item.durability}</b>
+															</span>
+														)}
+														{item.price && (
+															<span>
+																價格 <b className="text-fd-foreground">{item.price}</b>
+															</span>
+														)}
+													</div>
+													{/* Requirements for equipment */}
+													{item.requirements && Object.keys(item.requirements).length > 0 && (
+														<div className="mt-1 flex flex-wrap items-center gap-x-2 text-[9px] text-fd-muted-foreground/70">
+															<span className="font-semibold">需求:</span>
+															{Object.entries(item.requirements).map(([key, val]) => (
+																<span key={key}>
+																	{STAT_KEY_MAP[key] ?? key} {val as string}
+																</span>
+															))}
+														</div>
+													)}
 												</div>
-											)}
+											</div>
 										</div>
-									</TabsContent>
-								);
-							})}
-						</Tabs>
-					</div>
-				)}
+									);
+								})}
+							</div>
+						</div>
+					)}
 
+					{/* Skills, Actions & Gallery Panel */}
+					<SkillsPanel
+						skills={data.skills}
+						skillImages={data.skillImages ?? []}
+						actionGifs={data.actionGifs ?? []}
+						hiddenSkills={data.hiddenSkills ?? []}
+						hiddenNotes={data.hiddenNotes ?? []}
+						color={data.color}
+					/>
+
+					{/* Portraits & Dialogs — Grouped Tabs */}
+					{data.portraitGroups && data.portraitGroups.length > 0 && (
+						<div>
+							<h2 id="角色型像及對話圖" className="mb-3 scroll-mt-28 text-lg font-bold">
+								角色型像及對話圖
+							</h2>
+							<Tabs
+								defaultValue={data.portraitGroups[0].label}
+								className="overflow-hidden rounded-2xl border border-fd-border/50 bg-fd-card/80 backdrop-blur-xl"
+							>
+								<TabsList className="w-full justify-start gap-0 rounded-none border-b border-fd-border/30 bg-transparent px-2">
+									{data.portraitGroups.map((g) => (
+										<TabsTrigger
+											key={g.label}
+											value={g.label}
+											className="rounded-none border-b-2 border-transparent text-xs data-[state=active]:border-fd-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+										>
+											{g.label}
+										</TabsTrigger>
+									))}
+								</TabsList>
+								{data.portraitGroups.map((g) => {
+									const allImages = [
+										{ src: g.portrait, alt: g.label },
+										...g.dialogs.map((d) => ({ src: d, alt: g.label })),
+									];
+									return (
+										<TabsContent key={g.label} value={g.label} className="p-3">
+											<div className="flex gap-6">
+												{/* Portrait */}
+												<button
+													type="button"
+													className="group shrink-0 overflow-hidden rounded-xl transition-transform hover:scale-105"
+													onClick={() => showLightbox(allImages, 0)}
+												>
+													<img
+														src={g.portrait}
+														alt={g.label}
+														className="h-32 w-auto cursor-zoom-in rounded-xl object-contain"
+														loading="lazy"
+													/>
+												</button>
+												{/* Dialog images */}
+												{g.dialogs.length > 0 && (
+													<div className="flex flex-wrap gap-1.5">
+														{g.dialogs.map((url, idx) => (
+															<button
+																type="button"
+																key={url}
+																className="overflow-hidden rounded-lg transition-transform hover:scale-105"
+																onClick={() => showLightbox(allImages, idx + 1)}
+															>
+																<img
+																	src={url}
+																	alt={g.label}
+																	className="h-20 w-auto cursor-zoom-in rounded-lg object-cover sm:h-24"
+																	loading="lazy"
+																/>
+															</button>
+														))}
+													</div>
+												)}
+											</div>
+										</TabsContent>
+									);
+								})}
+							</Tabs>
+						</div>
+					)}
 				</motion.div>
-		</AnimatePresence>
+			</AnimatePresence>
 
-		{/* Stats Dialog */}
-		{data && (
-			<Dialog open={showStats} onOpenChange={setShowStats}>
-				<DialogContent className="max-h-[80vh] overflow-auto rounded-2xl border-fd-border/50 bg-fd-card backdrop-blur-xl">
-					<DialogHeader>
-						<DialogTitle>詳細能力值</DialogTitle>
-					</DialogHeader>
-					<RawStatsTable slug={data.slug} color={data.color} />
-				</DialogContent>
-			</Dialog>
-		)}
+			{/* Stats Dialog */}
+			{data && (
+				<Dialog open={showStats} onOpenChange={setShowStats}>
+					<DialogContent className="max-h-[80vh] overflow-auto rounded-2xl border-fd-border/50 bg-fd-card backdrop-blur-xl">
+						<DialogHeader>
+							<DialogTitle>詳細能力值</DialogTitle>
+						</DialogHeader>
+						<RawStatsTable slug={data.slug} color={data.color} />
+					</DialogContent>
+				</Dialog>
+			)}
 		</>
 	);
 }
@@ -667,7 +848,9 @@ function SkillsPanel({
 			{/* Skills Card Grid */}
 			{hasSkills && (
 				<div>
-					<h2 id="skills" className="mb-3 text-lg font-bold">招式技能</h2>
+					<h2 id="招式技能" className="mb-3 scroll-mt-28 text-lg font-bold">
+						招式技能
+					</h2>
 					<motion.div
 						className="flex flex-wrap gap-2 [&>*]:w-full [&>*]:sm:w-[calc(50%-0.25rem)]"
 						initial="hidden"
@@ -701,7 +884,7 @@ function SkillsPanel({
 			{/* Action GIFs — same card style as skills */}
 			{hasActions && (
 				<div>
-					<h2 id="actions" className="mb-3 text-lg font-bold">
+					<h2 id="角色基本動作" className="mb-3 scroll-mt-28 text-lg font-bold">
 						角色基本動作
 					</h2>
 					<div className="flex flex-wrap gap-2 [&>*]:w-full [&>*]:sm:w-[calc(50%-0.25rem)]">
@@ -731,7 +914,9 @@ function SkillsPanel({
 			{hasHidden && (
 				<div>
 					<div className="mb-3 flex items-center gap-2">
-						<h2 id="hidden-skills" className="text-lg font-bold">隱藏動作/技能資料</h2>
+						<h2 id="hidden-skills" className="text-lg font-bold">
+							隱藏動作/技能資料
+						</h2>
 						{hiddenNotes.length > 0 && (
 							<TooltipProvider delayDuration={200}>
 								<Tooltip>
@@ -740,7 +925,21 @@ function SkillsPanel({
 											type="button"
 											className="flex h-6 w-6 items-center justify-center rounded-full text-fd-muted-foreground transition-colors hover:text-fd-foreground"
 										>
-											<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="14"
+												height="14"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												strokeWidth="2"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											>
+												<circle cx="12" cy="12" r="10" />
+												<path d="M12 16v-4" />
+												<path d="M12 8h.01" />
+											</svg>
 										</button>
 									</TooltipTrigger>
 									<TooltipContent side="bottom" className="max-w-sm">
@@ -794,7 +993,7 @@ function SkillsPanel({
 							</button>
 						))}
 					</div>
-					</div>
+				</div>
 			)}
 		</div>
 	);

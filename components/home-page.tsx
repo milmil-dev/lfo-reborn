@@ -30,6 +30,8 @@ const special = [
 	{ title: "圖片展覽", href: "/docs/photo" },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 const fadeUp = {
 	hidden: { opacity: 0, y: 24 },
 	visible: { opacity: 1, y: 0 },
@@ -60,25 +62,22 @@ function SectionBlock({
 				visible: { transition: { staggerChildren: 0.04, delayChildren: delay } },
 			}}
 		>
-			<motion.div
-				variants={fadeUp}
-				className="mb-5 border-b border-[oklch(0.32_0.02_235/0.4)] pb-3"
-			>
-				<h3 className="font-serif text-[oklch(0.80_0.01_240)]">{label}</h3>
-				<p className="mt-0.5 text-xs text-[oklch(0.48_0.01_240)]">{sub}</p>
+			<motion.div variants={fadeUp} className="mb-5 border-b border-fd-border pb-3">
+				<h3 className="font-serif text-fd-foreground">{label}</h3>
+				<p className="mt-0.5 text-xs text-fd-muted-foreground">{sub}</p>
 			</motion.div>
 			<div className="space-y-0.5">
 				{items.map((item) => (
 					<motion.div key={item.href} variants={fadeUp}>
 						<Link
 							to={item.href}
-							className="group flex items-baseline justify-between py-2 transition-colors"
+							className="link-primary group flex items-baseline justify-between rounded-sm py-2"
 						>
-							<span className="font-serif text-[15px] text-[oklch(0.68_0.01_240)] transition-colors group-hover:text-[oklch(0.62_0.16_235)]">
+							<span className="font-serif text-[0.9375rem] text-fd-muted-foreground transition-colors group-hover:text-fd-primary">
 								{item.title}
 							</span>
-							{item.count && (
-								<span className="ml-3 text-[11px] tabular-nums text-[oklch(0.38_0.01_240)] transition-colors group-hover:text-[oklch(0.50_0.08_235)]">
+							{item.count != null && (
+								<span className="ml-3 text-[0.6875rem] tabular-nums text-fd-muted-foreground/50 transition-colors group-hover:text-fd-primary/60">
 									{item.count}
 								</span>
 							)}
@@ -92,16 +91,16 @@ function SectionBlock({
 
 export default function HomePage() {
 	return (
-		<main className="min-h-screen">
+		<main className="min-h-screen bg-fd-background">
 			{/* ── Hero ── */}
 			<section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6">
-				{/* Cool radial glow */}
+				{/* Ambient glow — adapts via fd-primary token opacity */}
 				<div
-					className="pointer-events-none absolute inset-0"
+					className="pointer-events-none absolute inset-0 dark:opacity-100 opacity-30"
 					style={{
 						background: [
-							"radial-gradient(ellipse 50% 40% at 50% 35%, oklch(0.22 0.06 235 / 0.6) 0%, transparent 70%)",
-							"radial-gradient(ellipse 80% 60% at 50% 100%, oklch(0.10 0.02 240 / 0.8) 0%, transparent 50%)",
+							"radial-gradient(ellipse 50% 40% at 50% 35%, oklch(0.30 0.06 85 / 0.4) 0%, transparent 70%)",
+							"radial-gradient(ellipse 80% 60% at 50% 100%, oklch(0.15 0.03 85 / 0.5) 0%, transparent 50%)",
 						].join(", "),
 					}}
 				/>
@@ -115,8 +114,8 @@ export default function HomePage() {
 					{/* Era tag */}
 					<motion.p
 						variants={fadeUp}
-						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="mb-8 text-[11px] tracking-[0.5em] text-[oklch(0.48_0.04_235)]"
+						transition={{ duration: 0.8, ease }}
+						className="mb-8 text-[0.6875rem] tracking-[0.5em] text-fd-muted-foreground"
 					>
 						2004 — 2016
 					</motion.p>
@@ -124,20 +123,17 @@ export default function HomePage() {
 					{/* Title */}
 					<motion.h1
 						variants={fadeUp}
-						transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+						transition={{ duration: 1, ease }}
 						className="font-serif leading-none"
 					>
-						<span className="text-[11px] font-normal tracking-[0.4em] text-[oklch(0.55_0.04_235)]">
+						<span className="text-[0.6875rem] font-normal tracking-[0.4em] text-fd-muted-foreground">
 							歡迎來到
 						</span>
 						<br />
-						<span
-							className="mt-2 block text-[clamp(3.5rem,10vw,7rem)] font-bold text-[oklch(0.58_0.16_235)]"
-							style={{ textShadow: "0 0 120px oklch(0.40 0.12 235 / 0.3)" }}
-						>
+						<span className="mt-2 block text-[clamp(3.5rem,10vw,7rem)] font-bold text-fd-primary drop-shadow-[0_0_120px_oklch(0.50_0.15_85_/_0.4)]">
 							LFO
 						</span>
-						<span className="mt-1 block text-[clamp(1.2rem,3.5vw,2rem)] tracking-[0.15em] text-[oklch(0.72_0.01_240)]">
+						<span className="mt-1 block text-[clamp(1.2rem,3.5vw,2rem)] tracking-[0.15em] text-fd-foreground">
 							資料博物館
 						</span>
 					</motion.h1>
@@ -145,16 +141,16 @@ export default function HomePage() {
 					{/* Separator */}
 					<motion.div
 						variants={{ hidden: { scaleX: 0 }, visible: { scaleX: 1 } }}
-						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="mx-auto my-10 h-px w-16 origin-center bg-[oklch(0.38_0.06_235)]"
+						transition={{ duration: 0.8, ease }}
+						className="mx-auto my-10 h-px w-16 origin-center bg-fd-primary/40"
 					/>
 
 					{/* Lore — the original game opening */}
 					<motion.div
 						variants={stagger}
-						className="space-y-4 font-serif text-[14px] leading-[2] text-[oklch(0.52_0.01_240)]"
+						className="space-y-4 font-serif text-sm leading-[2] text-fd-muted-foreground"
 					>
-						<motion.p variants={fadeUp} transition={{ duration: 0.7 }}>
+						<motion.p variants={fadeUp} transition={{ duration: 0.7, ease }}>
 							時空無涯，宇宙無量。
 							<br />
 							在那超越時空，比洪荒更遠古的時代，
@@ -162,10 +158,10 @@ export default function HomePage() {
 							神賜給衪的後裔——人類，
 							<br />
 							一種源自宇宙深處的無邊力量——
-							<span className="text-[oklch(0.65_0.14_235)]">元力</span>。
+							<span className="text-fd-primary">元力</span>。
 						</motion.p>
 
-						<motion.p variants={fadeUp} transition={{ duration: 0.7 }}>
+						<motion.p variants={fadeUp} transition={{ duration: 0.7, ease }}>
 							憑著這股偉大的力量，人類能抵擋暴獸的圍攻，
 							<br />
 							渡過酷寒的冰河時代，並熬過隕石墜落所造成的赤煉日子，
@@ -173,7 +169,7 @@ export default function HomePage() {
 							最終變成大地的真正主宰。
 						</motion.p>
 
-						<motion.p variants={fadeUp} transition={{ duration: 0.7 }}>
+						<motion.p variants={fadeUp} transition={{ duration: 0.7, ease }}>
 							隨著年月的過去，安穩的生活，使人們開始倚重智慧。
 							<br />
 							曾經賴以為生的偉大元力，變得無用武之地，
@@ -181,7 +177,7 @@ export default function HomePage() {
 							從而逐漸被遺忘掉，也逐漸被掩藏埋沒。
 						</motion.p>
 
-						<motion.p variants={fadeUp} transition={{ duration: 0.7 }}>
+						<motion.p variants={fadeUp} transition={{ duration: 0.7, ease }}>
 							但每當世界出現真的災難之時，
 							<br />
 							元力始終會再次成為救世的最後力量。
@@ -189,8 +185,8 @@ export default function HomePage() {
 
 						<motion.p
 							variants={fadeUp}
-							transition={{ duration: 0.7 }}
-							className="text-[oklch(0.62_0.02_240)]"
+							transition={{ duration: 0.7, ease }}
+							className="text-fd-foreground/70"
 						>
 							新的故事、新的神話、新的英雄，在這刻又再誕生了…
 						</motion.p>
@@ -199,17 +195,19 @@ export default function HomePage() {
 					{/* Separator */}
 					<motion.div
 						variants={fadeUp}
-						className="mx-auto my-10 flex items-center gap-3 text-[oklch(0.35_0.02_235)]"
+						className="mx-auto my-10 flex items-center gap-3 text-fd-border"
 					>
-						<div className="h-px flex-1 bg-[oklch(0.25_0.02_235)]" />
-						<span className="text-xs">⁂</span>
-						<div className="h-px flex-1 bg-[oklch(0.25_0.02_235)]" />
+						<div className="h-px flex-1 bg-fd-border" />
+						<span className="text-xs" aria-hidden="true">
+							⁂
+						</span>
+						<div className="h-px flex-1 bg-fd-border" />
 					</motion.div>
 
 					{/* About text */}
 					<motion.div
 						variants={stagger}
-						className="space-y-2 text-[13px] leading-relaxed text-[oklch(0.48_0.01_240)]"
+						className="space-y-2 text-[0.8125rem] leading-relaxed text-fd-muted-foreground"
 					>
 						<motion.p variants={fadeUp}>
 							「Little Fighter Online」——簡稱LFO
@@ -231,11 +229,8 @@ export default function HomePage() {
 					</motion.div>
 
 					{/* CTA */}
-					<motion.div variants={fadeUp} transition={{ duration: 0.8 }}>
-						<Link
-							to="/docs"
-							className="mt-14 inline-block border border-[oklch(0.45_0.10_235)] px-10 py-3.5 font-serif text-sm tracking-[0.2em] text-[oklch(0.58_0.12_235)] transition-all duration-300 hover:border-[oklch(0.58_0.16_235)] hover:bg-[oklch(0.58_0.16_235/0.08)] hover:text-[oklch(0.62_0.16_235)]"
-						>
+					<motion.div variants={fadeUp} transition={{ duration: 0.8, ease }}>
+						<Link to="/docs" className="btn-primary mt-14 px-10 py-3.5 tracking-[0.2em]">
 							進入百科
 						</Link>
 					</motion.div>
@@ -248,11 +243,13 @@ export default function HomePage() {
 					transition={{ delay: 3, duration: 1 }}
 					className="absolute bottom-10 flex flex-col items-center gap-2"
 				>
-					<span className="text-[9px] tracking-[0.4em] text-[oklch(0.32_0.01_240)]">SCROLL</span>
+					<span className="text-[0.5625rem] tracking-[0.4em] text-fd-muted-foreground/50">
+						SCROLL
+					</span>
 					<motion.div
 						animate={{ y: [0, 6, 0] }}
 						transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-						className="h-6 w-px bg-gradient-to-b from-[oklch(0.32_0.01_240)] to-transparent"
+						className="h-6 w-px bg-gradient-to-b from-fd-muted-foreground/30 to-transparent"
 					/>
 				</motion.div>
 			</section>
@@ -264,11 +261,11 @@ export default function HomePage() {
 					whileInView="visible"
 					viewport={{ once: true }}
 					variants={fadeUp}
-					transition={{ duration: 0.7 }}
+					transition={{ duration: 0.7, ease }}
 					className="mb-20"
 				>
-					<p className="text-[11px] tracking-[0.4em] text-[oklch(0.48_0.04_235)]">CONTENTS</p>
-					<h2 className="mt-2 font-serif text-2xl text-[oklch(0.80_0.01_240)]">目錄引索</h2>
+					<p className="text-[0.6875rem] tracking-[0.4em] text-fd-muted-foreground">CONTENTS</p>
+					<h2 className="mt-2 font-serif text-2xl text-fd-foreground">目錄引索</h2>
 				</motion.div>
 
 				<div className="grid gap-x-16 gap-y-14 md:grid-cols-2">
@@ -290,19 +287,16 @@ export default function HomePage() {
 				whileInView="visible"
 				viewport={{ once: true }}
 				variants={fadeUp}
-				transition={{ duration: 0.8 }}
-				className="border-t border-[oklch(0.25_0.02_235/0.5)] px-6 py-16"
+				transition={{ duration: 0.8, ease }}
+				className="border-t border-fd-border px-6 py-16"
 			>
-				<div className="mx-auto max-w-3xl text-center font-serif text-[12px] leading-loose text-[oklch(0.38_0.01_240)]">
+				<div className="mx-auto max-w-3xl text-center font-serif text-xs leading-loose text-fd-muted-foreground">
 					<p>獻給所有曾在這個世界留下足跡的玩家</p>
 					<p className="mt-4">
 						本站基於「LFO資料博物館」之資料重建
 						<br />
 						原站創辦者：
-						<Link
-							to="/docs/sitemaster"
-							className="text-[oklch(0.50_0.08_235)] hover:text-[oklch(0.62_0.14_235)]"
-						>
+						<Link to="/docs/sitemaster" className="link-primary">
 							魔法使命者
 						</Link>{" "}
 						(BOC@HK)

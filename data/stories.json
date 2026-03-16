@@ -1,0 +1,824 @@
+[
+	{
+		"id": "s001_cuite",
+		"arc": 1,
+		"character": "cuite",
+		"title": "學校（米兒線）",
+		"characterLine": "米兒線"
+	},
+	{
+		"id": "s001_davis",
+		"arc": 1,
+		"character": "davis",
+		"title": "學校（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s001_dennis",
+		"arc": 1,
+		"character": "dennis",
+		"title": "學校（小丹線）",
+		"characterLine": "小丹線"
+	},
+	{
+		"id": "s001_jessie",
+		"arc": 1,
+		"character": "jessie",
+		"title": "學校（璇瓏線）",
+		"characterLine": "璇瓏線"
+	},
+	{
+		"id": "s001_milo",
+		"arc": 1,
+		"character": "milo",
+		"title": "學校（馬龍線）",
+		"characterLine": "馬龍線"
+	},
+	{
+		"id": "s001_others",
+		"arc": 1,
+		"character": "others",
+		"title": "學校（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s001_ricky",
+		"arc": 1,
+		"character": "ricky",
+		"title": "學校（歷奇線）",
+		"characterLine": "歷奇線"
+	},
+	{
+		"id": "s001_stinky",
+		"arc": 1,
+		"character": "stinky",
+		"title": "學校（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s001_victor",
+		"arc": 1,
+		"character": "victor",
+		"title": "學校（域多線）",
+		"characterLine": "域多線"
+	},
+	{
+		"id": "s001_woody",
+		"arc": 1,
+		"character": "woody",
+		"title": "學校（悟地線）",
+		"characterLine": "悟地線"
+	},
+	{
+		"id": "s002_cuite",
+		"arc": 2,
+		"character": "cuite",
+		"title": "體育館（米兒線）",
+		"characterLine": "米兒線"
+	},
+	{
+		"id": "s002_davis",
+		"arc": 2,
+		"character": "davis",
+		"title": "體育館（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s002_dennis",
+		"arc": 2,
+		"character": "dennis",
+		"title": "體育館（小丹線）",
+		"characterLine": "小丹線"
+	},
+	{
+		"id": "s002_jessie",
+		"arc": 2,
+		"character": "jessie",
+		"title": "體育館（璇瓏線）",
+		"characterLine": "璇瓏線"
+	},
+	{
+		"id": "s002_milo",
+		"arc": 2,
+		"character": "milo",
+		"title": "體育館（馬龍線）",
+		"characterLine": "馬龍線"
+	},
+	{
+		"id": "s002_others",
+		"arc": 2,
+		"character": "others",
+		"title": "體育館（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s002_ricky",
+		"arc": 2,
+		"character": "ricky",
+		"title": "體育館（歷奇線）",
+		"characterLine": "歷奇線"
+	},
+	{
+		"id": "s002_stinky",
+		"arc": 2,
+		"character": "stinky",
+		"title": "體育館（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s002_victor",
+		"arc": 2,
+		"character": "victor",
+		"title": "體育館（域多線）",
+		"characterLine": "域多線"
+	},
+	{
+		"id": "s002_woody",
+		"arc": 2,
+		"character": "woody",
+		"title": "體育館（悟地線）",
+		"characterLine": "悟地線"
+	},
+	{
+		"id": "s003_cuite",
+		"arc": 3,
+		"character": "cuite",
+		"title": "大嶼山（米兒線）",
+		"characterLine": "米兒線"
+	},
+	{
+		"id": "s003_davis",
+		"arc": 3,
+		"character": "davis",
+		"title": "大嶼山（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s003_dennis",
+		"arc": 3,
+		"character": "dennis",
+		"title": "大嶼山（小丹線）",
+		"characterLine": "小丹線"
+	},
+	{
+		"id": "s003_greendogs",
+		"arc": 3,
+		"character": "greendogs",
+		"title": "大嶼山（青狗線）",
+		"characterLine": "青狗線"
+	},
+	{
+		"id": "s003_others",
+		"arc": 3,
+		"character": "others",
+		"title": "大嶼山（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s003_stinky",
+		"arc": 3,
+		"character": "stinky",
+		"title": "大嶼山（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s003_woody",
+		"arc": 3,
+		"character": "woody",
+		"title": "大嶼山（悟地線）",
+		"characterLine": "悟地線"
+	},
+	{
+		"id": "s004_cuite",
+		"arc": 4,
+		"character": "cuite",
+		"title": "冰火皇后島（米兒線）",
+		"characterLine": "米兒線"
+	},
+	{
+		"id": "s004_davis",
+		"arc": 4,
+		"character": "davis",
+		"title": "冰火皇后島（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s004_dennis",
+		"arc": 4,
+		"character": "dennis",
+		"title": "冰火皇后島（小丹線）",
+		"characterLine": "小丹線"
+	},
+	{
+		"id": "s004_others",
+		"arc": 4,
+		"character": "others",
+		"title": "冰火皇后島（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s004_stinky",
+		"arc": 4,
+		"character": "stinky",
+		"title": "冰火皇后島（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s004_woody",
+		"arc": 4,
+		"character": "woody",
+		"title": "冰火皇后島（悟地線）",
+		"characterLine": "悟地線"
+	},
+	{
+		"id": "s005_china",
+		"arc": 5,
+		"character": "china",
+		"title": "初考元鬥編",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s005_egypt",
+		"arc": 5,
+		"character": "egypt",
+		"title": "初考元鬥編",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s005c_others",
+		"arc": 5,
+		"variant": "c",
+		"character": "others",
+		"title": "初考元鬥編",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s005e_others",
+		"arc": 5,
+		"variant": "e",
+		"character": "others",
+		"title": "初考元鬥編",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s006_china",
+		"arc": 6,
+		"character": "china",
+		"title": "康州鬼城（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s006_eygpt",
+		"arc": 6,
+		"character": "eygpt",
+		"title": "突擊地下組織（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s006c_others",
+		"arc": 6,
+		"variant": "c",
+		"character": "others",
+		"title": "康州鬼城（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s006e_others",
+		"arc": 6,
+		"variant": "e",
+		"character": "others",
+		"title": "突擊地下組織（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s007_china",
+		"arc": 7,
+		"character": "china",
+		"title": "勇救帝王子孫（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s007_eygpt",
+		"arc": 7,
+		"character": "eygpt",
+		"title": "滅絕黑蝎子（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s007c_others",
+		"arc": 7,
+		"variant": "c",
+		"character": "others",
+		"title": "勇救帝王子孫（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s007e_others",
+		"arc": 7,
+		"variant": "e",
+		"character": "others",
+		"title": "滅絕黑蝎子（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s008_davis",
+		"arc": 8,
+		"character": "davis",
+		"title": "終考元鬥編（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s008_others",
+		"arc": 8,
+		"character": "others",
+		"title": "終考元鬥編（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s008_stinky",
+		"arc": 8,
+		"character": "stinky",
+		"title": "終考元鬥編（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s009_davis",
+		"arc": 9,
+		"character": "davis",
+		"title": "血骷髏軍的突襲（主角線）",
+		"characterLine": "主角線"
+	},
+	{
+		"id": "s009_others",
+		"arc": 9,
+		"character": "others",
+		"title": "血骷髏軍的突襲（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s010_davis",
+		"arc": 10,
+		"character": "davis",
+		"title": "神殿之危（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s010_others",
+		"arc": 10,
+		"character": "others",
+		"title": "神殿之危（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s010_stinky",
+		"arc": 10,
+		"character": "stinky",
+		"title": "神殿之危（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s011_davis",
+		"arc": 11,
+		"character": "davis",
+		"title": "死亡暗礁（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s011_others",
+		"arc": 11,
+		"character": "others",
+		"title": "死亡暗礁（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s011_stinky",
+		"arc": 11,
+		"character": "stinky",
+		"title": "死亡暗礁（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s012_davis",
+		"arc": 12,
+		"character": "davis",
+		"title": "勇闖羅剎堡（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s012_others",
+		"arc": 12,
+		"character": "others",
+		"title": "勇闖羅剎堡（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s012_stinky",
+		"arc": 12,
+		"character": "stinky",
+		"title": "勇闖羅剎堡（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s013_davis",
+		"arc": 13,
+		"character": "davis",
+		"title": "大魔王龐士（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s013_others",
+		"arc": 13,
+		"character": "others",
+		"title": "激戰大魔王（路人線）",
+		"characterLine": "路人線"
+	},
+	{
+		"id": "s013_stinky",
+		"arc": 13,
+		"character": "stinky",
+		"title": "激戰大魔王（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s014_main",
+		"arc": 14,
+		"character": "main",
+		"title": "竹林深處"
+	},
+	{
+		"id": "s015_dennis",
+		"arc": 15,
+		"character": "dennis",
+		"title": "暗黑秦王陵（小丹線）",
+		"characterLine": "小丹線"
+	},
+	{
+		"id": "s015_main",
+		"arc": 15,
+		"character": "main",
+		"title": "暗黑秦王陵（軸心主線）",
+		"characterLine": "軸心主線"
+	},
+	{
+		"id": "s016_dennis",
+		"arc": 16,
+		"character": "dennis",
+		"title": "秦王之陰謀（小丹線）",
+		"characterLine": "小丹線"
+	},
+	{
+		"id": "s016_main",
+		"arc": 16,
+		"character": "main",
+		"title": "秦王之陰謀（軸心主線）",
+		"characterLine": "軸心主線"
+	},
+	{
+		"id": "s017_main",
+		"arc": 17,
+		"character": "main",
+		"title": "富士湖畔"
+	},
+	{
+		"id": "s018_main",
+		"arc": 18,
+		"character": "main",
+		"title": "鳥居林（"
+	},
+	{
+		"id": "s018_stinky",
+		"arc": 18,
+		"character": "stinky",
+		"title": "鳥居林（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s019_main",
+		"arc": 19,
+		"character": "main",
+		"title": "決戰鶴丸城"
+	},
+	{
+		"id": "s021",
+		"arc": 21,
+		"title": "衝上雲霄"
+	},
+	{
+		"id": "s022",
+		"arc": 22,
+		"title": "究極研究所"
+	},
+	{
+		"id": "s023",
+		"arc": 23,
+		"title": "逃離研究所"
+	},
+	{
+		"id": "s024",
+		"arc": 24,
+		"title": "非洲草原"
+	},
+	{
+		"id": "s025",
+		"arc": 25,
+		"title": "森林古跡"
+	},
+	{
+		"id": "s026",
+		"arc": 26,
+		"title": "聖母之瞳"
+	},
+	{
+		"id": "s027",
+		"arc": 27,
+		"title": "火燒村莊"
+	},
+	{
+		"id": "s028",
+		"arc": 28,
+		"title": "地下謎城"
+	},
+	{
+		"id": "s029_cuite",
+		"arc": 29,
+		"character": "cuite",
+		"title": "飛行要塞（米兒線）",
+		"characterLine": "米兒線"
+	},
+	{
+		"id": "s029_davis",
+		"arc": 29,
+		"character": "davis",
+		"title": "飛行要塞（迪雲線）",
+		"characterLine": "迪雲線"
+	},
+	{
+		"id": "s029_dennis",
+		"arc": 29,
+		"character": "dennis",
+		"title": "飛行要塞（小丹線）",
+		"characterLine": "小丹線"
+	},
+	{
+		"id": "s029_stinky",
+		"arc": 29,
+		"character": "stinky",
+		"title": "飛行要塞（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s029_woody",
+		"arc": 29,
+		"character": "woody",
+		"title": "飛行要塞（悟地線）",
+		"characterLine": "悟地線"
+	},
+	{
+		"id": "s030",
+		"arc": 30,
+		"title": "末日的開始"
+	},
+	{
+		"id": "s031",
+		"arc": 31,
+		"title": "絕地猛虎"
+	},
+	{
+		"id": "s032",
+		"arc": 32,
+		"title": "女媧的勇氣"
+	},
+	{
+		"id": "s033",
+		"arc": 33,
+		"title": "終極魔人"
+	},
+	{
+		"id": "s034",
+		"arc": 34,
+		"title": "速度就是力量"
+	},
+	{
+		"id": "s035",
+		"arc": 35,
+		"title": "恐龍島"
+	},
+	{
+		"id": "s036",
+		"arc": 36,
+		"title": "去吧"
+	},
+	{
+		"id": "s037",
+		"arc": 37,
+		"title": "殲滅改造人"
+	},
+	{
+		"id": "s038",
+		"arc": 38,
+		"title": "強闖美干達"
+	},
+	{
+		"id": "s039",
+		"arc": 39,
+		"title": "不死英雄"
+	},
+	{
+		"id": "s040",
+		"arc": 40,
+		"title": "惡魔的力量"
+	},
+	{
+		"id": "s041",
+		"arc": 41,
+		"title": "再見"
+	},
+	{
+		"id": "s042",
+		"arc": 42,
+		"title": "背叛中的背叛"
+	},
+	{
+		"id": "s043",
+		"arc": 43,
+		"title": "燃燒生命的武者"
+	},
+	{
+		"id": "s044_davis",
+		"arc": 44,
+		"character": "davis",
+		"title": "戰士回歸（迪雲線"
+	},
+	{
+		"id": "s044_stinky",
+		"arc": 44,
+		"character": "stinky",
+		"title": "戰士回歸（星奇線）",
+		"characterLine": "星奇線"
+	},
+	{
+		"id": "s045_davis",
+		"arc": 45,
+		"character": "davis",
+		"title": "拯救迪倫"
+	},
+	{
+		"id": "s045_woody",
+		"arc": 45,
+		"character": "woody",
+		"title": "北極古都"
+	},
+	{
+		"id": "s046_davis",
+		"arc": 46,
+		"character": "davis",
+		"title": "撤旦的遊戲"
+	},
+	{
+		"id": "s046_woody",
+		"arc": 46,
+		"character": "woody",
+		"title": "地心洪爐"
+	},
+	{
+		"id": "s047",
+		"arc": 47,
+		"title": "古龍騎士"
+	},
+	{
+		"id": "s048",
+		"arc": 48,
+		"title": "納米亞王族"
+	},
+	{
+		"id": "s049",
+		"arc": 49,
+		"title": "滅神獸"
+	},
+	{
+		"id": "s050",
+		"arc": 50,
+		"title": "龍神"
+	},
+	{
+		"id": "s051",
+		"arc": 51,
+		"title": "決戰日"
+	},
+	{
+		"id": "s052",
+		"arc": 52,
+		"title": "亞空間"
+	},
+	{
+		"id": "s053",
+		"arc": 53,
+		"title": "黑澀森林"
+	},
+	{
+		"id": "s054",
+		"arc": 54,
+		"title": "合體戰神"
+	},
+	{
+		"id": "s055",
+		"arc": 55,
+		"title": "重拾力量"
+	},
+	{
+		"id": "s056",
+		"arc": 56,
+		"title": "兄弟同心"
+	},
+	{
+		"id": "s057",
+		"arc": 57,
+		"title": "龍神真面目"
+	},
+	{
+		"id": "s058",
+		"arc": 58,
+		"title": "死神交易"
+	},
+	{
+		"id": "s059",
+		"arc": 59,
+		"title": "亡靈之再生"
+	},
+	{
+		"id": "s060",
+		"arc": 60,
+		"title": "戰神解體"
+	},
+	{
+		"id": "s061",
+		"arc": 61,
+		"title": "藍龍族人"
+	},
+	{
+		"id": "s062",
+		"arc": 62,
+		"title": "我回來了"
+	},
+	{
+		"id": "s063",
+		"arc": 63,
+		"title": "反擊戰"
+	},
+	{
+		"id": "s064",
+		"arc": 64,
+		"title": "一秒鐘的對決"
+	},
+	{
+		"id": "s065",
+		"arc": 65,
+		"title": "使命之繼承"
+	},
+	{
+		"id": "s066",
+		"arc": 66,
+		"title": "不壞金身陣（破陣成功）"
+	},
+	{
+		"id": "s066b",
+		"arc": 66,
+		"variant": "b",
+		"title": "不壞金身陣（破陣失敗）"
+	},
+	{
+		"id": "s067",
+		"arc": 67,
+		"title": "隱藏的密室"
+	},
+	{
+		"id": "s068_duncun",
+		"arc": 68,
+		"character": "duncun",
+		"title": "三重鏡子世界（迪格斯線）",
+		"characterLine": "迪格斯線"
+	},
+	{
+		"id": "s068_karl",
+		"arc": 68,
+		"character": "karl",
+		"title": "三重鏡子世界（卡倫線）",
+		"characterLine": "卡倫線"
+	},
+	{
+		"id": "s069",
+		"arc": 69,
+		"title": "黑夜之神"
+	},
+	{
+		"id": "s070",
+		"arc": 70,
+		"title": "陰毒的計謀"
+	},
+	{
+		"id": "s20_main",
+		"arc": 20,
+		"character": "main",
+		"title": "橫跨大峽谷"
+	}
+]

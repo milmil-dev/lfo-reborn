@@ -116,7 +116,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "電擊+焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/WalDMNW.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -185,7 +185,7 @@
 				"cost": "120MP",
 				"learnPoints": "80",
 				"trigger": "混亂",
-				"notes": "出招時按\" 拳 \"可繼續揮拳 ，每次追加消耗 120 MP",
+				"notes": "出招時按\"拳\"可繼續揮拳，每次追加消耗120MP",
 				"gif": "https://i.imgur.com/EACmDCl.gif",
 				"icon": "https://i.imgur.com/63kNYM7.png"
 			},
@@ -259,7 +259,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/x9nID7q.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -301,6 +301,16 @@
 				"gif": "https://i.imgur.com/hnzR0Sc.gif",
 				"icon": "https://i.imgur.com/JDXcP1U.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "無法判定",
+				"name": "召喚！地藏十兵衛！！",
+				"gif": "https://i.imgur.com/N6zaLeJ.gif"
+			}
+		],
+		"hiddenNotes": [
+			"為何安雅會有召喚地十的技能啊啊啊啊啊我實在無法理解兩位到底有什麼關係啊啊啊啊啊ww"
 		]
 	},
 	"asyura": {
@@ -408,7 +418,15 @@
 				"gif": "https://i.imgur.com/x7seMSb.gif",
 				"icon": "https://i.imgur.com/XXD0U5L.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/9XugHEh.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"ava": {
 		"slug": "ava",
@@ -482,7 +500,7 @@
 				"cost": "250MP",
 				"learnPoints": "40",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/fSKC95a.gif",
 				"icon": "https://i.imgur.com/T5SeQgA.png"
 			},
@@ -537,7 +555,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "電擊",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/mVCe81p.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -635,7 +653,7 @@
 				"cost": "250MP",
 				"learnPoints": "0",
 				"trigger": "電擊",
-				"notes": "攻擊時可按\" 拳 \"使出 追加攻擊 ，追加消耗 200 MP",
+				"notes": "攻擊時可按\"拳\"使出[追加攻擊](https://i.imgur.com/LzP2lWS.gif)，追加消耗200MP",
 				"gif": "https://i.imgur.com/lOygYAm.gif",
 				"icon": "https://i.imgur.com/Zhu5iUP.png"
 			},
@@ -654,7 +672,7 @@
 				"cost": "300MP",
 				"learnPoints": "0",
 				"trigger": "電擊+吹飛",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/JxM1NDr.gif",
 				"icon": "https://i.imgur.com/sgUqVzp.png"
 			},
@@ -667,7 +685,15 @@
 				"gif": "https://i.imgur.com/JZH5zSD.gif",
 				"icon": "https://i.imgur.com/SASNX43.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/HZUjJG5.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"bat": {
 		"slug": "bat",
@@ -751,7 +777,7 @@
 				"cost": "400MP",
 				"learnPoints": "150",
 				"trigger": "電擊",
-				"notes": "出招時按\" 拳 \"可繼續放出死光 ，每次追加消耗 200 MP",
+				"notes": "出招時按\"拳\"可繼續放出死光，每次追加消耗200MP",
 				"gif": "https://i.imgur.com/yk2XgGB.gif",
 				"icon": "https://i.imgur.com/42eX25u.png"
 			},
@@ -818,7 +844,7 @@
 				"cost": "250MP",
 				"learnPoints": "40",
 				"trigger": "焚燒",
-				"notes": "可按\"←/→\"決定 鑽頭 攻擊的方向",
+				"notes": "可按\"←/→\"決定鑽頭攻擊的方向",
 				"gif": "https://i.imgur.com/9CaoJg4.gif",
 				"icon": "https://i.imgur.com/LUD3eky.png"
 			},
@@ -860,6 +886,33 @@
 				"gif": "https://i.imgur.com/YQzkqiN.gif",
 				"icon": "https://i.imgur.com/P1pr1Cj.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "異獸鑽1",
+				"gif": "https://i.imgur.com/wjqmvv7.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "異獸鑽2",
+				"gif": "https://i.imgur.com/1Wl0ea0.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "血脈相連",
+				"gif": "https://i.imgur.com/IwbZQOP.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "動作",
+				"gif": "https://i.imgur.com/ZJx9m8V.gif"
+			}
+		],
+		"hiddenNotes": [
+			"{{#00ff00:異獸鑽}}曾經被U1修改多次,目前最新版本是第三次修改",
+			"{{#00ff00:血脈相連}}已在故事中出現過了,有實裝成可用技能的可能性",
+			"新招的動作是原先預定要實裝的第六招,目前已胎死腹中"
 		]
 	},
 	"blake": {
@@ -953,7 +1006,7 @@
 				"cost": "350MP",
 				"learnPoints": "200",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可繼續進行突刺 ，每次追加消耗 200 MP 可按\"←/→\"中途改變突刺的方向",
+				"notes": "出招時按\"拳\"可繼續進行突刺，每次追加消耗200MP可按\"←/→\"中途改變突刺的方向",
 				"gif": "https://i.imgur.com/MbmnKJ1.gif",
 				"icon": "https://i.imgur.com/0MTzjAh.png"
 			},
@@ -981,7 +1034,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/6BeV1cC.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -1106,7 +1159,7 @@
 				"cost": "400MP",
 				"learnPoints": "40",
 				"trigger": "--",
-				"notes": "出招時按\"跳\"可改用 殘影攻擊 ，追加消耗 400 MP",
+				"notes": "出招時按\"跳\"可改用[殘影攻擊](https://i.imgur.com/4Qo6wEn.gif)，追加消耗400MP",
 				"gif": "https://i.imgur.com/ZZam4QN.gif",
 				"icon": "https://i.imgur.com/ldTQmrJ.png"
 			},
@@ -1312,6 +1365,27 @@
 				"gif": "https://i.imgur.com/6wRVie0.gif",
 				"icon": "https://i.imgur.com/SfDidyn.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/sNRlJSj.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "解源咒",
+				"gif": "https://i.imgur.com/l6ebLrg.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "魔狼滅",
+				"gif": "https://i.imgur.com/TwR1nEn.gif"
+			}
+		],
+		"hiddenNotes": [
+			"本角色升級時所使出來的動作，正常只會在升級時出現",
+			"{{#00ff00:解源咒}}是三位戰鬥型摩摩星人對合體戰神的技倆目前只在故事中出現"
 		]
 	},
 	"chester": {
@@ -1450,7 +1524,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/fmODYNn.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -1492,6 +1566,45 @@
 				"gif": "https://i.imgur.com/pmUsJ74.gif",
 				"icon": "https://i.imgur.com/YVPfRsc.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "一百萬匹馬力",
+				"gif": "https://i.imgur.com/Rg207MF.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "一飛沖天",
+				"gif": "https://i.imgur.com/SWgDovg.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "核子爆彈",
+				"gif": "https://i.imgur.com/AHqpRnG.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "雷射光線",
+				"gif": "https://i.imgur.com/QlQgZ8e.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "核子地雷陣",
+				"gif": "https://i.imgur.com/eJgEdZB.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "米迦勒粒子炮",
+				"gif": "https://i.imgur.com/wmXUZnM.gif"
+			}
+		],
+		"hiddenNotes": [
+			"※卓男的招式大部份都曾被大幅改動",
+			"舊版的{{#00ff00:一百萬匹馬力}}跟{{#00ff00:絕地一擊}}同樣為突進技相信因為兩招的性質及定位都一樣而被改動",
+			"舊版{{#00ff00:一飛沖天}}整招硬直很大，而且實用度非常差經修改後整招變的非常靈活",
+			"{{#00ff00:核子爆彈}}當年靠著超快的起收手及大範圍攻擊而聞名是當年最受歡迎技能之一經修改後動作時間被大幅延長…",
+			"舊版的{{#00ff00:米迦勒粒子炮}}收手後自身會強制倒地新版把這個特性移除了"
 		]
 	},
 	"chiyua": {
@@ -1594,7 +1707,7 @@
 				"cost": "300MP",
 				"learnPoints": "200",
 				"trigger": "中毒",
-				"notes": "出招時按\" 拳 \"可使用 追加攻擊 ，追加消耗 100 MP 使出追加攻擊前按住\"←/→\"以決定追加攻擊的方向",
+				"notes": "出招時按\"拳\"可使用[追加攻擊](https://i.imgur.com/zadj8mr.gif)，追加消耗100MP使出追加攻擊前按住\"←/→\"以決定追加攻擊的方向",
 				"gif": "https://i.imgur.com/1Cd0Jee.gif",
 				"icon": "https://i.imgur.com/Cq5Dpf9.png"
 			},
@@ -1622,7 +1735,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "電擊",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/ZgKBTlU.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -1664,6 +1777,16 @@
 				"gif": "https://i.imgur.com/RcyYng1.gif",
 				"icon": "https://i.imgur.com/lZJ5eKZ.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "無法判定",
+				"name": "不明技能",
+				"gif": "https://i.imgur.com/a5LY8hV.gif"
+			}
+		],
+		"hiddenNotes": [
+			"輸入「擋↑→拳」便能使出的技能，只花費150MP，相當實用其正體有可能就是將要實裝的{{#00ff00:天羅紅蓮滅}}"
 		]
 	},
 	"code": {
@@ -1751,7 +1874,15 @@
 				"gif": "https://i.imgur.com/4mDvMXa.gif",
 				"icon": "https://i.imgur.com/38lgEsp.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/WfFSggt.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"cuite": {
 		"slug": "cuite",
@@ -1889,7 +2020,7 @@
 				"cost": "100%MP",
 				"learnPoints": "220",
 				"trigger": "浮空",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/rEqeIsD.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -1958,6 +2089,28 @@
 				"gif": "https://i.imgur.com/mRJog8y.gif",
 				"icon": "https://i.imgur.com/h3CS1he.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "鳳神腿",
+				"gif": "https://i.imgur.com/YyORz86.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "新大天使之降臨",
+				"gif": "https://i.imgur.com/wFi11HE.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "女媧下凡",
+				"gif": "https://i.imgur.com/aBmN5aG.gif"
+			}
+		],
+		"hiddenNotes": [
+			"舊版本的{{#00ff00:鳳神腿}}跟新版本相比下飛行的距離有很大的差距",
+			"異轉後的{{#00ff00:大天使之降臨}}：目前只出現在故事中未知將來會否推出相關的技能",
+			"{{#00ff00:女媧下凡}}當初只是以普通的第九招實裝，消耗700MP而且能夠消除對手的體力及元力(只限怪物)還能把對手浮空後接五次{{#00ff00:大天使之降臨}}，被稱為新一代屈招很來跟馬龍的{{#00ff00:青狗合擊}}雙雙被U1改成奧義，並取消消除體力元力的效果"
 		]
 	},
 	"damian": {
@@ -2036,7 +2189,15 @@
 				"gif": "https://i.imgur.com/IaYYlws.gif",
 				"icon": "https://i.imgur.com/sWQyEfY.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/933fBxH.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"darkchiyua": {
 		"slug": "darkchiyua",
@@ -2131,6 +2292,28 @@
 				"gif": "https://i.imgur.com/yHJICx0.gif",
 				"icon": "https://i.imgur.com/CqkbOLV.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/I0su61Q.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "猛雷絕擊收尾",
+				"gif": "https://i.imgur.com/KhZpAN2.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "狂怒紅蓮斬",
+				"gif": "https://i.imgur.com/vFCxvfI.gif"
+			}
+		],
+		"hiddenNotes": [
+			"本角色升級時所使出來的動作，正常只會在升級時出現",
+			"由於暗黑蚩尤的動作由蚩尤的動作中套用而來所以理論上能夠使出蚩尤的技能",
+			"新招{{#00ff00:血魔噬魂}}可在LFO商抽至於能否成功抽中便沒人知曉了…因為實際上這招根本沒有實裝在遊戲中…"
 		]
 	},
 	"darkcutie": {
@@ -2223,7 +2406,7 @@
 				"cost": "350MP",
 				"learnPoints": "120",
 				"trigger": "吸近+電擊",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/jllLPqt.gif",
 				"icon": "https://i.imgur.com/JqpIiKi.png"
 			},
@@ -2337,7 +2520,7 @@
 				"cost": "400MP",
 				"learnPoints": "105",
 				"trigger": "焚燒",
-				"notes": "按\"←/→\" 可 中 途改變攻擊的方向",
+				"notes": "按\"←/→\"可中途改變攻擊的方向",
 				"gif": "https://i.imgur.com/XWatlCh.gif",
 				"icon": "https://i.imgur.com/KmeGgKO.png"
 			},
@@ -2350,7 +2533,15 @@
 				"gif": "https://i.imgur.com/xE2CB6l.gif",
 				"icon": "https://i.imgur.com/eY0x5tw.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "故事動作",
+				"name": "展示黑暗力量",
+				"gif": "https://i.imgur.com/Ud153DB.gif"
+			}
+		],
+		"hiddenNotes": ["暗迪在故事中使出過的動作"]
 	},
 	"darkfiren": {
 		"slug": "darkfiren",
@@ -2433,7 +2624,7 @@
 				"cost": "200MP",
 				"learnPoints": "100",
 				"trigger": "焚燒",
-				"notes": "起手前可按\" 跳 ／ 擋 \"來改變火焰出現的距離 衍生 轟天閃燃(中) +跳 +100MP -- 焚燒 衍生 轟天閃燃(遠) +擋 +200MP -- 焚燒",
+				"notes": "起手前可按\"跳／擋\"來改變火焰出現的距離衍生[轟天閃燃(中)](https://i.imgur.com/JUrT5Sh.gif)+跳+100MP--焚燒衍生[轟天閃燃(遠)](https://i.imgur.com/XXSxe2P.gif)+擋+200MP--焚燒",
 				"gif": "https://i.imgur.com/uq7SJo7.gif",
 				"icon": "https://i.imgur.com/I6EvT16.png"
 			},
@@ -2443,7 +2634,7 @@
 				"cost": "300MP",
 				"learnPoints": "80",
 				"trigger": "焚燒",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/1CHLBhM.gif",
 				"icon": "https://i.imgur.com/eNVV5kf.png"
 			},
@@ -2644,7 +2835,7 @@
 				"cost": "300MP",
 				"learnPoints": "65",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/4PNTQq7.gif",
 				"icon": "https://i.imgur.com/E156myP.png"
 			},
@@ -2657,6 +2848,27 @@
 				"gif": "https://i.imgur.com/hd5n5m2.gif",
 				"icon": "https://i.imgur.com/IZecUS4.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/JR9FZ6v.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "不明技能",
+				"gif": "https://i.imgur.com/RorgCQo.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "不明技能2",
+				"gif": "https://i.imgur.com/eaORtTI.gif"
+			}
+		],
+		"hiddenNotes": [
+			"本角色升級時所使出來的動作，正常只會在升級時出現",
+			"由於暗黑黃帝的動作由黃帝的動作中套用而來所以兩招不明技能跟{{#00ff00:君臨天下}}及{{#00ff00:帝王降臨彈}}相當相似"
 		]
 	},
 	"darklastevil": {
@@ -2761,6 +2973,22 @@
 				"gif": "https://i.imgur.com/vqklyqG.gif",
 				"icon": "https://i.imgur.com/cZKmiCH.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/kYFxAVs.gif"
+			},
+			{
+				"category": "無法判定",
+				"name": "大大的跳躍",
+				"gif": "https://i.imgur.com/crOf3uG.gif"
+			}
+		],
+		"hiddenNotes": [
+			"本角色升級時所使出來的動作，正常只會在升級時出現",
+			"大跳躍只隱藏在數據中，目前未知是什麼類型的動作"
 		]
 	},
 	"darkruwa": {
@@ -2826,7 +3054,7 @@
 				"cost": "300MP",
 				"learnPoints": "50",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可使出 追加攻擊 ， 追加消耗 150 MP 追加攻擊中按\" 拳 \"可作 第2次追加攻擊 ， 追加消耗20 0 MP",
+				"notes": "出招時按\"拳\"可使出[追加攻擊](https://i.imgur.com/gjltazW.gif)，追加消耗150MP 追加攻擊中按\"拳\"可作[第2次追加攻擊](https://i.imgur.com/cGk0Urn.gif)，追加消耗200MP",
 				"gif": "https://i.imgur.com/gOxWs60.gif",
 				"icon": "https://i.imgur.com/U9taTxE.png"
 			},
@@ -2848,7 +3076,15 @@
 				"gif": "https://i.imgur.com/jfJzzLX.gif",
 				"icon": "https://i.imgur.com/5GZDY0t.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/0Ctd825.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"darkstinky": {
 		"slug": "darkstinky",
@@ -2931,7 +3167,7 @@
 				"cost": "180MP",
 				"learnPoints": "100",
 				"trigger": "--",
-				"notes": "需要接近敵人時使用才會 發動攻擊動作",
+				"notes": "需要接近敵人時使用才會[發動攻擊動作](https://i.imgur.com/gvK1IXd.gif)",
 				"gif": "https://i.imgur.com/qG9rUNJ.gif",
 				"icon": "https://i.imgur.com/fH7CnL2.png"
 			},
@@ -2941,7 +3177,7 @@
 				"cost": "360MP",
 				"learnPoints": "100",
 				"trigger": "--",
-				"notes": "出招時按\"拳\"可使用 追加攻擊 ，追加消耗 50 MP 使出追加攻擊前按住\"←/→\"以決定追加攻擊的方向",
+				"notes": "出招時按\"拳\"可使用[追加攻擊](https://i.imgur.com/hcHyPKW.gif)，追加消耗50MP使出追加攻擊前按住\"←/→\"以決定追加攻擊的方向",
 				"gif": "https://i.imgur.com/AUgMBTW.gif",
 				"icon": "https://i.imgur.com/eeXixHf.png"
 			},
@@ -2954,7 +3190,15 @@
 				"gif": "https://i.imgur.com/Z214TZy.gif",
 				"icon": "https://i.imgur.com/4gTaqpk.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "未來新招",
+				"name": "動作",
+				"gif": "https://i.imgur.com/MDBmE7H.gif"
+			}
+		],
+		"hiddenNotes": ["目前推斷是未實裝完成的奧義技,目前已胎死腹中是目前所有黑暗戰神中雖一一招奧義技"]
 	},
 	"davis": {
 		"slug": "davis",
@@ -3037,7 +3281,7 @@
 				"cost": "100MP",
 				"learnPoints": "40",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"會改出散彈波",
+				"notes": "出招時按\"拳\"會改出散彈波",
 				"gif": "https://i.imgur.com/7zpb2HM.gif",
 				"icon": "https://i.imgur.com/oG02aYm.png"
 			},
@@ -3047,7 +3291,7 @@
 				"cost": "150MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "連續按\" 拳 \"可繼續 放出氣彈 ，每次追加消耗 150 MP",
+				"notes": "連續按\"拳\"可繼續放出氣彈，每次追加消耗150MP",
 				"gif": "https://i.imgur.com/hmPPbud.gif",
 				"icon": "https://i.imgur.com/28Gbqkb.png"
 			},
@@ -3075,7 +3319,7 @@
 				"cost": "640MP",
 				"learnPoints": "150",
 				"trigger": "--",
-				"notes": "連續按\" 拳 \"可持續 放出光束，每次追加消耗 100MP",
+				"notes": "連續按\"拳\"可持續放出光束，每次追加消耗100MP",
 				"gif": "https://i.imgur.com/V7llCCU.gif",
 				"icon": "https://i.imgur.com/7EdbaY2.png"
 			},
@@ -3094,7 +3338,7 @@
 				"cost": "100%MP",
 				"learnPoints": "500",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/15zIOVS.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -3106,7 +3350,7 @@
 				"cost": "220MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "連續按\" 拳 \"可繼續放出 氣彈 ，每次追加消耗 150 MP 持續攻擊時可按\"↑/↓\"來改變氣功波的 發射模式",
+				"notes": "連續按\"拳\"可繼續放出氣彈，每次追加消耗150MP持續攻擊時可按\"↑/↓\"來改變氣功波的[發射模式](https://i.imgur.com/dWpQtjm.gif)",
 				"gif": "https://i.imgur.com/47PZmK0.gif",
 				"icon": "https://i.imgur.com/rFwlYLJ.png"
 			},
@@ -3164,6 +3408,44 @@
 				"gif": "https://i.imgur.com/qODBzs4.gif",
 				"icon": "https://i.imgur.com/EG93zYX.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "龍飛翔",
+				"gif": "https://i.imgur.com/6IKwNZi.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "飛龍爪",
+				"gif": "https://i.imgur.com/xnxv2pM.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "真龍光炮",
+				"gif": "https://i.imgur.com/eG9AYwz.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "奧義昇龍霸",
+				"gif": "https://i.imgur.com/b53kHfU.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "不明(兩拳一踢)",
+				"gif": "https://i.imgur.com/G7guiTh.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "終極超昇龍",
+				"gif": "https://i.imgur.com/AA4zh69.gif"
+			}
+		],
+		"hiddenNotes": [
+			"廢案招式{{#00ff00:龍飛翔}}被認定為是{{#00ff00:真龍追風}}的前身",
+			"在這裡收錄的三招廢案技能均能按特定指令延長攻擊時間",
+			"收錄在這裡的{{#00ff00:奧義昇龍霸}}只在故事中登場此版本跟玩家使用的有所不同",
+			"終極超昇龍曾經被改動過目前的版本第二版"
 		]
 	},
 	"deep": {
@@ -3302,7 +3584,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "凍結",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/t3Pf0lD.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -3314,7 +3596,7 @@
 				"cost": "150MP",
 				"learnPoints": "30",
 				"trigger": "擊倒/吹飛",
-				"notes": "出招時按\" 拳 \"可繼續揮劍 ，每次追加消耗 100 MP",
+				"notes": "出招時按\"拳\"可繼續揮劍，每次追加消耗100MP",
 				"gif": "https://i.imgur.com/fcyxigW.gif",
 				"icon": "https://i.imgur.com/9IWTqVI.png"
 			},
@@ -3364,6 +3646,33 @@
 				"gif": "https://i.imgur.com/rAExfLg.gif",
 				"icon": "https://i.imgur.com/o0RexNh.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "天之刃",
+				"gif": "https://i.imgur.com/ZpdHg5K.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "劍之力",
+				"gif": "https://i.imgur.com/KWOOPNO.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "龍神劍",
+				"gif": "https://i.imgur.com/rAExfLg.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "滑翔刀",
+				"gif": "https://i.imgur.com/G69Sivg.gif"
+			}
+		],
+		"hiddenNotes": [
+			"廢案招式{{#00ff00:天之刃}}及{{#00ff00:劍之力}}在實裝時經已完成製作可是在目前的版本中尚未正式推出",
+			"{{#00ff00:龍神劍}}當時被設定成奧義 在正式推出時已更名為{{#00ff00:天龍刀}}",
+			"舊版的{{#00ff00:滑翔刀}}自由度非常大持續按\"跳\"能繼續攻擊,還能自由控制移動方向可惜新版把這些功能都移除了"
 		]
 	},
 	"dennis": {
@@ -3438,7 +3747,7 @@
 				"cost": "250MP",
 				"learnPoints": "120",
 				"trigger": "--",
-				"notes": "繼 續按\" 跳 \"可持續旋轉 ，每次追加消耗 125MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "繼續按\"跳\"可持續旋轉，每次追加消耗125MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/6e4MsTF.gif",
 				"icon": "https://i.imgur.com/GfZLRtq.png"
 			},
@@ -3484,7 +3793,7 @@
 				"cost": "400MP",
 				"learnPoints": "200",
 				"trigger": "--",
-				"notes": "繼 續按\" 跳 \"可持續旋轉 ，每次追加消耗 150MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "繼續按\"跳\"可持續旋轉，每次追加消耗150MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/22TmbFc.gif",
 				"icon": "https://i.imgur.com/XKeqh6v.png"
 			},
@@ -3503,7 +3812,7 @@
 				"cost": "100%MP",
 				"learnPoints": "400",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/mlhHkQl.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -3565,6 +3874,48 @@
 				"gif": "https://i.imgur.com/ne0J6QZ.gif",
 				"icon": "https://i.imgur.com/gAoOxQB.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "疾風百裂腳",
+				"gif": "https://i.imgur.com/vy2lm7e.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "幻影旋光舞",
+				"gif": "https://i.imgur.com/cvrnXb7.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "凌空衝刺",
+				"gif": "https://i.imgur.com/kql2RdP.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "野豹之暴走",
+				"gif": "https://i.imgur.com/imjAYG8.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "終極獸王彈",
+				"gif": "https://i.imgur.com/OSs8hwl.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "慧星射球",
+				"gif": "https://i.imgur.com/wRVGGBG.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "銀河旋風腿",
+				"gif": "https://i.imgur.com/oQV9v16.gif"
+			}
+		],
+		"hiddenNotes": [
+			"廢案招式{{#00ff00:疾風百裂腳}}是{{#00ff00:豹皇疾風腿}}的前身",
+			"廢案招式{{#00ff00:銀河旋風腿}}則是{{#00ff00:銀河旋風}}的前身",
+			"本角色的所有廢棄技能目前沒有循環再用到在新技能身上"
 		]
 	},
 	"dilun": {
@@ -3695,7 +4046,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/FyMjhBJ.gif"
 			}
 		],
@@ -3773,6 +4124,71 @@
 				"gif": "https://i.imgur.com/ZrI2Ca3.gif",
 				"icon": "https://i.imgur.com/n12YVvD.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "龍皇噬",
+				"gif": "https://i.imgur.com/XZfy4St.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "真‧昇龍拳",
+				"gif": "https://i.imgur.com/u9Nn62n.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "神龍百裂拳1",
+				"gif": "https://i.imgur.com/FerzJBa.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "神龍百裂拳2",
+				"gif": "https://i.imgur.com/nYmARRh.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "跳超高的昇龍霸",
+				"gif": "https://i.imgur.com/YOWdGe8.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "蒼龍三連擊(",
+				"gif": "https://i.imgur.com/oMDYeeX.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "元力吸法",
+				"gif": "https://i.imgur.com/VK3cshS.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "黑龍之怒",
+				"gif": "https://i.imgur.com/E04OHGq.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "霸王紫焰彈",
+				"gif": "https://i.imgur.com/qfZ9Y33.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "地藏龍",
+				"gif": "https://i.imgur.com/aKpIr6e.gif"
+			}
+		],
+		"hiddenNotes": [
+			"※迪倫人物在2007年剛推出時非常強勢，可是在量產後立即被U1開刀，成為首批被削弱的角色",
+			"最初的{{#00ff00:龍皇噬}}只需要100MP而且攻擊力強橫又能上下使出，由於太霸道所以令當時另外兩招不顯眼",
+			"第二版的{{#00ff00:龍皇噬}}的攻擊力被太幅削弱，MP也加至250，另外使出時自身會後退，本欄收錄的{{#00ff00:龍皇噬}}正是這個版本",
+			"最初的{{#00ff00:真",
+			"昇龍拳}}是迪倫初始三招中最弱的一招，經修改後的第二版變的又強又實用本欄收錄的{{#00ff00:真",
+			"昇龍拳}}正是這個版本",
+			"舊版的{{#00ff00:神龍百裂拳}}是持續攻擊技，可按\"拳\"來持續攻擊，可惜第二版把持續攻擊移除了※終極迪倫當初在初推出時有六招技能",
+			"招式{{#00ff00:元力吸法}}是{{#00ff00:吞天噬日}}的前身",
+			"在特迪中出現的{{#00ff00:黑龍之怒}}在這裡成為了廢案",
+			"初設定的{{#00ff00:霸王紫焰彈}}跟正式推出時的版本相比下，兩者出招的姿勢都不相同",
+			"{{#00ff00:地藏龍}}最初是終極迪倫的招式，因不明理由在推出時把整招重製並設定成少年迪倫的招式了"
 		]
 	},
 	"diluns": {
@@ -3865,7 +4281,7 @@
 				"cost": "200MP",
 				"learnPoints": "9999",
 				"trigger": "--",
-				"notes": "此技能目前的出招方法已被更改成\" ZZZ \"",
+				"notes": "此技能目前的出招方法已被更改成\"ZZZ\"",
 				"gif": "https://i.imgur.com/VK3cshS.gif",
 				"icon": "https://i.imgur.com/3xaMxo2.png"
 			},
@@ -3875,7 +4291,7 @@
 				"cost": "250MP",
 				"learnPoints": "9999",
 				"trigger": "混亂",
-				"notes": "此技能目前的出招方法已被更改成\" ZZZ \"",
+				"notes": "此技能目前的出招方法已被更改成\"ZZZ\"",
 				"gif": "https://i.imgur.com/qfZ9Y33.gif",
 				"icon": "https://i.imgur.com/hcExDYJ.png"
 			},
@@ -3986,7 +4402,20 @@
 				"gif": "https://i.imgur.com/Xm8XgeZ.gif",
 				"icon": "https://i.imgur.com/dORSQMq.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/PKQcx2y.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "被解源咒擊中",
+				"gif": "https://i.imgur.com/MylYNU2.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"fire_apostle": {
 		"slug": "fire_apostle",
@@ -4166,7 +4595,7 @@
 				"cost": "150MP",
 				"learnPoints": "90",
 				"trigger": "焚燒",
-				"notes": "出招時按\" 跳 \"可持續奔跑 ，每次追加消耗 100 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "出招時按\"跳\"可持續奔跑，每次追加消耗100MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/sbM3dbG.gif",
 				"icon": "https://i.imgur.com/38kjLQA.png"
 			},
@@ -4176,7 +4605,7 @@
 				"cost": "150MP",
 				"learnPoints": "80",
 				"trigger": "焚燒",
-				"notes": "出招時按\" 跳 \"可繼續噴火 ，每次追加消耗 80 MP 可按\"←/→\"改變攻擊方向",
+				"notes": "出招時按\"跳\"可繼續噴火，每次追加消耗80MP可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/mobi979.gif",
 				"icon": "https://i.imgur.com/s9U0WD5.png"
 			},
@@ -4231,7 +4660,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/0CROgmZ.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -4270,7 +4699,7 @@
 				"cost": "350MP",
 				"learnPoints": "200",
 				"trigger": "焚燒",
-				"notes": "出招時按\" 跳 \"可繼續噴火 ，每次追加消耗 200 MP",
+				"notes": "出招時按\"跳\"可繼續噴火，每次追加消耗200MP",
 				"gif": "https://i.imgur.com/eRbnnqr.gif",
 				"icon": "https://i.imgur.com/1pzIJKq.png"
 			},
@@ -4402,7 +4831,7 @@
 				"cost": "280MP",
 				"learnPoints": "100",
 				"trigger": "焚燒/凍結",
-				"notes": "出招時按\" 跳 \"可繼續奔跑 ，每次追加消耗 180 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "出招時按\"跳\"可繼續奔跑，每次追加消耗180MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/LmjLK1G.gif",
 				"icon": "https://i.imgur.com/PUpCYuC.png"
 			},
@@ -4421,7 +4850,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒/凍結",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/GOmwqJ7.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -4489,6 +4918,45 @@
 				"gif": "https://i.imgur.com/xY3g0Mz.gif",
 				"icon": "https://i.imgur.com/m2FWsGR.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "穿天轟炸",
+				"gif": "https://i.imgur.com/8oJLkUr.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "冰火世界",
+				"gif": "https://i.imgur.com/9zzvIti.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "真極地大火山",
+				"gif": "https://i.imgur.com/ZgrCALZ.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "A",
+				"gif": "https://i.imgur.com/TooYBdd.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "天魔外傳-攻擊技",
+				"gif": "https://i.imgur.com/JXuczBm.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "真冰火五重天",
+				"gif": "https://i.imgur.com/whBKqbd.gif"
+			}
+		],
+		"hiddenNotes": [
+			"※真天魔的招式大部份都被修改",
+			"{{#00ff00:穿天轟炸}}降落的冰火彈被更改",
+			"{{#00ff00:冰火世界}}被多次重做，最後變成目前的版本目前的版本是第三版，第二版的{{#00ff00:冰火世界}}圖片經已失傳",
+			"{{#00ff00:真冰火五重天}}在完成前意外流出，跟完成版相差甚多曾一度被認為{{#00ff00:真極地大火山}}",
+			"故事中的{{#00ff00:真極地大火山}}為菲雲跟菲沙的合體時所出的招式會有這個名字相信是被LF2影響的太深了…"
 		]
 	},
 	"fox": {
@@ -4563,7 +5031,7 @@
 				"cost": "200MP",
 				"learnPoints": "90",
 				"trigger": "電擊",
-				"notes": "出招時按\" 跳 \"可繼續攻擊 ，每次追加消耗 200 MP 可按\"←/→\"中途改變電轉攻擊的方向",
+				"notes": "出招時按\"跳\"可繼續攻擊，每次追加消耗200MP可按\"←/→\"中途改變電轉攻擊的方向",
 				"gif": "https://i.imgur.com/Vg1bJ9E.gif",
 				"icon": "https://i.imgur.com/OXUXNtC.png"
 			},
@@ -4628,7 +5096,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "浮空+電擊",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/iVq5WVd.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -4679,6 +5147,35 @@
 				"gif": "https://i.imgur.com/4uT9UpN.gif",
 				"icon": "https://i.imgur.com/q9TEsiX.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "雷神之鎚",
+				"gif": "https://i.imgur.com/vyPcj73.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "絕地天行",
+				"gif": "https://i.imgur.com/GiwkxF2.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "雷殛彈",
+				"gif": "https://i.imgur.com/mHZJixR.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "爆旋陀螺",
+				"gif": "https://i.imgur.com/IaVbYdO.gif"
+			}
+		],
+		"hiddenNotes": [
+			"霍雷大部份的招式都被修改過,此處只收錄變化較大的招式：",
+			"{{#00ff00:雷神之鎚}}的特效由放電改為爆炸,效果也由電擊改為焚燒",
+			"{{#00ff00:絕地天行}}原本放出的電擊不會前進的",
+			"舊版的{{#00ff00:爆旋陀螺}}只是單純的突進技",
+			"原來的{{#00ff00:雷殛彈}}是前後兩次攻擊"
 		]
 	},
 	"freeze": {
@@ -4798,7 +5295,7 @@
 				"cost": "300MP",
 				"learnPoints": "220",
 				"trigger": "凍結",
-				"notes": "出招時可以按\"←/→\"中途改變前進方向 按\" 拳 \"可提早進行攻擊",
+				"notes": "出招時可以按\"←/→\"中途改變前進方向按\"拳\"可提早進行攻擊",
 				"gif": "https://i.imgur.com/KpYDZDC.gif",
 				"icon": "https://i.imgur.com/BiYNrLC.png"
 			},
@@ -4808,7 +5305,7 @@
 				"cost": "350MP",
 				"learnPoints": "60",
 				"trigger": "--",
-				"notes": "出招時按\"跳\"會改用 冰錐攻擊 ，追加消耗 150 MP",
+				"notes": "出招時按\"跳\"會改用[冰錐攻擊](https://i.imgur.com/qEvAHZj.gif)，追加消耗150MP",
 				"gif": "https://i.imgur.com/n7bP09B.gif",
 				"icon": "https://i.imgur.com/CrxDqNj.png"
 			},
@@ -4818,7 +5315,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "凍結",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/TfKMQkJ.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -4858,7 +5355,7 @@
 				"cost": "350MP",
 				"learnPoints": "120",
 				"trigger": "--",
-				"notes": "出招時按\" 跳 \"可使出 追加攻擊(飛踢) ，追加消耗 50 MP 追加攻擊 (飛踢) 中按\" 拳 \"可使出 追加攻擊(冰刺) ，追加消耗 100 MP",
+				"notes": "出招時按\"跳\"可使出[追加攻擊(飛踢)](https://i.imgur.com/e9pCXnk.gif)，追加消耗50MP追加攻擊(飛踢)中按\"拳\"可使出[追加攻擊(冰刺)](https://i.imgur.com/GgUOVon.gif)，追加消耗100MP",
 				"gif": "https://i.imgur.com/CZWV6GY.gif",
 				"icon": "https://i.imgur.com/U21A09K.png"
 			},
@@ -4871,6 +5368,9 @@
 				"gif": "https://i.imgur.com/SMgmlZp.gif",
 				"icon": "https://i.imgur.com/gGFkx83.png"
 			}
+		],
+		"hiddenNotes": [
+			"舊版的{{#00ff00:冰封世界}}跟現在的版本相比下有著很大分別舊版本是魔法陣模式的封位技能，新版本則是普通攻擊技"
 		]
 	},
 	"fuku": {
@@ -5096,7 +5596,7 @@
 				"cost": "100MP",
 				"learnPoints": "100",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/kCTr0Al.gif",
 				"icon": "https://i.imgur.com/XXD0U5L.png"
 			},
@@ -5106,7 +5606,7 @@
 				"cost": "300MP",
 				"learnPoints": "150",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可延長鎖鏈攻擊的時間 ，追加消耗 100 MP",
+				"notes": "出招時按\"拳\"可延長鎖鏈攻擊的時間，追加消耗100MP",
 				"gif": "https://i.imgur.com/vvSsdT1.gif",
 				"icon": "https://i.imgur.com/RSaRqXr.png"
 			},
@@ -5125,7 +5625,7 @@
 				"cost": "350MP",
 				"learnPoints": "250",
 				"trigger": "--",
-				"notes": "出招時按\" 跳 \"可延長鎖鏈攻擊的時間 ，追加消耗 200 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "出招時按\"跳\"可延長鎖鏈攻擊的時間，追加消耗200MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/tVY3QQX.gif",
 				"icon": "https://i.imgur.com/NAzgOjB.png"
 			},
@@ -5171,7 +5671,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "電擊",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/3S3TBlO.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -5183,7 +5683,7 @@
 				"cost": "200MP",
 				"learnPoints": "80",
 				"trigger": "焚燒",
-				"notes": "出招時按\" 拳 \"可延長鎖鏈攻擊的時間 ，追加消耗 100MP",
+				"notes": "出招時按\"拳\"可延長鎖鏈攻擊的時間，追加消耗100MP",
 				"gif": "https://i.imgur.com/QrWD9Ky.gif",
 				"icon": "https://i.imgur.com/vqyHMGO.png"
 			},
@@ -5193,7 +5693,7 @@
 				"cost": "300MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可使出 追加攻擊 ，追加消耗 100MP",
+				"notes": "出招時按\"拳\"可使出[追加攻擊](https://i.imgur.com/SITUIZW.gif)，追加消耗100MP",
 				"gif": "https://i.imgur.com/VzcUc6B.gif",
 				"icon": "https://i.imgur.com/8Mh8qbw.png"
 			},
@@ -5203,7 +5703,7 @@
 				"cost": "400MP",
 				"learnPoints": "100",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/pYcByHe.gif",
 				"icon": "https://i.imgur.com/mlvjVW0.png"
 			},
@@ -5372,7 +5872,7 @@
 				"cost": "200MP",
 				"learnPoints": "60",
 				"trigger": "--",
-				"notes": "需要接近敵人時使用才會 發動攻擊動作",
+				"notes": "需要接近敵人時使用才會[發動攻擊動作](https://i.imgur.com/s1GgybA.gif)",
 				"gif": "https://i.imgur.com/jry49YQ.gif",
 				"icon": "https://i.imgur.com/PitJ4zB.png"
 			},
@@ -5403,6 +5903,32 @@
 				"gif": "https://i.imgur.com/5OtLMGt.gif",
 				"icon": "https://i.imgur.com/nV2jxkl.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "疾風刺裂",
+				"gif": "https://i.imgur.com/H7aZ7SO.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "魔烈風",
+				"gif": "https://i.imgur.com/bP0AUqt.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "逼退",
+				"gif": "https://i.imgur.com/NT4CUFH.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "無限超界",
+				"gif": "https://i.imgur.com/WbT4tsy.gif"
+			}
+		],
+		"hiddenNotes": [
+			"由於哈邦的動作是由索特的動作中套用而來所以理論上能夠使出哈邦的技能",
+			"而{{#00ff00:無限超界}}這招相信是U1設定給哈邦的奧義"
 		]
 	},
 	"hanzou": {
@@ -5518,7 +6044,15 @@
 				"gif": "https://i.imgur.com/jUHqXjv.gif",
 				"icon": "https://i.imgur.com/1aYu4o3.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/4OV8Ybw.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"hector": {
 		"slug": "hector",
@@ -5583,7 +6117,7 @@
 				"cost": "400MP",
 				"learnPoints": "40",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可持續放出剎動波 ，每次追加消耗 200 MP",
+				"notes": "出招時按\"拳\"可持續放出剎動波，每次追加消耗200MP",
 				"gif": "https://i.imgur.com/AUiCIgY.gif",
 				"icon": "https://i.imgur.com/Jrno8MS.png"
 			},
@@ -5602,7 +6136,7 @@
 				"cost": "350MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/N1KNGlm.gif",
 				"icon": "https://i.imgur.com/08KjZAd.png"
 			},
@@ -5639,7 +6173,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "暈眩",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/639TXhG.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -5682,7 +6216,15 @@
 				"gif": "https://i.imgur.com/zmN237z.gif",
 				"icon": "https://i.imgur.com/6sjOumU.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "空中沖刺",
+				"gif": "https://i.imgur.com/b31Y14c.gif"
+			}
+		],
+		"hiddenNotes": ["這個動作只要在空中按兩次\"←/→\"即可使用目前只有極少數的角色才擁有這個動作"]
 	},
 	"heng": {
 		"slug": "heng",
@@ -5951,7 +6493,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/BWM7Qrg.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -6002,6 +6544,65 @@
 				"gif": "https://i.imgur.com/S0mbEij.gif",
 				"icon": "https://i.imgur.com/SxTzR6b.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "新百步穿揚",
+				"gif": "https://i.imgur.com/MIXCWo9.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新穿心矢",
+				"gif": "https://i.imgur.com/KTK9dXS.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新漫天飛矢",
+				"gif": "https://i.imgur.com/ZXUayJb.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新降龍掌",
+				"gif": "https://i.imgur.com/kgp0JJB.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "伏虎拳",
+				"gif": "https://i.imgur.com/nqYtLjb.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "四連矢",
+				"gif": "https://i.imgur.com/gFN2nuH.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "暗箭難扔",
+				"gif": "https://i.imgur.com/0ZATfhQ.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "太陽矢",
+				"gif": "https://i.imgur.com/P8K3ouF.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "翔天穿空矢",
+				"gif": "https://i.imgur.com/3vbSy3p.gif"
+			},
+			{
+				"category": "無法判定",
+				"name": "一箭千里(新動作)",
+				"gif": "https://i.imgur.com/vx8dR5N.gif"
+			}
+		],
+		"hiddenNotes": [
+			"※廢案招式名稱以異轉草圖為準",
+			"{{#00ff00:新百步穿揚}}在正式推出時已更名為{{#00ff00:一箭千里}}",
+			"舊版的{{#00ff00:翔天穿空矢}}的動作看上去比較普通",
+			"目前新版的{{#00ff00:翔天穿空矢}}使用了{{#00ff00:暗箭難扔}}的動作",
+			"新生亨利{{#00ff00:一箭千里}}的一共收錄了兩個動作 未知是已成為廢案的動作還是將來更新取代目前{{#00ff00:一箭千里}}的新動作"
 		]
 	},
 	"ice_apostle": {
@@ -6315,7 +6916,7 @@
 				"cost": "120MP",
 				"learnPoints": "40",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"持續跑步 ，每次追加消耗 120 MP 按\"←/→\"則可進行攻擊 ， 消耗 120 MP",
+				"notes": "出招時按\"拳\"持續跑步，每次追加消耗120MP按\"←/→\"則可進行攻擊，消耗120MP",
 				"gif": "https://i.imgur.com/iZP7XsY.gif",
 				"icon": "https://i.imgur.com/NCDmxCZ.png"
 			},
@@ -6352,7 +6953,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/3XsPuUR.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -6632,7 +7233,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/Poa9kAc.gif"
 			}
 		]
@@ -6747,7 +7348,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/hL3PLOj.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -6798,6 +7399,17 @@
 				"gif": "https://i.imgur.com/JaYQvlf.gif",
 				"icon": "https://i.imgur.com/3EWDaBs.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "沒有名字的招式",
+				"gif": "https://i.imgur.com/qsENcxC.gif"
+			}
+		],
+		"hiddenNotes": [
+			"在實裝時已存在,並有跟本招對應的技能圖示,因不明原因而成為廢案該技能圖示目前被疾風連打使用",
+			"招式{{#00ff00:烈焰鳳凰}}本來有對應的招式圖示目前因不明原因變成了其他東西…※那麼說來新生璇瓏如果沒有廢棄任何招式的話現在應該有是有6招嗎？"
 		]
 	},
 	"john": {
@@ -6938,7 +7550,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/WknLd5g.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -6981,6 +7593,64 @@
 				"gif": "https://i.imgur.com/dPvvFYN.gif",
 				"icon": "https://i.imgur.com/1KbthfM.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "未來新招",
+				"name": "魔法破壞光(暫名)",
+				"gif": "https://i.imgur.com/4VE98Ve.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "反力結界",
+				"gif": "https://i.imgur.com/m11njzQ.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "破邪降法",
+				"gif": "https://i.imgur.com/P0y9WRO.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "破魔轉",
+				"gif": "https://i.imgur.com/VSg1BTR.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新防護壁",
+				"gif": "https://i.imgur.com/hFtK6Sq.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新治療術",
+				"gif": "https://i.imgur.com/DkbDwoH.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新破邪結界",
+				"gif": "https://i.imgur.com/g3tF9H0.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新破邪彈",
+				"gif": "https://i.imgur.com/5U8RYFI.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新透身咒",
+				"gif": "https://i.imgur.com/95IKyyu.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "極樂棒",
+				"gif": "https://i.imgur.com/gt3dHRa.gif"
+			}
+		],
+		"hiddenNotes": [
+			"原先預定要實裝的第五招,目前已胎死腹中是新生約翰首個遠距離攻擊技",
+			"原本的{{#00ff00:反力結界}}是個非常優秀的牽制技能，可是沒什麼攻擊力...目前的版本比較簡單，但地面的結界被移除了...",
+			"各種廢案招式在實裝時經已完成製作，目前的版本中尚未正式推出這些技能的數據目前因不明原因被刪除",
+			"新透身咒曾經在故事中有使出過一次"
 		]
 	},
 	"judi": {
@@ -7046,7 +7716,7 @@
 				"cost": "150MP",
 				"learnPoints": "40",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可使出 破風勢",
+				"notes": "出招時按\"拳\"可使出[破風勢](https://i.imgur.com/cOUGwDC.gif)",
 				"gif": "https://i.imgur.com/hgUk14q.gif",
 				"icon": "https://i.imgur.com/rgBQZWs.png"
 			},
@@ -7056,7 +7726,7 @@
 				"cost": "100MP",
 				"learnPoints": "60",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可使出 乘風腿",
+				"notes": "出招時按\"拳\"可使出[乘風腿](https://i.imgur.com/YdfBUks.gif)",
 				"gif": "https://i.imgur.com/cOUGwDC.gif",
 				"icon": "https://i.imgur.com/UVwJooi.png"
 			},
@@ -7094,7 +7764,7 @@
 				"cost": "200MP",
 				"learnPoints": "260",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可使出 追加攻擊 ，追加消耗 150 MP",
+				"notes": "出招時按\"拳\"可使出[追加攻擊](https://i.imgur.com/I4JAvVs.gif)，追加消耗150MP",
 				"gif": "https://i.imgur.com/BE8N9K7.gif",
 				"icon": "https://i.imgur.com/bI0M8mn.png"
 			},
@@ -7117,6 +7787,16 @@
 				"gif": "https://i.imgur.com/VxQCbpm.gif",
 				"icon": "https://i.imgur.com/bBFq50X.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "未來新招",
+				"name": "動作",
+				"gif": "https://i.imgur.com/9hREAMU.gif"
+			}
+		],
+		"hiddenNotes": [
+			"目前推斷是未實裝完成的奧義技,目前已胎死腹中雖然技能未完成，但是該動作已有攻擊判定…"
 		]
 	},
 	"julian": {
@@ -7182,7 +7862,7 @@
 				"cost": "100MP",
 				"learnPoints": "40",
 				"trigger": "電擊",
-				"notes": "出招時可按\" 拳 \"以繼續放出骷髏波 ，每次追加消耗 100 MP",
+				"notes": "出招時可按\"拳\"以繼續放出骷髏波，每次追加消耗100MP",
 				"gif": "https://i.imgur.com/BTWpLK8.gif",
 				"icon": "https://i.imgur.com/M2uM9n0.png"
 			},
@@ -7228,7 +7908,7 @@
 				"cost": "550MP",
 				"learnPoints": "280",
 				"trigger": "電擊",
-				"notes": "出招時按\"拳\"可使用 追加攻擊 ，追加消耗 300 MP",
+				"notes": "出招時按\"拳\"可使用[追加攻擊](https://i.imgur.com/haasHz6.gif)，追加消耗300MP",
 				"gif": "https://i.imgur.com/M9uVw0T.gif",
 				"icon": "https://i.imgur.com/z2AKGjI.png"
 			},
@@ -7238,7 +7918,7 @@
 				"cost": "400MP",
 				"learnPoints": "350",
 				"trigger": "暈眩/電擊",
-				"notes": "出招時按\" 拳 \"可使用 追加攻擊 ，毋需消耗 MP",
+				"notes": "出招時按\"拳\"可使用[追加攻擊](https://i.imgur.com/jdReccT.gif)，毋需消耗MP",
 				"gif": "https://i.imgur.com/BPUTnXR.gif",
 				"icon": "https://i.imgur.com/QKX2Mpi.png"
 			},
@@ -7248,7 +7928,7 @@
 				"cost": "400MP",
 				"learnPoints": "60",
 				"trigger": "電擊",
-				"notes": "出招時按\" 跳 \"可使用 追加攻擊 ，毋需消耗 MP 使出追加攻擊前按住\"←/→\"以決定追加攻擊的方向",
+				"notes": "出招時按\"跳\"可使用[追加攻擊](https://i.imgur.com/PrVBei7.gif)，毋需消耗MP使出追加攻擊前按住\"←/→\"以決定追加攻擊的方向",
 				"gif": "https://i.imgur.com/zLM0Xls.gif",
 				"icon": "https://i.imgur.com/XtcLiWS.png"
 			},
@@ -7258,7 +7938,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/AV0ZWnO.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -7270,7 +7950,7 @@
 				"cost": "150MP",
 				"learnPoints": "40",
 				"trigger": "電擊",
-				"notes": "出招時可按\" 拳 \"以繼續放出鬼靈波 ，每次追加消耗 100 MP",
+				"notes": "出招時可按\"拳\"以繼續放出鬼靈波，每次追加消耗100MP",
 				"gif": "https://i.imgur.com/AVc1yrr.gif",
 				"icon": "https://i.imgur.com/jOupiUW.png"
 			},
@@ -7320,6 +8000,39 @@
 				"gif": "https://i.imgur.com/OEuvqE4.gif",
 				"icon": "https://i.imgur.com/R0BxZd9.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "戰神衝擊波",
+				"gif": "https://i.imgur.com/gypwVaw.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "戰之道",
+				"gif": "https://i.imgur.com/UiSyT7i.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "兄弟同心",
+				"gif": "https://i.imgur.com/N2nwUcD.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "決戰日",
+				"gif": "https://i.imgur.com/ICCaTRo.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "邪神怒吼",
+				"gif": "https://i.imgur.com/C2Nxg5c.gif"
+			}
+		],
+		"hiddenNotes": [
+			"當年新生邪鬼實裝時已有六招初始技能在最新版本中除了{{#00ff00:戰神衝擊波}}其他都已實裝",
+			"而六招初始技能中，最不起眼的相信是{{#00ff00:戰之道}}整招只出四拳，攻擊力跟普攻沒分別，被玩家稱為最弱技能之一最後被U1改頭換面重製，成為了現在的版本",
+			"兩組故事技能均以新生邪鬼目前所擁有的技能組合而成的連技",
+			"{{#00ff00:邪神怒吼}}被修改前是一招0起手0收手的霸道招式現在已被移除了，新的版本變的較合理，攻擊力都比舊版高..."
 		]
 	},
 	"karl": {
@@ -7406,7 +8119,15 @@
 				"gif": "https://i.imgur.com/3pa4AtF.gif",
 				"icon": "https://i.imgur.com/ms3Z13U.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/jmufE3Y.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現合體戰神中唯一正常升級的人…"]
 	},
 	"kigai": {
 		"slug": "kigai",
@@ -7605,7 +8326,7 @@
 				"cost": "400MP",
 				"learnPoints": "350",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可繼續旋轉 ，每次追加消耗 50 MP 可按\"←/→\"改變前進的方向",
+				"notes": "出招時按\"拳\"可繼續旋轉，每次追加消耗50MP可按\"←/→\"改變前進的方向",
 				"gif": "https://i.imgur.com/fNPt2U2.gif",
 				"icon": "https://i.imgur.com/53vDwoc.png"
 			},
@@ -7796,7 +8517,7 @@
 				"cost": "400MP",
 				"learnPoints": "100",
 				"trigger": "焚燒",
-				"notes": "出招時按\" 拳 \"可使用追加攻擊 ，追加消耗 200 MP",
+				"notes": "出招時按\"拳\"可使用追加攻擊，追加消耗200MP",
 				"gif": "https://i.imgur.com/cr18S1U.gif",
 				"icon": "https://i.imgur.com/EjULJmD.png"
 			},
@@ -7815,7 +8536,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/MHpu0LP.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -8018,6 +8739,27 @@
 				"gif": "https://i.imgur.com/V7ZrqJO.gif",
 				"icon": "https://i.imgur.com/mqR0dyS.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "異轉招式A",
+				"gif": "https://i.imgur.com/7looUOn.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "異轉招式B",
+				"gif": "https://i.imgur.com/ERAqnPL.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "動作",
+				"gif": "https://i.imgur.com/jT7fAkt.gif"
+			}
+		],
+		"hiddenNotes": [
+			"兩招廢棄技在實裝時均已存在,目前不明原因而成為廢案",
+			"{{#00ff00:戰神之盾}}原本的技能圖示有收錄在官網中目前遊戲中的{{#00ff00:戰神之盾}}圖示應該是對應{{#00ff00:黃龍咆哮}}的而對應「{{#00ff00:異轉招式A}}」的技能圖示目前被{{#00ff00:黃龍咆哮}}使用中"
 		]
 	},
 	"kovalchuk": {
@@ -8129,7 +8871,7 @@
 				"cost": "400MP",
 				"learnPoints": "60",
 				"trigger": "--",
-				"notes": "出招時按\" 跳 \"可持續滾動 ，每次追加消耗 200 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "出招時按\"跳\"可持續滾動，每次追加消耗200MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/WFwNci7.gif",
 				"icon": "https://i.imgur.com/q4SXvGv.png"
 			}
@@ -8162,6 +8904,27 @@
 				"gif": "https://i.imgur.com/x2Lkv1A.gif",
 				"icon": "https://i.imgur.com/S43sVCL.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "封天空襲",
+				"gif": "https://i.imgur.com/h8E7TxV.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "粉碎爪",
+				"gif": "https://i.imgur.com/VKauhMO.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "魔人擁抱",
+				"gif": "https://i.imgur.com/oP5f2h2.gif"
+			}
+		],
+		"hiddenNotes": [
+			"舊版本的{{#00ff00:封天空襲}}是有一個跳躍的起手目前版本已把這個起手刪除了",
+			"這裡的{{#00ff00:粉碎爪}}跟{{#00ff00:魔人擁抱}}是故事中烏邪所用的技能"
 		]
 	},
 	"landon": {
@@ -8230,6 +8993,16 @@
 				"gif": "https://i.imgur.com/nC7kQOm.gif",
 				"icon": "https://i.imgur.com/pQC8m9c.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/petyIqr.gif"
+			}
+		],
+		"hiddenNotes": [
+			"本角色升級時所使出來的動作，正常只會在升級時出現在正式實裝前，這動作曾被設定為{{#00ff00:八陣燒岩破}}"
 		]
 	},
 	"lava": {
@@ -8359,10 +9132,25 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/veoYJDV.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "末日火焰",
+				"gif": "https://i.imgur.com/pLt4K5B.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "熔岩球",
+				"gif": "https://i.imgur.com/LTuQc6k.gif"
+			}
+		],
+		"hiddenNotes": [
+			"舊版的{{#00ff00:末日火焰}}跟新版的相比新版在起手前後增加了小爆炸，而且整招攻擊時間縮小了"
 		]
 	},
 	"lit": {
@@ -8437,7 +9225,7 @@
 				"cost": "150MP",
 				"learnPoints": "60",
 				"trigger": "吹飛",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/6q8O3Ba.gif",
 				"icon": "https://i.imgur.com/spcqRef.png"
 			},
@@ -8477,7 +9265,7 @@
 				"cost": "350MP",
 				"learnPoints": "70",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/Ry8xBdY.gif",
 				"icon": "https://i.imgur.com/fswEHb5.png"
 			}
@@ -8620,7 +9408,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/NuT51Jx.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -8632,7 +9420,7 @@
 				"cost": "350MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可繼續旋轉攻擊 ，每次追加消耗 100 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "出招時按\"拳\"可繼續旋轉攻擊，每次追加消耗100MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/7u3uO7E.gif",
 				"icon": "https://i.imgur.com/JDXn3WX.png"
 			},
@@ -8682,6 +9470,16 @@
 				"gif": "https://i.imgur.com/JjXkAvf.gif",
 				"icon": "https://i.imgur.com/1TJdFhR.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "狂虎彈",
+				"gif": "https://i.imgur.com/uwN6aiz.gif"
+			}
+		],
+		"hiddenNotes": [
+			"舊版的{{#00ff00:狂虎彈}}只是向下地面發射一個飛行物件，而新被改成向前方發射而且會爆炸"
 		]
 	},
 	"louisex": {
@@ -8794,7 +9592,7 @@
 				"cost": "400MP",
 				"learnPoints": "230",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可繼續放出死光 ，每次追加消耗 120 MP",
+				"notes": "出招時按\"拳\"可繼續放出死光，每次追加消耗120MP",
 				"gif": "https://i.imgur.com/HMb7K40.gif",
 				"icon": "https://i.imgur.com/k8KV5Sv.png"
 			},
@@ -8823,7 +9621,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "中毒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/vz7LWg0.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -8885,6 +9683,38 @@
 				"gif": "https://i.imgur.com/yl0cts4.gif",
 				"icon": "https://i.imgur.com/CQwuVkh.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "餓虎爪",
+				"gif": "https://i.imgur.com/ZNZk7FE.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "餓鬼召喚",
+				"gif": "https://i.imgur.com/W5i3rn0.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "終極滅殺道",
+				"gif": "https://i.imgur.com/RsymGQt.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "餓虎段‧下",
+				"gif": "https://i.imgur.com/dHsqpRf.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "凶獸元力覺醒",
+				"gif": "https://i.imgur.com/zAo58Aq.gif"
+			}
+		],
+		"hiddenNotes": [
+			"極惡龍翼在實裝時已有九招技能,目前大部份都已相繼推出餘下的三招目前仍未正式推出，仍在廢案狀態",
+			"舊版的{{#00ff00:餓虎段",
+			"下}}的兩次攻擊均為對地攻擊新版把第二次攻擊的方向改成正前方了"
 		]
 	},
 	"marcus": {
@@ -8968,7 +9798,7 @@
 				"cost": "600MP",
 				"learnPoints": "65",
 				"trigger": "電擊",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/rnjSh8D.gif",
 				"icon": "https://i.imgur.com/3M1G9l5.png"
 			},
@@ -8987,10 +9817,57 @@
 				"cost": "500MP",
 				"learnPoints": "60",
 				"trigger": "電擊",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向 按\" 跳 \"可使出 追加攻擊 ，追加消耗 300 MP",
+				"notes": "起手前可按\"←/→\"改變攻擊方向按\"跳\"可使出[追加攻擊](https://i.imgur.com/SQEYjlT.gif)，追加消耗300MP",
 				"gif": "https://i.imgur.com/NvQDWpk.gif",
 				"icon": "https://i.imgur.com/ekn4Z9e.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "擊落破",
+				"gif": "https://i.imgur.com/BZTWFuf.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "眩目掌",
+				"gif": "https://i.imgur.com/cSAjRqH.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "斷獄勢",
+				"gif": "https://i.imgur.com/0RwC2Qx.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "擊落破2",
+				"gif": "https://i.imgur.com/j6wcr2N.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "眩目掌2",
+				"gif": "https://i.imgur.com/rhgoKof.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "斷獄勢2",
+				"gif": "https://i.imgur.com/6b95K6z.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "解源咒",
+				"gif": "https://i.imgur.com/3HMILkO.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "真空天刃",
+				"gif": "https://i.imgur.com/7cLhNky.gif"
+			}
+		],
+		"hiddenNotes": [
+			"※武官的技能曾經被多次改動過",
+			"一開始的基本三招均是非常普通的體術技能第一次改動後把三招都改成現在版本的雛型第二次改動後便是現在的版本了",
+			"{{#00ff00:解源咒}}是三位戰鬥型摩摩星人對合體戰神的技倆目前只在故事中出現"
 		]
 	},
 	"marek": {
@@ -9104,6 +9981,16 @@
 				"gif": "https://i.imgur.com/rTB2Xue.gif",
 				"icon": "https://i.imgur.com/fmN4ea1.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "劇毒彈",
+				"gif": "https://i.imgur.com/lgfFM8C.gif"
+			}
+		],
+		"hiddenNotes": [
+			"這裡收錄的{{#00ff00:劇毒彈}}是當初實裝時的版本，不過被U1極速修改威力比現在的版本強一點"
 		]
 	},
 	"milo": {
@@ -9223,7 +10110,7 @@
 				"cost": "280MP",
 				"learnPoints": "250",
 				"trigger": "--",
-				"notes": "出招時連續按\" 拳 \"可繼續踐踏地面 ，每次追加消耗 200 MP",
+				"notes": "出招時連續按\"拳\"可繼續踐踏地面，每次追加消耗200MP",
 				"gif": "https://i.imgur.com/40eMICo.gif",
 				"icon": "https://i.imgur.com/qwetRHp.png"
 			},
@@ -9242,7 +10129,7 @@
 				"cost": "100%MP",
 				"learnPoints": "250",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/aSX4vW9.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -9293,6 +10180,16 @@
 				"gif": "https://i.imgur.com/pm3P4bn.gif",
 				"icon": "https://i.imgur.com/y8Ohman.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "青狗合擊",
+				"gif": "https://i.imgur.com/ooiNCjn.gif"
+			}
+		],
+		"hiddenNotes": [
+			"{{#00ff00:青狗合擊}}當初只是以普通的第九招實裝，消耗400MP很來跟米兒的{{#00ff00:女媧下凡}}雙雙被U1改成奧義"
 		]
 	},
 	"molson": {
@@ -9394,7 +10291,7 @@
 				"cost": "250MP",
 				"learnPoints": "150",
 				"trigger": "--",
-				"notes": "起手前按\"←/→\"可改變潛行時移動 的方向 潛行時 按\"←/→\"可改變潛行結束後的攻擊 方向",
+				"notes": "起手前按\"←/→\"可改變潛行時移動的方向潛行時按\"←/→\"可改變潛行結束後的攻擊方向",
 				"gif": "https://i.imgur.com/XJP6F3y.gif",
 				"icon": "https://i.imgur.com/kOxlyuK.png"
 			},
@@ -9523,6 +10420,57 @@
 				"gif": "https://i.imgur.com/Sr9tI19.gif",
 				"icon": "https://i.imgur.com/KZFUuKt.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "泥墜",
+				"gif": "https://i.imgur.com/Qn2XZ5i.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "泥墜(空)",
+				"gif": "https://i.imgur.com/3IqfzrQ.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "泥手",
+				"gif": "https://i.imgur.com/C7zUjHm.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "招式4",
+				"gif": "https://i.imgur.com/kQQjUUM.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "招式5",
+				"gif": "https://i.imgur.com/4MXfd5q.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "招式6",
+				"gif": "https://i.imgur.com/7mTU1wB.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "招式7",
+				"gif": "https://i.imgur.com/hLYbLhU.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "招式8",
+				"gif": "https://i.imgur.com/XFOmM54.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "招式9",
+				"gif": "https://i.imgur.com/O2NSuvU.gif"
+			}
+		],
+		"hiddenNotes": [
+			"基本三招都在推出後不久改動過以上收錄的均是修改前的模樣基中{{#00ff00:泥墜(空)}}是必須要在空中才能使出",
+			"其實泥鬼在實裝時已有齊九招的動作，其招式名稱均為不明可惜目前只正式推出了三招其他已經胎死腹中…"
 		]
 	},
 	"nina": {
@@ -9651,7 +10599,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/ccPfWNJ.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -9692,6 +10640,22 @@
 				"gif": "https://i.imgur.com/zXp4CTD.gif",
 				"icon": "https://i.imgur.com/mENhDW6.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "無法判定",
+				"name": "不明招式",
+				"gif": "https://i.imgur.com/TKAhz3P.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "獲得全新力量",
+				"gif": "https://i.imgur.com/hph7eN6.gif"
+			}
+		],
+		"hiddenNotes": [
+			"蓮娜的動作中有著這個奇怪的招式，目前無相關資料…",
+			"{{#00ff00:獲得全新力量}}的光柱有攻擊力"
 		]
 	},
 	"ninjaking": {
@@ -9775,7 +10739,7 @@
 				"cost": "200MP",
 				"learnPoints": "200",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/E8o7S1d.gif",
 				"icon": "https://i.imgur.com/Ko0Gz48.png"
 			},
@@ -9785,7 +10749,7 @@
 				"cost": "300MP",
 				"learnPoints": "120",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/OAmfoB0.gif",
 				"icon": "https://i.imgur.com/gXs402C.png"
 			},
@@ -9918,7 +10882,7 @@
 				"cost": "350MP",
 				"learnPoints": "130",
 				"trigger": "電擊",
-				"notes": "出招時可按\" 拳 \"使出 追加攻擊 ，追加消耗 20 0 MP",
+				"notes": "出招時可按\"拳\"使出[追加攻擊](https://i.imgur.com/MEE4FOV.gif)，追加消耗200MP",
 				"gif": "https://i.imgur.com/GNwqJlw.gif",
 				"icon": "https://i.imgur.com/4GYJhqI.png"
 			},
@@ -9966,7 +10930,7 @@
 				"cost": "800MP",
 				"learnPoints": "100",
 				"trigger": "電擊",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/kb1o9r8.gif",
 				"icon": "https://i.imgur.com/yEXhfiw.png"
 			},
@@ -9976,7 +10940,7 @@
 				"cost": "500MP",
 				"learnPoints": "70",
 				"trigger": "電擊",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/zqN8tQn.gif",
 				"icon": "https://i.imgur.com/TFS0SDB.png"
 			},
@@ -10067,6 +11031,22 @@
 				"gif": "https://i.imgur.com/Ae821Wy.gif",
 				"icon": "https://i.imgur.com/TjWRIhd.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/2ElVEnd.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "第五招",
+				"gif": "https://i.imgur.com/XtkotGz.gif"
+			}
+		],
+		"hiddenNotes": [
+			"本角色升級時所使出來的動作，正常只會在升級時出現",
+			"原本預定要實裝的第五招,目前已胎死腹中…連招式圖示都有了…"
 		]
 	},
 	"omegah": {
@@ -10186,7 +11166,7 @@
 				"cost": "400MP",
 				"learnPoints": "200",
 				"trigger": "中毒",
-				"notes": "出招時按\" 拳 \"以增長毒身攻擊的時間 ，每次追加消耗 100 MP 可按\"←/→\"改變前進的方向",
+				"notes": "出招時按\"拳\"以增長毒身攻擊的時間，每次追加消耗100MP可按\"←/→\"改變前進的方向",
 				"gif": "https://i.imgur.com/AgpyDK7.gif",
 				"icon": "https://i.imgur.com/4vX4NVM.png"
 			},
@@ -10205,7 +11185,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "電擊",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/DB04uyr.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -10375,7 +11355,7 @@
 				"cost": "350MP",
 				"learnPoints": "250",
 				"trigger": "焚燒",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向 持續按\" 拳 \"可繼續攻擊 ，每次追加消耗 50MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向持續按\"拳\"可繼續攻擊，每次追加消耗50MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/89saMgE.gif",
 				"icon": "https://i.imgur.com/KP2ob3G.png"
 			},
@@ -10394,7 +11374,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/RycU0MC.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -10438,7 +11418,15 @@
 				"gif": "https://i.imgur.com/EGS2JbH.gif",
 				"icon": "https://i.imgur.com/izgshYB.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "故事動作",
+				"name": "獲得全新力量",
+				"gif": "https://i.imgur.com/KaQBsVT.gif"
+			}
+		],
+		"hiddenNotes": ["{{#00ff00:獲得全新力量}}的光柱有攻擊力"]
 	},
 	"paco": {
 		"slug": "paco",
@@ -10572,6 +11560,22 @@
 				"gif": "https://i.imgur.com/Ql8Ob6j.gif",
 				"icon": "https://i.imgur.com/XU5WLiC.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "火機大爆炸",
+				"gif": "https://i.imgur.com/1RBlmxG.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "轟天密林",
+				"gif": "https://i.imgur.com/NraWpCx.gif"
+			}
+		],
+		"hiddenNotes": [
+			"跟舊版相比，新版的{{#00ff00:火機大爆炸}}看上去更有威脅性",
+			"新舊版的{{#00ff00:轟天密林}}相比下有著較大的差別"
 		]
 	},
 	"phoenix": {
@@ -10679,7 +11683,15 @@
 				"gif": "https://i.imgur.com/p03xKXG.gif",
 				"icon": "https://i.imgur.com/h9psVRY.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/OWSrNoh.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"pokai": {
 		"slug": "pokai",
@@ -10748,6 +11760,17 @@
 				"gif": "https://i.imgur.com/EI0dx8C.gif",
 				"icon": "https://i.imgur.com/u7skZIy.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/hP4c0cP.gif"
+			}
+		],
+		"hiddenNotes": [
+			"本角色升級時所使出來的動作，正常只會在升級時出現",
+			"大滾蛋本是預定要實裝的波加第四招,最後卻胎死腹中…"
 		]
 	},
 	"ricky": {
@@ -10910,7 +11933,7 @@
 				"cost": "450MP",
 				"learnPoints": "100",
 				"trigger": "電擊",
-				"notes": "出招時按\" 拳 \"可使出 追加攻擊 ， 追加消耗 200 MP",
+				"notes": "出招時按\"拳\"可使出[追加攻擊](https://i.imgur.com/TCiuzjD.gif)，追加消耗200MP",
 				"gif": "https://i.imgur.com/QRPVu2Q.gif",
 				"icon": "https://i.imgur.com/ChyEE5L.png"
 			},
@@ -10923,7 +11946,20 @@
 				"gif": "https://i.imgur.com/IlgGmRb.gif",
 				"icon": "https://i.imgur.com/vx2irh6.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "霸王拳",
+				"gif": "https://i.imgur.com/KjTOBBY.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "霸王流星擊",
+				"gif": "https://i.imgur.com/BpjngIK.gif"
+			}
+		],
+		"hiddenNotes": ["歷奇改版前的招式都比較簡單一點變化較大的有以上兩招"]
 	},
 	"rova": {
 		"slug": "rova",
@@ -10988,7 +12024,7 @@
 				"cost": "100MP",
 				"learnPoints": "100",
 				"trigger": "--",
-				"notes": "需要擊中敵人才會發動 餘下的攻擊",
+				"notes": "需要擊中敵人才會發動[餘下的攻擊](https://i.imgur.com/ZWB8BA7.gif)",
 				"gif": "https://i.imgur.com/JrR8Bnq.gif",
 				"icon": "https://i.imgur.com/ytAJ8MH.png"
 			},
@@ -10998,7 +12034,7 @@
 				"cost": "200MP",
 				"learnPoints": "150",
 				"trigger": "--",
-				"notes": "起手前及出招時均可按\"←/→\"改變攻擊的 方向",
+				"notes": "起手前及出招時均可按\"←/→\"改變攻擊的方向",
 				"gif": "https://i.imgur.com/6GswTmh.gif",
 				"icon": "https://i.imgur.com/VefTPJQ.png"
 			},
@@ -11035,7 +12071,7 @@
 				"cost": "120MP",
 				"learnPoints": "260",
 				"trigger": "--",
-				"notes": "飛踢後按\" 拳 \"可繼續 追加攻擊 ， 消耗 50 MP 此追加攻擊可再按\" 拳 \" 進行 第二次追加 ， 消耗 200 MP",
+				"notes": "飛踢後按\"拳\"可繼續[追加攻擊](https://i.imgur.com/tQux5Xv.gif)，消耗50MP 此追加攻擊可再按\"拳\"進行[第二次追加](https://i.imgur.com/9X1pbmg.gif)，消耗200MP",
 				"gif": "https://i.imgur.com/kBaCpiF.gif",
 				"icon": "https://i.imgur.com/4Kmo4vA.png"
 			},
@@ -11063,7 +12099,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "暈眩",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/r2Wd50A.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -11093,7 +12129,7 @@
 				"cost": "350MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/3hQbRcT.gif",
 				"icon": "https://i.imgur.com/z8JHWTc.png"
 			},
@@ -11106,7 +12142,15 @@
 				"gif": "https://i.imgur.com/iOsXIGM.gif",
 				"icon": "https://i.imgur.com/M2p2k9r.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "未來新招",
+				"name": "新驚天掌(暫名)",
+				"gif": "https://i.imgur.com/4B0NmsS.gif"
+			}
+		],
+		"hiddenNotes": ["原本預定要實裝的第五招異轉技,目前已胎死腹中…"]
 	},
 	"rowan": {
 		"slug": "rowan",
@@ -11210,6 +12254,43 @@
 				"gif": "https://i.imgur.com/YWWgH98.gif",
 				"icon": "https://i.imgur.com/lZwzUXA.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "變成無敵狀態",
+				"gif": "https://i.imgur.com/QJr90ze.gif"
+			},
+			{
+				"category": "特殊動作",
+				"name": "後跳",
+				"gif": "https://i.imgur.com/peHhul0.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "緊急回避",
+				"gif": "https://i.imgur.com/YbLp9YO.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "深淵呼聲",
+				"gif": "https://i.imgur.com/3ecDqMS.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "絕對力量",
+				"gif": "https://i.imgur.com/qQXGalt.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "病毒波(遠)",
+				"gif": "https://i.imgur.com/tLZcFv6.gif"
+			}
+		],
+		"hiddenNotes": [
+			"{{#00ff00:變成無敵狀態}}這招應該是U1失誤而造成的出招方法是擋↑拳，消耗700MP",
+			"{{#00ff00:後跳}}這個動作只要按兩次\"擋\"即可使用目前只有這角色才擁有這個動作",
+			"其實惱在實裝時已有齊九招的動作，其招式名稱均已證實可惜目前只正式推出了五招其他已經胎死腹中…"
 		]
 	},
 	"rudolf": {
@@ -11348,7 +12429,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "焚燒",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/7AX18Df.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -11387,7 +12468,7 @@
 				"cost": "300MP",
 				"learnPoints": "100",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可使出 追加攻擊 ，追加消耗 200 MP 能在空中使用",
+				"notes": "出招時按\"拳\"可使出[追加攻擊](https://i.imgur.com/JlcISEa.gif)，追加消耗200MP能在空中使用",
 				"gif": "https://i.imgur.com/AIlF5Pj.gif",
 				"icon": "https://i.imgur.com/nTTG2bn.png"
 			},
@@ -11400,6 +12481,52 @@
 				"gif": "https://i.imgur.com/e0nFeKp.gif",
 				"icon": "https://i.imgur.com/HVJhg4B.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "新分身術",
+				"gif": "https://i.imgur.com/yVEPOsd.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新回天腿",
+				"gif": "https://i.imgur.com/z0Z8vFM.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新追魂十字斬",
+				"gif": "https://i.imgur.com/6CMW7Hm.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新忍流化雨",
+				"gif": "https://i.imgur.com/bVKB5Kd.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新五連鏢/五連追魂鏢",
+				"gif": "https://i.imgur.com/KadwW5h.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "大替身",
+				"gif": "https://i.imgur.com/pYApAkE.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "一文字斬",
+				"gif": "https://i.imgur.com/D7oUmS0.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "圍巾",
+				"gif": "https://i.imgur.com/7oT9XLL.gif"
+			}
+		],
+		"hiddenNotes": [
+			"※廢案招式名稱以異轉草圖為準",
+			"本角色的所有廢棄技能目前沒有循環再用到在新技能身上"
 		]
 	},
 	"ruwa": {
@@ -11597,7 +12724,7 @@
 				"cost": "350MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變氣斬的攻擊方向",
+				"notes": "起手前可按\"←/→\"改變氣斬的攻擊方向",
 				"gif": "https://i.imgur.com/H4nUOoZ.gif",
 				"icon": "https://i.imgur.com/Qynd4MK.png"
 			},
@@ -11684,7 +12811,7 @@
 				"cost": "400MP",
 				"learnPoints": "60",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/eXyVqqR.gif",
 				"icon": "https://i.imgur.com/Oad5XZJ.png"
 			},
@@ -11703,7 +12830,7 @@
 				"cost": "400MP",
 				"learnPoints": "60",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/CyrlLMQ.gif",
 				"icon": "https://i.imgur.com/onhyKfB.png"
 			},
@@ -11808,7 +12935,7 @@
 				"cost": "250MP",
 				"learnPoints": "150",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可繼續攻擊 ，每次追加消耗 100 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "出招時按\"拳\"可繼續攻擊，每次追加消耗100MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/pl9aRrU.gif",
 				"icon": "https://i.imgur.com/IQTS5Ez.png"
 			},
@@ -12017,7 +13144,7 @@
 				"cost": "150MP",
 				"learnPoints": "45",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方 向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/gquPnjk.gif",
 				"icon": "https://i.imgur.com/U3PeZfc.png"
 			},
@@ -12091,7 +13218,7 @@
 				"cost": "100%MP",
 				"learnPoints": "450",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/6xBClUK.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -12139,7 +13266,7 @@
 				"cost": "300MP",
 				"learnPoints": "150",
 				"trigger": "焚燒",
-				"notes": "出招時可按\" 跳 \"使出 追加攻擊 ，追加消耗 200MP",
+				"notes": "出招時可按\"跳\"使出[追加攻擊](https://i.imgur.com/LQ6x4fY.gif)，追加消耗200MP",
 				"gif": "https://i.imgur.com/Sr1X9h5.gif",
 				"icon": "https://i.imgur.com/piOuVVA.png"
 			},
@@ -12168,6 +13295,72 @@
 				"trigger": "--",
 				"gif": "https://i.imgur.com/28pq6MD.gif"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "技能廢案",
+				"name": "新破空拳",
+				"gif": "https://i.imgur.com/K5aI7zu.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新十字旋風拳",
+				"gif": "https://i.imgur.com/c9XKMgS.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "黑風刹",
+				"gif": "https://i.imgur.com/IS9rQnj.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "新破空腳",
+				"gif": "https://i.imgur.com/9g1xGah.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "魔風紋",
+				"gif": "https://i.imgur.com/YvAQW48.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "魔獸之怒火",
+				"gif": "https://i.imgur.com/hYj9dKV.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "魔剎拳",
+				"gif": "https://i.imgur.com/28pq6MD.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "元力球",
+				"gif": "https://i.imgur.com/Bvo71tE.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "魔界地獄",
+				"gif": "https://i.imgur.com/IfzQ5jB.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "狂獸狙擊",
+				"gif": "https://i.imgur.com/xbg8hiv.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "長程元力球(暫名)",
+				"gif": "https://i.imgur.com/DcOxb69.gif"
+			}
+		],
+		"hiddenNotes": [
+			"在這裡的{{#00ff00:魔獸之怒火}}跟現在的同名招式大不相同現在已成為{{#00ff00:十字烈風拳}}的動作",
+			"{{#00ff00:魔風紋}}被認定為是{{#00ff00:終極魔龍噬}}的前身",
+			"{{#00ff00:魔剎拳}}當時被設定成奧義在正式推出時已更名為{{#00ff00:疾風怒濤}}",
+			"{{#00ff00:新破空腳}}的部份動作成為了{{#00ff00:狂獸狙擊}}",
+			"舊版的{{#00ff00:元力球}}及{{#00ff00:魔界地獄}}跟新版的相比新版把起手動作加快了",
+			"舊版本的{{#00ff00:狙獸狙擊}}的攻擊動作比現在的平凡",
+			"{{#00ff00:長程元力球}}是故事中星奇比較常愛用的一招把{{#00ff00:元力球}}當作氣功波放出"
 		]
 	},
 	"stmary": {
@@ -12346,7 +13539,7 @@
 				"cost": "120MP",
 				"learnPoints": "180",
 				"trigger": "--",
-				"notes": "按\" 拳 \"會使出衍生技\" 申武擊．絕地 \" 衍生 申武擊．絕地 +拳 +50MP -- -- P.S. 出招時持續按\" 拳 \"會增長揮棍時間 ，每次追加消耗 50 MP 如按下\" ↑跳 \"則 會使出 衍生技 \" 申武擊．破天 \" 衍生 申武擊．破天 +↑跳 +80MP -- --",
+				"notes": "按\"拳\"會使出衍生技\"申武擊．絕地\" 衍生[申武擊．絕地](https://i.imgur.com/hLuKqYu.gif)+拳+50MP----P.S.出招時持續按\"拳\"會增長揮棍時間，每次追加消耗50MP如按下\"↑跳\"則會使出衍生技\"申武擊．破天\"衍生[申武擊．破天](https://i.imgur.com/pjYMNXS.gif)+↑跳+80MP----",
 				"gif": "https://i.imgur.com/yZrWP4Y.gif",
 				"icon": "https://i.imgur.com/IvvJLFS.png"
 			},
@@ -12469,7 +13662,7 @@
 				"cost": "400MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/3AQruol.gif",
 				"icon": "https://i.imgur.com/SNzllxR.png"
 			},
@@ -12488,7 +13681,7 @@
 				"cost": "350MP",
 				"learnPoints": "70",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 \"可使用 追加攻擊 ，追加消耗 50 MP",
+				"notes": "出招時按\"拳\"可使用[追加攻擊](https://i.imgur.com/LUzslZ4.gif)，追加消耗50MP",
 				"gif": "https://i.imgur.com/VDalVgG.gif",
 				"icon": "https://i.imgur.com/zIxmZ8E.png"
 			},
@@ -12516,7 +13709,7 @@
 				"cost": "400MP",
 				"learnPoints": "60",
 				"trigger": "--",
-				"notes": "出招時按\" 跳 \"可使出 追加攻擊 ，追加消耗 100 MP",
+				"notes": "出招時按\"跳\"可使出[追加攻擊](https://i.imgur.com/mNfoWXh.gif)，追加消耗100MP",
 				"gif": "https://i.imgur.com/b8csZAy.gif",
 				"icon": "https://i.imgur.com/P0LIjjR.png"
 			}
@@ -12604,7 +13797,7 @@
 				"cost": "350MP",
 				"learnPoints": "40",
 				"trigger": "電擊",
-				"notes": "出招時按\" 拳 \"繼續放出骷髏波 ，每次追加消耗 100MP",
+				"notes": "出招時按\"拳\"繼續放出骷髏波，每次追加消耗100MP",
 				"gif": "https://i.imgur.com/8CYc6tw.gif",
 				"icon": "https://i.imgur.com/AezMYFb.png"
 			},
@@ -12614,7 +13807,7 @@
 				"cost": "250MP",
 				"learnPoints": "180",
 				"trigger": "焚燒",
-				"notes": "出招時按\" 跳 \"可繼續奔跑 ，每次追加消耗 100MP",
+				"notes": "出招時按\"跳\"可繼續奔跑，每次追加消耗100MP",
 				"gif": "https://i.imgur.com/qz7IUa2.gif",
 				"icon": "https://i.imgur.com/I3XSuBX.png"
 			},
@@ -12906,7 +14099,8 @@
 				"gif": "https://i.imgur.com/102VyGH.gif",
 				"icon": "https://i.imgur.com/cAo41FS.png"
 			}
-		]
+		],
+		"hiddenNotes": ["原本預定要實裝的第七招技能,目前已胎死腹中"]
 	},
 	"uranus": {
 		"slug": "uranus",
@@ -12980,7 +14174,7 @@
 				"cost": "150MP",
 				"learnPoints": "150",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變轉移的方向",
+				"notes": "起手前可按\"←/→\"改變轉移的方向",
 				"gif": "https://i.imgur.com/O0m0cZ2.gif",
 				"icon": "https://i.imgur.com/j5k5Vlf.png"
 			},
@@ -13044,7 +14238,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "暈眩/電擊",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/M06VpGr.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -13065,7 +14259,7 @@
 				"cost": "500MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "出招時按\" 拳 ／ 跳 \"會使出對應的衍生技能 衍生 天羅地網．封 + 跳 +100MP -- -- 衍生 天羅地網．破 + 拳 +200MP -- 電擊",
+				"notes": "出招時按\"拳／跳\"會使出對應的衍生技能衍生[天羅地網．封](https://i.imgur.com/0wjwdwg.gif)+跳+100MP----衍生[天羅地網．破](https://i.imgur.com/v9uErKT.gif)+拳+200MP--電擊",
 				"gif": "https://i.imgur.com/8AkjKUe.gif",
 				"icon": "https://i.imgur.com/8guJbHf.png"
 			},
@@ -13171,7 +14365,7 @@
 				"cost": "350MP",
 				"learnPoints": "150",
 				"trigger": "--",
-				"notes": "起手時可按\"←/→\"決定投出 飛刀 的方向",
+				"notes": "起手時可按\"←/→\"決定投出飛刀的方向",
 				"gif": "https://i.imgur.com/IhKkrTU.gif",
 				"icon": "https://i.imgur.com/KMJci5c.png"
 			},
@@ -13190,7 +14384,7 @@
 				"cost": "630MP",
 				"learnPoints": "320",
 				"trigger": "--",
-				"notes": "起手時可按\"←/→\"改變投出 飛刀 的方向",
+				"notes": "起手時可按\"←/→\"改變投出飛刀的方向",
 				"gif": "https://i.imgur.com/ewGRfso.gif",
 				"icon": "https://i.imgur.com/aEiX3ov.png"
 			},
@@ -13200,7 +14394,7 @@
 				"cost": "300MP",
 				"learnPoints": "200",
 				"trigger": "--",
-				"notes": "使用時自身會進入無敵狀態 連續按\" 跳 \"可持續逃跑 ，每次追加消耗 200 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "使用時自身會進入無敵狀態連續按\"跳\"可持續逃跑，每次追加消耗200MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/heDZ5nv.gif",
 				"icon": "https://i.imgur.com/nvPVq4K.png"
 			},
@@ -13210,7 +14404,7 @@
 				"cost": "500MP",
 				"learnPoints": "250",
 				"trigger": "--",
-				"notes": "起手前及出招時均可按\"←/→\"改變 飛刀 投出 的方向",
+				"notes": "起手前及出招時均可按\"←/→\"改變飛刀投出的方向",
 				"gif": "https://i.imgur.com/ioyaKho.gif",
 				"icon": "https://i.imgur.com/g6JAqRl.png"
 			},
@@ -13220,7 +14414,7 @@
 				"cost": "50MP",
 				"learnPoints": "80",
 				"trigger": "--",
-				"notes": "起手前可按\"←/→\"改變攻擊 方向",
+				"notes": "起手前可按\"←/→\"改變攻擊方向",
 				"gif": "https://i.imgur.com/uQdwJwZ.gif",
 				"icon": "https://i.imgur.com/qT6Zywo.png"
 			}
@@ -13263,6 +14457,17 @@
 				"gif": "https://i.imgur.com/7MwdXJI.gif",
 				"icon": "https://i.imgur.com/lsAFaKt.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "V刀陣",
+				"gif": "https://i.imgur.com/gOrYdmQ.gif"
+			}
+		],
+		"hiddenNotes": [
+			"域多Z中有個廢案招式,據說原先是作為域多Z的第三招而實裝目前因不明原因被{{#00ff00:穿梭破空閃}}取代了，因而成為廢案",
+			"舊版的{{#00ff00:V刀陣}}放出的是大量實體小刀,新版則放出三把元力刀攻擊方向也由對空改為前方斜角"
 		]
 	},
 	"windy": {
@@ -13400,7 +14605,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/wQpghHb.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -13451,6 +14656,22 @@
 				"gif": "https://i.imgur.com/ncgGLvN.gif",
 				"icon": "https://i.imgur.com/Smu7CAN.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "春風得意",
+				"gif": "https://i.imgur.com/I587tdE.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "絕地龍捲",
+				"gif": "https://i.imgur.com/FztAk9s.gif"
+			}
+		],
+		"hiddenNotes": [
+			"新舊版{{#00ff00:春風得意}}的現在的版本相比下有著很大分別舊版的技能定位是解毒，新版把整招重製為攻擊技",
+			"舊版的{{#00ff00:絕地龍捲}}靈活性非常高目前在最新的版本已被重製成另一招了"
 		]
 	},
 	"witch": {
@@ -13707,7 +14928,7 @@
 				"cost": "100%MP",
 				"learnPoints": "500",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/kuBQqP8.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -13719,7 +14940,7 @@
 				"cost": "350MP",
 				"learnPoints": "40",
 				"trigger": "--",
-				"notes": "持續按\" 跳 \"可繼續旋轉 ，每次追加消耗 200 MP 可按\"←/→\"中途改變前進的方向",
+				"notes": "持續按\"跳\"可繼續旋轉，每次追加消耗200MP可按\"←/→\"中途改變前進的方向",
 				"gif": "https://i.imgur.com/1TjBEX8.gif",
 				"icon": "https://i.imgur.com/IHIE7al.png"
 			},
@@ -13779,6 +15000,39 @@
 				"gif": "https://i.imgur.com/mSVp3vl.gif",
 				"icon": "https://i.imgur.com/37lhDJm.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "狂虎斬",
+				"gif": "https://i.imgur.com/8syvDUa.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "絕地音速刀",
+				"gif": "https://i.imgur.com/Tj9NAG9.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "絕玄掌",
+				"gif": "https://i.imgur.com/IrgLU3L.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "超虎斬",
+				"gif": "https://i.imgur.com/qjc7WrT.gif"
+			},
+			{
+				"category": "技能廢案",
+				"name": "虎皇霸／新虎皇霸",
+				"gif": "https://i.imgur.com/VyiRKOG.gif"
+			}
+		],
+		"hiddenNotes": [
+			"廢案招式{{#00ff00:絕地音速刀}}是現在同名招式的前身",
+			"廢案招式{{#00ff00:超虎斬}}是初稿設定時的樣子目前玩家所用的超虎斬在初稿時被命名為{{#00ff00:落虎爪}}",
+			"廢案招式{{#00ff00:虎皇霸}}跟{{#00ff00:新}}{{#00ff00:虎皇霸}}的動作是一樣的正式推出時已更名為{{#00ff00:虎煌霸}}",
+			"廢案招式{{#00ff00:絕玄掌}}的技能概念應該來自申武玄的同名招式可惜目前沒有相關技能的消息…"
 		]
 	},
 	"xander": {
@@ -13844,7 +15098,7 @@
 				"cost": "350MP",
 				"learnPoints": "0",
 				"trigger": "--",
-				"notes": "出招時按\" 跳 \"可 持續前進 ， 每次追加消耗 50 MP 可按\"←/→\"中途改變前進的方向 按\" 拳 \"即可 使出攻擊 ，追加消耗 200 MP",
+				"notes": "出招時按\"跳\"可[持續前進](https://i.imgur.com/IiVOUJY.gif)，每次追加消耗50MP可按\"←/→\"中途改變前進的方向按\"拳\"即可[使出攻擊](https://i.imgur.com/0soxCMs.gif)，追加消耗200MP",
 				"gif": "https://i.imgur.com/Wr9VATg.gif",
 				"icon": "https://i.imgur.com/DjcXrVx.png"
 			},
@@ -13866,7 +15120,15 @@
 				"gif": "https://i.imgur.com/jD1Akgr.gif",
 				"icon": "https://i.imgur.com/GIWtm2t.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "特殊動作",
+				"name": "等級提升",
+				"gif": "https://i.imgur.com/aKEjkrS.gif"
+			}
+		],
+		"hiddenNotes": ["本角色升級時所使出來的動作，正常只會在升級時出現"]
 	},
 	"yuenmu": {
 		"slug": "yuenmu",
@@ -13984,7 +15246,8 @@
 				"gif": "https://i.imgur.com/yb3QyXr.gif",
 				"icon": "https://i.imgur.com/eOqBUTg.png"
 			}
-		]
+		],
+		"hiddenNotes": ["原本預定要實裝的奧義技,目前已胎死腹中"]
 	},
 	"yungsum": {
 		"slug": "yungsum",
@@ -14085,7 +15348,7 @@
 				"cost": "300MP",
 				"learnPoints": "85",
 				"trigger": "定格",
-				"notes": "使用後自身MP會暫時歸零 能在空中使用",
+				"notes": "使用後自身MP會暫時歸零能在空中使用",
 				"gif": "https://i.imgur.com/cOmxiWQ.gif",
 				"icon": "https://i.imgur.com/iA0NH42.png"
 			},
@@ -14118,7 +15381,15 @@
 				"gif": "https://i.imgur.com/eDqXhwm.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
-		]
+		],
+		"hiddenSkills": [
+			{
+				"category": "故事動作",
+				"name": "超級心‧碎裂",
+				"gif": "https://i.imgur.com/n4o1L0M.gif"
+			}
+		],
+		"hiddenNotes": ["在故事中把威力放大化的{{#00ff00:心碎裂}}"]
 	},
 	"zack": {
 		"slug": "zack",
@@ -14255,7 +15526,7 @@
 				"cost": "100%MP",
 				"learnPoints": "300",
 				"trigger": "--",
-				"notes": "此技能需 要 HP 少於50%才能使出",
+				"notes": "此技能需要HP少於50%才能使出",
 				"gif": "https://i.imgur.com/tBN3VEj.gif",
 				"icon": "https://i.imgur.com/Qkcstpe.png"
 			}
@@ -14295,7 +15566,7 @@
 				"cost": "250MP",
 				"learnPoints": "100",
 				"trigger": "--",
-				"notes": "起手前 可按\"←/→\"改變攻擊方向 能在空中使出",
+				"notes": "起手前可按\"←/→\"改變攻擊方向能在空中使出",
 				"gif": "https://i.imgur.com/uUUhMuM.gif",
 				"icon": "https://i.imgur.com/raQYL01.png"
 			},
@@ -14327,6 +15598,54 @@
 				"gif": "https://i.imgur.com/JrO6Hk6.gif",
 				"icon": "https://i.imgur.com/u8WnNl7.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "舊版招式",
+				"name": "孤狼高嗚",
+				"gif": "https://i.imgur.com/CE4vfcm.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "逆狼牙襲",
+				"gif": "https://i.imgur.com/QawUPCr.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "扔手榴彈",
+				"gif": "https://i.imgur.com/LdUXPiQ.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "噬狼牙",
+				"gif": "https://i.imgur.com/xWBr93w.gif"
+			},
+			{
+				"category": "舊版招式",
+				"name": "魔狼疾風腿",
+				"gif": "https://i.imgur.com/n5VNR31.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "超狂凶極惡",
+				"gif": "https://i.imgur.com/s95kryi.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "凶獸光束",
+				"gif": "https://i.imgur.com/On06yGE.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "凶獸元力爆發",
+				"gif": "https://i.imgur.com/zykhAFC.gif"
+			}
+		],
+		"hiddenNotes": [
+			"※撒卡的技能有一半曾被改動過",
+			"{{#00ff00:孤狼高嗚}}由原先的一條光柱改成現在的三條光柱",
+			"{{#00ff00:噬狼牙}}及{{#00ff00:魔狼疾風腿}}都曾經被重製成現在的版本",
+			"撒卡是故事招較多的角色"
 		]
 	},
 	"zhida": {
@@ -14413,6 +15732,29 @@
 				"gif": "https://i.imgur.com/Fx4VO7t.gif",
 				"icon": "https://i.imgur.com/7ckbAvJ.png"
 			}
+		],
+		"hiddenSkills": [
+			{
+				"category": "未來新招",
+				"name": "光武‧烈陽墜",
+				"gif": "https://i.imgur.com/Mv7NQuZ.gif"
+			},
+			{
+				"category": "未來新招",
+				"name": "光武‧錐擊",
+				"gif": "https://i.imgur.com/YegjwVQ.gif"
+			},
+			{
+				"category": "故事動作",
+				"name": "解源咒",
+				"gif": "https://i.imgur.com/xqFax6U.gif"
+			}
+		],
+		"hiddenNotes": [
+			"{{#00ff00:光武",
+			"烈陽墜}}跟{{#00ff00:光武",
+			"錐擊}}跟智達的基本三招同時登場可是這兩招當時只流出名字，其他數據一切不明最後被U1刪除了",
+			"{{#00ff00:解源咒}}是三位戰鬥型摩摩星人對合體戰神的技倆目前只在故事中出現"
 		]
 	}
 }

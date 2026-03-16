@@ -29,7 +29,7 @@ export function showLightbox(images: LightboxImage | LightboxImage[], index = 0)
  */
 export function ImageLightbox() {
 	const [state, setState] = useState<LightboxState | null>(null);
-	const [zoom, setZoom] = useState(1);
+	const [zoom, setZoom] = useState(1.2);
 	const [rotation, setRotation] = useState(0);
 	const containerRef = useRef<HTMLDivElement>(null);
 
@@ -91,7 +91,7 @@ export function ImageLightbox() {
 		});
 	}, [panX, panY]);
 	const resetView = useCallback(() => {
-		setZoom(1);
+		setZoom(1.2);
 		setRotation(0);
 		panX.set(0);
 		panY.set(0);
@@ -386,7 +386,6 @@ export function ImageLightbox() {
 								}}
 								title="上一張 (← / A)"
 							>
-								{/* biome-ignore lint/a11y/noSvgWithoutTitle: decorative, button has title */}
 								<svg
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
@@ -411,7 +410,6 @@ export function ImageLightbox() {
 								}}
 								title="下一張 (→ / D)"
 							>
-								{/* biome-ignore lint/a11y/noSvgWithoutTitle: decorative, button has title */}
 								<svg
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"

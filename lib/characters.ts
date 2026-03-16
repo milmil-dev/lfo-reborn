@@ -1,6 +1,20 @@
 import data from "@/data/characters.json";
 import skillsData from "@/data/skills.json";
 
+export interface CharacterItem {
+	type: "weapon" | "equipment";
+	name: string;
+	image?: string;
+	description?: string;
+	material?: string;
+	effect?: string;
+	cost?: string;
+	durability?: string;
+	price?: string;
+	stats?: Record<string, string>;
+	requirements?: Record<string, string>;
+}
+
 export interface Character {
 	slug: string;
 	name: string;
@@ -11,12 +25,20 @@ export interface Character {
 	birthplace?: string;
 	identity?: string;
 	combatStyle?: string;
+	items?: CharacterItem[];
 	weapon?: {
 		name: string;
 		effect?: string;
 		durability?: string;
 		description?: string;
 	};
+	weapons?: {
+		name: string;
+		effect?: string;
+		durability?: string;
+		description?: string;
+		image?: string;
+	}[];
 	equipment?: {
 		name: string;
 		stats?: Record<string, string>;
@@ -47,6 +69,12 @@ export interface CharacterSkill {
 	icon?: string;
 }
 
+export interface HiddenSkill {
+	category: string;
+	name: string;
+	gif?: string;
+}
+
 export interface CharacterSkillData {
 	slug: string;
 	stats: {
@@ -55,6 +83,8 @@ export interface CharacterSkillData {
 	};
 	skills: CharacterSkill[];
 	transformSkills?: CharacterSkill[];
+	hiddenSkills?: HiddenSkill[];
+	hiddenNotes?: string[];
 }
 
 export const versions = data.versions;

@@ -1,6 +1,20 @@
 import Giscus from "@giscus/react";
+import { useEffect, useState } from "react";
 
 export function GiscusComments() {
+	const [theme, setTheme] = useState<"dark_dimmed" | "light">("dark_dimmed");
+
+	useEffect(() => {
+		const root = document.documentElement;
+		const update = () => {
+			setTheme(root.classList.contains("dark") ? "dark_dimmed" : "light");
+		};
+		update();
+		const observer = new MutationObserver(update);
+		observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+		return () => observer.disconnect();
+	}, []);
+
 	return (
 		<div className="mt-12 border-t border-fd-border pt-8">
 			<Giscus
@@ -13,7 +27,7 @@ export function GiscusComments() {
 				reactionsEnabled="1"
 				emitMetadata="0"
 				inputPosition="top"
-				theme="dark_dimmed"
+				theme={theme}
 				lang="zh-TW"
 			/>
 		</div>

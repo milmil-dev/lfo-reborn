@@ -1,0 +1,376 @@
+{
+	"casso": {
+		"slug": "casso",
+		"name": "狂旺獸",
+		"normalStats": {
+			"hp": {
+				"base": "560",
+				"growth": "7"
+			},
+			"mp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"sp": {
+				"base": "470",
+				"growth": "4"
+			},
+			"str": {
+				"base": "8",
+				"growth": "1.2"
+			},
+			"def": {
+				"base": "8",
+				"growth": "1.1"
+			},
+			"agi": {
+				"base": "8",
+				"growth": "1"
+			}
+		},
+		"skills": [
+			{
+				"name": "技能1",
+				"command": "消耗能力",
+				"cost": "技能1"
+			},
+			{
+				"name": "技能2",
+				"command": "消耗能力",
+				"cost": "技能2"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "1"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "2"
+			}
+		]
+	},
+	"crawley": {
+		"slug": "crawley",
+		"name": "克拉雷",
+		"normalStats": {
+			"hp": {
+				"base": "560",
+				"growth": "7"
+			},
+			"mp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"sp": {
+				"base": "470",
+				"growth": "4"
+			},
+			"str": {
+				"base": "8",
+				"growth": "1.2"
+			},
+			"def": {
+				"base": "8",
+				"growth": "1.1"
+			},
+			"agi": {
+				"base": "8",
+				"growth": "1"
+			}
+		},
+		"skills": [
+			{
+				"name": "技能1",
+				"command": "消耗能力",
+				"cost": "技能1"
+			},
+			{
+				"name": "技能2",
+				"command": "消耗能力",
+				"cost": "技能2"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "1"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "2"
+			}
+		]
+	},
+	"dashs": {
+		"slug": "dashs",
+		"name": "達希斯",
+		"normalStats": {
+			"hp": {
+				"base": "560",
+				"growth": "7"
+			},
+			"mp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"sp": {
+				"base": "470",
+				"growth": "4"
+			},
+			"str": {
+				"base": "8",
+				"growth": "1.2"
+			},
+			"def": {
+				"base": "8",
+				"growth": "1.1"
+			},
+			"agi": {
+				"base": "8",
+				"growth": "1"
+			}
+		},
+		"skills": [
+			{
+				"name": "技能1",
+				"command": "消耗能力",
+				"cost": "技能1"
+			},
+			{
+				"name": "技能2",
+				"command": "消耗能力",
+				"cost": "技能2"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "1"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "2"
+			}
+		]
+	},
+	"dega": {
+		"slug": "dega",
+		"name": "狄加",
+		"normalStats": {
+			"hp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"mp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"sp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"str": {
+				"base": "8",
+				"growth": "1"
+			},
+			"def": {
+				"base": "8",
+				"growth": "1"
+			},
+			"agi": {
+				"base": "8",
+				"growth": "1"
+			}
+		},
+		"skills": [
+			{
+				"name": "技能1",
+				"command": "消耗能力",
+				"cost": "技能1"
+			},
+			{
+				"name": "技能2",
+				"command": "消耗能力",
+				"cost": "技能2"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "1"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "2"
+			}
+		]
+	},
+	"duba": {
+		"slug": "duba",
+		"name": "杜巴",
+		"normalStats": {
+			"hp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"mp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"sp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"str": {
+				"base": "8",
+				"growth": "1"
+			},
+			"def": {
+				"base": "8",
+				"growth": "1"
+			},
+			"agi": {
+				"base": "8",
+				"growth": "1"
+			}
+		},
+		"skills": [
+			{
+				"name": "技能1",
+				"command": "消耗能力",
+				"cost": "技能1"
+			},
+			{
+				"name": "技能2",
+				"command": "消耗能力",
+				"cost": "技能2"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "1"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "2"
+			}
+		]
+	},
+	"gneuss": {
+		"slug": "gneuss",
+		"name": "格諾斯",
+		"normalStats": {
+			"hp": {
+				"base": "560",
+				"growth": "7"
+			},
+			"mp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"sp": {
+				"base": "470",
+				"growth": "4"
+			},
+			"str": {
+				"base": "8",
+				"growth": "1.2"
+			},
+			"def": {
+				"base": "8",
+				"growth": "1.1"
+			},
+			"agi": {
+				"base": "8",
+				"growth": "1"
+			}
+		},
+		"skills": [
+			{
+				"name": "技能1",
+				"command": "消耗能力",
+				"cost": "技能1"
+			},
+			{
+				"name": "技能2",
+				"command": "消耗能力",
+				"cost": "技能2"
+			},
+			{
+				"name": "技能3",
+				"command": "消耗能力",
+				"cost": "技能3"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "1"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "2"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "3"
+			}
+		]
+	},
+	"nacala": {
+		"slug": "nacala",
+		"name": "納卡拉",
+		"normalStats": {
+			"hp": {
+				"base": "560",
+				"growth": "7"
+			},
+			"mp": {
+				"base": "500",
+				"growth": "5"
+			},
+			"sp": {
+				"base": "470",
+				"growth": "4"
+			},
+			"str": {
+				"base": "8",
+				"growth": "1.2"
+			},
+			"def": {
+				"base": "8",
+				"growth": "1.1"
+			},
+			"agi": {
+				"base": "8",
+				"growth": "1"
+			}
+		},
+		"skills": [
+			{
+				"name": "技能1",
+				"command": "消耗能力",
+				"cost": "技能1"
+			},
+			{
+				"name": "技能2",
+				"command": "消耗能力",
+				"cost": "技能2"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "1"
+			},
+			{
+				"name": "出招方法",
+				"command": "消耗能力",
+				"cost": "2"
+			}
+		]
+	}
+}

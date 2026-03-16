@@ -1,0 +1,2315 @@
+{
+	"armor": {
+		"category": "裝備",
+		"items": [
+			{
+				"name": "頭帶",
+				"category": "裝備",
+				"material": "布料",
+				"stats": {
+					"def": "+5"
+				}
+			},
+			{
+				"name": "太陽帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "頭巾",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "西部牛仔帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "鴨咀帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "口罩",
+				"category": "裝備",
+				"material": "塑膠"
+			},
+			{
+				"name": "高級口罩",
+				"category": "裝備",
+				"material": "塑膠",
+				"stats": {
+					"def": "+20"
+				}
+			},
+			{
+				"name": "面具",
+				"category": "裝備",
+				"material": "銅"
+			},
+			{
+				"name": "防毒面具",
+				"category": "裝備",
+				"material": "塑膠"
+			},
+			{
+				"name": "聖水教頭巾",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "水晶頭盔",
+				"category": "裝備",
+				"material": "合金"
+			},
+			{
+				"name": "戰神頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "鬥氣頭盔",
+				"category": "裝備",
+				"material": "鐵",
+				"stats": {
+					"str": "+50",
+					"def": "-20"
+				}
+			},
+			{
+				"name": "雪狼之頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "千錘之盔",
+				"category": "裝備",
+				"material": "金"
+			},
+			{
+				"name": "血魔頭盔",
+				"category": "裝備",
+				"material": "銅"
+			},
+			{
+				"name": "邪神頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "受難之盔",
+				"category": "裝備",
+				"material": "銅"
+			},
+			{
+				"name": "奇蹟之盔",
+				"category": "裝備",
+				"material": "鋼",
+				"stats": {
+					"hp": "+70",
+					"mp": "+70",
+					"sp": "+50",
+					"def": "+40",
+					"agi": "-60"
+				}
+			},
+			{
+				"name": "宙斯頭盔",
+				"category": "裝備",
+				"material": "金"
+			},
+			{
+				"name": "幸運頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "信徒頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "帝王頭盔",
+				"category": "裝備",
+				"material": "金"
+			},
+			{
+				"name": "神將頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "荊棘頭盔",
+				"category": "裝備",
+				"material": "鐵",
+				"stats": {
+					"hp": "-100",
+					"mp": "+150",
+					"str": "+45",
+					"def": "+40",
+					"agi": "-80"
+				}
+			},
+			{
+				"name": "雅典娜頭盔",
+				"category": "裝備",
+				"material": "金"
+			},
+			{
+				"name": "暗黑頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "萬王頭盔",
+				"category": "裝備",
+				"material": "合金"
+			},
+			{
+				"name": "懲罰女神頭盔",
+				"category": "裝備",
+				"material": "金"
+			},
+			{
+				"name": "魔獸頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "皇者頭盔",
+				"category": "裝備",
+				"material": "金",
+				"stats": {
+					"hp": "+80",
+					"mp": "+100",
+					"sp": "+80",
+					"str": "+150",
+					"def": "+200"
+				}
+			},
+			{
+				"name": "櫻花帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "武士頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "總統假髮",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "特種部隊頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "中山帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "始皇帝帽",
+				"category": "裝備",
+				"material": "布料",
+				"stats": {
+					"sp": "+30",
+					"def": "+170",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "謎之頭盔",
+				"category": "裝備",
+				"material": "合金"
+			},
+			{
+				"name": "天使光環",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "路西法頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "魔導使帽",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "小熊帽",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "假髮",
+				"category": "裝備",
+				"material": "布料",
+				"stats": {
+					"def": "+50"
+				}
+			},
+			{
+				"name": "土著頭盔",
+				"category": "裝備",
+				"material": "木材"
+			},
+			{
+				"name": "瑪雅頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "夏威夷草帽",
+				"category": "裝備",
+				"material": "木材"
+			},
+			{
+				"name": "復活島頭盔",
+				"category": "裝備",
+				"material": "銅"
+			},
+			{
+				"name": "偵探帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "P.H頭盔",
+				"category": "裝備",
+				"material": "合金",
+				"stats": {
+					"sp": "-150",
+					"str": "+80",
+					"def": "+40",
+					"agi": "+30"
+				}
+			},
+			{
+				"name": "聖誕帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "新年帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "魔尊頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "聖尊之帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "炎冰頭盔",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "破壞神頭盔",
+				"category": "裝備",
+				"material": "鐵",
+				"stats": {
+					"sp": "+140",
+					"def": "+82",
+					"agi": "-65"
+				}
+			},
+			{
+				"name": "雷伯特頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "古代龍頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "異獸頭盔",
+				"category": "裝備",
+				"material": "合金"
+			},
+			{
+				"name": "聖域之帽",
+				"category": "裝備",
+				"material": "金"
+			},
+			{
+				"name": "終極頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "古龍骨頭盔",
+				"category": "裝備",
+				"material": "木材",
+				"stats": {
+					"hp": "+120",
+					"mp": "+110",
+					"str": "-80",
+					"def": "+250"
+				}
+			},
+			{
+				"name": "黑曜石頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "鳳凰頭盔",
+				"category": "裝備",
+				"material": "銅"
+			},
+			{
+				"name": "龍神頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "玄武絕盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "青龍頭盔",
+				"category": "裝備",
+				"material": "木材"
+			},
+			{
+				"name": "白虎頭盔",
+				"category": "裝備",
+				"material": "布料",
+				"stats": {
+					"hp": "+110",
+					"mp": "+110",
+					"sp": "+110",
+					"str": "+110",
+					"def": "+110",
+					"agi": "+110"
+				}
+			},
+			{
+				"name": "朱雀神盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "晝夜魔盔",
+				"category": "裝備",
+				"material": "鋼"
+			},
+			{
+				"name": "紫電眼罩(霍雷專用)",
+				"category": "裝備"
+			},
+			{
+				"name": "熱血頭巾",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "雷電頭盔",
+				"category": "裝備",
+				"material": "金"
+			},
+			{
+				"name": "戰車頭盔",
+				"category": "裝備",
+				"material": "銅",
+				"stats": {
+					"hp": "+300",
+					"mp": "+100",
+					"sp": "+600",
+					"str": "+80",
+					"def": "+270",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "蝦頭",
+				"category": "裝備",
+				"material": "塑膠"
+			},
+			{
+				"name": "暴風頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "機甲頭盔",
+				"category": "裝備",
+				"material": "合金"
+			},
+			{
+				"name": "達摩帽",
+				"category": "裝備",
+				"material": "布料"
+			},
+			{
+				"name": "護法頭盔",
+				"category": "裝備",
+				"material": "鐵"
+			},
+			{
+				"name": "龍戰之盔",
+				"category": "裝備",
+				"material": "銅",
+				"stats": {
+					"hp": "+700",
+					"mp": "+300",
+					"str": "+50",
+					"def": "+70"
+				}
+			},
+			{
+				"name": "關羽臉譜",
+				"category": "裝備",
+				"material": "木材"
+			},
+			{
+				"name": "白金頭盔",
+				"category": "裝備",
+				"material": "合金"
+			},
+			{
+				"name": "風精靈頭盔",
+				"category": "裝備",
+				"material": "鋼"
+			}
+		]
+	},
+	"weapon": {
+		"category": "武器",
+		"items": [
+			{
+				"name": "球棒",
+				"category": "武器",
+				"material": "木材",
+				"durability": "60",
+				"price": "500"
+			},
+			{
+				"name": "刀",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "120",
+				"price": "1200"
+			},
+			{
+				"name": "網球拍",
+				"category": "武器",
+				"material": "塑膠",
+				"durability": "60",
+				"price": "800"
+			},
+			{
+				"name": "鐵劍",
+				"category": "武器",
+				"material": "銅",
+				"durability": "160",
+				"price": "2000"
+			},
+			{
+				"name": "小刀",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "40",
+				"price": "100"
+			},
+			{
+				"name": "金龍劍",
+				"category": "武器",
+				"material": "金",
+				"durability": "200",
+				"price": "1400"
+			},
+			{
+				"name": "傘",
+				"category": "武器",
+				"durability": "20",
+				"price": "200"
+			},
+			{
+				"name": "木棒",
+				"category": "武器",
+				"material": "木材",
+				"durability": "20",
+				"price": "160"
+			},
+			{
+				"name": "鐵棒",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "80",
+				"price": "1000"
+			},
+			{
+				"name": "結他",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "吹飛",
+				"durability": "40",
+				"price": "1500"
+			},
+			{
+				"name": "大地之劍",
+				"category": "武器",
+				"material": "銅",
+				"effect": "吹飛",
+				"durability": "320",
+				"price": "3000"
+			},
+			{
+				"name": "倚天劍",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "480",
+				"price": "4000"
+			},
+			{
+				"name": "武士之劍",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "600",
+				"price": "5000"
+			},
+			{
+				"name": "樹枝",
+				"category": "武器",
+				"durability": "12",
+				"price": "20"
+			},
+			{
+				"name": "平底鑊",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "60",
+				"price": "200"
+			},
+			{
+				"name": "鑊鏟",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "40",
+				"price": "300"
+			},
+			{
+				"name": "青銅劍",
+				"category": "武器",
+				"material": "銅",
+				"effect": "吹飛",
+				"durability": "200",
+				"price": "3000"
+			},
+			{
+				"name": "破邪劍(陸道專用)",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "紅劍氣",
+				"durability": "500",
+				"price": "3200",
+				"consumption": "0MP"
+			},
+			{
+				"name": "七星關刀",
+				"category": "武器",
+				"material": "合金",
+				"effect": "氣勁",
+				"durability": "500",
+				"price": "9000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "丹鳳劍",
+				"category": "武器",
+				"material": "銅",
+				"effect": "紅劍氣",
+				"durability": "500",
+				"price": "8500",
+				"consumption": "100MP"
+			},
+			{
+				"name": "太玄劍",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "紅劍氣",
+				"durability": "500",
+				"price": "8000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "白玉劍",
+				"category": "武器",
+				"material": "合金",
+				"effect": "電擊",
+				"durability": "500",
+				"price": "10000",
+				"consumption": "225MP"
+			},
+			{
+				"name": "伏虎棒",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "血蝠之災 (混亂)",
+				"durability": "500",
+				"price": "100",
+				"consumption": "250MP"
+			},
+			{
+				"name": "百煉寶刀",
+				"category": "武器",
+				"material": "金",
+				"effect": "灰飛煙滅 (焚燒)",
+				"durability": "500",
+				"price": "100",
+				"consumption": "250MP"
+			},
+			{
+				"name": "米兒傘",
+				"category": "武器",
+				"material": "塑膠",
+				"effect": "天使之吻 (暈眩)",
+				"durability": "500",
+				"price": "100",
+				"consumption": "125MP"
+			},
+			{
+				"name": "巫師妖杖",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "邪殺骷髏波 (電擊)",
+				"durability": "500",
+				"price": "100",
+				"consumption": "200MP"
+			},
+			{
+				"name": "法老王之杖",
+				"category": "武器",
+				"material": "金",
+				"effect": "詛咒光彈 (混亂)",
+				"durability": "500",
+				"price": "100",
+				"consumption": "250MP"
+			},
+			{
+				"name": "虎皇劍",
+				"category": "武器",
+				"material": "金",
+				"effect": "音速刀",
+				"durability": "500",
+				"price": "100",
+				"consumption": "250MP"
+			},
+			{
+				"name": "毒沼籐棒",
+				"category": "武器",
+				"material": "木材",
+				"effect": "毒素光波 (中毒)",
+				"durability": "500",
+				"price": "100",
+				"consumption": "250MP"
+			},
+			{
+				"name": "風霜之劍",
+				"category": "武器",
+				"material": "銅",
+				"effect": "劍氣",
+				"durability": "500",
+				"price": "100",
+				"consumption": "300MP"
+			},
+			{
+				"name": "飛雲偃月刀",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "旋風閃",
+				"durability": "500",
+				"price": "100",
+				"consumption": "300MP"
+			},
+			{
+				"name": "疾風劍",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "拳風",
+				"durability": "500",
+				"price": "100",
+				"consumption": "300MP"
+			},
+			{
+				"name": "神風劍",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "500",
+				"price": "100"
+			},
+			{
+				"name": "勝利女神劍",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "500",
+				"price": "100"
+			},
+			{
+				"name": "黑邪劍",
+				"category": "武器",
+				"material": "合金",
+				"durability": "500",
+				"price": "100"
+			},
+			{
+				"name": "萬王寶刀",
+				"category": "武器",
+				"material": "合金",
+				"durability": "500",
+				"price": "100"
+			},
+			{
+				"name": "鳳凰之劍",
+				"category": "武器",
+				"material": "合金",
+				"durability": "500",
+				"price": "100"
+			},
+			{
+				"name": "冰封之劍",
+				"category": "武器",
+				"material": "布料",
+				"effect": "劍氣+凍結",
+				"durability": "20",
+				"price": "0"
+			},
+			{
+				"name": "刀",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "40",
+				"price": "100"
+			},
+			{
+				"name": "掃把",
+				"category": "武器",
+				"material": "木材",
+				"durability": "80",
+				"price": "240"
+			},
+			{
+				"name": "竹",
+				"category": "武器",
+				"durability": "40",
+				"price": "200"
+			},
+			{
+				"name": "偃月刀",
+				"category": "武器",
+				"material": "銅",
+				"durability": "180",
+				"price": "1600"
+			},
+			{
+				"name": "長矛",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "250",
+				"price": "2000"
+			},
+			{
+				"name": "皇者之矛",
+				"category": "武器",
+				"material": "金",
+				"durability": "380",
+				"price": "3000"
+			},
+			{
+				"name": "蛇矛",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "500",
+				"price": "4000"
+			},
+			{
+				"name": "雷龍偃月刀",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "電擊",
+				"durability": "500",
+				"price": "6000"
+			},
+			{
+				"name": "箭",
+				"category": "武器",
+				"material": "木材",
+				"durability": "10",
+				"price": "50"
+			},
+			{
+				"name": "始皇帝仗",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "500",
+				"price": "5500"
+			},
+			{
+				"name": "天使之仗",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "500",
+				"price": "800"
+			},
+			{
+				"name": "路西法之矛",
+				"category": "武器",
+				"material": "銅",
+				"durability": "500",
+				"price": "5800"
+			},
+			{
+				"name": "火鳳戟",
+				"category": "武器",
+				"material": "布料",
+				"effect": "電擊",
+				"durability": "5",
+				"price": "0"
+			},
+			{
+				"name": "隕石",
+				"category": "武器",
+				"durability": "20",
+				"price": "200"
+			},
+			{
+				"name": "球棒",
+				"category": "武器",
+				"material": "布料",
+				"durability": "???",
+				"description": "球棒",
+				"price": "???"
+			},
+			{
+				"name": "弓",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "160",
+				"price": "5000"
+			},
+			{
+				"name": "箭",
+				"category": "武器",
+				"material": "木材",
+				"durability": "10",
+				"description": "此武器無法揮動",
+				"price": "50"
+			},
+			{
+				"name": "箭",
+				"category": "武器",
+				"material": "木材",
+				"durability": "10",
+				"description": "此武器無法揮動",
+				"price": "50"
+			},
+			{
+				"name": "破邪劍(服部半藏專用)",
+				"category": "武器",
+				"material": "合金",
+				"effect": "特殊揮動動作",
+				"durability": "600",
+				"description": "[稀有]甲賀流派傳下的名劍，專殺一般兵器傷不了的妖魔邪靈",
+				"price": "50000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "斬魂刀(服部半藏專用)",
+				"category": "武器",
+				"material": "合金",
+				"effect": "特殊揮動動作",
+				"durability": "600",
+				"description": "[稀有]忍者王-服部半藏之配刀，揮舞時散發出藍色的刀光氣勁。",
+				"price": "50000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "血祭(阿修羅專用)",
+				"category": "武器",
+				"material": "合金",
+				"effect": "魔．閃捲刀 (吸近)",
+				"durability": "600",
+				"description": "[稀有]謎之人物-阿修羅的配兵之一，殺傷力極高,「以敵人之鮮血祭天地」。",
+				"price": "50000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "鬼彈(阿修羅專用)",
+				"category": "武器",
+				"material": "合金",
+				"effect": "夜重天‧鬼斬 (焚燒)",
+				"durability": "600",
+				"description": "[稀有]謎之人物-阿修羅的配兵之一，殺傷力極高,「力如鬼影般彈珠擊出」。",
+				"price": "50000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "皇者之劍",
+				"category": "武器",
+				"material": "金",
+				"effect": "焚燒+吹飛",
+				"durability": "500",
+				"price": "8000"
+			},
+			{
+				"name": "櫻花劍",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "500",
+				"price": "1000"
+			},
+			{
+				"name": "武士劍",
+				"category": "武器",
+				"material": "木材",
+				"durability": "500",
+				"price": "4000"
+			},
+			{
+				"name": "總統鋼筆",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "500",
+				"price": "3500"
+			},
+			{
+				"name": "特種部隊刀",
+				"category": "武器",
+				"material": "合金",
+				"durability": "500",
+				"price": "500"
+			},
+			{
+				"name": "中山毛筆",
+				"category": "武器",
+				"material": "木材",
+				"durability": "500",
+				"price": "4500"
+			},
+			{
+				"name": "謎之劍",
+				"category": "武器",
+				"material": "合金",
+				"effect": "凍結",
+				"durability": "500",
+				"price": "6800"
+			},
+			{
+				"name": "魔導使劍",
+				"category": "武器",
+				"material": "合金",
+				"effect": "電擊",
+				"durability": "500",
+				"price": "2000"
+			},
+			{
+				"name": "小熊蠟筆",
+				"category": "武器",
+				"material": "塑膠",
+				"durability": "500",
+				"price": "2500"
+			},
+			{
+				"name": "摺凳",
+				"category": "武器",
+				"material": "木材",
+				"durability": "500",
+				"price": "90"
+			},
+			{
+				"name": "土著矛",
+				"category": "武器",
+				"material": "木材",
+				"durability": "500",
+				"price": "2800"
+			},
+			{
+				"name": "瑪雅劍",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "500",
+				"price": "3200"
+			},
+			{
+				"name": "夏威夷花球",
+				"category": "武器",
+				"material": "塑膠",
+				"durability": "500",
+				"price": "2000"
+			},
+			{
+				"name": "復活島劍",
+				"category": "武器",
+				"material": "銅",
+				"durability": "500",
+				"price": "2500"
+			},
+			{
+				"name": "放大鏡",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "500",
+				"price": "3000"
+			},
+			{
+				"name": "P.H光棒",
+				"category": "武器",
+				"material": "合金",
+				"effect": "電擊",
+				"durability": "500",
+				"price": "8000"
+			},
+			{
+				"name": "聖誕棒",
+				"category": "武器",
+				"material": "塑膠",
+				"durability": "500",
+				"price": "3000"
+			},
+			{
+				"name": "新年桔",
+				"category": "武器",
+				"material": "木材",
+				"effect": "詛咒迷霧(混亂)",
+				"durability": "360",
+				"price": "3600",
+				"consumption": "300MP"
+			},
+			{
+				"name": "魔尊寶劍",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "焚燒",
+				"durability": "500",
+				"price": "10000"
+			},
+			{
+				"name": "聖尊神劍",
+				"category": "武器",
+				"material": "銅",
+				"effect": "凍結",
+				"durability": "500",
+				"price": "10000"
+			},
+			{
+				"name": "七聖巨刀",
+				"category": "武器",
+				"material": "銅",
+				"effect": "電擊",
+				"durability": "600",
+				"price": "11000"
+			},
+			{
+				"name": "破壞神劍",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "凍結",
+				"durability": "500",
+				"price": "15780"
+			},
+			{
+				"name": "雷伯特劍",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "倒地",
+				"durability": "600",
+				"price": "20000"
+			},
+			{
+				"name": "古代龍仗",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "紫色爆破波",
+				"durability": "500",
+				"price": "16240",
+				"consumption": "300MP"
+			},
+			{
+				"name": "異獸刀",
+				"category": "武器",
+				"material": "合金",
+				"effect": "藍色刀氣 (凍結)",
+				"durability": "500",
+				"price": "17090",
+				"consumption": "300MP"
+			},
+			{
+				"name": "聖域之矛",
+				"category": "武器",
+				"material": "金",
+				"effect": "浮空",
+				"durability": "500",
+				"price": "20000",
+				"consumption": "400MP"
+			},
+			{
+				"name": "迫擊炮",
+				"category": "武器",
+				"material": "合金",
+				"effect": "核子爆彈 (焚燒)",
+				"durability": "400",
+				"price": "16200",
+				"consumption": "200MP"
+			},
+			{
+				"name": "雷光槍",
+				"category": "武器",
+				"material": "合金",
+				"effect": "閃電砲 (電擊)",
+				"durability": "500",
+				"price": "22500",
+				"consumption": "200MP"
+			},
+			{
+				"name": "龍戰之槍",
+				"category": "武器",
+				"material": "鐵",
+				"durability": "600",
+				"price": "22100"
+			},
+			{
+				"name": "卜傻瓜鎚",
+				"category": "武器",
+				"material": "塑膠",
+				"effect": "暈眩",
+				"durability": "600",
+				"price": "22100"
+			},
+			{
+				"name": "白金之劍",
+				"category": "武器",
+				"material": "合金",
+				"effect": "劍氣",
+				"durability": "300",
+				"price": "12000",
+				"consumption": "100MP"
+			},
+			{
+				"name": "噴火槍",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "豪火球 (焚燒)",
+				"durability": "250",
+				"price": "8000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "幻魔神劍",
+				"category": "武器",
+				"material": "合金",
+				"effect": "怒雷之陣 (電擊)",
+				"durability": "500",
+				"price": "20000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "終極之劍",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "紫色爆破波",
+				"durability": "500",
+				"price": "20000",
+				"consumption": "50MP"
+			},
+			{
+				"name": "古龍骨矛",
+				"category": "武器",
+				"material": "木材",
+				"effect": "中毒",
+				"durability": "800",
+				"price": "2000"
+			},
+			{
+				"name": "黑曜石之斧",
+				"category": "武器",
+				"material": "鐵",
+				"effect": "凍結",
+				"durability": "700",
+				"price": "2000"
+			},
+			{
+				"name": "鳳凰大劍",
+				"category": "武器",
+				"material": "銅",
+				"effect": "火圈 (焚燒)",
+				"durability": "700",
+				"price": "1000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "射日 (新生亨利專用)",
+				"category": "武器",
+				"material": "合金",
+				"effect": "穿心矢",
+				"durability": "800",
+				"price": "35000",
+				"consumption": "350MP"
+			},
+			{
+				"name": "破邪聖仗",
+				"category": "武器",
+				"material": "金",
+				"effect": "破邪彈 (混亂)",
+				"durability": "400",
+				"price": "2000",
+				"consumption": "150MP"
+			},
+			{
+				"name": "晝夜光刃",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "旋風刀氣",
+				"durability": "400",
+				"price": "8000",
+				"consumption": "0MP"
+			},
+			{
+				"name": "索命劍 (陸道,陸島橋之助專用)",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "紅劍氣x3",
+				"durability": "300",
+				"description": "被封印的凶劍，相傳會吸蝕使用者的靈魂。",
+				"price": "50000",
+				"consumption": "0MP"
+			},
+			{
+				"name": "凌霜劍",
+				"category": "武器",
+				"material": "鋼",
+				"effect": "劍氣",
+				"durability": "500",
+				"price": "3500"
+			},
+			{
+				"name": "雷鳴鞭",
+				"category": "武器",
+				"material": "鋼",
+				"durability": "500",
+				"price": "3500"
+			},
+			{
+				"name": "蒼龍戟 (終極迪倫專用)",
+				"category": "武器",
+				"effect": "加攻防+黃金之蒼龍",
+				"durability": "2000",
+				"description": "一代最強武者-迪倫之專用武器",
+				"price": "100000",
+				"consumption": "300MP"
+			},
+			{
+				"name": "魔劍",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "石化",
+				"durability": "600",
+				"description": "未完成的魔劍",
+				"price": "10000",
+				"consumption": "600MP"
+			},
+			{
+				"name": "魔劍【紅蓮】",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "凶獸力量(焚燒)",
+				"durability": "600",
+				"description": "此物品不能交易及儲存在銀行",
+				"price": "10000",
+				"consumption": "60MP"
+			},
+			{
+				"name": "魔劍【日】",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "凶獸力量",
+				"durability": "600",
+				"description": "附有凶獸力量的魔劍",
+				"price": "10000",
+				"consumption": "60MP"
+			},
+			{
+				"name": "魔劍【紫電】",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "凶獸力量",
+				"durability": "600",
+				"description": "此物品不能交易及儲存在銀行",
+				"price": "10000",
+				"consumption": "100MP"
+			},
+			{
+				"name": "魔劍【月】",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "凶獸力量(中毒)",
+				"durability": "600",
+				"description": "附有凶獸力量的魔劍",
+				"price": "10000",
+				"consumption": "150MP"
+			},
+			{
+				"name": "魔劍【螢】",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "凶獸力量",
+				"durability": "600",
+				"description": "此物品不能交易及儲存在銀行",
+				"price": "10000",
+				"consumption": "60MP"
+			},
+			{
+				"name": "魔劍【蒼雷】",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "凶獸力量",
+				"durability": "600",
+				"description": "附有凶獸力量的魔劍",
+				"price": "10000",
+				"consumption": "200MP"
+			},
+			{
+				"name": "魔劍【烈風】",
+				"category": "武器",
+				"material": "魔精石",
+				"effect": "凶獸力量(吹飛)",
+				"durability": "600",
+				"description": "此物品不能交易及儲存在銀行",
+				"price": "10000",
+				"consumption": "600MP"
+			}
+		]
+	},
+	"consumables": {
+		"category": "消耗品",
+		"items": [
+			{
+				"name": "汽水",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "200",
+				"effect": "回復"
+			},
+			{
+				"name": "補充飲料",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "200",
+				"effect": "HP"
+			},
+			{
+				"name": "荳奶",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "200",
+				"effect": "500"
+			},
+			{
+				"name": "生命藥水",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "2000",
+				"effect": "MP150"
+			},
+			{
+				"name": "元力藥水",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "2000",
+				"effect": "SP100"
+			},
+			{
+				"name": "咀咒藥水",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "2000",
+				"effect": "自已陷入"
+			},
+			{
+				"name": "毒性藥水",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "2000",
+				"effect": "混亂"
+			},
+			{
+				"name": "解毒藥水",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "2000",
+				"effect": "狀態"
+			},
+			{
+				"name": "LFO月餅",
+				"category": "消耗品",
+				"durability": "1",
+				"description": "中秋節快樂!",
+				"price": "1000",
+				"effect": "自已陷入"
+			},
+			{
+				"name": "肉粽",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "3000",
+				"effect": "中毒"
+			},
+			{
+				"name": "雄黃酒",
+				"category": "消耗品",
+				"durability": "1",
+				"price": "3000",
+				"effect": "回復"
+			},
+			{
+				"name": "紅芥",
+				"category": "消耗品",
+				"durability": "1",
+				"description": "細菌毒素的抗體",
+				"price": "5000",
+				"effect": "HP"
+			},
+			{
+				"name": "十吻福",
+				"category": "消耗品",
+				"durability": "1",
+				"description": "流感流感同我",
+				"price": "5000",
+				"effect": "100"
+			}
+		]
+	},
+	"head": {
+		"category": "摩摩星人",
+		"items": [
+			{
+				"name": "血牛帽",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "雙層髮",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "陸軍裝",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "型仔頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "爆炸頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "貓王頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "曲髮",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "風吹頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "瞢瞢頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "野人頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "藝術頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "搖滾頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "飛行頭盔",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "羅馬頭盔",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "藝妓頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "摩洛哥帽",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "宰相冠",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "牛仔帽",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "海盜帽",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "宙斯冠",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "日本武士頭盔",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "明星頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "電視天線",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "鍋蓋頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "天使頭盔",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "惡魔角",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "平頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "學生頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "忍者頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "蠱惑仔頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "拉波頭",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "消防拯救隊頭盔",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "醫護人員頭盔",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "解放軍頭盔",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "船長帽",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "米兒髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成米兒一樣。",
+				"type": "時限物品",
+				"effect": "行動計回復時間 -2秒"
+			},
+			{
+				"name": "星奇髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成星奇一樣。",
+				"type": "時限物品",
+				"effect": "行動計回復時間 -2秒"
+			},
+			{
+				"name": "迪雲髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成迪雲一樣。",
+				"type": "時限物品",
+				"effect": "行動計回復時間 -2秒"
+			},
+			{
+				"name": "小丹髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成小丹一樣。",
+				"type": "時限物品",
+				"effect": "行動計回復時間 -2秒"
+			},
+			{
+				"name": "悟地髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成悟地一樣。",
+				"type": "時限物品",
+				"effect": "行動計回復時間 -2秒"
+			},
+			{
+				"name": "馬龍髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成馬龍一樣。",
+				"type": "時限物品",
+				"effect": "行動計回復時間 -2秒"
+			},
+			{
+				"name": "女巫帽",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "陸道髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成陸道一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "地藏十兵衛髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成地藏十兵衛一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "忍者兜",
+				"category": "摩摩星人",
+				"type": "時限物品"
+			},
+			{
+				"name": "真。天魔髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成真．天魔一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "終極迪倫髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成終極迪倫一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "迪倫髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成迪倫一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "蓮娜髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成蓮娜一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "安雅髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成安雅一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "蚩尤髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成蚩尤一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "黑羅剎髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成黑羅剎一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "卓男改髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成卓男改一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "幻音神巫髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成幻音神巫一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "妖化蓮娜髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成妖化蓮娜一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "終極魔人髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成終極魔人一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "極惡龍翼髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成極惡龍翼一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "巫神髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成巫神一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "終極龐士髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成終極龐士一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "宇歷斯髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成宇歷斯一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "約翰髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成約翰一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "溫蒂髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成溫蒂一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "霍雷髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成霍雷一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "菲雲髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成菲雲一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "菲沙髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成菲沙一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "蓋亞髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成蓋亞一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "樂雲髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成樂雲一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "天魔髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成天魔一樣。",
+				"type": "時限物品"
+			},
+			{
+				"name": "玄武髮式",
+				"category": "摩摩星人",
+				"description": "把摩摩星人裝扮成玄武一樣。",
+				"type": "時限物品"
+			}
+		]
+	},
+	"set": {
+		"category": "套裝",
+		"items": [
+			{
+				"name": "皇者之劍",
+				"category": "套裝",
+				"material": "金",
+				"effect": "焚燒+吹飛",
+				"durability": "500",
+				"price": "8000"
+			},
+			{
+				"name": "皇者頭盔",
+				"category": "套裝",
+				"material": "金",
+				"stats": {
+					"hp": "+80",
+					"mp": "+100",
+					"sp": "+80",
+					"str": "+150",
+					"def": "+200"
+				}
+			},
+			{
+				"name": "皇者項錬",
+				"category": "套裝",
+				"material": "金"
+			},
+			{
+				"name": "皇者盔甲",
+				"category": "套裝",
+				"material": "金"
+			},
+			{
+				"name": "皇者之盾",
+				"category": "套裝",
+				"material": "金"
+			},
+			{
+				"name": "皇者手鐲",
+				"category": "套裝",
+				"material": "金"
+			},
+			{
+				"name": "皇者之靴",
+				"category": "套裝",
+				"material": "金"
+			},
+			{
+				"name": "櫻花劍",
+				"category": "套裝",
+				"material": "鐵",
+				"durability": "500",
+				"price": "1000"
+			},
+			{
+				"name": "櫻花帽",
+				"category": "套裝",
+				"material": "布料",
+				"stats": {
+					"def": "+100",
+					"agi": "-30"
+				}
+			},
+			{
+				"name": "櫻花項鍊",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "櫻花服",
+				"category": "套裝",
+				"material": "金"
+			},
+			{
+				"name": "櫻花盾",
+				"category": "套裝",
+				"material": "鐵"
+			},
+			{
+				"name": "櫻花手鐲",
+				"category": "套裝",
+				"material": "鐵"
+			},
+			{
+				"name": "櫻花屐",
+				"category": "套裝",
+				"material": "木材"
+			},
+			{
+				"name": "總統鋼筆",
+				"category": "套裝",
+				"material": "鋼",
+				"durability": "500",
+				"price": "3500"
+			},
+			{
+				"name": "總統假髮",
+				"category": "套裝",
+				"material": "布料",
+				"stats": {
+					"hp": "+70",
+					"mp": "+20",
+					"def": "+130",
+					"agi": "-30"
+				}
+			},
+			{
+				"name": "總統煲呔",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "總統西裝",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "總統盾",
+				"category": "套裝",
+				"material": "金"
+			},
+			{
+				"name": "總統手錶",
+				"category": "套裝",
+				"material": "合金"
+			},
+			{
+				"name": "總統皮鞋",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "特種部隊刀",
+				"category": "套裝",
+				"material": "合金",
+				"durability": "500",
+				"price": "500"
+			},
+			{
+				"name": "特種部隊頭盔",
+				"category": "套裝",
+				"material": "鋼",
+				"stats": {
+					"mp": "+20",
+					"def": "+100",
+					"agi": "-30"
+				}
+			},
+			{
+				"name": "特種部隊軍牌",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "特種部隊盔甲",
+				"category": "套裝",
+				"material": "鋼"
+			},
+			{
+				"name": "特種部隊盾",
+				"category": "套裝",
+				"material": "鐵"
+			},
+			{
+				"name": "特種部隊手套",
+				"category": "套裝",
+				"material": "鐵"
+			},
+			{
+				"name": "特種部隊靴",
+				"category": "套裝",
+				"material": "鋼"
+			},
+			{
+				"name": "中山毛筆",
+				"category": "套裝",
+				"material": "木材",
+				"durability": "500",
+				"price": "4500"
+			},
+			{
+				"name": "中山帽",
+				"category": "套裝",
+				"material": "布料",
+				"stats": {
+					"str": "+30",
+					"def": "+100",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "中山戒指",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "中山服",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "中山盾",
+				"category": "套裝",
+				"material": "木材"
+			},
+			{
+				"name": "中山手套",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "中山鞋",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "謎之劍",
+				"category": "套裝",
+				"material": "合金",
+				"effect": "凍結",
+				"durability": "500",
+				"price": "6800"
+			},
+			{
+				"name": "謎之頭盔",
+				"category": "套裝",
+				"material": "合金",
+				"stats": {
+					"sp": "+30",
+					"def": "+190",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "謎之耳環",
+				"category": "套裝",
+				"material": "合金"
+			},
+			{
+				"name": "謎之盔甲",
+				"category": "套裝",
+				"material": "合金"
+			},
+			{
+				"name": "謎之盾",
+				"category": "套裝",
+				"material": "合金"
+			},
+			{
+				"name": "謎之爪",
+				"category": "套裝",
+				"material": "合金"
+			},
+			{
+				"name": "謎之靴",
+				"category": "套裝",
+				"material": "合金"
+			},
+			{
+				"name": "天使之仗",
+				"category": "套裝",
+				"material": "鐵",
+				"durability": "500",
+				"price": "800"
+			},
+			{
+				"name": "天使光環",
+				"category": "套裝",
+				"material": "布料",
+				"stats": {
+					"def": "+80",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "天使耳環",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "天使之服",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "天使之盾",
+				"category": "套裝",
+				"material": "鋼"
+			},
+			{
+				"name": "天使手鐲",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "天使之靴",
+				"category": "套裝",
+				"material": "合金"
+			},
+			{
+				"name": "路西法之矛",
+				"category": "套裝",
+				"material": "銅",
+				"durability": "500",
+				"price": "5800"
+			},
+			{
+				"name": "路西法頭盔",
+				"category": "套裝",
+				"material": "鋼",
+				"stats": {
+					"hp": "+40",
+					"def": "+180",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "路西法之爪",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "路西法盔甲",
+				"category": "套裝",
+				"material": "鋼"
+			},
+			{
+				"name": "路西法之盾",
+				"category": "套裝",
+				"material": "鋼"
+			},
+			{
+				"name": "路西法戒指",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "路西法之鞋",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "魔導使劍",
+				"category": "套裝",
+				"material": "合金",
+				"effect": "電擊",
+				"durability": "500",
+				"price": "2000"
+			},
+			{
+				"name": "魔導使帽",
+				"category": "套裝",
+				"material": "鋼",
+				"stats": {
+					"hp": "+40",
+					"def": "+170",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "魔導使項錬",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "魔導使服",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "魔導使盾",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "魔導使手鐲",
+				"category": "套裝",
+				"material": "銅"
+			},
+			{
+				"name": "魔導使鞋",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "小熊蠟筆",
+				"category": "套裝",
+				"material": "塑膠",
+				"durability": "500",
+				"price": "2500"
+			},
+			{
+				"name": "小熊帽",
+				"category": "套裝",
+				"material": "鋼",
+				"stats": {
+					"def": "+100",
+					"agi": "-20"
+				}
+			},
+			{
+				"name": "小熊奶咀",
+				"category": "套裝",
+				"material": "塑膠"
+			},
+			{
+				"name": "小熊服",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "小熊盾",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "小熊掌",
+				"category": "套裝",
+				"material": "布料"
+			},
+			{
+				"name": "小熊鞋",
+				"category": "套裝",
+				"material": "布料"
+			}
+		]
+	}
+}
