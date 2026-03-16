@@ -10,8 +10,7 @@ import { CharacterStandCard } from "@/components/character-stand-card";
 import { GiscusComments } from "@/components/giscus-comments";
 import { ItemsIndex, ItemsTable } from "@/components/items-table";
 import { getMDXComponents } from "@/components/mdx";
-import { MissionDetail, MissionList } from "@/components/mission-list";
-import { StoryDetail, StoryList } from "@/components/story-list";
+import { PlotDetail, PlotIndex, PlotLanding } from "@/components/plot-list";
 import { getCharacterColor } from "@/lib/characters";
 import { baseOptions } from "@/lib/layout.shared";
 import { source } from "@/lib/source";
@@ -42,6 +41,14 @@ const serverLoader = createServerFn({
 
 const clientLoader = browserCollections.docs.createClientLoader({
 	component({ toc, frontmatter, default: MDX }, _props: undefined) {
+		// Update browser tab title
+		// biome-ignore lint/correctness/useHookAtTopLevel: This is a component function
+		useEffect(() => {
+			if (frontmatter.title) {
+				document.title = `${frontmatter.title} - LFO Wiki`;
+			}
+		}, [frontmatter.title]);
+
 		const editUrl = `https://github.com/niskan516/lfo-wiki/edit/main/${frontmatter._file?.path ?? ""}`;
 		const path = typeof window !== "undefined" ? window.location.pathname : "";
 		const depth = path
@@ -53,26 +60,34 @@ const clientLoader = browserCollections.docs.createClientLoader({
 		const isBeastPage = path.includes("/beast/") && depth >= 2;
 		const isItemsIndex = path.endsWith("/items") || path.endsWith("/items/");
 		const isItemPage = path.includes("/items/") && depth >= 2;
-		const isMissionIndex = path.endsWith("/missionindex") || path.endsWith("/missionindex/");
-		const isMissionPage = path.includes("/missionindex/") && depth >= 2;
-		const isStoryIndex = path.endsWith("/storyindex") || path.endsWith("/storyindex/");
-		const isStoryPage = path.includes("/storyindex/") && depth >= 2;
+		const isPlotLanding = path.endsWith("/plot") || path.endsWith("/plot/");
+		const isPlotIndex =
+			path.endsWith("/plot/story") ||
+			path.endsWith("/plot/story/") ||
+			path.endsWith("/plot/mission") ||
+			path.endsWith("/plot/mission/");
+		const isPlotPage =
+			(path.includes("/plot/story/") || path.includes("/plot/mission/")) && depth >= 3;
 
 		return (
-			<DocsPage toc={toc} breadcrumb={depth > 1 ? { includePage: true } : { enabled: false }}>
+			<DocsPage
+				toc={isPlotPage ? undefined : toc}
+				breadcrumb={depth > 1 ? { includePage: true } : { enabled: false }}
+			>
 				<DocsTitle>{frontmatter.title}</DocsTitle>
-				<DocsDescription>{frontmatter.description}</DocsDescription>
+				{!isPlotPage && <DocsDescription>{frontmatter.description}</DocsDescription>}
 				{isCharacterPage && <CharacterStandCard />}
 				{isBeastPage && <BeastCard />}
 				{isItemsIndex && <ItemsIndex />}
 				{isItemPage && <ItemsTable />}
-				{isMissionIndex && <MissionList />}
-				{isMissionPage && <MissionDetail />}
-				{isStoryIndex && <StoryList />}
-				{isStoryPage && <StoryDetail />}
-				<DocsBody>
-					<MDX components={getMDXComponents()} />
-				</DocsBody>
+				{isPlotLanding && <PlotLanding />}
+				{isPlotPage && <PlotDetail />}
+				{!isPlotPage && (
+					<DocsBody>
+						<MDX components={getMDXComponents()} />
+					</DocsBody>
+				)}
+				{isPlotIndex && <PlotIndex />}
 				<a
 					href={editUrl}
 					target="_blank"
