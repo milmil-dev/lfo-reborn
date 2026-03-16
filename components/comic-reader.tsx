@@ -5,11 +5,19 @@ import { useCallback, useEffect, useState } from "react";
 interface ComicReaderProps {
 	images: string[];
 	title?: string;
+	storyId?: string;
 }
 
-export function ComicReader({ images, title }: ComicReaderProps) {
+export function ComicReader({ images, title, storyId }: ComicReaderProps) {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [isFullscreen, setIsFullscreen] = useState(false);
+	const [showThumbnails, setShowThumbnails] = useState(true);
+	const [imageLoading, setImageLoading] = useState(true);
+	const [showHint, setShowHint] = useState(() => {
+		if (typeof window === "undefined") return false;
+		return !sessionStorage.getItem("lfo-reader-hint-seen");
+	});
+	const [resumePrompt, setResumePrompt] = useState<number | null>(null);
 	const total = images.length;
 
 	const goNext = useCallback(() => {
@@ -47,6 +55,50 @@ export function ComicReader({ images, title }: ComicReaderProps) {
 		window.addEventListener("keydown", handler);
 		return () => window.removeEventListener("keydown", handler);
 	}, [goNext, goPrev, goFirst, goLast, isFullscreen]);
+
+	// Reset image loading state on page change
+	// biome-ignore lint/correctness/useExhaustiveDependencies: currentPage is the trigger, not used in body
+	useEffect(() => {
+		setImageLoading(true);
+	}, [currentPage]);
+
+	// Auto-dismiss keyboard hint
+	useEffect(() => {
+		if (!showHint) return;
+		const timer = setTimeout(() => {
+			setShowHint(false);
+			sessionStorage.setItem("lfo-reader-hint-seen", "1");
+		}, 3000);
+		const dismiss = () => {
+			setShowHint(false);
+			sessionStorage.setItem("lfo-reader-hint-seen", "1");
+		};
+		window.addEventListener("keydown", dismiss, { once: true });
+		window.addEventListener("click", dismiss, { once: true });
+		return () => {
+			clearTimeout(timer);
+			window.removeEventListener("keydown", dismiss);
+			window.removeEventListener("click", dismiss);
+		};
+	}, [showHint]);
+
+	// Check localStorage for saved progress on mount
+	useEffect(() => {
+		if (!storyId) return;
+		const saved = localStorage.getItem(`lfo-reader-${storyId}`);
+		if (saved) {
+			const page = Number(saved);
+			if (page > 0 && page < total) {
+				setResumePrompt(page);
+			}
+		}
+	}, [storyId, total]);
+
+	// Save progress to localStorage
+	useEffect(() => {
+		if (!storyId || currentPage === 0) return;
+		localStorage.setItem(`lfo-reader-${storyId}`, String(currentPage));
+	}, [storyId, currentPage]);
 
 	if (!images.length) return null;
 
@@ -97,11 +149,19 @@ export function ComicReader({ images, title }: ComicReaderProps) {
 				{currentPage > 0 && <link rel="prefetch" href={images[currentPage - 1]} />}
 				{currentPage < total - 1 && <link rel="prefetch" href={images[currentPage + 1]} />}
 
+				{imageLoading && (
+					<div className="absolute inset-0 flex items-center justify-center">
+						<div className="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-white/80" />
+					</div>
+				)}
+
 				<img
 					src={images[currentPage]}
 					alt={`第 ${currentPage + 1} 頁`}
-					className={`${isFullscreen ? "max-h-[calc(100vh-88px)]" : "max-h-[70vh]"} w-auto max-w-full object-contain`}
+					className={`${isFullscreen ? "max-h-[calc(100vh-88px)]" : "max-h-[85vh]"} w-auto max-w-full object-contain transition-opacity ${imageLoading ? "opacity-0" : "opacity-100"}`}
 					draggable={false}
+					onLoad={() => setImageLoading(false)}
+					onError={() => setImageLoading(false)}
 				/>
 
 				{/* Left/right click zones visual hint */}
@@ -142,6 +202,42 @@ export function ComicReader({ images, title }: ComicReaderProps) {
 									d="M9 5l7 7-7 7"
 								/>
 							</svg>
+						</div>
+					</div>
+				)}
+
+				{showHint && (
+					<div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+						<div className="rounded-xl bg-black/70 px-6 py-4 text-center text-sm text-white/90 backdrop-blur-sm">
+							<p>← → 翻頁 · F 全屏 · Home/End 首末頁</p>
+							<p className="mt-1 text-xs text-white/50">點擊圖片左右區域也可翻頁</p>
+						</div>
+					</div>
+				)}
+
+				{resumePrompt !== null && (
+					<div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+						<div className="rounded-xl bg-fd-card border border-fd-border px-6 py-4 text-center shadow-xl">
+							<p className="text-sm text-fd-foreground">繼續閱讀第 {resumePrompt + 1} 頁？</p>
+							<div className="mt-3 flex justify-center gap-3">
+								<button
+									type="button"
+									onClick={() => {
+										setCurrentPage(resumePrompt);
+										setResumePrompt(null);
+									}}
+									className="rounded-lg bg-fd-primary px-4 py-1.5 text-sm font-medium text-white"
+								>
+									繼續
+								</button>
+								<button
+									type="button"
+									onClick={() => setResumePrompt(null)}
+									className="rounded-lg border border-fd-border px-4 py-1.5 text-sm text-fd-muted-foreground hover:bg-fd-muted/50"
+								>
+									從頭開始
+								</button>
+							</div>
 						</div>
 					</div>
 				)}
@@ -192,30 +288,40 @@ export function ComicReader({ images, title }: ComicReaderProps) {
 				>
 					⏭
 				</button>
+				<button
+					type="button"
+					onClick={() => setShowThumbnails((v) => !v)}
+					className="ml-2 rounded px-2 py-1 text-xs text-white/70 hover:bg-white/10 hover:text-white"
+					title={showThumbnails ? "隱藏縮圖" : "顯示縮圖"}
+				>
+					{showThumbnails ? "▼" : "▲"}
+				</button>
 			</div>
 
 			{/* Thumbnail strip */}
-			<div className="flex gap-1 overflow-x-auto bg-black/95 px-2 py-2">
-				{images.map((img, i) => (
-					<button
-						type="button"
-						key={img}
-						onClick={() => setCurrentPage(i)}
-						className={`shrink-0 overflow-hidden rounded border-2 transition-all ${
-							i === currentPage
-								? "border-white opacity-100"
-								: "border-transparent opacity-40 hover:opacity-70"
-						}`}
-					>
-						<img
-							src={img}
-							alt={`縮圖 ${i + 1}`}
-							className="h-12 w-16 object-cover"
-							loading="lazy"
-						/>
-					</button>
-				))}
-			</div>
+			{showThumbnails && (
+				<div className="flex gap-1 overflow-x-auto bg-black/95 px-2 py-2">
+					{images.map((img, i) => (
+						<button
+							type="button"
+							key={img}
+							onClick={() => setCurrentPage(i)}
+							className={`shrink-0 overflow-hidden rounded border-2 transition-all ${
+								i === currentPage
+									? "border-white opacity-100"
+									: "border-transparent opacity-40 hover:opacity-70"
+							}`}
+						>
+							<img
+								src={img}
+								alt={`縮圖 ${i + 1}`}
+								className="h-16 w-24 object-cover"
+								loading="lazy"
+							/>
+						</button>
+					))}
+				</div>
+			)}
 		</div>
 	);
 
