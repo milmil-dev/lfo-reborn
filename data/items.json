@@ -1,2314 +1,5710 @@
 {
-	"armor": {
-		"category": "裝備",
-		"items": [
-			{
-				"name": "頭帶",
-				"category": "裝備",
-				"material": "布料",
-				"stats": {
-					"def": "+5"
-				}
-			},
-			{
-				"name": "太陽帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "頭巾",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "西部牛仔帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "鴨咀帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "口罩",
-				"category": "裝備",
-				"material": "塑膠"
-			},
-			{
-				"name": "高級口罩",
-				"category": "裝備",
-				"material": "塑膠",
-				"stats": {
-					"def": "+20"
-				}
-			},
-			{
-				"name": "面具",
-				"category": "裝備",
-				"material": "銅"
-			},
-			{
-				"name": "防毒面具",
-				"category": "裝備",
-				"material": "塑膠"
-			},
-			{
-				"name": "聖水教頭巾",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "水晶頭盔",
-				"category": "裝備",
-				"material": "合金"
-			},
-			{
-				"name": "戰神頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "鬥氣頭盔",
-				"category": "裝備",
-				"material": "鐵",
-				"stats": {
-					"str": "+50",
-					"def": "-20"
-				}
-			},
-			{
-				"name": "雪狼之頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "千錘之盔",
-				"category": "裝備",
-				"material": "金"
-			},
-			{
-				"name": "血魔頭盔",
-				"category": "裝備",
-				"material": "銅"
-			},
-			{
-				"name": "邪神頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "受難之盔",
-				"category": "裝備",
-				"material": "銅"
-			},
-			{
-				"name": "奇蹟之盔",
-				"category": "裝備",
-				"material": "鋼",
-				"stats": {
-					"hp": "+70",
-					"mp": "+70",
-					"sp": "+50",
-					"def": "+40",
-					"agi": "-60"
-				}
-			},
-			{
-				"name": "宙斯頭盔",
-				"category": "裝備",
-				"material": "金"
-			},
-			{
-				"name": "幸運頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "信徒頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "帝王頭盔",
-				"category": "裝備",
-				"material": "金"
-			},
-			{
-				"name": "神將頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "荊棘頭盔",
-				"category": "裝備",
-				"material": "鐵",
-				"stats": {
-					"hp": "-100",
-					"mp": "+150",
-					"str": "+45",
-					"def": "+40",
-					"agi": "-80"
-				}
-			},
-			{
-				"name": "雅典娜頭盔",
-				"category": "裝備",
-				"material": "金"
-			},
-			{
-				"name": "暗黑頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "萬王頭盔",
-				"category": "裝備",
-				"material": "合金"
-			},
-			{
-				"name": "懲罰女神頭盔",
-				"category": "裝備",
-				"material": "金"
-			},
-			{
-				"name": "魔獸頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "皇者頭盔",
-				"category": "裝備",
-				"material": "金",
-				"stats": {
-					"hp": "+80",
-					"mp": "+100",
-					"sp": "+80",
-					"str": "+150",
-					"def": "+200"
-				}
-			},
-			{
-				"name": "櫻花帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "武士頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "總統假髮",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "特種部隊頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "中山帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "始皇帝帽",
-				"category": "裝備",
-				"material": "布料",
-				"stats": {
-					"sp": "+30",
-					"def": "+170",
-					"agi": "-20"
-				}
-			},
-			{
-				"name": "謎之頭盔",
-				"category": "裝備",
-				"material": "合金"
-			},
-			{
-				"name": "天使光環",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "路西法頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "魔導使帽",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "小熊帽",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "假髮",
-				"category": "裝備",
-				"material": "布料",
-				"stats": {
-					"def": "+50"
-				}
-			},
-			{
-				"name": "土著頭盔",
-				"category": "裝備",
-				"material": "木材"
-			},
-			{
-				"name": "瑪雅頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "夏威夷草帽",
-				"category": "裝備",
-				"material": "木材"
-			},
-			{
-				"name": "復活島頭盔",
-				"category": "裝備",
-				"material": "銅"
-			},
-			{
-				"name": "偵探帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "P.H頭盔",
-				"category": "裝備",
-				"material": "合金",
-				"stats": {
-					"sp": "-150",
-					"str": "+80",
-					"def": "+40",
-					"agi": "+30"
-				}
-			},
-			{
-				"name": "聖誕帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "新年帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "魔尊頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "聖尊之帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "炎冰頭盔",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "破壞神頭盔",
-				"category": "裝備",
-				"material": "鐵",
-				"stats": {
-					"sp": "+140",
-					"def": "+82",
-					"agi": "-65"
-				}
-			},
-			{
-				"name": "雷伯特頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "古代龍頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "異獸頭盔",
-				"category": "裝備",
-				"material": "合金"
-			},
-			{
-				"name": "聖域之帽",
-				"category": "裝備",
-				"material": "金"
-			},
-			{
-				"name": "終極頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "古龍骨頭盔",
-				"category": "裝備",
-				"material": "木材",
-				"stats": {
-					"hp": "+120",
-					"mp": "+110",
-					"str": "-80",
-					"def": "+250"
-				}
-			},
-			{
-				"name": "黑曜石頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "鳳凰頭盔",
-				"category": "裝備",
-				"material": "銅"
-			},
-			{
-				"name": "龍神頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "玄武絕盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "青龍頭盔",
-				"category": "裝備",
-				"material": "木材"
-			},
-			{
-				"name": "白虎頭盔",
-				"category": "裝備",
-				"material": "布料",
-				"stats": {
-					"hp": "+110",
-					"mp": "+110",
-					"sp": "+110",
-					"str": "+110",
-					"def": "+110",
-					"agi": "+110"
-				}
-			},
-			{
-				"name": "朱雀神盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "晝夜魔盔",
-				"category": "裝備",
-				"material": "鋼"
-			},
-			{
-				"name": "紫電眼罩(霍雷專用)",
-				"category": "裝備"
-			},
-			{
-				"name": "熱血頭巾",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "雷電頭盔",
-				"category": "裝備",
-				"material": "金"
-			},
-			{
-				"name": "戰車頭盔",
-				"category": "裝備",
-				"material": "銅",
-				"stats": {
-					"hp": "+300",
-					"mp": "+100",
-					"sp": "+600",
-					"str": "+80",
-					"def": "+270",
-					"agi": "-20"
-				}
-			},
-			{
-				"name": "蝦頭",
-				"category": "裝備",
-				"material": "塑膠"
-			},
-			{
-				"name": "暴風頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "機甲頭盔",
-				"category": "裝備",
-				"material": "合金"
-			},
-			{
-				"name": "達摩帽",
-				"category": "裝備",
-				"material": "布料"
-			},
-			{
-				"name": "護法頭盔",
-				"category": "裝備",
-				"material": "鐵"
-			},
-			{
-				"name": "龍戰之盔",
-				"category": "裝備",
-				"material": "銅",
-				"stats": {
-					"hp": "+700",
-					"mp": "+300",
-					"str": "+50",
-					"def": "+70"
-				}
-			},
-			{
-				"name": "關羽臉譜",
-				"category": "裝備",
-				"material": "木材"
-			},
-			{
-				"name": "白金頭盔",
-				"category": "裝備",
-				"material": "合金"
-			},
-			{
-				"name": "風精靈頭盔",
-				"category": "裝備",
-				"material": "鋼"
-			}
-		]
-	},
 	"weapon": {
-		"category": "武器",
+		"title": "武器",
 		"items": [
 			{
 				"name": "球棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/s9C771X.png",
 				"material": "木材",
-				"durability": "60",
-				"price": "500"
+				"demo": "https://i.imgur.com/EHkymoV.gif",
+				"effect": "球棒",
+				"durability": 60,
+				"price": 500,
+				"description": "球棒",
+				"stats": {},
+				"requirements": {},
+				"consumption": "球棒"
 			},
 			{
 				"name": "刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/0dwmmyl.png",
 				"material": "鐵",
-				"durability": "120",
-				"price": "1200"
+				"demo": "https://i.imgur.com/F0WCZ1x.gif",
+				"effect": "刀",
+				"durability": 120,
+				"price": 1200,
+				"description": "刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "刀"
 			},
 			{
 				"name": "網球拍",
-				"category": "武器",
+				"image": "https://i.imgur.com/7alhMgH.png",
 				"material": "塑膠",
-				"durability": "60",
-				"price": "800"
+				"demo": "https://i.imgur.com/UMFPp0i.gif",
+				"effect": "網球拍",
+				"durability": 60,
+				"price": 800,
+				"description": "網球拍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "網球拍"
 			},
 			{
 				"name": "鐵劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/S02Pucx.png",
 				"material": "銅",
-				"durability": "160",
-				"price": "2000"
+				"demo": "https://i.imgur.com/GNiG3jZ.gif",
+				"effect": "鐵劍",
+				"durability": 160,
+				"price": 2000,
+				"description": "鐵劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "鐵劍"
 			},
 			{
 				"name": "小刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/9wugmOt.png",
 				"material": "鋼",
-				"durability": "40",
-				"price": "100"
+				"demo": "https://i.imgur.com/sNA3B0t.gif",
+				"effect": "小刀",
+				"durability": 40,
+				"price": 100,
+				"description": "小刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "小刀"
 			},
 			{
 				"name": "金龍劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/ONGa2RY.png",
 				"material": "金",
-				"durability": "200",
-				"price": "1400"
+				"demo": "https://i.imgur.com/artSH2V.gif",
+				"effect": "金龍劍",
+				"durability": 200,
+				"price": 1400,
+				"description": "金龍劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "金龍劍"
 			},
 			{
 				"name": "傘",
-				"category": "武器",
-				"durability": "20",
-				"price": "200"
+				"image": "https://i.imgur.com/Cffsnjo.png",
+				"material": null,
+				"demo": "https://i.imgur.com/fJBxXzB.gif",
+				"effect": "傘",
+				"durability": 20,
+				"price": 200,
+				"description": "傘",
+				"stats": {},
+				"requirements": {},
+				"consumption": "傘"
 			},
 			{
 				"name": "木棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/REJwtnS.png",
 				"material": "木材",
-				"durability": "20",
-				"price": "160"
+				"demo": "https://i.imgur.com/0z0ySvw.gif",
+				"effect": "木棒",
+				"durability": 20,
+				"price": 160,
+				"description": "木棒",
+				"stats": {},
+				"requirements": {},
+				"consumption": "木棒"
 			},
 			{
 				"name": "鐵棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/TlDuNPK.png",
 				"material": "鐵",
-				"durability": "80",
-				"price": "1000"
+				"demo": "https://i.imgur.com/65faODR.gif",
+				"effect": "鐵棒",
+				"durability": 80,
+				"price": 1000,
+				"description": "鐵棒",
+				"stats": {},
+				"requirements": {},
+				"consumption": "鐵棒"
 			},
 			{
 				"name": "結他",
-				"category": "武器",
+				"image": "https://i.imgur.com/syMLagz.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/0XD5cqG.gif",
 				"effect": "吹飛",
-				"durability": "40",
-				"price": "1500"
+				"durability": 40,
+				"price": 1500,
+				"description": "結他",
+				"stats": {},
+				"requirements": {},
+				"consumption": "結他"
 			},
 			{
 				"name": "大地之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/82t5OEf.png",
 				"material": "銅",
+				"demo": "https://i.imgur.com/75caQt4.gif",
 				"effect": "吹飛",
-				"durability": "320",
-				"price": "3000"
+				"durability": 320,
+				"price": 3000,
+				"description": "大地之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "大地之劍"
 			},
 			{
 				"name": "倚天劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/0VzXNUW.png",
 				"material": "鐵",
-				"durability": "480",
-				"price": "4000"
+				"demo": "https://i.imgur.com/IVE0sYt.gif",
+				"effect": "倚天劍",
+				"durability": 480,
+				"price": 4000,
+				"description": "倚天劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "倚天劍"
 			},
 			{
 				"name": "武士之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/tAd6Z3u.png",
 				"material": "鋼",
-				"durability": "600",
-				"price": "5000"
+				"demo": "https://i.imgur.com/X4zExWa.gif",
+				"effect": "武士之劍",
+				"durability": 600,
+				"price": 5000,
+				"description": "武士之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "武士之劍"
 			},
 			{
 				"name": "樹枝",
-				"category": "武器",
-				"durability": "12",
-				"price": "20"
+				"image": "https://i.imgur.com/AaJiE60.png",
+				"material": null,
+				"demo": "https://i.imgur.com/T4yiDQU.gif",
+				"effect": "樹枝",
+				"durability": 12,
+				"price": 20,
+				"description": "樹枝",
+				"stats": {},
+				"requirements": {},
+				"consumption": "樹枝"
 			},
 			{
 				"name": "平底鑊",
-				"category": "武器",
+				"image": "https://i.imgur.com/T9VDVyr.png",
 				"material": "鋼",
-				"durability": "60",
-				"price": "200"
+				"demo": "https://i.imgur.com/lnqyh03.gif",
+				"effect": "平底鑊",
+				"durability": 60,
+				"price": 200,
+				"description": "平底鑊",
+				"stats": {},
+				"requirements": {},
+				"consumption": "平底鑊"
 			},
 			{
 				"name": "鑊鏟",
-				"category": "武器",
+				"image": "https://i.imgur.com/o0t0bBC.png",
 				"material": "鋼",
-				"durability": "40",
-				"price": "300"
+				"demo": "https://i.imgur.com/70r1YGF.gif",
+				"effect": "鑊鏟",
+				"durability": 40,
+				"price": 300,
+				"description": "鑊鏟",
+				"stats": {},
+				"requirements": {},
+				"consumption": "鑊鏟"
 			},
 			{
 				"name": "青銅劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/g9zkQsk.png",
 				"material": "銅",
+				"demo": "https://i.imgur.com/vGy2nSo.gif",
 				"effect": "吹飛",
-				"durability": "200",
-				"price": "3000"
+				"durability": 200,
+				"price": 3000,
+				"description": "青銅劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "青銅劍"
 			},
 			{
 				"name": "破邪劍(陸道專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/OVHN8zl.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/P9iZnBX.gif",
 				"effect": "紅劍氣",
-				"durability": "500",
-				"price": "3200",
-				"consumption": "0MP"
+				"durability": 500,
+				"price": 3200,
+				"description": "破邪劍(陸道專用)",
+				"stats": {},
+				"requirements": {},
+				"consumption": "破邪劍(陸道專用)"
 			},
 			{
 				"name": "七星關刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/eltIEq6.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/zq3x6wZ.gif",
 				"effect": "氣勁",
-				"durability": "500",
-				"price": "9000",
-				"consumption": "200MP"
+				"durability": 500,
+				"price": 9000,
+				"description": "七星關刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "七星關刀"
 			},
 			{
 				"name": "丹鳳劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/ug8AEdU.png",
 				"material": "銅",
+				"demo": "https://i.imgur.com/jPNIdAo.gif",
 				"effect": "紅劍氣",
-				"durability": "500",
-				"price": "8500",
-				"consumption": "100MP"
+				"durability": 500,
+				"price": 8500,
+				"description": "丹鳳劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "丹鳳劍"
 			},
 			{
 				"name": "太玄劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/eyLz4aB.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/H0cHAGU.gif",
 				"effect": "紅劍氣",
-				"durability": "500",
-				"price": "8000",
-				"consumption": "200MP"
+				"durability": 500,
+				"price": 8000,
+				"description": "太玄劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "太玄劍"
 			},
 			{
 				"name": "白玉劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/V4qtqah.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/DiCNLyc.gif",
 				"effect": "電擊",
-				"durability": "500",
-				"price": "10000",
-				"consumption": "225MP"
+				"durability": 500,
+				"price": 10000,
+				"description": "白玉劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "白玉劍"
 			},
 			{
 				"name": "伏虎棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/PToxcJu.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/tavP2e4.gif",
 				"effect": "血蝠之災 (混亂)",
-				"durability": "500",
-				"price": "100",
-				"consumption": "250MP"
+				"durability": 500,
+				"price": 100,
+				"description": "伏虎棒",
+				"stats": {},
+				"requirements": {},
+				"consumption": "伏虎棒"
 			},
 			{
 				"name": "百煉寶刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/Bql2jAd.png",
 				"material": "金",
+				"demo": "https://i.imgur.com/xSyP2WA.gif",
 				"effect": "灰飛煙滅 (焚燒)",
-				"durability": "500",
-				"price": "100",
-				"consumption": "250MP"
+				"durability": 500,
+				"price": 100,
+				"description": "百煉寶刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "百煉寶刀"
 			},
 			{
 				"name": "米兒傘",
-				"category": "武器",
+				"image": "https://i.imgur.com/YQt7edd.png",
 				"material": "塑膠",
+				"demo": "https://i.imgur.com/Hok4wIJ.gif",
 				"effect": "天使之吻 (暈眩)",
-				"durability": "500",
-				"price": "100",
-				"consumption": "125MP"
+				"durability": 500,
+				"price": 100,
+				"description": "米兒傘",
+				"stats": {},
+				"requirements": {},
+				"consumption": "米兒傘"
 			},
 			{
 				"name": "巫師妖杖",
-				"category": "武器",
+				"image": "https://i.imgur.com/tHfRpgY.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/dxxAkxP.gif",
 				"effect": "邪殺骷髏波 (電擊)",
-				"durability": "500",
-				"price": "100",
-				"consumption": "200MP"
+				"durability": 500,
+				"price": 100,
+				"description": "巫師妖杖",
+				"stats": {},
+				"requirements": {},
+				"consumption": "巫師妖杖"
 			},
 			{
 				"name": "法老王之杖",
-				"category": "武器",
+				"image": "https://i.imgur.com/VqKiVXa.png",
 				"material": "金",
+				"demo": "https://i.imgur.com/wabBALn.gif",
 				"effect": "詛咒光彈 (混亂)",
-				"durability": "500",
-				"price": "100",
-				"consumption": "250MP"
+				"durability": 500,
+				"price": 100,
+				"description": "法老王之杖",
+				"stats": {},
+				"requirements": {},
+				"consumption": "法老王之杖"
 			},
 			{
 				"name": "虎皇劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/7kgXV1j.png",
 				"material": "金",
+				"demo": "https://i.imgur.com/963gyiP.gif",
 				"effect": "音速刀",
-				"durability": "500",
-				"price": "100",
-				"consumption": "250MP"
+				"durability": 500,
+				"price": 100,
+				"description": "虎皇劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "虎皇劍"
 			},
 			{
 				"name": "毒沼籐棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/YS2ChB3.png",
 				"material": "木材",
+				"demo": "https://i.imgur.com/JOmB95Z.gif",
 				"effect": "毒素光波 (中毒)",
-				"durability": "500",
-				"price": "100",
-				"consumption": "250MP"
+				"durability": 500,
+				"price": 100,
+				"description": "毒沼籐棒",
+				"stats": {},
+				"requirements": {},
+				"consumption": "毒沼籐棒"
 			},
 			{
 				"name": "風霜之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/U5Sosli.png",
 				"material": "銅",
+				"demo": "https://i.imgur.com/8vMhlKm.gif",
 				"effect": "劍氣",
-				"durability": "500",
-				"price": "100",
-				"consumption": "300MP"
+				"durability": 500,
+				"price": 100,
+				"description": "風霜之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "風霜之劍"
 			},
 			{
 				"name": "飛雲偃月刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/wS6fnBn.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/BsCy1mh.gif",
 				"effect": "旋風閃",
-				"durability": "500",
-				"price": "100",
-				"consumption": "300MP"
+				"durability": 500,
+				"price": 100,
+				"description": "飛雲偃月刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "飛雲偃月刀"
 			},
 			{
 				"name": "疾風劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/FVNeDZ3.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/5f8Pjl5.gif",
 				"effect": "拳風",
-				"durability": "500",
-				"price": "100",
-				"consumption": "300MP"
+				"durability": 500,
+				"price": 100,
+				"description": "疾風劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "疾風劍"
 			},
 			{
 				"name": "神風劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/GA7ZPNL.png",
 				"material": "鐵",
-				"durability": "500",
-				"price": "100"
+				"demo": "https://i.imgur.com/5Lq17XE.gif",
+				"effect": "神風劍",
+				"durability": 500,
+				"price": 100,
+				"description": "神風劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "神風劍"
 			},
 			{
 				"name": "勝利女神劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/6Irslws.png",
 				"material": "鋼",
-				"durability": "500",
-				"price": "100"
+				"demo": "https://i.imgur.com/7I4ug7O.gif",
+				"effect": "勝利女神劍",
+				"durability": 500,
+				"price": 100,
+				"description": "勝利女神劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "勝利女神劍"
 			},
 			{
 				"name": "黑邪劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/jKusYsp.png",
 				"material": "合金",
-				"durability": "500",
-				"price": "100"
+				"demo": "https://i.imgur.com/1j5l7vK.gif",
+				"effect": "黑邪劍",
+				"durability": 500,
+				"price": 100,
+				"description": "黑邪劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "黑邪劍"
 			},
 			{
 				"name": "萬王寶刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/cEsn1dv.png",
 				"material": "合金",
-				"durability": "500",
-				"price": "100"
+				"demo": "https://i.imgur.com/unVNBQF.gif",
+				"effect": "萬王寶刀",
+				"durability": 500,
+				"price": 100,
+				"description": "萬王寶刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "萬王寶刀"
 			},
 			{
 				"name": "鳳凰之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/E2FGZkL.png",
 				"material": "合金",
-				"durability": "500",
-				"price": "100"
+				"demo": "https://i.imgur.com/xOvNlTX.gif",
+				"effect": "鳳凰之劍",
+				"durability": 500,
+				"price": 100,
+				"description": "鳳凰之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "鳳凰之劍"
 			},
 			{
 				"name": "冰封之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/Cs2jE4g.png",
 				"material": "布料",
+				"demo": "https://i.imgur.com/8rA3l6v.gif",
 				"effect": "劍氣+凍結",
-				"durability": "20",
-				"price": "0"
+				"durability": 20,
+				"price": 0,
+				"description": "冰封之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "冰封之劍"
 			},
 			{
 				"name": "刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/9rAeclj.png",
 				"material": "鋼",
-				"durability": "40",
-				"price": "100"
+				"demo": "https://i.imgur.com/ma7d7rA.gif",
+				"effect": "刀",
+				"durability": 40,
+				"price": 100,
+				"description": "刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "刀"
 			},
 			{
 				"name": "掃把",
-				"category": "武器",
+				"image": "https://i.imgur.com/5JtSTxY.png",
 				"material": "木材",
-				"durability": "80",
-				"price": "240"
+				"demo": "https://i.imgur.com/nbtfMkw.gif",
+				"effect": "掃把",
+				"durability": 80,
+				"price": 240,
+				"description": "掃把",
+				"stats": {},
+				"requirements": {},
+				"consumption": "掃把"
 			},
 			{
 				"name": "竹",
-				"category": "武器",
-				"durability": "40",
-				"price": "200"
+				"image": "https://i.imgur.com/OnTUU4k.png",
+				"material": null,
+				"demo": "https://i.imgur.com/r6ZgbKH.gif",
+				"effect": "竹",
+				"durability": 40,
+				"price": 200,
+				"description": "竹",
+				"stats": {},
+				"requirements": {},
+				"consumption": "竹"
 			},
 			{
 				"name": "偃月刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/rXJX1Nj.png",
 				"material": "銅",
-				"durability": "180",
-				"price": "1600"
+				"demo": "https://i.imgur.com/IVKtlUA.gif",
+				"effect": "偃月刀",
+				"durability": 180,
+				"price": 1600,
+				"description": "偃月刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "偃月刀"
 			},
 			{
 				"name": "長矛",
-				"category": "武器",
+				"image": "https://i.imgur.com/UQ3cacs.png",
 				"material": "鐵",
-				"durability": "250",
-				"price": "2000"
+				"demo": "https://i.imgur.com/iKPquzb.gif",
+				"effect": "長矛",
+				"durability": 250,
+				"price": 2000,
+				"description": "長矛",
+				"stats": {},
+				"requirements": {},
+				"consumption": "長矛"
 			},
 			{
 				"name": "皇者之矛",
-				"category": "武器",
+				"image": "https://i.imgur.com/RLzEwov.png",
 				"material": "金",
-				"durability": "380",
-				"price": "3000"
+				"demo": "https://i.imgur.com/H3LFB2F.gif",
+				"effect": "皇者之矛",
+				"durability": 380,
+				"price": 3000,
+				"description": "皇者之矛",
+				"stats": {},
+				"requirements": {},
+				"consumption": "皇者之矛"
 			},
 			{
 				"name": "蛇矛",
-				"category": "武器",
+				"image": "https://i.imgur.com/Kp8A9Nz.png",
 				"material": "鋼",
-				"durability": "500",
-				"price": "4000"
+				"demo": "https://i.imgur.com/1Gh2NtH.gif",
+				"effect": "蛇矛",
+				"durability": 500,
+				"price": 4000,
+				"description": "蛇矛",
+				"stats": {},
+				"requirements": {},
+				"consumption": "蛇矛"
 			},
 			{
 				"name": "雷龍偃月刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/8iU37fr.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/LsceaYh.gif",
 				"effect": "電擊",
-				"durability": "500",
-				"price": "6000"
+				"durability": 500,
+				"price": 6000,
+				"description": "雷龍偃月刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "雷龍偃月刀"
 			},
 			{
 				"name": "箭",
-				"category": "武器",
+				"image": "https://i.imgur.com/wlJsaTM.png",
 				"material": "木材",
-				"durability": "10",
-				"price": "50"
+				"demo": "https://i.imgur.com/6vHfGVZ.gif",
+				"effect": "箭",
+				"durability": 10,
+				"price": 50,
+				"description": "箭",
+				"stats": {},
+				"requirements": {},
+				"consumption": "箭"
 			},
 			{
 				"name": "始皇帝仗",
-				"category": "武器",
+				"image": "https://i.imgur.com/igQpbXl.png",
 				"material": "鐵",
-				"durability": "500",
-				"price": "5500"
+				"demo": "https://i.imgur.com/QKbvzv7.gif",
+				"effect": "始皇帝仗",
+				"durability": 500,
+				"price": 5500,
+				"description": "始皇帝仗",
+				"stats": {},
+				"requirements": {},
+				"consumption": "始皇帝仗"
 			},
 			{
 				"name": "天使之仗",
-				"category": "武器",
+				"image": "https://i.imgur.com/DXsYRqm.png",
 				"material": "鐵",
-				"durability": "500",
-				"price": "800"
+				"demo": "https://i.imgur.com/7nKN8eu.gif",
+				"effect": "天使之仗",
+				"durability": 500,
+				"price": 800,
+				"description": "天使之仗",
+				"stats": {},
+				"requirements": {},
+				"consumption": "天使之仗"
 			},
 			{
 				"name": "路西法之矛",
-				"category": "武器",
+				"image": "https://i.imgur.com/Z6cq2Ph.png",
 				"material": "銅",
-				"durability": "500",
-				"price": "5800"
+				"demo": "https://i.imgur.com/IeNGuRD.gif",
+				"effect": "路西法之矛",
+				"durability": 500,
+				"price": 5800,
+				"description": "路西法之矛",
+				"stats": {},
+				"requirements": {},
+				"consumption": "路西法之矛"
 			},
 			{
 				"name": "火鳳戟",
-				"category": "武器",
+				"image": "https://i.imgur.com/TCfWsTI.png",
 				"material": "布料",
+				"demo": "https://i.imgur.com/HFiBZGH.gif",
 				"effect": "電擊",
-				"durability": "5",
-				"price": "0"
+				"durability": 5,
+				"price": 0,
+				"description": "火鳳戟",
+				"stats": {},
+				"requirements": {},
+				"consumption": "火鳳戟"
 			},
 			{
 				"name": "隕石",
-				"category": "武器",
-				"durability": "20",
-				"price": "200"
+				"image": "https://i.imgur.com/7jrqyJD.png",
+				"material": null,
+				"demo": "https://i.imgur.com/Y4zhJwA.gif",
+				"effect": "隕石",
+				"durability": 20,
+				"price": 200,
+				"description": "隕石",
+				"stats": {},
+				"requirements": {},
+				"consumption": "隕石"
 			},
 			{
 				"name": "球棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/hua743n.png",
 				"material": "布料",
-				"durability": "???",
+				"demo": "https://i.imgur.com/QCUF5sl.gif",
+				"effect": "球棒",
+				"durability": null,
+				"price": null,
 				"description": "球棒",
-				"price": "???"
+				"stats": {},
+				"requirements": {},
+				"consumption": "球棒"
 			},
 			{
 				"name": "弓",
-				"category": "武器",
+				"image": "https://i.imgur.com/ZkHhqFA.png",
 				"material": "鋼",
-				"durability": "160",
-				"price": "5000"
+				"demo": "https://i.imgur.com/B1A6pld.gif",
+				"effect": "弓",
+				"durability": 160,
+				"price": 5000,
+				"description": "弓",
+				"stats": {},
+				"requirements": {},
+				"consumption": "弓"
 			},
 			{
 				"name": "箭",
-				"category": "武器",
+				"image": "https://i.imgur.com/jvtyonL.png",
 				"material": "木材",
-				"durability": "10",
+				"demo": null,
+				"effect": "箭",
+				"durability": 10,
+				"price": 50,
 				"description": "此武器無法揮動",
-				"price": "50"
+				"stats": {},
+				"requirements": {},
+				"consumption": "箭"
 			},
 			{
 				"name": "箭",
-				"category": "武器",
+				"image": "https://i.imgur.com/gMklsND.png",
 				"material": "木材",
-				"durability": "10",
+				"demo": null,
+				"effect": "箭",
+				"durability": 10,
+				"price": 50,
 				"description": "此武器無法揮動",
-				"price": "50"
+				"stats": {},
+				"requirements": {},
+				"consumption": "箭"
 			},
 			{
 				"name": "破邪劍(服部半藏專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/MYzTxux.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/Of31yX9.gif",
 				"effect": "特殊揮動動作",
-				"durability": "600",
+				"durability": 600,
+				"price": 50000,
 				"description": "[稀有]甲賀流派傳下的名劍，專殺一般兵器傷不了的妖魔邪靈",
-				"price": "50000",
-				"consumption": "200MP"
+				"stats": {},
+				"requirements": {},
+				"consumption": "破邪劍(服部半藏專用)"
 			},
 			{
 				"name": "斬魂刀(服部半藏專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/tW5huG6.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/rLEe11E.gif",
 				"effect": "特殊揮動動作",
-				"durability": "600",
+				"durability": 600,
+				"price": 50000,
 				"description": "[稀有]忍者王-服部半藏之配刀，揮舞時散發出藍色的刀光氣勁。",
-				"price": "50000",
-				"consumption": "200MP"
+				"stats": {},
+				"requirements": {},
+				"consumption": "斬魂刀(服部半藏專用)"
 			},
 			{
 				"name": "血祭(阿修羅專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/JvqkFoc.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/dmeuT3W.gif",
 				"effect": "魔．閃捲刀 (吸近)",
-				"durability": "600",
+				"durability": 600,
+				"price": 50000,
 				"description": "[稀有]謎之人物-阿修羅的配兵之一，殺傷力極高,「以敵人之鮮血祭天地」。",
-				"price": "50000",
-				"consumption": "200MP"
+				"stats": {},
+				"requirements": {},
+				"consumption": "血祭(阿修羅專用)"
 			},
 			{
 				"name": "鬼彈(阿修羅專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/MQkFQrS.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/Hy0MeLW.gif",
 				"effect": "夜重天‧鬼斬 (焚燒)",
-				"durability": "600",
+				"durability": 600,
+				"price": 50000,
 				"description": "[稀有]謎之人物-阿修羅的配兵之一，殺傷力極高,「力如鬼影般彈珠擊出」。",
-				"price": "50000",
-				"consumption": "200MP"
+				"stats": {},
+				"requirements": {},
+				"consumption": "鬼彈(阿修羅專用)"
 			},
 			{
 				"name": "皇者之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/5q8t3cd.png",
 				"material": "金",
+				"demo": "https://i.imgur.com/vCt3xGA.gif",
 				"effect": "焚燒+吹飛",
-				"durability": "500",
-				"price": "8000"
+				"durability": 500,
+				"price": 8000,
+				"description": "皇者之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "皇者之劍"
 			},
 			{
 				"name": "櫻花劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/nOhmKTr.png",
 				"material": "鐵",
-				"durability": "500",
-				"price": "1000"
+				"demo": "https://i.imgur.com/K1t0Rde.gif",
+				"effect": "櫻花劍",
+				"durability": 500,
+				"price": 1000,
+				"description": "櫻花劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "櫻花劍"
 			},
 			{
 				"name": "武士劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/f98qXDA.png",
 				"material": "木材",
-				"durability": "500",
-				"price": "4000"
+				"demo": "https://i.imgur.com/MmyImLh.gif",
+				"effect": "武士劍",
+				"durability": 500,
+				"price": 4000,
+				"description": "武士劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "武士劍"
 			},
 			{
 				"name": "總統鋼筆",
-				"category": "武器",
+				"image": "https://i.imgur.com/2IeduKp.png",
 				"material": "鋼",
-				"durability": "500",
-				"price": "3500"
+				"demo": "https://i.imgur.com/hde2rKh.gif",
+				"effect": "總統鋼筆",
+				"durability": 500,
+				"price": 3500,
+				"description": "總統鋼筆",
+				"stats": {},
+				"requirements": {},
+				"consumption": "總統鋼筆"
 			},
 			{
 				"name": "特種部隊刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/UgE9eSL.png",
 				"material": "合金",
-				"durability": "500",
-				"price": "500"
+				"demo": "https://i.imgur.com/qnYoEX8.gif",
+				"effect": "特種部隊刀",
+				"durability": 500,
+				"price": 500,
+				"description": "特種部隊刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "特種部隊刀"
 			},
 			{
 				"name": "中山毛筆",
-				"category": "武器",
+				"image": "https://i.imgur.com/hsxqztb.png",
 				"material": "木材",
-				"durability": "500",
-				"price": "4500"
+				"demo": "https://i.imgur.com/8E2A7yJ.gif",
+				"effect": "中山毛筆",
+				"durability": 500,
+				"price": 4500,
+				"description": "中山毛筆",
+				"stats": {},
+				"requirements": {},
+				"consumption": "中山毛筆"
 			},
 			{
 				"name": "謎之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/tcxc7rw.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/256kOyI.gif",
 				"effect": "凍結",
-				"durability": "500",
-				"price": "6800"
+				"durability": 500,
+				"price": 6800,
+				"description": "謎之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "謎之劍"
 			},
 			{
 				"name": "魔導使劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/ky7alHC.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/5GtRVgE.gif",
 				"effect": "電擊",
-				"durability": "500",
-				"price": "2000"
+				"durability": 500,
+				"price": 2000,
+				"description": "魔導使劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔導使劍"
 			},
 			{
 				"name": "小熊蠟筆",
-				"category": "武器",
+				"image": "https://i.imgur.com/1UoTZBd.png",
 				"material": "塑膠",
-				"durability": "500",
-				"price": "2500"
+				"demo": "https://i.imgur.com/dMWJYeM.gif",
+				"effect": "小熊蠟筆",
+				"durability": 500,
+				"price": 2500,
+				"description": "小熊蠟筆",
+				"stats": {},
+				"requirements": {},
+				"consumption": "小熊蠟筆"
 			},
 			{
 				"name": "摺凳",
-				"category": "武器",
+				"image": "https://i.imgur.com/ZxL26AC.png",
 				"material": "木材",
-				"durability": "500",
-				"price": "90"
+				"demo": "https://i.imgur.com/E6mr5aJ.gif",
+				"effect": "摺凳",
+				"durability": 500,
+				"price": 90,
+				"description": "摺凳",
+				"stats": {},
+				"requirements": {},
+				"consumption": "摺凳"
 			},
 			{
 				"name": "土著矛",
-				"category": "武器",
+				"image": "https://i.imgur.com/rhHm57Q.png",
 				"material": "木材",
-				"durability": "500",
-				"price": "2800"
+				"demo": "https://i.imgur.com/6Gn3289.gif",
+				"effect": "土著矛",
+				"durability": 500,
+				"price": 2800,
+				"description": "土著矛",
+				"stats": {},
+				"requirements": {},
+				"consumption": "土著矛"
 			},
 			{
 				"name": "瑪雅劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/tTYR0K2.png",
 				"material": "鐵",
-				"durability": "500",
-				"price": "3200"
+				"demo": "https://i.imgur.com/YMD96tP.gif",
+				"effect": "瑪雅劍",
+				"durability": 500,
+				"price": 3200,
+				"description": "瑪雅劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "瑪雅劍"
 			},
 			{
 				"name": "夏威夷花球",
-				"category": "武器",
+				"image": "https://i.imgur.com/dHSe67k.png",
 				"material": "塑膠",
-				"durability": "500",
-				"price": "2000"
+				"demo": "https://i.imgur.com/xoy6Lai.gif",
+				"effect": "夏威夷花球",
+				"durability": 500,
+				"price": 2000,
+				"description": "夏威夷花球",
+				"stats": {},
+				"requirements": {},
+				"consumption": "夏威夷花球"
 			},
 			{
 				"name": "復活島劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/S6jghvI.png",
 				"material": "銅",
-				"durability": "500",
-				"price": "2500"
+				"demo": "https://i.imgur.com/oUWcatI.gif",
+				"effect": "復活島劍",
+				"durability": 500,
+				"price": 2500,
+				"description": "復活島劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "復活島劍"
 			},
 			{
 				"name": "放大鏡",
-				"category": "武器",
+				"image": "https://i.imgur.com/XKLkT61.png",
 				"material": "鋼",
-				"durability": "500",
-				"price": "3000"
+				"demo": "https://i.imgur.com/kRn8zEg.gif",
+				"effect": "放大鏡",
+				"durability": 500,
+				"price": 3000,
+				"description": "放大鏡",
+				"stats": {},
+				"requirements": {},
+				"consumption": "放大鏡"
 			},
 			{
 				"name": "P.H光棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/4PI9KD4.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/ni4nzVu.gif",
 				"effect": "電擊",
-				"durability": "500",
-				"price": "8000"
+				"durability": 500,
+				"price": 8000,
+				"description": "P.H光棒",
+				"stats": {},
+				"requirements": {},
+				"consumption": "P.H光棒"
 			},
 			{
 				"name": "聖誕棒",
-				"category": "武器",
+				"image": "https://i.imgur.com/hpRQJsT.png",
 				"material": "塑膠",
-				"durability": "500",
-				"price": "3000"
+				"demo": "https://i.imgur.com/eR1YiTD.gif",
+				"effect": "聖誕棒",
+				"durability": 500,
+				"price": 3000,
+				"description": "聖誕棒",
+				"stats": {},
+				"requirements": {},
+				"consumption": "聖誕棒"
 			},
 			{
 				"name": "新年桔",
-				"category": "武器",
+				"image": "https://i.imgur.com/C171WRe.png",
 				"material": "木材",
+				"demo": "https://i.imgur.com/MSWg9yM.gif",
 				"effect": "詛咒迷霧(混亂)",
-				"durability": "360",
-				"price": "3600",
-				"consumption": "300MP"
+				"durability": 360,
+				"price": 3600,
+				"description": "新年桔",
+				"stats": {},
+				"requirements": {},
+				"consumption": "新年桔"
 			},
 			{
 				"name": "魔尊寶劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/NbDeRiI.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/EwSlrDX.gif",
 				"effect": "焚燒",
-				"durability": "500",
-				"price": "10000"
+				"durability": 500,
+				"price": 10000,
+				"description": "魔尊寶劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔尊寶劍"
 			},
 			{
 				"name": "聖尊神劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/gEKv1CV.png",
 				"material": "銅",
+				"demo": "https://i.imgur.com/G52FMn0.gif",
 				"effect": "凍結",
-				"durability": "500",
-				"price": "10000"
+				"durability": 500,
+				"price": 10000,
+				"description": "聖尊神劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "聖尊神劍"
 			},
 			{
 				"name": "七聖巨刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/LnS848D.png",
 				"material": "銅",
+				"demo": "https://i.imgur.com/K00xqVj.gif",
 				"effect": "電擊",
-				"durability": "600",
-				"price": "11000"
+				"durability": 600,
+				"price": 11000,
+				"description": "七聖巨刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "七聖巨刀"
 			},
 			{
 				"name": "破壞神劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/rVRd6lb.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/ny1Y64m.gif",
 				"effect": "凍結",
-				"durability": "500",
-				"price": "15780"
+				"durability": 500,
+				"price": 15780,
+				"description": "破壞神劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "破壞神劍"
 			},
 			{
 				"name": "雷伯特劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/YBt78cW.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/RlbQw1n.gif",
 				"effect": "倒地",
-				"durability": "600",
-				"price": "20000"
+				"durability": 600,
+				"price": 20000,
+				"description": "雷伯特劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "雷伯特劍"
 			},
 			{
 				"name": "古代龍仗",
-				"category": "武器",
+				"image": "https://i.imgur.com/uqNhBw0.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/ZqCVuJc.gif",
 				"effect": "紫色爆破波",
-				"durability": "500",
-				"price": "16240",
-				"consumption": "300MP"
+				"durability": 500,
+				"price": 16240,
+				"description": "古代龍仗",
+				"stats": {},
+				"requirements": {},
+				"consumption": "古代龍仗"
 			},
 			{
 				"name": "異獸刀",
-				"category": "武器",
+				"image": "https://i.imgur.com/Ey7sviG.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/iaK5A43.gif",
 				"effect": "藍色刀氣 (凍結)",
-				"durability": "500",
-				"price": "17090",
-				"consumption": "300MP"
+				"durability": 500,
+				"price": 17090,
+				"description": "異獸刀",
+				"stats": {},
+				"requirements": {},
+				"consumption": "異獸刀"
 			},
 			{
 				"name": "聖域之矛",
-				"category": "武器",
+				"image": "https://i.imgur.com/2cbZ3mM.png",
 				"material": "金",
+				"demo": "https://i.imgur.com/o5XFP3I.gif",
 				"effect": "浮空",
-				"durability": "500",
-				"price": "20000",
-				"consumption": "400MP"
+				"durability": 500,
+				"price": 20000,
+				"description": "聖域之矛",
+				"stats": {},
+				"requirements": {},
+				"consumption": "聖域之矛"
 			},
 			{
 				"name": "迫擊炮",
-				"category": "武器",
+				"image": "https://i.imgur.com/esqrdzT.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/IcK1IaT.gif",
 				"effect": "核子爆彈 (焚燒)",
-				"durability": "400",
-				"price": "16200",
-				"consumption": "200MP"
+				"durability": 400,
+				"price": 16200,
+				"description": "迫擊炮",
+				"stats": {},
+				"requirements": {},
+				"consumption": "迫擊炮"
 			},
 			{
 				"name": "雷光槍",
-				"category": "武器",
+				"image": "https://i.imgur.com/Q5SlOgx.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/rIFtTKA.gif",
 				"effect": "閃電砲 (電擊)",
-				"durability": "500",
-				"price": "22500",
-				"consumption": "200MP"
+				"durability": 500,
+				"price": 22500,
+				"description": "雷光槍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "雷光槍"
 			},
 			{
 				"name": "龍戰之槍",
-				"category": "武器",
+				"image": "https://i.imgur.com/XUj2tXr.png",
 				"material": "鐵",
-				"durability": "600",
-				"price": "22100"
+				"demo": "https://i.imgur.com/e4P6GAi.gif",
+				"effect": "龍戰之槍",
+				"durability": 600,
+				"price": 22100,
+				"description": "龍戰之槍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "龍戰之槍"
 			},
 			{
 				"name": "卜傻瓜鎚",
-				"category": "武器",
+				"image": "https://i.imgur.com/apCFrjV.png",
 				"material": "塑膠",
+				"demo": "https://i.imgur.com/pS2WvpY.gif",
 				"effect": "暈眩",
-				"durability": "600",
-				"price": "22100"
+				"durability": 600,
+				"price": 22100,
+				"description": "卜傻瓜鎚",
+				"stats": {},
+				"requirements": {},
+				"consumption": "卜傻瓜鎚"
 			},
 			{
 				"name": "白金之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/vaOxCgr.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/SOp8Hvs.gif",
 				"effect": "劍氣",
-				"durability": "300",
-				"price": "12000",
-				"consumption": "100MP"
+				"durability": 300,
+				"price": 12000,
+				"description": "白金之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "白金之劍"
 			},
 			{
 				"name": "噴火槍",
-				"category": "武器",
+				"image": "https://i.imgur.com/0j1NbyM.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/zc3JzTo.gif",
 				"effect": "豪火球 (焚燒)",
-				"durability": "250",
-				"price": "8000",
-				"consumption": "200MP"
+				"durability": 250,
+				"price": 8000,
+				"description": "噴火槍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "噴火槍"
 			},
 			{
 				"name": "幻魔神劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/ef6DTLO.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/J0GuIdJ.gif",
 				"effect": "怒雷之陣 (電擊)",
-				"durability": "500",
-				"price": "20000",
-				"consumption": "200MP"
+				"durability": 500,
+				"price": 20000,
+				"description": "幻魔神劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "幻魔神劍"
 			},
 			{
 				"name": "終極之劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/jbbUTrC.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/CKG0wxh.gif",
 				"effect": "紫色爆破波",
-				"durability": "500",
-				"price": "20000",
-				"consumption": "50MP"
+				"durability": 500,
+				"price": 20000,
+				"description": "終極之劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "終極之劍"
 			},
 			{
 				"name": "古龍骨矛",
-				"category": "武器",
+				"image": "https://i.imgur.com/JzZJkDf.png",
 				"material": "木材",
+				"demo": "https://i.imgur.com/u59j9du.gif",
 				"effect": "中毒",
-				"durability": "800",
-				"price": "2000"
+				"durability": 800,
+				"price": 2000,
+				"description": "古龍骨矛",
+				"stats": {},
+				"requirements": {},
+				"consumption": "古龍骨矛"
 			},
 			{
 				"name": "黑曜石之斧",
-				"category": "武器",
+				"image": "https://i.imgur.com/JJ9wXHb.png",
 				"material": "鐵",
+				"demo": "https://i.imgur.com/G299lBi.gif",
 				"effect": "凍結",
-				"durability": "700",
-				"price": "2000"
+				"durability": 700,
+				"price": 2000,
+				"description": "黑曜石之斧",
+				"stats": {},
+				"requirements": {},
+				"consumption": "黑曜石之斧"
 			},
 			{
 				"name": "鳳凰大劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/C5Bg3PQ.png",
 				"material": "銅",
+				"demo": "https://i.imgur.com/3m7qIZw.gif",
 				"effect": "火圈 (焚燒)",
-				"durability": "700",
-				"price": "1000",
-				"consumption": "200MP"
+				"durability": 700,
+				"price": 1000,
+				"description": "鳳凰大劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "鳳凰大劍"
 			},
 			{
 				"name": "射日 (新生亨利專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/YKo2Ztq.png",
 				"material": "合金",
+				"demo": "https://i.imgur.com/NIZCS04.gif",
 				"effect": "穿心矢",
-				"durability": "800",
-				"price": "35000",
-				"consumption": "350MP"
+				"durability": 800,
+				"price": 35000,
+				"description": "射日 (新生亨利專用)",
+				"stats": {},
+				"requirements": {},
+				"consumption": "射日 (新生亨利專用)"
 			},
 			{
 				"name": "破邪聖仗",
-				"category": "武器",
+				"image": "https://i.imgur.com/idl5ySw.png",
 				"material": "金",
+				"demo": "https://i.imgur.com/L1OQVVN.gif",
 				"effect": "破邪彈 (混亂)",
-				"durability": "400",
-				"price": "2000",
-				"consumption": "150MP"
+				"durability": 400,
+				"price": 2000,
+				"description": "破邪聖仗",
+				"stats": {},
+				"requirements": {},
+				"consumption": "破邪聖仗"
 			},
 			{
 				"name": "晝夜光刃",
-				"category": "武器",
+				"image": "https://i.imgur.com/j7AfFuS.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/cCSXfTC.gif",
 				"effect": "旋風刀氣",
-				"durability": "400",
-				"price": "8000",
-				"consumption": "0MP"
+				"durability": 400,
+				"price": 8000,
+				"description": "晝夜光刃",
+				"stats": {},
+				"requirements": {},
+				"consumption": "晝夜光刃"
 			},
 			{
 				"name": "索命劍 (陸道,陸島橋之助專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/Y2798DA.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/06W3DrP.gif",
 				"effect": "紅劍氣x3",
-				"durability": "300",
+				"durability": 300,
+				"price": 50000,
 				"description": "被封印的凶劍，相傳會吸蝕使用者的靈魂。",
-				"price": "50000",
-				"consumption": "0MP"
+				"stats": {},
+				"requirements": {},
+				"consumption": "索命劍 (陸道,陸島橋之助專用)"
 			},
 			{
 				"name": "凌霜劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/fuAZizO.png",
 				"material": "鋼",
+				"demo": "https://i.imgur.com/DzVeCQH.gif",
 				"effect": "劍氣",
-				"durability": "500",
-				"price": "3500"
+				"durability": 500,
+				"price": 3500,
+				"description": "凌霜劍",
+				"stats": {},
+				"requirements": {},
+				"consumption": "凌霜劍"
 			},
 			{
 				"name": "雷鳴鞭",
-				"category": "武器",
+				"image": "https://i.imgur.com/k0Fxk3J.png",
 				"material": "鋼",
-				"durability": "500",
-				"price": "3500"
+				"demo": "https://i.imgur.com/lRbbrPG.gif",
+				"effect": "雷鳴鞭",
+				"durability": 500,
+				"price": 3500,
+				"description": "雷鳴鞭",
+				"stats": {},
+				"requirements": {},
+				"consumption": "雷鳴鞭"
 			},
 			{
 				"name": "蒼龍戟 (終極迪倫專用)",
-				"category": "武器",
+				"image": "https://i.imgur.com/OeVTsdc.png",
+				"material": null,
+				"demo": "https://i.imgur.com/pMNXXXs.gif",
 				"effect": "加攻防+黃金之蒼龍",
-				"durability": "2000",
+				"durability": 2000,
+				"price": 100000,
 				"description": "一代最強武者-迪倫之專用武器",
-				"price": "100000",
-				"consumption": "300MP"
+				"stats": {},
+				"requirements": {},
+				"consumption": "蒼龍戟 (終極迪倫專用)"
 			},
 			{
 				"name": "魔劍",
-				"category": "武器",
+				"image": "https://i.imgur.com/JZKzPcZ.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/7l0Pcvj.gif",
 				"effect": "石化",
-				"durability": "600",
-				"description": "未完成的魔劍",
-				"price": "10000",
-				"consumption": "600MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "未完成的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍"
 			},
 			{
 				"name": "魔劍【紅蓮】",
-				"category": "武器",
+				"image": "https://i.imgur.com/5CKP7O1.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/Q55MGfv.gif",
 				"effect": "凶獸力量(焚燒)",
-				"durability": "600",
-				"description": "此物品不能交易及儲存在銀行",
-				"price": "10000",
-				"consumption": "60MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "附有凶獸力量的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍【紅蓮】"
 			},
 			{
 				"name": "魔劍【日】",
-				"category": "武器",
+				"image": "https://i.imgur.com/3MzNiGe.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/Z3R8DRF.gif",
 				"effect": "凶獸力量",
-				"durability": "600",
-				"description": "附有凶獸力量的魔劍",
-				"price": "10000",
-				"consumption": "60MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "附有凶獸力量的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍【日】"
 			},
 			{
 				"name": "魔劍【紫電】",
-				"category": "武器",
+				"image": "https://i.imgur.com/mCjtIe8.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/OJHbP8n.gif",
 				"effect": "凶獸力量",
-				"durability": "600",
-				"description": "此物品不能交易及儲存在銀行",
-				"price": "10000",
-				"consumption": "100MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "附有凶獸力量的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍【紫電】"
 			},
 			{
 				"name": "魔劍【月】",
-				"category": "武器",
+				"image": "https://i.imgur.com/OTiN9uW.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/cXp6ur9.gif",
 				"effect": "凶獸力量(中毒)",
-				"durability": "600",
-				"description": "附有凶獸力量的魔劍",
-				"price": "10000",
-				"consumption": "150MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "附有凶獸力量的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍【月】"
 			},
 			{
 				"name": "魔劍【螢】",
-				"category": "武器",
+				"image": "https://i.imgur.com/B1sSYHU.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/U2S8zc4.gif",
 				"effect": "凶獸力量",
-				"durability": "600",
-				"description": "此物品不能交易及儲存在銀行",
-				"price": "10000",
-				"consumption": "60MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "附有凶獸力量的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍【螢】"
 			},
 			{
 				"name": "魔劍【蒼雷】",
-				"category": "武器",
+				"image": "https://i.imgur.com/OtLZwTV.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/Tthfq5T.gif",
 				"effect": "凶獸力量",
-				"durability": "600",
-				"description": "附有凶獸力量的魔劍",
-				"price": "10000",
-				"consumption": "200MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "附有凶獸力量的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍【蒼雷】"
 			},
 			{
 				"name": "魔劍【烈風】",
-				"category": "武器",
+				"image": "https://i.imgur.com/DsxWPdS.png",
 				"material": "魔精石",
+				"demo": "https://i.imgur.com/jjJh0XP.gif",
 				"effect": "凶獸力量(吹飛)",
-				"durability": "600",
-				"description": "此物品不能交易及儲存在銀行",
-				"price": "10000",
-				"consumption": "600MP"
+				"durability": 600,
+				"price": 10000,
+				"description": "附有凶獸力量的魔劍 此物品不能交易及儲存在銀行",
+				"stats": {},
+				"requirements": {},
+				"consumption": "魔劍【烈風】"
+			}
+		]
+	},
+	"armor": {
+		"title": "裝備",
+		"items": [
+			{
+				"name": "頭帶",
+				"image": "https://i.imgur.com/XyjJvho.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+5"
+				},
+				"requirements": {
+					"元力值": "525"
+				},
+				"durability": 60,
+				"price": 50,
+				"description": "頭帶",
+				"consumption": "頭帶"
+			},
+			{
+				"name": "太陽帽",
+				"image": "https://i.imgur.com/4HyKwi4.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+15"
+				},
+				"requirements": {
+					"生命值": "575"
+				},
+				"durability": 90,
+				"price": 500,
+				"description": "太陽帽",
+				"consumption": "太陽帽"
+			},
+			{
+				"name": "頭巾",
+				"image": "https://i.imgur.com/Dr1xJSt.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+15"
+				},
+				"requirements": {
+					"生命值": "575"
+				},
+				"durability": 75,
+				"price": 350,
+				"description": "頭巾",
+				"consumption": "頭巾"
+			},
+			{
+				"name": "西部牛仔帽",
+				"image": "https://i.imgur.com/vQ6i2Ev.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+20"
+				},
+				"requirements": {
+					"生命值": "600"
+				},
+				"durability": 120,
+				"price": 1500,
+				"description": "西部牛仔帽",
+				"consumption": "西部牛仔帽"
+			},
+			{
+				"name": "鴨咀帽",
+				"image": "https://i.imgur.com/TAvw0AU.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+10"
+				},
+				"requirements": {
+					"生命值": "550"
+				},
+				"durability": 60,
+				"price": 2500,
+				"description": "鴨咀帽",
+				"consumption": "鴨咀帽"
+			},
+			{
+				"name": "口罩",
+				"image": "https://i.imgur.com/Jke2a1n.png",
+				"material": "塑膠",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+20"
+				},
+				"requirements": {
+					"生命值": "600"
+				},
+				"durability": 75,
+				"price": 250,
+				"description": "口罩",
+				"consumption": "口罩"
+			},
+			{
+				"name": "高級口罩",
+				"image": "https://i.imgur.com/AwaA4ER.png",
+				"material": "塑膠",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+20"
+				},
+				"requirements": {
+					"生命值": "600"
+				},
+				"durability": 75,
+				"price": 600,
+				"description": "高級口罩",
+				"consumption": "高級口罩"
+			},
+			{
+				"name": "面具",
+				"image": "https://i.imgur.com/Bs0inJA.png",
+				"material": "銅",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+30"
+				},
+				"requirements": {
+					"生命值": "650"
+				},
+				"durability": 90,
+				"price": 1150,
+				"description": "面具",
+				"consumption": "面具"
+			},
+			{
+				"name": "防毒面具",
+				"image": "https://i.imgur.com/rFTXu5e.png",
+				"material": "塑膠",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+50"
+				},
+				"requirements": {
+					"生命值": "750"
+				},
+				"durability": 120,
+				"price": 2000,
+				"description": "防毒面具",
+				"consumption": "防毒面具"
+			},
+			{
+				"name": "聖水教頭巾",
+				"image": "https://i.imgur.com/FQR1dme.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+15",
+					"防禦力": "+15"
+				},
+				"requirements": {
+					"攻擊力": "80"
+				},
+				"durability": 80,
+				"price": 500,
+				"description": "聖水教頭巾",
+				"consumption": "聖水教頭巾"
+			},
+			{
+				"name": "水晶頭盔",
+				"image": "https://i.imgur.com/Zg2gPwL.png",
+				"material": "合金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+30",
+					"元力值": "+30",
+					"氣力值": "+30",
+					"攻擊力": "-10",
+					"防禦力": "+30",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"攻擊力": "100",
+					"敏捷度": "50"
+				},
+				"durability": 200,
+				"price": 5000,
+				"description": "水晶頭盔",
+				"consumption": "水晶頭盔"
+			},
+			{
+				"name": "戰神頭盔",
+				"image": "https://i.imgur.com/PLjuyWi.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+100",
+					"攻擊力": "+70"
+				},
+				"requirements": {
+					"生命值": "700",
+					"防禦力": "100",
+					"敏捷度": "100"
+				},
+				"durability": 120,
+				"price": 6000,
+				"description": "戰神頭盔",
+				"consumption": "戰神頭盔"
+			},
+			{
+				"name": "鬥氣頭盔",
+				"image": "https://i.imgur.com/Kc69FjO.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"攻擊力": "+50",
+					"防禦力": "-20"
+				},
+				"requirements": {
+					"生命值": "600",
+					"防禦力": "50"
+				},
+				"durability": 120,
+				"price": 2000,
+				"description": "鬥氣頭盔",
+				"consumption": "鬥氣頭盔"
+			},
+			{
+				"name": "雪狼之頭盔",
+				"image": "https://i.imgur.com/lYnMMpX.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+70",
+					"攻擊力": "+30",
+					"防禦力": "+20",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"攻擊力": "60",
+					"防禦力": "60",
+					"敏捷度": "60"
+				},
+				"durability": 120,
+				"price": 3500,
+				"description": "雪狼之頭盔",
+				"consumption": "雪狼之頭盔"
+			},
+			{
+				"name": "千錘之盔",
+				"image": "https://i.imgur.com/bjoMRUM.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+60",
+					"元力值": "+50",
+					"氣力值": "+100",
+					"防禦力": "+35",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "800",
+					"敏捷度": "30"
+				},
+				"durability": 500,
+				"price": 7000,
+				"description": "千錘之盔",
+				"consumption": "千錘之盔"
+			},
+			{
+				"name": "血魔頭盔",
+				"image": "https://i.imgur.com/1Qzk7kL.png",
+				"material": "銅",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+125",
+					"防禦力": "+30",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"生命值": "700",
+					"敏捷度": "40"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "血魔頭盔",
+				"consumption": "血魔頭盔"
+			},
+			{
+				"name": "邪神頭盔",
+				"image": "https://i.imgur.com/2WfvmL8.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "+125",
+					"防禦力": "+40",
+					"敏捷度": "-35"
+				},
+				"requirements": {
+					"元力值": "700",
+					"敏捷度": "45"
+				},
+				"durability": 500,
+				"price": 9000,
+				"description": "邪神頭盔",
+				"consumption": "邪神頭盔"
+			},
+			{
+				"name": "受難之盔",
+				"image": "https://i.imgur.com/q7ssE0P.png",
+				"material": "銅",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "-80",
+					"元力值": "+180",
+					"防禦力": "+30",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"元力值": "700",
+					"敏捷度": "30"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "受難之盔",
+				"consumption": "受難之盔"
+			},
+			{
+				"name": "奇蹟之盔",
+				"image": "https://i.imgur.com/0ZngTy9.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+70",
+					"元力值": "+70",
+					"氣力值": "+50",
+					"防禦力": "+40",
+					"敏捷度": "-60"
+				},
+				"requirements": {
+					"生命值": "700",
+					"元力值": "700",
+					"敏捷度": "70"
+				},
+				"durability": 500,
+				"price": 10000,
+				"description": "奇蹟之盔",
+				"consumption": "奇蹟之盔"
+			},
+			{
+				"name": "宙斯頭盔",
+				"image": "https://i.imgur.com/lRCAq8Y.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+60",
+					"元力值": "+60",
+					"氣力值": "+25",
+					"攻擊力": "+30",
+					"防禦力": "+50",
+					"敏捷度": "-60"
+				},
+				"requirements": {
+					"敏捷度": "70"
+				},
+				"durability": 500,
+				"price": 10000,
+				"description": "宙斯頭盔",
+				"consumption": "宙斯頭盔"
+			},
+			{
+				"name": "幸運頭盔",
+				"image": "https://i.imgur.com/r3EiW83.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+120",
+					"元力值": "+120",
+					"氣力值": "+120",
+					"攻擊力": "+50",
+					"防禦力": "+50",
+					"敏捷度": "-50"
+				},
+				"requirements": {
+					"生命值": "600",
+					"元力值": "600",
+					"氣力值": "600",
+					"敏捷度": "60"
+				},
+				"durability": 500,
+				"price": 13000,
+				"description": "幸運頭盔",
+				"consumption": "幸運頭盔"
+			},
+			{
+				"name": "信徒頭盔",
+				"image": "https://i.imgur.com/Ttu2cmW.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+50",
+					"元力值": "+100",
+					"氣力值": "+75",
+					"防禦力": "+40",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"生命值": "600",
+					"元力值": "700",
+					"敏捷度": "40"
+				},
+				"durability": 500,
+				"price": 9000,
+				"description": "信徒頭盔",
+				"consumption": "信徒頭盔"
+			},
+			{
+				"name": "帝王頭盔",
+				"image": "https://i.imgur.com/2ruBjY2.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+50",
+					"元力值": "+50",
+					"攻擊力": "+70",
+					"防禦力": "+60",
+					"敏捷度": "-70"
+				},
+				"requirements": {
+					"生命值": "800",
+					"敏捷度": "80"
+				},
+				"durability": 500,
+				"price": 13000,
+				"description": "帝王頭盔",
+				"consumption": "帝王頭盔"
+			},
+			{
+				"name": "神將頭盔",
+				"image": "https://i.imgur.com/okk2Vcv.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+200",
+					"攻擊力": "+70",
+					"防禦力": "+30",
+					"敏捷度": "-75"
+				},
+				"requirements": {
+					"元力值": "800"
+				},
+				"durability": 500,
+				"price": 16000,
+				"description": "神將頭盔",
+				"consumption": "神將頭盔"
+			},
+			{
+				"name": "荊棘頭盔",
+				"image": "https://i.imgur.com/kahISGK.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "-100",
+					"元力值": "+150",
+					"攻擊力": "+45",
+					"防禦力": "+40",
+					"敏捷度": "-80"
+				},
+				"requirements": {
+					"生命值": "600",
+					"元力值": "800",
+					"攻擊力": "70"
+				},
+				"durability": 500,
+				"price": 16000,
+				"description": "荊棘頭盔",
+				"consumption": "荊棘頭盔"
+			},
+			{
+				"name": "雅典娜頭盔",
+				"image": "https://i.imgur.com/H2rSh07.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+150",
+					"氣力值": "+100",
+					"攻擊力": "+70",
+					"防禦力": "+30",
+					"敏捷度": "-90"
+				},
+				"requirements": {
+					"生命值": "800",
+					"攻擊力": "100"
+				},
+				"durability": 500,
+				"price": 23000,
+				"description": "雅典娜頭盔",
+				"consumption": "雅典娜頭盔"
+			},
+			{
+				"name": "暗黑頭盔",
+				"image": "https://i.imgur.com/Yt7l12D.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+30",
+					"元力值": "+120",
+					"防禦力": "+50",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"氣力值": "600",
+					"敏捷度": "30"
+				},
+				"durability": 500,
+				"price": 10000,
+				"description": "暗黑頭盔",
+				"consumption": "暗黑頭盔"
+			},
+			{
+				"name": "萬王頭盔",
+				"image": "https://i.imgur.com/fsItnK9.png",
+				"material": "合金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+50",
+					"元力值": "+200",
+					"氣力值": "+70",
+					"攻擊力": "+60",
+					"防禦力": "+50",
+					"敏捷度": "-75"
+				},
+				"requirements": {
+					"元力值": "900"
+				},
+				"durability": 500,
+				"price": 16000,
+				"description": "萬王頭盔",
+				"consumption": "萬王頭盔"
+			},
+			{
+				"name": "懲罰女神頭盔",
+				"image": "https://i.imgur.com/sMW7nkL.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "-300",
+					"元力值": "+600",
+					"氣力值": "-1000",
+					"攻擊力": "+70",
+					"防禦力": "+30",
+					"敏捷度": "-60"
+				},
+				"requirements": {
+					"生命值": "1000",
+					"攻擊力": "150"
+				},
+				"durability": 500,
+				"price": 18000,
+				"description": "懲罰女神頭盔",
+				"consumption": "懲罰女神頭盔"
+			},
+			{
+				"name": "魔獸頭盔",
+				"image": "https://i.imgur.com/hXcG7ek.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+135",
+					"元力值": "+135",
+					"氣力值": "+50",
+					"攻擊力": "+30",
+					"防禦力": "+35",
+					"敏捷度": "-40"
+				},
+				"requirements": {
+					"氣力值": "700",
+					"敏捷度": "50"
+				},
+				"durability": 500,
+				"price": 15000,
+				"description": "魔獸頭盔",
+				"consumption": "魔獸頭盔"
+			},
+			{
+				"name": "皇者頭盔",
+				"image": "https://i.imgur.com/yhsbkS0.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+80",
+					"元力值": "+100",
+					"氣力值": "+80",
+					"攻擊力": "+150",
+					"防禦力": "+200"
+				},
+				"requirements": {
+					"生命值": "800",
+					"攻擊力": "100"
+				},
+				"durability": 500,
+				"price": 13000,
+				"description": "皇者頭盔",
+				"consumption": "皇者頭盔"
+			},
+			{
+				"name": "櫻花帽",
+				"image": "https://i.imgur.com/QKcIQJb.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+100",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"生命值": "700",
+					"敏捷度": "60"
+				},
+				"durability": 120,
+				"price": 4000,
+				"description": "櫻花帽",
+				"consumption": "櫻花帽"
+			},
+			{
+				"name": "武士頭盔",
+				"image": "https://i.imgur.com/weTvAI1.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+50",
+					"防禦力": "+150",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"元力值": "700"
+				},
+				"durability": 120,
+				"price": 3000,
+				"description": "武士頭盔",
+				"consumption": "武士頭盔"
+			},
+			{
+				"name": "總統假髮",
+				"image": "https://i.imgur.com/m8HLtG7.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+70",
+					"元力值": "+20",
+					"防禦力": "+130",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"生命值": "700"
+				},
+				"durability": 120,
+				"price": 5000,
+				"description": "總統假髮",
+				"consumption": "總統假髮"
+			},
+			{
+				"name": "特種部隊頭盔",
+				"image": "https://i.imgur.com/92A3m62.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "+20",
+					"防禦力": "+100",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"元力值": "700"
+				},
+				"durability": 120,
+				"price": 3000,
+				"description": "特種部隊頭盔",
+				"consumption": "特種部隊頭盔"
+			},
+			{
+				"name": "中山帽",
+				"image": "https://i.imgur.com/wxAotsc.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"攻擊力": "+30",
+					"防禦力": "+100",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "700"
+				},
+				"durability": 120,
+				"price": 10000,
+				"description": "中山帽",
+				"consumption": "中山帽"
+			},
+			{
+				"name": "始皇帝帽",
+				"image": "https://i.imgur.com/DjFSdOb.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+30",
+					"防禦力": "+170",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"元力值": "800"
+				},
+				"durability": 120,
+				"price": 9000,
+				"description": "始皇帝帽",
+				"consumption": "始皇帝帽"
+			},
+			{
+				"name": "謎之頭盔",
+				"image": "https://i.imgur.com/iPvEyGX.png",
+				"material": "合金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+30",
+					"防禦力": "+190",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "800"
+				},
+				"durability": 120,
+				"price": 11000,
+				"description": "謎之頭盔",
+				"consumption": "謎之頭盔"
+			},
+			{
+				"name": "天使光環",
+				"image": "https://i.imgur.com/pzjXRFp.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+80",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"元力值": "800"
+				},
+				"durability": 120,
+				"price": 7000,
+				"description": "天使光環",
+				"consumption": "天使光環"
+			},
+			{
+				"name": "路西法頭盔",
+				"image": "https://i.imgur.com/zjGwplt.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+40",
+					"防禦力": "+180",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "700",
+					"防禦力": "100"
+				},
+				"durability": 120,
+				"price": 6000,
+				"description": "路西法頭盔",
+				"consumption": "路西法頭盔"
+			},
+			{
+				"name": "魔導使帽",
+				"image": "https://i.imgur.com/EJ6dLUH.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+40",
+					"防禦力": "+170",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "700",
+					"攻擊力": "100"
+				},
+				"durability": 120,
+				"price": 6000,
+				"description": "魔導使帽",
+				"consumption": "魔導使帽"
+			},
+			{
+				"name": "小熊帽",
+				"image": "https://i.imgur.com/3OvFp8s.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+100",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "200",
+					"防禦力": "100"
+				},
+				"durability": 120,
+				"price": 4000,
+				"description": "小熊帽",
+				"consumption": "小熊帽"
+			},
+			{
+				"name": "假髮",
+				"image": "https://i.imgur.com/tVSpUiH.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"防禦力": "+50"
+				},
+				"requirements": {
+					"敏捷度": "60"
+				},
+				"durability": 120,
+				"price": 1000,
+				"description": "假髮",
+				"consumption": "假髮"
+			},
+			{
+				"name": "土著頭盔",
+				"image": "https://i.imgur.com/oL6TIvK.png",
+				"material": "木材",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+80",
+					"攻擊力": "+110",
+					"防禦力": "-100",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"元力值": "1200",
+					"防禦力": "320"
+				},
+				"durability": 500,
+				"price": 6000,
+				"description": "土著頭盔",
+				"consumption": "土著頭盔"
+			},
+			{
+				"name": "瑪雅頭盔",
+				"image": "https://i.imgur.com/uvlDhjV.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+50",
+					"元力值": "+190",
+					"防禦力": "+50",
+					"敏捷度": "+10"
+				},
+				"requirements": {
+					"生命值": "1200",
+					"攻擊力": "250"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "瑪雅頭盔",
+				"consumption": "瑪雅頭盔"
+			},
+			{
+				"name": "夏威夷草帽",
+				"image": "https://i.imgur.com/ISSeunJ.png",
+				"material": "木材",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "-100",
+					"氣力值": "+220",
+					"攻擊力": "-50",
+					"敏捷度": "+20"
+				},
+				"requirements": {
+					"生命值": "1100",
+					"攻擊力": "300"
+				},
+				"durability": 500,
+				"price": 7000,
+				"description": "夏威夷草帽",
+				"consumption": "夏威夷草帽"
+			},
+			{
+				"name": "復活島頭盔",
+				"image": "https://i.imgur.com/bRmWG52.png",
+				"material": "銅",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "+85",
+					"防禦力": "+110"
+				},
+				"requirements": {
+					"氣力值": "1300",
+					"敏捷度": "300"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "復活島頭盔",
+				"consumption": "復活島頭盔"
+			},
+			{
+				"name": "偵探帽",
+				"image": "https://i.imgur.com/Q6UwPGW.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "-50",
+					"攻擊力": "+70",
+					"防禦力": "-80",
+					"敏捷度": "+100"
+				},
+				"requirements": {
+					"生命值": "1000",
+					"防禦力": "130"
+				},
+				"durability": 500,
+				"price": 6000,
+				"description": "偵探帽",
+				"consumption": "偵探帽"
+			},
+			{
+				"name": "P.H頭盔",
+				"image": "https://i.imgur.com/nEXX4TT.png",
+				"material": "合金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "-150",
+					"攻擊力": "+80",
+					"防禦力": "+40",
+					"敏捷度": "+30"
+				},
+				"requirements": {
+					"生命值": "1100",
+					"氣力值": "1200"
+				},
+				"durability": 500,
+				"price": 15000,
+				"description": "P.H頭盔",
+				"consumption": "P.H頭盔"
+			},
+			{
+				"name": "聖誕帽",
+				"image": "https://i.imgur.com/nMTTR6A.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "+80",
+					"氣力值": "+150",
+					"攻擊力": "+80"
+				},
+				"requirements": {
+					"氣力值": "300"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "聖誕帽",
+				"consumption": "聖誕帽"
+			},
+			{
+				"name": "新年帽",
+				"image": "https://i.imgur.com/4mKjJJ0.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+30",
+					"元力值": "+30",
+					"氣力值": "+20",
+					"攻擊力": "+80",
+					"防禦力": "+60",
+					"敏捷度": "-40"
+				},
+				"requirements": {
+					"元力值": "750",
+					"氣力值": "750"
+				},
+				"durability": 800,
+				"price": 10000,
+				"description": "新年帽",
+				"consumption": "新年帽"
+			},
+			{
+				"name": "魔尊頭盔",
+				"image": "https://i.imgur.com/mpy9pBO.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+150",
+					"攻擊力": "+100",
+					"敏捷度": "-80"
+				},
+				"requirements": {
+					"生命值": "1500",
+					"敏捷度": "80"
+				},
+				"durability": 800,
+				"price": 12000,
+				"description": "魔尊頭盔",
+				"consumption": "魔尊頭盔"
+			},
+			{
+				"name": "聖尊之帽",
+				"image": "https://i.imgur.com/euBOeFZ.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+130",
+					"防禦力": "+100",
+					"敏捷度": "-60"
+				},
+				"requirements": {
+					"生命值": "1000",
+					"防禦力": "200"
+				},
+				"durability": 800,
+				"price": 12000,
+				"description": "聖尊之帽",
+				"consumption": "聖尊之帽"
+			},
+			{
+				"name": "炎冰頭盔",
+				"image": "https://i.imgur.com/q8oRc5l.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+120",
+					"元力值": "+150",
+					"氣力值": "+100",
+					"攻擊力": "+150",
+					"防禦力": "+130"
+				},
+				"requirements": {
+					"生命值": "1100"
+				},
+				"durability": 860,
+				"price": 11500,
+				"description": "炎冰頭盔",
+				"consumption": "炎冰頭盔"
+			},
+			{
+				"name": "破壞神頭盔",
+				"image": "https://i.imgur.com/dlqlrxp.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+140",
+					"防禦力": "+82",
+					"敏捷度": "-65"
+				},
+				"requirements": {
+					"生命值": "1050",
+					"防禦力": "230"
+				},
+				"durability": 850,
+				"price": 12200,
+				"description": "破壞神頭盔",
+				"consumption": "破壞神頭盔"
+			},
+			{
+				"name": "雷伯特頭盔",
+				"image": "https://i.imgur.com/2Rf18RP.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+300",
+					"攻擊力": "-50",
+					"防禦力": "+170",
+					"敏捷度": "+40"
+				},
+				"requirements": {
+					"生命值": "1000",
+					"敏捷度": "100"
+				},
+				"durability": 550,
+				"price": 18000,
+				"description": "雷伯特頭盔",
+				"consumption": "雷伯特頭盔"
+			},
+			{
+				"name": "古代龍頭盔",
+				"image": "https://i.imgur.com/FPlfvpk.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+400",
+					"攻擊力": "+115"
+				},
+				"requirements": {
+					"生命值": "1200",
+					"攻擊力": "200"
+				},
+				"durability": 900,
+				"price": 15700,
+				"description": "古代龍頭盔",
+				"consumption": "古代龍頭盔"
+			},
+			{
+				"name": "異獸頭盔",
+				"image": "https://i.imgur.com/6OX2K4S.png",
+				"material": "合金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+500",
+					"元力值": "-75",
+					"氣力值": "+10",
+					"攻擊力": "+100",
+					"防禦力": "-10"
+				},
+				"requirements": {
+					"生命值": "1500",
+					"攻擊力": "200",
+					"防禦力": "100"
+				},
+				"durability": 900,
+				"price": 19300,
+				"description": "異獸頭盔",
+				"consumption": "異獸頭盔"
+			},
+			{
+				"name": "聖域之帽",
+				"image": "https://i.imgur.com/CcHwVuc.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+40",
+					"元力值": "+150",
+					"氣力值": "+80",
+					"防禦力": "+100",
+					"敏捷度": "+30"
+				},
+				"requirements": {
+					"生命值": "800",
+					"元力值": "800",
+					"防禦力": "200",
+					"敏捷度": "200"
+				},
+				"durability": 900,
+				"price": 16000,
+				"description": "聖域之帽",
+				"consumption": "聖域之帽"
+			},
+			{
+				"name": "終極頭盔",
+				"image": "https://i.imgur.com/rvMN9VU.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+100",
+					"元力值": "-10",
+					"氣力值": "+100",
+					"攻擊力": "+200",
+					"防禦力": "+100",
+					"敏捷度": "-100"
+				},
+				"requirements": {
+					"生命值": "1000",
+					"防禦力": "200",
+					"敏捷度": "100"
+				},
+				"durability": 500,
+				"price": 16000,
+				"description": "終極頭盔",
+				"consumption": "終極頭盔"
+			},
+			{
+				"name": "古龍骨頭盔",
+				"image": "https://i.imgur.com/wLQPCz7.png",
+				"material": "木材",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+120",
+					"元力值": "+110",
+					"攻擊力": "-80",
+					"防禦力": "+250"
+				},
+				"requirements": {
+					"元力值": "800",
+					"攻擊力": "80"
+				},
+				"durability": 800,
+				"price": 2000,
+				"description": "古龍骨頭盔",
+				"consumption": "古龍骨頭盔"
+			},
+			{
+				"name": "黑曜石頭盔",
+				"image": "https://i.imgur.com/IoWg1iJ.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "-50",
+					"元力值": "+110",
+					"氣力值": "+150",
+					"攻擊力": "+210",
+					"防禦力": "-20"
+				},
+				"requirements": {
+					"生命值": "800",
+					"防禦力": "80"
+				},
+				"durability": 800,
+				"price": 2000,
+				"description": "黑曜石頭盔",
+				"consumption": "黑曜石頭盔"
+			},
+			{
+				"name": "鳳凰頭盔",
+				"image": "https://i.imgur.com/2IUUzaI.png",
+				"material": "銅",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"攻擊力": "+350",
+					"防禦力": "+350"
+				},
+				"requirements": {
+					"敏捷度": "400"
+				},
+				"durability": 300,
+				"price": 5000,
+				"description": "鳳凰頭盔",
+				"consumption": "鳳凰頭盔"
+			},
+			{
+				"name": "龍神頭盔",
+				"image": "https://i.imgur.com/RD9ZkKG.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+300",
+					"防禦力": "+250"
+				},
+				"requirements": {
+					"元力值": "300"
+				},
+				"durability": 500,
+				"price": 10000,
+				"description": "龍神頭盔",
+				"consumption": "龍神頭盔"
+			},
+			{
+				"name": "玄武絕盔",
+				"image": "https://i.imgur.com/6hdHlPl.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "+100",
+					"氣力值": "-150",
+					"防禦力": "+150",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"氣力值": "1500",
+					"敏捷度": "150"
+				},
+				"durability": 800,
+				"price": 7000,
+				"description": "玄武絕盔",
+				"consumption": "玄武絕盔"
+			},
+			{
+				"name": "青龍頭盔",
+				"image": "https://i.imgur.com/A9KTT49.png",
+				"material": "木材",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+500",
+					"元力值": "+500",
+					"氣力值": "+500"
+				},
+				"requirements": {
+					"攻擊力": "500",
+					"防禦力": "500"
+				},
+				"durability": 700,
+				"price": 15000,
+				"description": "青龍頭盔",
+				"consumption": "青龍頭盔"
+			},
+			{
+				"name": "白虎頭盔",
+				"image": "https://i.imgur.com/rQu73Pj.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+110",
+					"元力值": "+110",
+					"氣力值": "+110",
+					"攻擊力": "+110",
+					"防禦力": "+110",
+					"敏捷度": "+110"
+				},
+				"requirements": {
+					"攻擊力": "500",
+					"防禦力": "500",
+					"敏捷度": "300"
+				},
+				"durability": 700,
+				"price": 20000,
+				"description": "白虎頭盔",
+				"consumption": "白虎頭盔"
+			},
+			{
+				"name": "朱雀神盔",
+				"image": "https://i.imgur.com/r7luBUa.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+4000",
+					"攻擊力": "-2000"
+				},
+				"requirements": {
+					"生命值": "4500"
+				},
+				"durability": 100,
+				"price": 50000,
+				"description": "消耗使用者的意志，傳聞是寄宿的朱雀的靈魂。",
+				"consumption": "朱雀神盔"
+			},
+			{
+				"name": "晝夜魔盔",
+				"image": "https://i.imgur.com/qZRbnrk.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+200",
+					"元力值": "+150",
+					"氣力值": "-200",
+					"攻擊力": "+250",
+					"防禦力": "+250",
+					"敏捷度": "-80"
+				},
+				"requirements": {
+					"氣力值": "1400",
+					"攻擊力": "500",
+					"防禦力": "500"
+				},
+				"durability": 400,
+				"price": 8000,
+				"description": "晝夜魔盔",
+				"consumption": "晝夜魔盔"
+			},
+			{
+				"name": "紫電眼罩(霍雷專用)",
+				"image": "https://i.imgur.com/2kpcfx9.png",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"攻擊力": "+300",
+					"防禦力": "+300"
+				},
+				"requirements": {
+					"氣力值": "1000"
+				},
+				"durability": 2000,
+				"price": 10000,
+				"description": "開發費用非常高，霍雷的傑出作品之一。",
+				"consumption": "紫電眼罩(霍雷專用)"
+			},
+			{
+				"name": "熱血頭巾",
+				"image": "https://i.imgur.com/wS0UmqQ.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"氣力值": "+1000"
+				},
+				"requirements": {
+					"氣力值": "1300"
+				},
+				"durability": 500,
+				"price": 5000,
+				"description": "熱血的漢子才有資格把我戴上！",
+				"consumption": "熱血頭巾"
+			},
+			{
+				"name": "雷電頭盔",
+				"image": "https://i.imgur.com/4xW1do3.png",
+				"material": "金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "+700",
+					"敏捷度": "+350"
+				},
+				"requirements": {
+					"攻擊力": "400"
+				},
+				"durability": 300,
+				"price": 7500,
+				"description": "穿梭天地間之矢。",
+				"consumption": "雷電頭盔"
+			},
+			{
+				"name": "戰車頭盔",
+				"image": "https://i.imgur.com/7RQFNfK.png",
+				"material": "銅",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+300",
+					"元力值": "+100",
+					"氣力值": "+600",
+					"攻擊力": "+80",
+					"防禦力": "+270",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"攻擊力": "350",
+					"防禦力": "350",
+					"敏捷度": "230"
+				},
+				"durability": 1000,
+				"price": 5000,
+				"description": "戰車頭盔",
+				"consumption": "戰車頭盔"
+			},
+			{
+				"name": "蝦頭",
+				"image": "https://i.imgur.com/RYkJvUM.png",
+				"material": "塑膠",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"元力值": "+300",
+					"防禦力": "+250"
+				},
+				"requirements": {
+					"元力值": "950"
+				},
+				"durability": 800,
+				"price": 5000,
+				"description": "料理剩下的蝦頭，聽說熬湯很好喝！",
+				"consumption": "蝦頭"
+			},
+			{
+				"name": "暴風頭盔",
+				"image": "https://i.imgur.com/AcZqDfd.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+400",
+					"元力值": "+200",
+					"氣力值": "-100",
+					"攻擊力": "+300",
+					"防禦力": "+250",
+					"敏捷度": "-100"
+				},
+				"requirements": {
+					"氣力值": "1200",
+					"攻擊力": "200",
+					"防禦力": "200"
+				},
+				"durability": 600,
+				"price": 10000,
+				"description": "暴風頭盔",
+				"consumption": "暴風頭盔"
+			},
+			{
+				"name": "機甲頭盔",
+				"image": "https://i.imgur.com/eaW4lXb.png",
+				"material": "合金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+150",
+					"元力值": "+270",
+					"氣力值": "-180",
+					"攻擊力": "+40",
+					"防禦力": "+240"
+				},
+				"requirements": {
+					"生命值": "1460",
+					"氣力值": "1570",
+					"攻擊力": "160",
+					"防禦力": "170"
+				},
+				"durability": 390,
+				"price": 16100,
+				"description": "機甲頭盔",
+				"consumption": "機甲頭盔"
+			},
+			{
+				"name": "達摩帽",
+				"image": "https://i.imgur.com/RXrakYa.png",
+				"material": "布料",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+200",
+					"元力值": "+1220",
+					"氣力值": "+190"
+				},
+				"requirements": {
+					"生命值": "2000",
+					"氣力值": "1310",
+					"攻擊力": "140",
+					"敏捷度": "100"
+				},
+				"durability": 710,
+				"price": 27500,
+				"description": "達摩帽",
+				"consumption": "達摩帽"
+			},
+			{
+				"name": "護法頭盔",
+				"image": "https://i.imgur.com/xFe4fPQ.png",
+				"material": "鐵",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+210",
+					"元力值": "+1140",
+					"攻擊力": "+40",
+					"防禦力": "+40"
+				},
+				"requirements": {
+					"生命值": "970",
+					"元力值": "880",
+					"氣力值": "1500",
+					"攻擊力": "70",
+					"敏捷度": "80"
+				},
+				"durability": 700,
+				"price": 27300,
+				"description": "護法頭盔",
+				"consumption": "護法頭盔"
+			},
+			{
+				"name": "龍戰之盔",
+				"image": "https://i.imgur.com/wrWVNP8.png",
+				"material": "銅",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+700",
+					"元力值": "+300",
+					"攻擊力": "+50",
+					"防禦力": "+70"
+				},
+				"requirements": {
+					"生命值": "1820",
+					"元力值": "1600",
+					"氣力值": "1200",
+					"攻擊力": "300",
+					"敏捷度": "210"
+				},
+				"durability": 840,
+				"price": 31700,
+				"description": "龍戰之盔",
+				"consumption": "龍戰之盔"
+			},
+			{
+				"name": "關羽臉譜",
+				"image": "https://i.imgur.com/xv2KYQv.png",
+				"material": "木材",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+500",
+					"元力值": "+600",
+					"氣力值": "+300",
+					"攻擊力": "+140",
+					"防禦力": "+80",
+					"敏捷度": "+50"
+				},
+				"requirements": {
+					"生命值": "2000",
+					"元力值": "1500",
+					"氣力值": "1000",
+					"攻擊力": "230",
+					"防禦力": "240",
+					"敏捷度": "210"
+				},
+				"durability": 870,
+				"price": 32700,
+				"description": "關羽臉譜",
+				"consumption": "關羽臉譜"
+			},
+			{
+				"name": "白金頭盔",
+				"image": "https://i.imgur.com/w9TpTcY.png",
+				"material": "合金",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "+110",
+					"元力值": "+100",
+					"氣力值": "+170",
+					"攻擊力": "+150",
+					"防禦力": "+150"
+				},
+				"requirements": {
+					"生命值": "1300",
+					"攻擊力": "150",
+					"敏捷度": "50"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "白金頭盔",
+				"consumption": "白金頭盔"
+			},
+			{
+				"name": "風精靈頭盔",
+				"image": "https://i.imgur.com/YYO99Kf.png",
+				"material": "鋼",
+				"demo": null,
+				"effect": null,
+				"stats": {
+					"生命值": "-150",
+					"元力值": "+600",
+					"氣力值": "+800",
+					"攻擊力": "+150",
+					"防禦力": "+70",
+					"敏捷度": "+200"
+				},
+				"requirements": {
+					"生命值": "800",
+					"元力值": "1100",
+					"攻擊力": "130",
+					"敏捷度": "50"
+				},
+				"durability": 500,
+				"price": 7000,
+				"description": "風精靈頭盔",
+				"consumption": "風精靈頭盔"
 			}
 		]
 	},
 	"consumables": {
-		"category": "消耗品",
+		"title": "消耗品",
 		"items": [
 			{
 				"name": "汽水",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "200",
-				"effect": "回復"
+				"image": "https://i.imgur.com/KHIFheP.png",
+				"material": null,
+				"demo": "https://i.imgur.com/0valj8o.gif",
+				"effect": "回復 HP 500 MP150 SP100",
+				"consumption": "汽水",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 200,
+				"description": "汽水"
 			},
 			{
 				"name": "補充飲料",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "200",
-				"effect": "HP"
+				"image": "https://i.imgur.com/AKgqt38.png",
+				"material": null,
+				"demo": "https://i.imgur.com/44agDER.gif",
+				"effect": "回復 HP 100 MP500 SP100",
+				"consumption": "補充飲料",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 200,
+				"description": "補充飲料"
 			},
 			{
 				"name": "荳奶",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "200",
-				"effect": "500"
+				"image": "https://i.imgur.com/DWfaQPz.png",
+				"material": null,
+				"demo": "https://i.imgur.com/szvn9tY.gif",
+				"effect": "回復 HP150 MP50 SP500",
+				"consumption": "荳奶",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 200,
+				"description": "荳奶"
 			},
 			{
 				"name": "生命藥水",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "2000",
-				"effect": "MP150"
+				"image": "https://i.imgur.com/o6Boa4k.png",
+				"material": null,
+				"demo": "https://i.imgur.com/4Xy4ohR.gif",
+				"effect": "回復 HP2400 MP150 SP500",
+				"consumption": "生命藥水",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 2000,
+				"description": "生命藥水"
 			},
 			{
 				"name": "元力藥水",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "2000",
-				"effect": "SP100"
+				"image": "https://i.imgur.com/In6tY6X.png",
+				"material": null,
+				"demo": "https://i.imgur.com/bjJE7bP.gif",
+				"effect": "回復 HP100 MP2400 SP500",
+				"consumption": "元力藥水",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 2000,
+				"description": "元力藥水"
 			},
 			{
 				"name": "咀咒藥水",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "2000",
-				"effect": "自已陷入"
+				"image": "https://i.imgur.com/0l0HNtN.png",
+				"material": null,
+				"demo": "https://i.imgur.com/GxObYkb.gif",
+				"effect": "自已陷入 混亂 狀態",
+				"consumption": "咀咒藥水",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 2000,
+				"description": "咀咒藥水"
 			},
 			{
 				"name": "毒性藥水",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "2000",
-				"effect": "混亂"
+				"image": "https://i.imgur.com/23fLn4O.png",
+				"material": null,
+				"demo": "https://i.imgur.com/QK2s4eB.gif",
+				"effect": "自已陷入 中毒 狀態",
+				"consumption": "毒性藥水",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 2000,
+				"description": "毒性藥水"
 			},
 			{
 				"name": "解毒藥水",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "2000",
-				"effect": "狀態"
+				"image": "https://i.imgur.com/1iiEovM.png",
+				"material": null,
+				"demo": "https://i.imgur.com/cXCVLSG.gif",
+				"effect": "解除自已的 中毒 狀態",
+				"consumption": "解毒藥水",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 2000,
+				"description": "解毒藥水"
 			},
 			{
 				"name": "LFO月餅",
-				"category": "消耗品",
-				"durability": "1",
-				"description": "中秋節快樂!",
-				"price": "1000",
-				"effect": "自已陷入"
+				"image": "https://i.imgur.com/NEAFhu1.png",
+				"material": null,
+				"demo": "https://i.imgur.com/3M29el3.gif",
+				"effect": "回復 HP 5000 MP5000 SP5000",
+				"consumption": "LFO月餅",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 1000,
+				"description": "中秋節快樂!"
 			},
 			{
 				"name": "肉粽",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "3000",
-				"effect": "中毒"
+				"image": "https://i.imgur.com/hmOpCwR.png",
+				"material": null,
+				"demo": "https://i.imgur.com/0IvAtzG.gif",
+				"effect": "回復 HP 5000 MP150 SP100",
+				"consumption": "肉粽",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 3000,
+				"description": "肉粽"
 			},
 			{
 				"name": "雄黃酒",
-				"category": "消耗品",
-				"durability": "1",
-				"price": "3000",
-				"effect": "回復"
+				"image": "https://i.imgur.com/X9TPd63.png",
+				"material": null,
+				"demo": "https://i.imgur.com/oHCesx8.gif",
+				"effect": "回復 HP 100 MP5000 SP100",
+				"consumption": "雄黃酒",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 3000,
+				"description": "雄黃酒"
 			},
 			{
 				"name": "紅芥",
-				"category": "消耗品",
-				"durability": "1",
-				"description": "細菌毒素的抗體",
-				"price": "5000",
-				"effect": "HP"
+				"image": "https://i.imgur.com/WrUkdP2.png",
+				"material": null,
+				"demo": "https://i.imgur.com/A9l1jU0.gif",
+				"effect": "回復 HP 4000 MP100 SP500",
+				"consumption": "紅芥",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 5000,
+				"description": "細菌毒素的抗體"
 			},
 			{
 				"name": "十吻福",
-				"category": "消耗品",
-				"durability": "1",
-				"description": "流感流感同我",
-				"price": "5000",
-				"effect": "100"
-			}
-		]
-	},
-	"head": {
-		"category": "摩摩星人",
-		"items": [
-			{
-				"name": "血牛帽",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "雙層髮",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "陸軍裝",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "型仔頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "爆炸頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "貓王頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "曲髮",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "風吹頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "瞢瞢頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "野人頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "藝術頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "搖滾頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "飛行頭盔",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "羅馬頭盔",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "藝妓頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "摩洛哥帽",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "宰相冠",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "牛仔帽",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "海盜帽",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "宙斯冠",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "日本武士頭盔",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "明星頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "電視天線",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "鍋蓋頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "天使頭盔",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "惡魔角",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "平頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "學生頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "忍者頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "蠱惑仔頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "拉波頭",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "消防拯救隊頭盔",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "醫護人員頭盔",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "解放軍頭盔",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "船長帽",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "米兒髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成米兒一樣。",
-				"type": "時限物品",
-				"effect": "行動計回復時間 -2秒"
-			},
-			{
-				"name": "星奇髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成星奇一樣。",
-				"type": "時限物品",
-				"effect": "行動計回復時間 -2秒"
-			},
-			{
-				"name": "迪雲髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成迪雲一樣。",
-				"type": "時限物品",
-				"effect": "行動計回復時間 -2秒"
-			},
-			{
-				"name": "小丹髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成小丹一樣。",
-				"type": "時限物品",
-				"effect": "行動計回復時間 -2秒"
-			},
-			{
-				"name": "悟地髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成悟地一樣。",
-				"type": "時限物品",
-				"effect": "行動計回復時間 -2秒"
-			},
-			{
-				"name": "馬龍髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成馬龍一樣。",
-				"type": "時限物品",
-				"effect": "行動計回復時間 -2秒"
-			},
-			{
-				"name": "女巫帽",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "陸道髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成陸道一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "地藏十兵衛髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成地藏十兵衛一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "忍者兜",
-				"category": "摩摩星人",
-				"type": "時限物品"
-			},
-			{
-				"name": "真。天魔髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成真．天魔一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "終極迪倫髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成終極迪倫一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "迪倫髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成迪倫一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "蓮娜髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成蓮娜一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "安雅髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成安雅一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "蚩尤髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成蚩尤一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "黑羅剎髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成黑羅剎一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "卓男改髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成卓男改一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "幻音神巫髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成幻音神巫一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "妖化蓮娜髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成妖化蓮娜一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "終極魔人髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成終極魔人一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "極惡龍翼髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成極惡龍翼一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "巫神髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成巫神一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "終極龐士髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成終極龐士一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "宇歷斯髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成宇歷斯一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "約翰髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成約翰一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "溫蒂髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成溫蒂一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "霍雷髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成霍雷一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "菲雲髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成菲雲一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "菲沙髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成菲沙一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "蓋亞髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成蓋亞一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "樂雲髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成樂雲一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "天魔髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成天魔一樣。",
-				"type": "時限物品"
-			},
-			{
-				"name": "玄武髮式",
-				"category": "摩摩星人",
-				"description": "把摩摩星人裝扮成玄武一樣。",
-				"type": "時限物品"
+				"image": "https://i.imgur.com/NGEwmjp.png",
+				"material": null,
+				"demo": "https://i.imgur.com/BqQU1Dq.gif",
+				"effect": "回復 HP 5000 MP5000 SP500",
+				"consumption": "十吻福",
+				"stats": {},
+				"requirements": {},
+				"durability": 1,
+				"price": 5000,
+				"description": "流感流感同我 通通走!"
 			}
 		]
 	},
 	"set": {
-		"category": "套裝",
+		"title": "套裝",
 		"items": [
 			{
 				"name": "皇者之劍",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/jJaAwtq.png",
 				"material": "金",
+				"demo": null,
 				"effect": "焚燒+吹飛",
-				"durability": "500",
-				"price": "8000"
+				"consumption": "皇者之劍",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 8000,
+				"description": "皇者之劍"
 			},
 			{
 				"name": "皇者頭盔",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "金",
+				"demo": null,
+				"effect": "皇者頭盔",
+				"consumption": "皇者頭盔",
 				"stats": {
-					"hp": "+80",
-					"mp": "+100",
-					"sp": "+80",
-					"str": "+150",
-					"def": "+200"
-				}
+					"生命值": "+80",
+					"元力值": "+100",
+					"氣力值": "+80",
+					"攻擊力": "+150",
+					"防禦力": "+200"
+				},
+				"requirements": {
+					"生命值": "800",
+					"攻擊力": "100"
+				},
+				"durability": 500,
+				"price": 13000,
+				"description": "皇者頭盔"
 			},
 			{
 				"name": "皇者項錬",
-				"category": "套裝",
-				"material": "金"
+				"type": "頭盔",
+				"image": null,
+				"material": "金",
+				"demo": null,
+				"effect": "皇者項錬",
+				"consumption": "皇者項錬",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+200",
+					"攻擊力": "+200"
+				},
+				"requirements": {
+					"生命值": "500",
+					"元力值": "500"
+				},
+				"durability": 500,
+				"price": 9000,
+				"description": "皇者項錬"
 			},
 			{
 				"name": "皇者盔甲",
-				"category": "套裝",
-				"material": "金"
+				"type": "頭盔",
+				"image": null,
+				"material": "金",
+				"demo": null,
+				"effect": "皇者盔甲",
+				"consumption": "皇者盔甲",
+				"stats": {
+					"生命值": "+500",
+					"元力值": "+100",
+					"氣力值": "+100",
+					"攻擊力": "+50",
+					"防禦力": "+150",
+					"敏捷度": "-200"
+				},
+				"requirements": {
+					"生命值": "500",
+					"攻擊力": "150"
+				},
+				"durability": 500,
+				"price": 30000,
+				"description": "皇者盔甲"
 			},
 			{
 				"name": "皇者之盾",
-				"category": "套裝",
-				"material": "金"
+				"type": "頭盔",
+				"image": null,
+				"material": "金",
+				"demo": null,
+				"effect": "皇者之盾",
+				"consumption": "皇者之盾",
+				"stats": {
+					"生命值": "+80",
+					"元力值": "+100",
+					"氣力值": "+80",
+					"攻擊力": "+150",
+					"防禦力": "+200",
+					"敏捷度": "-100"
+				},
+				"requirements": {
+					"生命值": "800",
+					"攻擊力": "100"
+				},
+				"durability": 500,
+				"price": 36000,
+				"description": "皇者之盾"
 			},
 			{
 				"name": "皇者手鐲",
-				"category": "套裝",
-				"material": "金"
+				"type": "頭盔",
+				"image": null,
+				"material": "金",
+				"demo": null,
+				"effect": "皇者手鐲",
+				"consumption": "皇者手鐲",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+150",
+					"氣力值": "+150"
+				},
+				"requirements": {
+					"生命值": "800",
+					"元力值": "550"
+				},
+				"durability": 500,
+				"price": 10000,
+				"description": "皇者手鐲"
 			},
 			{
 				"name": "皇者之靴",
-				"category": "套裝",
-				"material": "金"
+				"type": "頭盔",
+				"image": null,
+				"material": "金",
+				"demo": null,
+				"effect": "皇者之靴",
+				"consumption": "皇者之靴",
+				"stats": {
+					"生命值": "+250",
+					"元力值": "+250",
+					"氣力值": "+160",
+					"防禦力": "+80",
+					"敏捷度": "+50"
+				},
+				"requirements": {
+					"生命值": "900"
+				},
+				"durability": 500,
+				"price": 20000,
+				"description": "皇者之靴"
 			},
 			{
 				"name": "櫻花劍",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "鐵",
-				"durability": "500",
-				"price": "1000"
+				"demo": null,
+				"effect": "櫻花劍",
+				"consumption": "櫻花劍",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 1000,
+				"description": "櫻花劍"
 			},
 			{
 				"name": "櫻花帽",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "布料",
+				"demo": null,
+				"effect": "櫻花帽",
+				"consumption": "櫻花帽",
 				"stats": {
-					"def": "+100",
-					"agi": "-30"
-				}
+					"防禦力": "+100",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"生命值": "700",
+					"敏捷度": "60"
+				},
+				"durability": 120,
+				"price": 4000,
+				"description": "櫻花帽"
 			},
 			{
 				"name": "櫻花項鍊",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "櫻花項鍊",
+				"consumption": "櫻花項鍊",
+				"stats": {
+					"生命值": "+40",
+					"防禦力": "+10"
+				},
+				"requirements": {
+					"生命值": "300"
+				},
+				"durability": 500,
+				"price": 1600,
+				"description": "櫻花項鍊"
 			},
 			{
 				"name": "櫻花服",
-				"category": "套裝",
-				"material": "金"
+				"type": "頭盔",
+				"image": null,
+				"material": "金",
+				"demo": null,
+				"effect": "櫻花服",
+				"consumption": "櫻花服",
+				"stats": {
+					"生命值": "+100",
+					"防禦力": "+100",
+					"敏捷度": "-50"
+				},
+				"requirements": {
+					"生命值": "100",
+					"敏捷度": "30"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "櫻花服"
 			},
 			{
 				"name": "櫻花盾",
-				"category": "套裝",
-				"material": "鐵"
+				"type": "頭盔",
+				"image": null,
+				"material": "鐵",
+				"demo": null,
+				"effect": "櫻花盾",
+				"consumption": "櫻花盾",
+				"stats": {
+					"氣力值": "+30",
+					"防禦力": "+50",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"敏捷度": "30"
+				},
+				"durability": 500,
+				"price": 9000,
+				"description": "櫻花盾"
 			},
 			{
 				"name": "櫻花手鐲",
-				"category": "套裝",
-				"material": "鐵"
+				"type": "頭盔",
+				"image": null,
+				"material": "鐵",
+				"demo": null,
+				"effect": "櫻花手鐲",
+				"consumption": "櫻花手鐲",
+				"stats": {
+					"生命值": "+80",
+					"元力值": "+80",
+					"敏捷度": "-10"
+				},
+				"requirements": {
+					"元力值": "600"
+				},
+				"durability": 150,
+				"price": 2000,
+				"description": "櫻花手鐲"
 			},
 			{
 				"name": "櫻花屐",
-				"category": "套裝",
-				"material": "木材"
+				"type": "頭盔",
+				"image": null,
+				"material": "木材",
+				"demo": null,
+				"effect": "櫻花屐",
+				"consumption": "櫻花屐",
+				"stats": {
+					"生命值": "+100",
+					"攻擊力": "+50",
+					"敏捷度": "+30"
+				},
+				"requirements": {
+					"生命值": "700"
+				},
+				"durability": 120,
+				"price": 5000,
+				"description": "櫻花屐"
 			},
 			{
 				"name": "總統鋼筆",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "鋼",
-				"durability": "500",
-				"price": "3500"
+				"demo": null,
+				"effect": "總統鋼筆",
+				"consumption": "總統鋼筆",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 3500,
+				"description": "總統鋼筆"
 			},
 			{
 				"name": "總統假髮",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "布料",
+				"demo": null,
+				"effect": "總統假髮",
+				"consumption": "總統假髮",
 				"stats": {
-					"hp": "+70",
-					"mp": "+20",
-					"def": "+130",
-					"agi": "-30"
-				}
+					"生命值": "+70",
+					"元力值": "+20",
+					"防禦力": "+130",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"生命值": "700"
+				},
+				"durability": 120,
+				"price": 5000,
+				"description": "總統假髮"
 			},
 			{
 				"name": "總統煲呔",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "總統煲呔",
+				"consumption": "總統煲呔",
+				"stats": {
+					"生命值": "+50",
+					"元力值": "+80"
+				},
+				"requirements": {
+					"元力值": "700",
+					"攻擊力": "80"
+				},
+				"durability": 500,
+				"price": 6000,
+				"description": "總統煲呔"
 			},
 			{
 				"name": "總統西裝",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "總統西裝",
+				"consumption": "總統西裝",
+				"stats": {
+					"生命值": "+150",
+					"元力值": "+100",
+					"攻擊力": "+130",
+					"防禦力": "+160",
+					"敏捷度": "-80"
+				},
+				"requirements": {
+					"元力值": "800"
+				},
+				"durability": 500,
+				"price": 24000,
+				"description": "總統西裝"
 			},
 			{
 				"name": "總統盾",
-				"category": "套裝",
-				"material": "金"
+				"type": "頭盔",
+				"image": null,
+				"material": "金",
+				"demo": null,
+				"effect": "總統盾",
+				"consumption": "總統盾",
+				"stats": {
+					"元力值": "+20",
+					"防禦力": "+160",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"敏捷度": "70"
+				},
+				"durability": 500,
+				"price": 15000,
+				"description": "總統盾"
 			},
 			{
 				"name": "總統手錶",
-				"category": "套裝",
-				"material": "合金"
+				"type": "頭盔",
+				"image": null,
+				"material": "合金",
+				"demo": null,
+				"effect": "總統手錶",
+				"consumption": "總統手錶",
+				"stats": {
+					"生命值": "+100",
+					"氣力值": "+70",
+					"敏捷度": "-10"
+				},
+				"requirements": {
+					"生命值": "200",
+					"攻擊力": "20",
+					"防禦力": "30"
+				},
+				"durability": 150,
+				"price": 5000,
+				"description": "總統手錶"
 			},
 			{
 				"name": "總統皮鞋",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "總統皮鞋",
+				"consumption": "總統皮鞋",
+				"stats": {
+					"生命值": "+200",
+					"防禦力": "+100",
+					"敏捷度": "+20"
+				},
+				"requirements": {
+					"生命值": "500",
+					"元力值": "500",
+					"攻擊力": "100"
+				},
+				"durability": 120,
+				"price": 10000,
+				"description": "總統皮鞋"
 			},
 			{
 				"name": "特種部隊刀",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "合金",
-				"durability": "500",
-				"price": "500"
+				"demo": null,
+				"effect": "特種部隊刀",
+				"consumption": "特種部隊刀",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 500,
+				"description": "特種部隊刀"
 			},
 			{
 				"name": "特種部隊頭盔",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "鋼",
+				"demo": null,
+				"effect": "特種部隊頭盔",
+				"consumption": "特種部隊頭盔",
 				"stats": {
-					"mp": "+20",
-					"def": "+100",
-					"agi": "-30"
-				}
+					"元力值": "+20",
+					"防禦力": "+100",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"元力值": "700"
+				},
+				"durability": 120,
+				"price": 3000,
+				"description": "特種部隊頭盔"
 			},
 			{
 				"name": "特種部隊軍牌",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "特種部隊軍牌",
+				"consumption": "特種部隊軍牌",
+				"stats": {
+					"氣力值": "+80",
+					"防禦力": "+10",
+					"敏捷度": "+10"
+				},
+				"requirements": {
+					"元力值": "300"
+				},
+				"durability": 500,
+				"price": 2000,
+				"description": "特種部隊軍牌"
 			},
 			{
 				"name": "特種部隊盔甲",
-				"category": "套裝",
-				"material": "鋼"
+				"type": "頭盔",
+				"image": null,
+				"material": "鋼",
+				"demo": null,
+				"effect": "特種部隊盔甲",
+				"consumption": "特種部隊盔甲",
+				"stats": {
+					"生命值": "+90",
+					"元力值": "+80",
+					"氣力值": "+100",
+					"防禦力": "+100",
+					"敏捷度": "-50"
+				},
+				"requirements": {
+					"攻擊力": "100",
+					"防禦力": "80"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "特種部隊盔甲"
 			},
 			{
 				"name": "特種部隊盾",
-				"category": "套裝",
-				"material": "鐵"
+				"type": "頭盔",
+				"image": null,
+				"material": "鐵",
+				"demo": null,
+				"effect": "特種部隊盾",
+				"consumption": "特種部隊盾",
+				"stats": {
+					"防禦力": "+110",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"敏捷度": "50"
+				},
+				"durability": 500,
+				"price": 4000,
+				"description": "特種部隊盾"
 			},
 			{
 				"name": "特種部隊手套",
-				"category": "套裝",
-				"material": "鐵"
+				"type": "頭盔",
+				"image": null,
+				"material": "鐵",
+				"demo": null,
+				"effect": "特種部隊手套",
+				"consumption": "特種部隊手套",
+				"stats": {
+					"氣力值": "+100",
+					"攻擊力": "+10",
+					"防禦力": "+10",
+					"敏捷度": "+30"
+				},
+				"requirements": {
+					"氣力值": "100",
+					"敏捷度": "40"
+				},
+				"durability": 150,
+				"price": 1000,
+				"description": "特種部隊手套"
 			},
 			{
 				"name": "特種部隊靴",
-				"category": "套裝",
-				"material": "鋼"
+				"type": "頭盔",
+				"image": null,
+				"material": "鋼",
+				"demo": null,
+				"effect": "特種部隊靴",
+				"consumption": "特種部隊靴",
+				"stats": {
+					"元力值": "-50",
+					"氣力值": "+150",
+					"敏捷度": "+30"
+				},
+				"requirements": {
+					"氣力值": "500",
+					"攻擊力": "20",
+					"防禦力": "40",
+					"敏捷度": "30"
+				},
+				"durability": 120,
+				"price": 4000,
+				"description": "特種部隊靴"
 			},
 			{
 				"name": "中山毛筆",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "木材",
-				"durability": "500",
-				"price": "4500"
+				"demo": null,
+				"effect": "中山毛筆",
+				"consumption": "中山毛筆",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 4500,
+				"description": "中山毛筆"
 			},
 			{
 				"name": "中山帽",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "布料",
+				"demo": null,
+				"effect": "中山帽",
+				"consumption": "中山帽",
 				"stats": {
-					"str": "+30",
-					"def": "+100",
-					"agi": "-20"
-				}
+					"攻擊力": "+30",
+					"防禦力": "+100",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "700"
+				},
+				"durability": 120,
+				"price": 10000,
+				"description": "中山帽"
 			},
 			{
 				"name": "中山戒指",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "中山戒指",
+				"consumption": "中山戒指",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+80",
+					"氣力值": "+100",
+					"防禦力": "+30"
+				},
+				"requirements": {
+					"生命值": "100",
+					"氣力值": "200"
+				},
+				"durability": 500,
+				"price": 5000,
+				"description": "中山戒指"
 			},
 			{
 				"name": "中山服",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "中山服",
+				"consumption": "中山服",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+130",
+					"氣力值": "+100",
+					"攻擊力": "+50",
+					"防禦力": "+160",
+					"敏捷度": "-80"
+				},
+				"requirements": {
+					"生命值": "800"
+				},
+				"durability": 500,
+				"price": 20000,
+				"description": "中山服"
 			},
 			{
 				"name": "中山盾",
-				"category": "套裝",
-				"material": "木材"
+				"type": "頭盔",
+				"image": null,
+				"material": "木材",
+				"demo": null,
+				"effect": "中山盾",
+				"consumption": "中山盾",
+				"stats": {
+					"生命值": "+200",
+					"防禦力": "+170",
+					"敏捷度": "-30"
+				},
+				"requirements": {
+					"敏捷度": "70"
+				},
+				"durability": 500,
+				"price": 12000,
+				"description": "中山盾"
 			},
 			{
 				"name": "中山手套",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "中山手套",
+				"consumption": "中山手套",
+				"stats": {
+					"生命值": "+130",
+					"氣力值": "+80",
+					"敏捷度": "+20"
+				},
+				"requirements": {
+					"氣力值": "550",
+					"攻擊力": "30",
+					"敏捷度": "30"
+				},
+				"durability": 150,
+				"price": 5800,
+				"description": "中山手套"
 			},
 			{
 				"name": "中山鞋",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "中山鞋",
+				"consumption": "中山鞋",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+400",
+					"敏捷度": "+20"
+				},
+				"requirements": {
+					"元力值": "800",
+					"攻擊力": "100",
+					"敏捷度": "100"
+				},
+				"durability": 120,
+				"price": 8000,
+				"description": "中山鞋"
 			},
 			{
 				"name": "謎之劍",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "合金",
+				"demo": null,
 				"effect": "凍結",
-				"durability": "500",
-				"price": "6800"
+				"consumption": "謎之劍",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 6800,
+				"description": "謎之劍"
 			},
 			{
 				"name": "謎之頭盔",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "合金",
+				"demo": null,
+				"effect": "謎之頭盔",
+				"consumption": "謎之頭盔",
 				"stats": {
-					"sp": "+30",
-					"def": "+190",
-					"agi": "-20"
-				}
+					"氣力值": "+30",
+					"防禦力": "+190",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "800"
+				},
+				"durability": 120,
+				"price": 11000,
+				"description": "謎之頭盔"
 			},
 			{
 				"name": "謎之耳環",
-				"category": "套裝",
-				"material": "合金"
+				"type": "頭盔",
+				"image": null,
+				"material": "合金",
+				"demo": null,
+				"effect": "謎之耳環",
+				"consumption": "謎之耳環",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+250"
+				},
+				"requirements": {
+					"元力值": "700"
+				},
+				"durability": 500,
+				"price": 7000,
+				"description": "謎之耳環"
 			},
 			{
 				"name": "謎之盔甲",
-				"category": "套裝",
-				"material": "合金"
+				"type": "頭盔",
+				"image": null,
+				"material": "合金",
+				"demo": null,
+				"effect": "謎之盔甲",
+				"consumption": "謎之盔甲",
+				"stats": {
+					"生命值": "+70",
+					"元力值": "+60",
+					"攻擊力": "+200",
+					"防禦力": "+220",
+					"敏捷度": "-100"
+				},
+				"requirements": {
+					"生命值": "800",
+					"攻擊力": "160",
+					"防禦力": "150"
+				},
+				"durability": 500,
+				"price": 32000,
+				"description": "謎之盔甲"
 			},
 			{
 				"name": "謎之盾",
-				"category": "套裝",
-				"material": "合金"
+				"type": "頭盔",
+				"image": null,
+				"material": "合金",
+				"demo": null,
+				"effect": "謎之盾",
+				"consumption": "謎之盾",
+				"stats": {
+					"元力值": "+30",
+					"防禦力": "+200",
+					"敏捷度": "-50"
+				},
+				"requirements": {
+					"敏捷度": "80"
+				},
+				"durability": 500,
+				"price": 20000,
+				"description": "謎之盾"
 			},
 			{
 				"name": "謎之爪",
-				"category": "套裝",
-				"material": "合金"
+				"type": "頭盔",
+				"image": null,
+				"material": "合金",
+				"demo": null,
+				"effect": "謎之爪",
+				"consumption": "謎之爪",
+				"stats": {
+					"生命值": "+150",
+					"元力值": "+200",
+					"防禦力": "+80",
+					"敏捷度": "+50"
+				},
+				"requirements": {
+					"元力值": "850"
+				},
+				"durability": 150,
+				"price": 9000,
+				"description": "謎之爪"
 			},
 			{
 				"name": "謎之靴",
-				"category": "套裝",
-				"material": "合金"
+				"type": "頭盔",
+				"image": null,
+				"material": "合金",
+				"demo": null,
+				"effect": "謎之靴",
+				"consumption": "謎之靴",
+				"stats": {
+					"元力值": "+550",
+					"攻擊力": "+30",
+					"敏捷度": "+50"
+				},
+				"requirements": {
+					"元力值": "1000"
+				},
+				"durability": 120,
+				"price": 16000,
+				"description": "謎之靴"
 			},
 			{
 				"name": "天使之仗",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "鐵",
-				"durability": "500",
-				"price": "800"
+				"demo": null,
+				"effect": "天使之仗",
+				"consumption": "天使之仗",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 800,
+				"description": "天使之仗"
 			},
 			{
 				"name": "天使光環",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "布料",
+				"demo": null,
+				"effect": "天使光環",
+				"consumption": "天使光環",
 				"stats": {
-					"def": "+80",
-					"agi": "-20"
-				}
+					"防禦力": "+80",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"元力值": "800"
+				},
+				"durability": 120,
+				"price": 7000,
+				"description": "天使光環"
 			},
 			{
 				"name": "天使耳環",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "天使耳環",
+				"consumption": "天使耳環",
+				"stats": {
+					"元力值": "+100"
+				},
+				"requirements": {
+					"元力值": "300"
+				},
+				"durability": 500,
+				"price": 2500,
+				"description": "天使耳環"
 			},
 			{
 				"name": "天使之服",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "天使之服",
+				"consumption": "天使之服",
+				"stats": {
+					"生命值": "+35",
+					"元力值": "+35",
+					"攻擊力": "-50",
+					"防禦力": "+100",
+					"敏捷度": "-80"
+				},
+				"requirements": {
+					"元力值": "700"
+				},
+				"durability": 500,
+				"price": 10000,
+				"description": "天使之服"
 			},
 			{
 				"name": "天使之盾",
-				"category": "套裝",
-				"material": "鋼"
+				"type": "頭盔",
+				"image": null,
+				"material": "鋼",
+				"demo": null,
+				"effect": "天使之盾",
+				"consumption": "天使之盾",
+				"stats": {
+					"生命值": "+200",
+					"防禦力": "+100",
+					"敏捷度": "-50"
+				},
+				"requirements": {
+					"敏捷度": "50"
+				},
+				"durability": 500,
+				"price": 6000,
+				"description": "天使之盾"
 			},
 			{
 				"name": "天使手鐲",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "天使手鐲",
+				"consumption": "天使手鐲",
+				"stats": {
+					"元力值": "+100",
+					"攻擊力": "+20",
+					"敏捷度": "+40"
+				},
+				"requirements": {
+					"元力值": "400"
+				},
+				"durability": 150,
+				"price": 6000,
+				"description": "天使手鐲"
 			},
 			{
 				"name": "天使之靴",
-				"category": "套裝",
-				"material": "合金"
+				"type": "頭盔",
+				"image": null,
+				"material": "合金",
+				"demo": null,
+				"effect": "天使之靴",
+				"consumption": "天使之靴",
+				"stats": {
+					"元力值": "+100",
+					"防禦力": "+50",
+					"敏捷度": "+10"
+				},
+				"requirements": {
+					"元力值": "500"
+				},
+				"durability": 120,
+				"price": 6000,
+				"description": "天使之靴"
 			},
 			{
 				"name": "路西法之矛",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "銅",
-				"durability": "500",
-				"price": "5800"
+				"demo": null,
+				"effect": "路西法之矛",
+				"consumption": "路西法之矛",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 5800,
+				"description": "路西法之矛"
 			},
 			{
 				"name": "路西法頭盔",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "鋼",
+				"demo": null,
+				"effect": "路西法頭盔",
+				"consumption": "路西法頭盔",
 				"stats": {
-					"hp": "+40",
-					"def": "+180",
-					"agi": "-20"
-				}
+					"生命值": "+40",
+					"防禦力": "+180",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "700",
+					"防禦力": "100"
+				},
+				"durability": 120,
+				"price": 6000,
+				"description": "路西法頭盔"
 			},
 			{
 				"name": "路西法之爪",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "路西法之爪",
+				"consumption": "路西法之爪",
+				"stats": {
+					"生命值": "+80",
+					"元力值": "+100",
+					"防禦力": "+30",
+					"敏捷度": "-10"
+				},
+				"requirements": {
+					"生命值": "600",
+					"元力值": "600"
+				},
+				"durability": 150,
+				"price": 7000,
+				"description": "路西法之爪"
 			},
 			{
 				"name": "路西法盔甲",
-				"category": "套裝",
-				"material": "鋼"
+				"type": "頭盔",
+				"image": null,
+				"material": "鋼",
+				"demo": null,
+				"effect": "路西法盔甲",
+				"consumption": "路西法盔甲",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+400",
+					"氣力值": "+50",
+					"防禦力": "+220",
+					"敏捷度": "-120"
+				},
+				"requirements": {
+					"生命值": "800"
+				},
+				"durability": 500,
+				"price": 32000,
+				"description": "路西法盔甲"
 			},
 			{
 				"name": "路西法之盾",
-				"category": "套裝",
-				"material": "鋼"
+				"type": "頭盔",
+				"image": null,
+				"material": "鋼",
+				"demo": null,
+				"effect": "路西法之盾",
+				"consumption": "路西法之盾",
+				"stats": {
+					"生命值": "+200",
+					"防禦力": "+180",
+					"敏捷度": "-50"
+				},
+				"requirements": {
+					"敏捷度": "80"
+				},
+				"durability": 500,
+				"price": 18000,
+				"description": "路西法之盾"
 			},
 			{
 				"name": "路西法戒指",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "路西法戒指",
+				"consumption": "路西法戒指",
+				"stats": {
+					"元力值": "+50",
+					"敏捷度": "+20"
+				},
+				"requirements": {
+					"元力值": "700"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "路西法戒指"
 			},
 			{
 				"name": "路西法之鞋",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "路西法之鞋",
+				"consumption": "路西法之鞋",
+				"stats": {
+					"元力值": "+350",
+					"氣力值": "+150",
+					"攻擊力": "+80",
+					"防禦力": "+50",
+					"敏捷度": "+50"
+				},
+				"requirements": {
+					"生命值": "900",
+					"氣力值": "600",
+					"防禦力": "150"
+				},
+				"durability": 120,
+				"price": 13000,
+				"description": "路西法之鞋"
 			},
 			{
 				"name": "魔導使劍",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "合金",
+				"demo": null,
 				"effect": "電擊",
-				"durability": "500",
-				"price": "2000"
+				"consumption": "魔導使劍",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 2000,
+				"description": "魔導使劍"
 			},
 			{
 				"name": "魔導使帽",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "鋼",
+				"demo": null,
+				"effect": "魔導使帽",
+				"consumption": "魔導使帽",
 				"stats": {
-					"hp": "+40",
-					"def": "+170",
-					"agi": "-20"
-				}
+					"生命值": "+40",
+					"防禦力": "+170",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "700",
+					"攻擊力": "100"
+				},
+				"durability": 120,
+				"price": 6000,
+				"description": "魔導使帽"
 			},
 			{
 				"name": "魔導使項錬",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "魔導使項錬",
+				"consumption": "魔導使項錬",
+				"stats": {
+					"生命值": "+70",
+					"氣力值": "+30",
+					"敏捷度": "+10"
+				},
+				"requirements": {
+					"生命值": "300",
+					"氣力值": "300"
+				},
+				"durability": 500,
+				"price": 2400,
+				"description": "魔導使項錬"
 			},
 			{
 				"name": "魔導使服",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "魔導使服",
+				"consumption": "魔導使服",
+				"stats": {
+					"元力值": "+200",
+					"攻擊力": "+50",
+					"防禦力": "+160",
+					"敏捷度": "-80"
+				},
+				"requirements": {
+					"攻擊力": "100",
+					"防禦力": "100"
+				},
+				"durability": 500,
+				"price": 16000,
+				"description": "魔導使服"
 			},
 			{
 				"name": "魔導使盾",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "魔導使盾",
+				"consumption": "魔導使盾",
+				"stats": {
+					"攻擊力": "+20",
+					"防禦力": "+130",
+					"敏捷度": "-40"
+				},
+				"requirements": {
+					"敏捷度": "60"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "魔導使盾"
 			},
 			{
 				"name": "魔導使手鐲",
-				"category": "套裝",
-				"material": "銅"
+				"type": "頭盔",
+				"image": null,
+				"material": "銅",
+				"demo": null,
+				"effect": "魔導使手鐲",
+				"consumption": "魔導使手鐲",
+				"stats": {
+					"生命值": "+100",
+					"元力值": "+30",
+					"防禦力": "+20",
+					"敏捷度": "+30"
+				},
+				"requirements": {
+					"生命值": "500",
+					"元力值": "500"
+				},
+				"durability": 150,
+				"price": 4000,
+				"description": "魔導使手鐲"
 			},
 			{
 				"name": "魔導使鞋",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "魔導使鞋",
+				"consumption": "魔導使鞋",
+				"stats": {
+					"生命值": "+30",
+					"氣力值": "+400",
+					"攻擊力": "+40",
+					"防禦力": "+20",
+					"敏捷度": "+40"
+				},
+				"requirements": {
+					"元力值": "800",
+					"敏捷度": "80"
+				},
+				"durability": 120,
+				"price": 12000,
+				"description": "魔導使鞋"
 			},
 			{
 				"name": "小熊蠟筆",
-				"category": "套裝",
+				"type": "武器",
+				"image": "https://i.imgur.com/GnXMWkU.png",
 				"material": "塑膠",
-				"durability": "500",
-				"price": "2500"
+				"demo": null,
+				"effect": "小熊蠟筆",
+				"consumption": "小熊蠟筆",
+				"stats": {},
+				"requirements": {},
+				"durability": 500,
+				"price": 2500,
+				"description": "小熊蠟筆"
 			},
 			{
 				"name": "小熊帽",
-				"category": "套裝",
+				"type": "頭盔",
+				"image": null,
 				"material": "鋼",
+				"demo": null,
+				"effect": "小熊帽",
+				"consumption": "小熊帽",
 				"stats": {
-					"def": "+100",
-					"agi": "-20"
-				}
+					"防禦力": "+100",
+					"敏捷度": "-20"
+				},
+				"requirements": {
+					"生命值": "200",
+					"防禦力": "100"
+				},
+				"durability": 120,
+				"price": 4000,
+				"description": "小熊帽"
 			},
 			{
 				"name": "小熊奶咀",
-				"category": "套裝",
-				"material": "塑膠"
+				"type": "頭盔",
+				"image": null,
+				"material": "塑膠",
+				"demo": null,
+				"effect": "小熊奶咀",
+				"consumption": "小熊奶咀",
+				"stats": {
+					"生命值": "+150",
+					"氣力值": "+50"
+				},
+				"requirements": {
+					"生命值": "500"
+				},
+				"durability": 500,
+				"price": 2000,
+				"description": "小熊奶咀"
 			},
 			{
 				"name": "小熊服",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "小熊服",
+				"consumption": "小熊服",
+				"stats": {
+					"生命值": "+50",
+					"元力值": "+50",
+					"攻擊力": "+30",
+					"防禦力": "+100",
+					"敏捷度": "-50"
+				},
+				"requirements": {
+					"防禦力": "100"
+				},
+				"durability": 500,
+				"price": 8000,
+				"description": "小熊服"
 			},
 			{
 				"name": "小熊盾",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "小熊盾",
+				"consumption": "小熊盾",
+				"stats": {
+					"防禦力": "+100",
+					"敏捷度": "-40"
+				},
+				"requirements": {
+					"敏捷度": "30"
+				},
+				"durability": 500,
+				"price": 7000,
+				"description": "小熊盾"
 			},
 			{
 				"name": "小熊掌",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "小熊掌",
+				"consumption": "小熊掌",
+				"stats": {
+					"生命值": "+80",
+					"攻擊力": "+10",
+					"防禦力": "+10",
+					"敏捷度": "+20"
+				},
+				"requirements": {
+					"生命值": "300"
+				},
+				"durability": 150,
+				"price": 2500,
+				"description": "小熊掌"
 			},
 			{
 				"name": "小熊鞋",
-				"category": "套裝",
-				"material": "布料"
+				"type": "頭盔",
+				"image": null,
+				"material": "布料",
+				"demo": null,
+				"effect": "小熊鞋",
+				"consumption": "小熊鞋",
+				"stats": {
+					"生命值": "+30",
+					"元力值": "+20",
+					"氣力值": "+200",
+					"防禦力": "+20",
+					"敏捷度": "+50"
+				},
+				"requirements": {
+					"氣力值": "700",
+					"攻擊力": "40"
+				},
+				"durability": 120,
+				"price": 2000,
+				"description": "小熊鞋"
+			}
+		]
+	},
+	"momo": {
+		"title": "摩摩星人",
+		"items": [
+			{
+				"name": "血牛帽",
+				"image": "https://i.imgur.com/HlN5SDT.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "血牛帽",
+				"consumption": "血牛帽"
+			},
+			{
+				"name": "雙層髮",
+				"image": "https://i.imgur.com/nXQvj06.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "雙層髮",
+				"consumption": "雙層髮"
+			},
+			{
+				"name": "陸軍裝",
+				"image": "https://i.imgur.com/IaOTpiO.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "陸軍裝",
+				"consumption": "陸軍裝"
+			},
+			{
+				"name": "型仔頭",
+				"image": "https://i.imgur.com/BSPk5Fb.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "型仔頭",
+				"consumption": "型仔頭"
+			},
+			{
+				"name": "爆炸頭",
+				"image": "https://i.imgur.com/iJwlzEL.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "爆炸頭",
+				"consumption": "爆炸頭"
+			},
+			{
+				"name": "貓王頭",
+				"image": "https://i.imgur.com/NbBvgKH.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "貓王頭",
+				"consumption": "貓王頭"
+			},
+			{
+				"name": "曲髮",
+				"image": "https://i.imgur.com/780NxXJ.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "曲髮",
+				"consumption": "曲髮"
+			},
+			{
+				"name": "風吹頭",
+				"image": "https://i.imgur.com/C7Rlbir.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "風吹頭",
+				"consumption": "風吹頭"
+			},
+			{
+				"name": "瞢瞢頭",
+				"image": "https://i.imgur.com/muk6E3z.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "瞢瞢頭",
+				"consumption": "瞢瞢頭"
+			},
+			{
+				"name": "野人頭",
+				"image": "https://i.imgur.com/ZKuuxvy.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "野人頭",
+				"consumption": "野人頭"
+			},
+			{
+				"name": "藝術頭",
+				"image": "https://i.imgur.com/vtfgtie.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "藝術頭",
+				"consumption": "藝術頭"
+			},
+			{
+				"name": "搖滾頭",
+				"image": "https://i.imgur.com/vtfgtie.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "搖滾頭",
+				"consumption": "搖滾頭"
+			},
+			{
+				"name": "飛行頭盔",
+				"image": "https://i.imgur.com/xbPVd2m.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "飛行頭盔",
+				"consumption": "飛行頭盔"
+			},
+			{
+				"name": "羅馬頭盔",
+				"image": "https://i.imgur.com/1GGh4Rl.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "羅馬頭盔",
+				"consumption": "羅馬頭盔"
+			},
+			{
+				"name": "藝妓頭",
+				"image": "https://i.imgur.com/YdALXG8.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "藝妓頭",
+				"consumption": "藝妓頭"
+			},
+			{
+				"name": "摩洛哥帽",
+				"image": "https://i.imgur.com/6ceAz62.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "摩洛哥帽",
+				"consumption": "摩洛哥帽"
+			},
+			{
+				"name": "宰相冠",
+				"image": "https://i.imgur.com/UjWyJBt.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "宰相冠",
+				"consumption": "宰相冠"
+			},
+			{
+				"name": "牛仔帽",
+				"image": "https://i.imgur.com/a9ZIvkg.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "牛仔帽",
+				"consumption": "牛仔帽"
+			},
+			{
+				"name": "海盜帽",
+				"image": "https://i.imgur.com/JIfW8Yh.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "海盜帽",
+				"consumption": "海盜帽"
+			},
+			{
+				"name": "宙斯冠",
+				"image": "https://i.imgur.com/rA0KZdv.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "宙斯冠",
+				"consumption": "宙斯冠"
+			},
+			{
+				"name": "日本武士頭盔",
+				"image": "https://i.imgur.com/DkCHoWP.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "日本武士頭盔",
+				"consumption": "日本武士頭盔"
+			},
+			{
+				"name": "明星頭",
+				"image": "https://i.imgur.com/i5pKzxD.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "明星頭",
+				"consumption": "明星頭"
+			},
+			{
+				"name": "電視天線",
+				"image": "https://i.imgur.com/kod94Wm.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "電視天線",
+				"consumption": "電視天線"
+			},
+			{
+				"name": "鍋蓋頭",
+				"image": "https://i.imgur.com/no5cWJK.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "鍋蓋頭",
+				"consumption": "鍋蓋頭"
+			},
+			{
+				"name": "天使頭盔",
+				"image": "https://i.imgur.com/O0CBp9i.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "天使頭盔",
+				"consumption": "天使頭盔"
+			},
+			{
+				"name": "惡魔角",
+				"image": "https://i.imgur.com/zPalkUd.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "惡魔角",
+				"consumption": "惡魔角"
+			},
+			{
+				"name": "平頭",
+				"image": "https://i.imgur.com/eSvA6Pn.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "平頭",
+				"consumption": "平頭"
+			},
+			{
+				"name": "學生頭",
+				"image": "https://i.imgur.com/IWoYyDX.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "學生頭",
+				"consumption": "學生頭"
+			},
+			{
+				"name": "忍者頭",
+				"image": "https://i.imgur.com/LWZhBlI.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "忍者頭",
+				"consumption": "忍者頭"
+			},
+			{
+				"name": "蠱惑仔頭",
+				"image": "https://i.imgur.com/pigIajj.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "蠱惑仔頭",
+				"consumption": "蠱惑仔頭"
+			},
+			{
+				"name": "拉波頭",
+				"image": "https://i.imgur.com/TUyl0Mw.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "拉波頭",
+				"consumption": "拉波頭"
+			},
+			{
+				"name": "消防拯救隊頭盔",
+				"image": "https://i.imgur.com/pPagQBk.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "消防拯救隊頭盔",
+				"consumption": "消防拯救隊頭盔"
+			},
+			{
+				"name": "醫護人員頭盔",
+				"image": "https://i.imgur.com/T6dGZE7.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "醫護人員頭盔",
+				"consumption": "醫護人員頭盔"
+			},
+			{
+				"name": "解放軍頭盔",
+				"image": "https://i.imgur.com/potML1X.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "解放軍頭盔",
+				"consumption": "解放軍頭盔"
+			},
+			{
+				"name": "船長帽",
+				"image": "https://i.imgur.com/p2zu7Cs.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "船長帽",
+				"consumption": "船長帽"
+			},
+			{
+				"name": "米兒髮式",
+				"image": "https://i.imgur.com/wCFAzbN.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": "行動計回復時間 -2秒",
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成米兒一樣。",
+				"consumption": "米兒髮式"
+			},
+			{
+				"name": "星奇髮式",
+				"image": "https://i.imgur.com/LsaTVdh.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": "行動計回復時間 -2秒",
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成星奇一樣。",
+				"consumption": "星奇髮式"
+			},
+			{
+				"name": "迪雲髮式",
+				"image": "https://i.imgur.com/MSbfgFp.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": "行動計回復時間 -2秒",
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成迪雲一樣。",
+				"consumption": "迪雲髮式"
+			},
+			{
+				"name": "小丹髮式",
+				"image": "https://i.imgur.com/PdtFJZ5.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": "行動計回復時間 -2秒",
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成小丹一樣。",
+				"consumption": "小丹髮式"
+			},
+			{
+				"name": "悟地髮式",
+				"image": "https://i.imgur.com/rwsc88t.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": "行動計回復時間 -2秒",
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成悟地一樣。",
+				"consumption": "悟地髮式"
+			},
+			{
+				"name": "馬龍髮式",
+				"image": "https://i.imgur.com/bbfgy6J.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": "行動計回復時間 -2秒",
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成馬龍一樣。",
+				"consumption": "馬龍髮式"
+			},
+			{
+				"name": "女巫帽",
+				"image": "https://i.imgur.com/9iMzCCA.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "女巫帽",
+				"consumption": "女巫帽"
+			},
+			{
+				"name": "陸道髮式",
+				"image": "https://i.imgur.com/YxfcBZR.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成陸道一樣。",
+				"consumption": "陸道髮式"
+			},
+			{
+				"name": "地藏十兵衛髮式",
+				"image": "https://i.imgur.com/Rz20QP8.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成地藏十兵衛一樣。",
+				"consumption": "地藏十兵衛髮式"
+			},
+			{
+				"name": "忍者兜",
+				"image": "https://i.imgur.com/7XXhLf3.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "忍者兜",
+				"consumption": "忍者兜"
+			},
+			{
+				"name": "真。天魔髮式",
+				"image": "https://i.imgur.com/br0mpon.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成真．天魔一樣。",
+				"consumption": "真。天魔髮式"
+			},
+			{
+				"name": "終極迪倫髮式",
+				"image": "https://i.imgur.com/pAubfWI.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成終極迪倫一樣。",
+				"consumption": "終極迪倫髮式"
+			},
+			{
+				"name": "迪倫髮式",
+				"image": "https://i.imgur.com/lylJnXR.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成迪倫一樣。",
+				"consumption": "迪倫髮式"
+			},
+			{
+				"name": "蓮娜髮式",
+				"image": "https://i.imgur.com/xHdoGkj.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成蓮娜一樣。",
+				"consumption": "蓮娜髮式"
+			},
+			{
+				"name": "安雅髮式",
+				"image": "https://i.imgur.com/4y4Id2Q.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成安雅一樣。",
+				"consumption": "安雅髮式"
+			},
+			{
+				"name": "蚩尤髮式",
+				"image": "https://i.imgur.com/Lp7IdqF.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成蚩尤一樣。",
+				"consumption": "蚩尤髮式"
+			},
+			{
+				"name": "黑羅剎髮式",
+				"image": "https://i.imgur.com/KiE64sj.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成黑羅剎一樣。",
+				"consumption": "黑羅剎髮式"
+			},
+			{
+				"name": "卓男改髮式",
+				"image": "https://i.imgur.com/xsrqFxt.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成卓男改一樣。",
+				"consumption": "卓男改髮式"
+			},
+			{
+				"name": "幻音神巫髮式",
+				"image": "https://i.imgur.com/u3xSkEe.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成幻音神巫一樣。",
+				"consumption": "幻音神巫髮式"
+			},
+			{
+				"name": "妖化蓮娜髮式",
+				"image": "https://i.imgur.com/61qNTso.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成妖化蓮娜一樣。",
+				"consumption": "妖化蓮娜髮式"
+			},
+			{
+				"name": "終極魔人髮式",
+				"image": "https://i.imgur.com/h00OW6X.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成終極魔人一樣。",
+				"consumption": "終極魔人髮式"
+			},
+			{
+				"name": "極惡龍翼髮式",
+				"image": "https://i.imgur.com/2R4s51X.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成極惡龍翼一樣。",
+				"consumption": "極惡龍翼髮式"
+			},
+			{
+				"name": "巫神髮式",
+				"image": "https://i.imgur.com/TbABMyv.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成巫神一樣。",
+				"consumption": "巫神髮式"
+			},
+			{
+				"name": "終極龐士髮式",
+				"image": "https://i.imgur.com/uWNNVDO.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成終極龐士一樣。",
+				"consumption": "終極龐士髮式"
+			},
+			{
+				"name": "宇歷斯髮式",
+				"image": "https://i.imgur.com/dSSKFA6.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成宇歷斯一樣。",
+				"consumption": "宇歷斯髮式"
+			},
+			{
+				"name": "約翰髮式",
+				"image": "https://i.imgur.com/HtWAaui.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成約翰一樣。",
+				"consumption": "約翰髮式"
+			},
+			{
+				"name": "溫蒂髮式",
+				"image": "https://i.imgur.com/hIGxizZ.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成溫蒂一樣。",
+				"consumption": "溫蒂髮式"
+			},
+			{
+				"name": "霍雷髮式",
+				"image": "https://i.imgur.com/HpAmVGN.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成霍雷一樣。",
+				"consumption": "霍雷髮式"
+			},
+			{
+				"name": "菲雲髮式",
+				"image": "https://i.imgur.com/SRPxnzY.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成菲雲一樣。",
+				"consumption": "菲雲髮式"
+			},
+			{
+				"name": "菲沙髮式",
+				"image": "https://i.imgur.com/xjCmFgJ.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成菲沙一樣。",
+				"consumption": "菲沙髮式"
+			},
+			{
+				"name": "蓋亞髮式",
+				"image": "https://i.imgur.com/aReMqFS.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成蓋亞一樣。",
+				"consumption": "蓋亞髮式"
+			},
+			{
+				"name": "樂雲髮式",
+				"image": "https://i.imgur.com/rwWOHpH.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成樂雲一樣。",
+				"consumption": "樂雲髮式"
+			},
+			{
+				"name": "天魔髮式",
+				"image": "https://i.imgur.com/WiMnAak.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成天魔一樣。",
+				"consumption": "天魔髮式"
+			},
+			{
+				"name": "玄武髮式",
+				"image": "https://i.imgur.com/TcYgO9z.png",
+				"type": "時限物品",
+				"material": null,
+				"demo": null,
+				"effect": null,
+				"stats": {},
+				"requirements": {},
+				"durability": null,
+				"price": null,
+				"description": "把摩摩星人裝扮成玄武一樣。",
+				"consumption": "玄武髮式"
 			}
 		]
 	}
