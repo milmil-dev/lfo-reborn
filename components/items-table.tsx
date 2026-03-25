@@ -161,16 +161,13 @@ function ItemCard({ item }: { item: Item }) {
 							href={item.demo}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 backdrop-blur-[2px]"
+							className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px]"
 							onClick={(e) => e.stopPropagation()}
 						>
-							<div className="flex flex-col items-center gap-1.5">
-								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-fd-primary text-fd-primary-foreground shadow-xl">
-									<Sword className="h-5 w-5 fill-current" />
-								</div>
-								<span className="text-[10px] font-bold tracking-widest text-white/80 uppercase">
-									演示預覽
-								</span>
+							<img src={item.demo} alt="Demo" className="h-full w-full object-contain p-2" />
+							{/* Small indicator that it's clickable */}
+							<div className="absolute right-2 bottom-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white/80 backdrop-blur-sm transition-colors hover:bg-fd-primary hover:text-fd-primary-foreground">
+								<ExternalLink className="h-3 w-3" />
 							</div>
 						</motion.a>
 					)}
@@ -186,6 +183,11 @@ function ItemCard({ item }: { item: Item }) {
 							)}
 						>
 							{item.material}
+						</span>
+					)}
+					{item.demo && (
+						<span className="rounded-sm border border-fd-primary/30 bg-fd-primary/10 px-1.5 py-0.5 text-[8px] font-bold tracking-widest text-fd-primary backdrop-blur-md shadow-sm uppercase">
+							Demo
 						</span>
 					)}
 				</div>
