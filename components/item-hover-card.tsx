@@ -78,32 +78,30 @@ function HoverCardShell({
 	const cardWidth = 320;
 	const gap = 16;
 
-	// Position logic
-	let left = rect.right + gap;
-	let top = rect.top + rect.height / 2 - 100;
+	// Calculate target position
+	let targetLeft = rect.right + gap;
+	let targetTop = rect.top + rect.height / 2 - 100;
 
-	// Boundary check: Right to Left flip
+	// Flip to left if no space on right
 	if (typeof window !== "undefined") {
-		if (left + cardWidth > window.innerWidth - 20) {
-			left = rect.left - cardWidth - gap;
+		if (targetLeft + cardWidth > window.innerWidth - 20) {
+			targetLeft = rect.left - cardWidth - gap;
 		}
-		if (left < 20) {
-			left = rect.right + gap;
-		}
-		top = Math.max(80, Math.min(top, window.innerHeight - 250));
+		// Clamp vertical
+		targetTop = Math.max(80, Math.min(targetTop, window.innerHeight - 250));
 	}
 
-	const x = useSpring(useMotionValue(left), springConfig);
-	const y = useSpring(useMotionValue(top), springConfig);
+	const x = useSpring(useMotionValue(targetLeft), springConfig);
+	const y = useSpring(useMotionValue(targetTop), springConfig);
 
 	useEffect(() => {
-		x.set(left);
-		y.set(top);
-	}, [left, top, x, y]);
+		x.set(targetLeft);
+		y.set(targetTop);
+	}, [targetLeft, targetTop, x, y]);
 
 	return (
 		<motion.div
-			className="pointer-events-auto fixed z-50 hidden md:block"
+			className="pointer-events-auto fixed z-[100]"
 			style={{
 				x,
 				y,
@@ -111,9 +109,9 @@ function HoverCardShell({
 				left: 0,
 				top: 0,
 			}}
-			initial={{ opacity: 0, scale: 0.95, x: left - 10 }}
-			animate={{ opacity: 1, scale: 1, x: left }}
-			exit={{ opacity: 0, scale: 0.95, x: left - 10 }}
+			initial={{ opacity: 0, scale: 0.95 }}
+			animate={{ opacity: 1, scale: 1 }}
+			exit={{ opacity: 0, scale: 0.95 }}
 			transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
@@ -122,7 +120,7 @@ function HoverCardShell({
 				<div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40">
 					<img src={demo} alt="Demo" className="h-full w-full object-contain" />
 					<div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3 pt-10">
-						<p className="font-sans text-sm font-bold text-white drop-shadow-md">
+						<p className="font-serif text-sm font-bold text-white drop-shadow-md">
 							{name} <span className="text-fd-primary/90 ml-1">— 動作示範</span>
 						</p>
 					</div>

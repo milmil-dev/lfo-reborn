@@ -7,8 +7,10 @@ import { DocsBody, DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/layo
 import { Suspense, useEffect } from "react";
 import { BeastCard } from "@/components/beast-card";
 import { CharacterStandCard } from "@/components/character-stand-card";
+import { DocsIndex } from "@/components/docs-index";
 import { GiscusComments } from "@/components/giscus-comments";
-import { ItemsIndex, ItemsTable } from "@/components/items-table";
+import { GitHubChangelog } from "@/components/github-changelog";
+import { ItemsGrid, ItemsIndex } from "@/components/items-table";
 import { getMDXComponents } from "@/components/mdx";
 import {
 	MISSION_VERSIONS,
@@ -67,6 +69,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
 		const isBeastPage = path.includes("/beast/") && depth >= 2;
 		const isItemsIndex = path.endsWith("/items") || path.endsWith("/items/");
 		const isItemPage = path.includes("/items/") && depth >= 2;
+		const isDocsIndex = path === "/docs" || path === "/docs/";
 		const isPlotLanding = path.endsWith("/plot") || path.endsWith("/plot/");
 		const isPlotIndex =
 			path.endsWith("/plot/story") ||
@@ -80,6 +83,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
 			frontmatter.description?.startsWith("角色資料") ||
 			frontmatter.description?.startsWith("兇獸檔案") ||
 			isPlotPage;
+		const isUpdatePage = path.endsWith("/update") || path.endsWith("/update/");
 		const isStoryIndex = path.endsWith("/plot/story") || path.endsWith("/plot/story/");
 		const isMissionIndex = path.endsWith("/plot/mission") || path.endsWith("/plot/mission/");
 
@@ -88,21 +92,25 @@ const clientLoader = browserCollections.docs.createClientLoader({
 
 		return (
 			<DocsPage
-				toc={isPlotPage ? undefined : (plotToc ?? toc)}
-				tableOfContent={{ style: "clerk" }}
+				toc={isDocsIndex || isPlotPage ? undefined : (plotToc ?? toc)}
+				tableOfContent={isDocsIndex ? { enabled: false } : { style: "clerk" }}
 				breadcrumb={depth > 1 ? { includePage: true } : { enabled: false }}
 			>
-				{!hideTitle && <DocsTitle>{frontmatter.title}</DocsTitle>}
-				{!hideTitle && <DocsDescription>{frontmatter.description}</DocsDescription>}
+				{!hideTitle && !isDocsIndex && <DocsTitle>{frontmatter.title ?? ""}</DocsTitle>}
+				{!hideTitle && !isDocsIndex && (
+					<DocsDescription>{frontmatter.description ?? ""}</DocsDescription>
+				)}
+				{isDocsIndex && <DocsIndex />}
 				{isCharacterPage && <CharacterStandCard />}
 				{isBeastPage && <BeastCard />}
 				{isItemsIndex && <ItemsIndex />}
-				{isItemPage && <ItemsTable />}
+				{isItemPage && <ItemsGrid />}
 				{isPlotLanding && <PlotLanding />}
 				{isPlotPage && <PlotDetail />}
-				{!isPlotPage && (
+				{!isPlotPage && !isDocsIndex && (
 					<DocsBody>
 						<MDX components={getMDXComponents()} />
+						{isUpdatePage && <GitHubChangelog />}
 						{isPlotIndex && <PlotIndex />}
 					</DocsBody>
 				)}
@@ -136,8 +144,9 @@ function DocsPageSkeleton() {
 	);
 }
 
-function useCharacterTheme(path: string) {
+function useCharacterTheme(path: string | undefined) {
 	useEffect(() => {
+		if (!path) return;
 		// Match character slug from path or URL
 		const match =
 			path.match(/character\/([^/]+?)(?:\/r)?$/) ??

@@ -7,15 +7,18 @@ import {
 	Footprints,
 	Heart,
 	Info,
+	Search,
 	Shield,
+	SlidersHorizontal,
 	Sparkles,
 	Sword,
 	Wand2,
 	Wrench,
+	X,
 	Zap,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import itemsData from "@/data/items.json";
 import { cn } from "@/lib/utils";
 import { ItemHoverCardProvider, useItemHoverCard } from "./item-hover-card";
@@ -331,19 +334,140 @@ function ItemCard({ item }: { item: Item }) {
 export function ItemsGrid() {
 	const path = typeof window !== "undefined" ? window.location.pathname : "";
 	const match = path.match(/\/docs\/items\/([^/]+)$/);
-	if (!match) return null;
-
-	const slug = match[1];
+	const slug = match ? match[1] : null;
 	const categoryData = itemsData as unknown as Record<string, Category>;
-	if (!slug || !categoryData[slug]) return null;
-	const data = categoryData[slug];
+	const data = slug ? categoryData[slug] : null;
+
+	const [searchQuery, setSearchQuery] = useState("");
+	const [selectedMaterial, setSelectedMaterial] = useState<string | null>(null);
+
+	const materials = useMemo(() => {
+		if (!data) return [];
+		const unique = new Set<string>();
+		for (const item of data.items) {
+			if (item.material) unique.add(item.material);
+		}
+		return Array.from(unique).sort();
+	}, [data]);
+
+	const filteredItems = useMemo(() => {
+		if (!data) return [];
+		return data.items.filter((item) => {
+			const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
+			const matchesMaterial = !selectedMaterial || item.material === selectedMaterial;
+			return matchesSearch && matchesMaterial;
+		});
+	}, [data, searchQuery, selectedMaterial]);
+
+	if (!data) return null;
 
 	return (
 		<ItemHoverCardProvider>
-			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-				{data.items.map((item: Item) => (
-					<ItemCard key={`${item.name}-${item.price}-${item.durability}`} item={item} />
-				))}
+			<div className="space-y-6">
+				{/* Filter Toolbar */}
+				<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between sticky top-[var(--fd-banner-height,0)] z-40 bg-fd-background/80 backdrop-blur-md py-4 border-b border-fd-border/50">
+					<div className="relative flex-1 max-w-sm">
+						<Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-fd-muted-foreground" />
+						<input
+							type="text"
+							placeholder="搜尋道具名稱..."
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
+							className="h-10 w-full rounded-full border border-fd-border bg-fd-muted/50 pl-10 pr-4 text-sm transition-all focus:border-fd-primary focus:bg-fd-background focus:outline-none focus:ring-2 focus:ring-fd-primary/20"
+						/>
+						{searchQuery && (
+							<button
+								type="button"
+								onClick={() => setSearchQuery("")}
+								className="absolute right-3 top-1/2 -translate-y-1/2 text-fd-muted-foreground hover:text-fd-foreground"
+							>
+								<X className="h-4 w-4" />
+							</button>
+						)}
+					</div>
+
+					<div className="flex flex-wrap items-center gap-2">
+						<div className="flex items-center gap-2 mr-2 text-fd-muted-foreground">
+							<SlidersHorizontal className="h-4 w-4" />
+							<span className="text-xs font-bold uppercase tracking-widest">材質篩選</span>
+						</div>
+
+						<button
+							type="button"
+							onClick={() => setSelectedMaterial(null)}
+							className={cn(
+								"rounded-full px-4 py-1.5 text-xs font-bold transition-all",
+								!selectedMaterial
+									? "bg-fd-primary text-fd-primary-foreground shadow-lg shadow-fd-primary/20"
+									: "bg-fd-muted text-fd-muted-foreground hover:bg-fd-accent hover:text-fd-accent-foreground",
+							)}
+						>
+							全部
+						</button>
+
+						{materials.map((m) => {
+							const meta = MATERIAL_META[m];
+							return (
+								<button
+									key={m}
+									type="button"
+									onClick={() => setSelectedMaterial(selectedMaterial === m ? null : m)}
+									className={cn(
+										"rounded-full px-4 py-1.5 text-xs font-bold transition-all border",
+										selectedMaterial === m
+											? meta?.badge ||
+													"bg-fd-primary text-fd-primary-foreground border-fd-primary shadow-lg shadow-fd-primary/20"
+											: "bg-fd-muted/50 text-fd-muted-foreground border-transparent hover:bg-fd-accent hover:text-fd-accent-foreground",
+									)}
+								>
+									{m}
+								</button>
+							);
+						})}
+					</div>
+				</div>
+
+				{/* Results Stats */}
+				<div className="flex items-center justify-between px-1 text-xs font-medium text-fd-muted-foreground">
+					<span>找到 {filteredItems.length} 個道具</span>
+					{(searchQuery || selectedMaterial) && (
+						<button
+							type="button"
+							onClick={() => {
+								setSearchQuery("");
+								setSelectedMaterial(null);
+							}}
+							className="font-bold text-fd-primary hover:underline"
+						>
+							重設篩選
+						</button>
+					)}
+				</div>
+
+				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+					<AnimatePresence mode="popLayout">
+						{filteredItems.map((item: Item) => (
+							<motion.div
+								layout
+								key={`${item.name}-${item.price}-${item.durability}`}
+								initial={{ opacity: 0, scale: 0.9 }}
+								animate={{ opacity: 1, scale: 1 }}
+								exit={{ opacity: 0, scale: 0.9 }}
+								transition={{ duration: 0.2 }}
+							>
+								<ItemCard item={item} />
+							</motion.div>
+						))}
+					</AnimatePresence>
+				</div>
+
+				{filteredItems.length === 0 && (
+					<div className="flex flex-col items-center justify-center py-20 text-fd-muted-foreground">
+						<Search className="mb-4 h-12 w-12 opacity-20" />
+						<p className="font-serif text-lg">找不到符合條件的道具</p>
+						<p className="text-sm opacity-60">請嘗試不同的關鍵字或篩選條件</p>
+					</div>
+				)}
 			</div>
 		</ItemHoverCardProvider>
 	);
@@ -371,7 +495,7 @@ export function ItemsIndex() {
 						{/* Sample item images as grid mosaic */}
 						<div className="relative h-16 w-16 shrink-0 shadow-inner">
 							{sampleImages.length >= 4 ? (
-								<div className="grid h-16 w-16 grid-cols-2 gap-1 rounded-xl overflow-hidden bg-fd-muted/30 p-1">
+								<div className="grid h-16 w-16 grid-cols-2 gap-1 overflow-hidden rounded-xl bg-fd-muted/30 p-1">
 									{sampleImages.slice(0, 4).map((src) => (
 										<img
 											key={src}
@@ -383,7 +507,7 @@ export function ItemsIndex() {
 									))}
 								</div>
 							) : sampleImages[0] ? (
-								<div className="flex h-16 w-16 items-center justify-center rounded-xl bg-fd-muted/30 border border-fd-border/30">
+								<div className="flex h-16 w-16 items-center justify-center rounded-xl border border-fd-border/30 bg-fd-muted/30">
 									<img
 										src={sampleImages[0]}
 										alt=""
@@ -392,7 +516,7 @@ export function ItemsIndex() {
 									/>
 								</div>
 							) : (
-								<div className="flex h-16 w-16 items-center justify-center rounded-xl bg-fd-muted border border-fd-border/30 text-fd-muted-foreground/30 font-serif">
+								<div className="flex h-16 w-16 items-center justify-center rounded-xl border border-fd-border/30 bg-fd-muted text-fd-muted-foreground/30 font-serif">
 									<span className="text-2xl">?</span>
 								</div>
 							)}
@@ -407,14 +531,14 @@ export function ItemsIndex() {
 									{data.items.length} 項目
 								</span>
 								<div className="h-1 w-1 rounded-full bg-fd-muted-foreground/30" />
-								<span className="text-[10px] text-fd-muted-foreground uppercase tracking-widest font-medium">
+								<span className="text-[10px] font-medium uppercase tracking-widest text-fd-muted-foreground">
 									Explore
 								</span>
 							</div>
 						</div>
 
-						<div className="flex h-8 w-8 items-center justify-center rounded-full bg-fd-muted/50 group-hover:bg-fd-primary/10 transition-colors">
-							<ExternalLink className="h-4 w-4 text-fd-muted-foreground/40 group-hover:text-fd-primary transition-all" />
+						<div className="flex h-8 w-8 items-center justify-center rounded-full bg-fd-muted/50 transition-colors group-hover:bg-fd-primary/10">
+							<ExternalLink className="h-4 w-4 text-fd-muted-foreground/40 transition-all group-hover:text-fd-primary" />
 						</div>
 					</motion.a>
 				);
