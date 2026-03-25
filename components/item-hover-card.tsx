@@ -116,7 +116,7 @@ function HoverCardShell({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 		>
-			<div className="relative overflow-hidden rounded-2xl border border-fd-primary/30 bg-fd-card/95 p-1 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(var(--primary),0.1)] backdrop-blur-md">
+			<div className="relative overflow-hidden rounded-2xl border border-fd-primary/35 bg-fd-card/95 p-1 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(var(--primary),0.1)] backdrop-blur-md">
 				<div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40">
 					<img src={demo} alt="Demo" className="h-full w-full object-contain" />
 					<div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3 pt-10">
