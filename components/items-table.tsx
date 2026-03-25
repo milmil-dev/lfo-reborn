@@ -14,7 +14,7 @@ import {
 	Wrench,
 	Zap,
 } from "lucide-react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useRef, useState } from "react";
 import itemsData from "@/data/items.json";
 import { cn } from "@/lib/utils";
@@ -166,6 +166,20 @@ function ItemCard({ item }: { item: Item }) {
 						<span className="text-xl text-fd-muted-foreground/30 font-serif">?</span>
 					</div>
 				)}
+
+				{/* GIF Demo Overlay (Mobile fallback) */}
+				<AnimatePresence>
+					{hovered && item.demo && (
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px] md:hidden"
+						>
+							<img src={item.demo} alt="Demo" className="h-full w-full object-contain p-2" />
+						</motion.div>
+					)}
+				</AnimatePresence>
 
 				{/* Material/Type badges (floating) */}
 				<div className="absolute left-2 top-2 flex flex-col gap-1 z-10">

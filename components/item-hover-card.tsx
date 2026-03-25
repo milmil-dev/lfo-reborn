@@ -1,6 +1,14 @@
 import { Wand2 } from "lucide-react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
-import { createContext, type ReactNode, useCallback, useContext, useRef, useState } from "react";
+import {
+	createContext,
+	type ReactNode,
+	useCallback,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 
 interface HoverState {
 	name: string;
@@ -35,7 +43,6 @@ export function ItemHoverCardProvider({ children }: { children: ReactNode }) {
 	const hide = useCallback(() => {
 		timeoutRef.current = setTimeout(() => {
 			setVisible(false);
-			// Clear hover data after exit animation
 			setTimeout(() => setHover(null), 200);
 		}, 150);
 	}, []);
@@ -68,42 +75,45 @@ function HoverCardShell({
 	onMouseLeave: () => void;
 }) {
 	const { name, demo, rect } = hover;
+	const cardWidth = 320;
+	const gap = 16;
 
-	const cardWidth = 280;
-	const gap = 12;
+	// Position logic
+	let left = rect.right + gap;
+	let top = rect.top + rect.height / 2 - 100;
 
-	let left = rect.left + rect.width / 2 - cardWidth / 2;
-	left = Math.max(12, Math.min(left, window.innerWidth - cardWidth - 12));
+	// Boundary check: Right to Left flip
+	if (typeof window !== "undefined") {
+		if (left + cardWidth > window.innerWidth - 20) {
+			left = rect.left - cardWidth - gap;
+		}
+		if (left < 20) {
+			left = rect.right + gap;
+		}
+		top = Math.max(80, Math.min(top, window.innerHeight - 250));
+	}
 
-	const spaceAbove = rect.top;
-	const positionAbove = spaceAbove > 220;
-
-	const targetTop = positionAbove ? undefined : rect.bottom + gap;
-	const targetBottom = positionAbove ? window.innerHeight - rect.top + gap : undefined;
-
-	// Smooth position springs
 	const x = useSpring(useMotionValue(left), springConfig);
-	x.set(left);
+	const y = useSpring(useMotionValue(top), springConfig);
 
-	const topSpring = useSpring(useMotionValue(targetTop ?? 0), springConfig);
-	if (targetTop !== undefined) topSpring.set(targetTop);
-
-	const bottomSpring = useSpring(useMotionValue(targetBottom ?? 0), springConfig);
-	if (targetBottom !== undefined) bottomSpring.set(targetBottom);
+	useEffect(() => {
+		x.set(left);
+		y.set(top);
+	}, [left, top, x, y]);
 
 	return (
 		<motion.div
-			className="pointer-events-auto fixed z-50"
+			className="pointer-events-auto fixed z-50 hidden md:block"
 			style={{
 				x,
-				top: positionAbove ? undefined : topSpring,
-				bottom: positionAbove ? bottomSpring : undefined,
+				y,
 				width: cardWidth,
 				left: 0,
+				top: 0,
 			}}
-			initial={{ opacity: 0, scale: 0.95, y: positionAbove ? 10 : -10 }}
-			animate={{ opacity: 1, scale: 1, y: 0 }}
-			exit={{ opacity: 0, scale: 0.95, y: positionAbove ? 10 : -10 }}
+			initial={{ opacity: 0, scale: 0.95, x: left - 10 }}
+			animate={{ opacity: 1, scale: 1, x: left }}
+			exit={{ opacity: 0, scale: 0.95, x: left - 10 }}
 			transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
@@ -117,7 +127,6 @@ function HoverCardShell({
 						</p>
 					</div>
 				</div>
-				{/* Footer Info */}
 				<div className="flex items-center justify-between px-3 py-2 text-[10px] font-bold tracking-widest text-fd-muted-foreground uppercase opacity-80">
 					<div className="flex items-center gap-1.5 text-fd-primary">
 						<Wand2 className="h-3 w-3 animate-pulse" />
