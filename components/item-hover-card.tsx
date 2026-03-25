@@ -120,12 +120,12 @@ function HoverCardShell({
 				<div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40">
 					<img src={demo} alt="Demo" className="h-full w-full object-contain" />
 					<div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3 pt-10">
-						<p className="font-serif text-sm font-bold text-white drop-shadow-md">
+						<p className="font-sans text-sm font-bold text-white drop-shadow-md">
 							{name} <span className="text-fd-primary/90 ml-1">— 動作示範</span>
 						</p>
 					</div>
 				</div>
-				<div className="flex items-center justify-between px-3 py-2 text-[10px] font-bold tracking-widest text-fd-muted-foreground uppercase opacity-80">
+				<div className="flex items-center justify-between px-3 py-2 text-[10px] font-bold tracking-widest text-fd-muted-foreground uppercase opacity-80 font-sans">
 					<div className="flex items-center gap-1.5 text-fd-primary">
 						<Wand2 className="h-3 w-3 animate-pulse" />
 						<span>Live Preview</span>

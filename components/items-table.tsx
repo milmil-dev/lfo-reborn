@@ -113,6 +113,10 @@ function ItemCard({ item }: { item: Item }) {
 	const bonusEntries = Object.entries(item.stats ?? {}).filter(([, v]) => v && v !== "--");
 	const reqEntries = Object.entries(item.requirements ?? {}).filter(([, v]) => v && v !== "--");
 
+	// Clean up description if it just repeats the name
+	const displayDescription =
+		item.description && item.description !== item.name ? item.description : null;
+
 	const handleMouseEnter = useCallback(() => {
 		setHovered(true);
 		if (item.demo && containerRef.current) {
@@ -131,17 +135,17 @@ function ItemCard({ item }: { item: Item }) {
 			initial={{ opacity: 0, y: 10 }}
 			animate={{ opacity: 1, y: 0 }}
 			className={cn(
-				"group relative flex flex-col rounded-xl border border-fd-border bg-fd-card/50 backdrop-blur-sm transition-all duration-300",
-				"hover:border-fd-primary/50 hover:shadow-2xl hover:shadow-fd-primary/5 hover:-translate-y-1",
+				"group relative flex flex-col rounded-2xl border border-fd-border bg-fd-card/40 backdrop-blur-sm transition-all duration-500 hover:z-10",
+				"hover:border-fd-primary/40 hover:shadow-[0_0_40px_rgba(var(--primary),0.05)] hover:-translate-y-1.5",
 				isRare &&
-					"border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:border-amber-500/60",
+					"border-amber-500/20 shadow-[0_0_20px_rgba(245,158,11,0.03)] hover:border-amber-500/50 hover:shadow-[0_0_30px_rgba(245,158,11,0.1)]",
 			)}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
 			{/* Rare highlight ribbon */}
 			{isRare && (
-				<div className="absolute -right-6 top-1 z-10 w-24 rotate-45 bg-amber-500/20 py-0.5 text-center text-[8px] font-bold tracking-tighter text-amber-500 backdrop-blur-md border-y border-amber-500/30">
+				<div className="absolute -right-6 top-2 z-20 w-24 rotate-45 border-y border-amber-500/30 bg-amber-500/10 py-0.5 text-center text-[8px] font-black tracking-tighter text-amber-500 backdrop-blur-md">
 					RARE
 				</div>
 			)}
@@ -149,24 +153,24 @@ function ItemCard({ item }: { item: Item }) {
 			{/* Image area */}
 			<div
 				ref={containerRef}
-				className="relative flex h-28 w-full items-center justify-center overflow-hidden border-b border-fd-border/30"
+				className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-t-2xl border-b border-fd-border/30 bg-fd-muted/20"
 				style={{
-					background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 80%), hsl(var(--fd-muted) / 0.4)`,
+					background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)`,
 				}}
 			>
 				{item.image && !imgError ? (
 					<motion.img
 						src={item.image}
 						alt={item.name}
-						animate={hovered ? { scale: 1.15, rotate: 2 } : { scale: 1, rotate: 0 }}
-						transition={{ type: "spring", stiffness: 300, damping: 20 }}
-						className="h-16 w-16 object-contain drop-shadow-[0_0_8px_rgba(0,0,0,0.5)]"
+						animate={hovered ? { scale: 1.1, y: -5 } : { scale: 1, y: 0 }}
+						transition={{ type: "spring", stiffness: 200, damping: 25 }}
+						className="h-24 w-24 object-contain drop-shadow-[0_0_15px_rgba(0,0,0,0.6)]"
 						onError={() => setImgError(true)}
 						loading="lazy"
 					/>
 				) : (
-					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-fd-muted/50 border border-fd-border/30">
-						<span className="text-xl text-fd-muted-foreground/30 font-serif">?</span>
+					<div className="flex h-16 w-16 items-center justify-center rounded-full border border-fd-border/30 bg-fd-muted/50">
+						<span className="font-serif text-2xl text-fd-muted-foreground/20">?</span>
 					</div>
 				)}
 
@@ -177,19 +181,19 @@ function ItemCard({ item }: { item: Item }) {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
-							className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px] md:hidden"
+							className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 backdrop-blur-[2px] md:hidden"
 						>
-							<img src={item.demo} alt="Demo" className="h-full w-full object-contain p-2" />
+							<img src={item.demo} alt="Demo" className="h-full w-full object-contain p-4" />
 						</motion.div>
 					)}
 				</AnimatePresence>
 
-				{/* Material/Type badges (floating) */}
-				<div className="absolute left-2 top-2 flex flex-col gap-1 z-10">
+				{/* Top Badges */}
+				<div className="absolute left-3 top-3 z-20 flex flex-col gap-1.5">
 					{meta && (
 						<span
 							className={cn(
-								"rounded-sm border px-1.5 py-0.5 text-[9px] font-bold tracking-tight backdrop-blur-md shadow-sm",
+								"rounded-md border px-2 py-0.5 text-[10px] font-black tracking-wide backdrop-blur-md shadow-lg",
 								meta.badge,
 							)}
 						>
@@ -197,7 +201,8 @@ function ItemCard({ item }: { item: Item }) {
 						</span>
 					)}
 					{item.demo && (
-						<span className="rounded-sm border border-fd-primary/30 bg-fd-primary/10 px-1.5 py-0.5 text-[8px] font-bold tracking-widest text-fd-primary backdrop-blur-md shadow-sm uppercase">
+						<span className="flex items-center gap-1 rounded-md border border-fd-primary/30 bg-fd-primary/10 px-2 py-0.5 text-[8px] font-black tracking-widest text-fd-primary backdrop-blur-md shadow-lg uppercase">
+							<div className="h-1 w-1 animate-pulse rounded-full bg-fd-primary" />
 							Demo
 						</span>
 					)}
@@ -205,125 +210,127 @@ function ItemCard({ item }: { item: Item }) {
 			</div>
 
 			{/* Body */}
-			<div className="flex flex-1 flex-col gap-2.5 p-3">
-				{/* Name */}
-				<div className="space-y-0.5">
+			<div className="flex flex-1 flex-col gap-3 p-4">
+				{/* Header: Name + Price */}
+				<div className="flex items-start justify-between gap-2">
 					<h4
 						className={cn(
-							"line-clamp-2 min-h-[2.5rem] font-sans text-[13px] font-bold leading-tight text-fd-foreground",
+							"font-sans text-[15px] font-black leading-tight tracking-tight text-fd-foreground",
 							isRare && "text-amber-100 group-hover:text-amber-400 transition-colors",
 						)}
 					>
 						{item.name}
 					</h4>
+					{item.price != null && (
+						<div className="flex shrink-0 items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5">
+							<Coins className="h-3 w-3 text-amber-500" />
+							<span className="font-mono text-xs font-bold text-amber-500">
+								{item.price.toLocaleString()}
+							</span>
+						</div>
+					)}
 				</div>
 
 				{/* Description / Lore */}
-				{item.description && (
-					<div className="relative">
-						<div className="absolute -left-1.5 top-0 bottom-0 w-0.5 bg-fd-primary/20 rounded-full" />
-						<p className="text-[10.5px] italic leading-relaxed text-fd-muted-foreground/80 line-clamp-3">
-							{item.description}
-						</p>
-					</div>
+				{displayDescription && (
+					<p className="border-l-2 border-fd-primary/30 pl-3 text-[11px] font-medium leading-relaxed text-fd-muted-foreground/80">
+						{displayDescription}
+					</p>
 				)}
 
-				{/* Special Effect */}
+				{/* Special Effect - Modernized */}
 				{item.effect && (
-					<div className="flex items-start gap-1.5 rounded-lg border border-fd-primary/20 bg-fd-primary/5 p-2">
-						<Wand2 className="h-3 w-3 shrink-0 text-fd-primary mt-0.5" />
-						<div className="space-y-0.5">
-							<p className="text-[10px] font-bold uppercase tracking-wider text-fd-primary/80">
-								特效能力
-							</p>
-							<p className="text-[10.5px] leading-snug text-fd-foreground/90 font-medium">
-								{item.effect}
-							</p>
-							{item.consumption && (
-								<p className="text-[9px] text-fd-muted-foreground italic">
-									消耗: {item.consumption}
+					<div className="group/effect relative overflow-hidden rounded-xl border border-fd-primary/10 bg-fd-primary/5 p-3 transition-colors hover:border-fd-primary/30">
+						<div className="relative z-10 flex items-start gap-2.5">
+							<div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-fd-primary/10 text-fd-primary shadow-inner">
+								<Wand2 className="h-3.5 w-3.5" />
+							</div>
+							<div className="space-y-1">
+								<p className="text-[10px] font-black uppercase tracking-[0.1em] text-fd-primary/60">
+									特效能力
 								</p>
-							)}
+								<p className="text-[11.5px] font-bold leading-snug text-fd-foreground/90">
+									{item.effect}
+								</p>
+								{item.consumption && (
+									<p className="flex items-center gap-1 text-[10px] font-medium text-fd-muted-foreground/70 italic">
+										<Zap className="h-2.5 w-2.5" /> 消耗: {item.consumption}
+									</p>
+								)}
+							</div>
 						</div>
+						{/* Background decorative glow */}
+						<div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-fd-primary/5 blur-2xl transition-all group-hover/effect:bg-fd-primary/10" />
 					</div>
 				)}
 
-				{/* Bonus stats */}
-				{bonusEntries.length > 0 && (
-					<div className="space-y-1.5">
-						<div className="flex items-center gap-1 opacity-50">
-							<div className="h-px flex-1 bg-fd-border" />
-							<span className="text-[8px] font-bold uppercase tracking-widest">數值加成</span>
-							<div className="h-px flex-1 bg-fd-border" />
-						</div>
-						<div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
-							{bonusEntries.map(([key, value]) => {
-								const config = STAT_CONFIG[key];
-								const Icon = config?.icon ?? Info;
-								const isPos = value.startsWith("+");
-								const isNeg = value.startsWith("-");
-								const valColor = isPos
-									? "text-emerald-400"
-									: isNeg
-										? "text-rose-400"
-										: "text-fd-muted-foreground";
+				{/* Stats Grid - Cleaner */}
+				{(bonusEntries.length > 0 || item.durability != null) && (
+					<div className="mt-1 flex flex-col gap-2">
+						{bonusEntries.length > 0 && (
+							<div className="grid grid-cols-2 gap-2">
+								{bonusEntries.map(([key, value]) => {
+									const config = STAT_CONFIG[key];
+									const Icon = config?.icon ?? Info;
+									const isPos = value.startsWith("+");
+									const isNeg = value.startsWith("-");
+									const valColor = isPos
+										? "text-emerald-400"
+										: isNeg
+											? "text-rose-400"
+											: "text-fd-foreground";
 
-								return (
-									<div key={key} className="flex items-center justify-between gap-1 group/stat">
-										<div className="flex items-center gap-1.5">
-											<Icon
-												className={cn("h-3 w-3", config?.color ?? "text-fd-muted-foreground")}
-											/>
-											<span className="text-[10px] font-medium text-fd-muted-foreground/70 uppercase">
-												{config?.label ?? key}
-											</span>
+									return (
+										<div
+											key={key}
+											className="flex items-center justify-between rounded-lg border border-fd-border/50 bg-fd-muted/30 px-2.5 py-1.5 shadow-sm"
+										>
+											<div className="flex items-center gap-2">
+												<Icon
+													className={cn("h-3 w-3", config?.color ?? "text-fd-muted-foreground")}
+												/>
+												<span className="text-[9px] font-black uppercase tracking-wider text-fd-muted-foreground/80">
+													{config?.label ?? key}
+												</span>
+											</div>
+											<span className={cn("font-mono text-xs font-black", valColor)}>{value}</span>
 										</div>
-										<span className={cn("font-mono text-[10px] font-bold", valColor)}>{value}</span>
-									</div>
-								);
-							})}
-						</div>
-					</div>
-				)}
+									);
+								})}
+							</div>
+						)}
 
-				{/* Requirements */}
-				{reqEntries.length > 0 && (
-					<div className="mt-1 rounded-md bg-fd-muted/30 p-1.5 border border-fd-border/30">
-						<p className="mb-1 text-[8px] font-bold uppercase tracking-widest text-fd-muted-foreground/40">
-							使用需求
-						</p>
-						<div className="flex flex-wrap gap-x-3 gap-y-0.5">
-							{reqEntries.map(([key, value]) => (
-								<div key={key} className="flex items-center gap-1">
-									<span className="text-[9px] text-fd-muted-foreground/60">{key}:</span>
-									<span className="font-mono text-[9px] font-bold text-fd-foreground/80">
-										{value}
-									</span>
+						{/* Durability as a bar or badge */}
+						{item.durability != null && (
+							<div className="flex items-center justify-between rounded-lg border border-fd-border/50 bg-fd-muted/30 px-2.5 py-1.5">
+								<div className="flex items-center gap-2 text-fd-muted-foreground/80">
+									<Wrench className="h-3 w-3" />
+									<span className="text-[9px] font-black uppercase tracking-wider">Durability</span>
 								</div>
-							))}
-						</div>
-					</div>
-				)}
-
-				{/* Footer: price + durability */}
-				{(item.price != null || item.durability != null) && (
-					<div className="mt-auto flex items-center justify-between border-t border-fd-border/30 pt-2.5 text-[11px]">
-						{item.price != null ? (
-							<div className="flex items-center gap-1">
-								<Coins className="h-3 w-3 text-amber-500/70" />
-								<span className="font-mono font-bold text-amber-500">
-									{item.price.toLocaleString()}
+								<span className="font-mono text-xs font-black text-fd-foreground">
+									{item.durability}
 								</span>
 							</div>
-						) : (
-							<div />
 						)}
-						{item.durability != null && (
-							<div className="flex items-center gap-1 text-fd-muted-foreground/60">
-								<Wrench className="h-2.5 w-2.5" />
-								<span className="text-[10px] font-medium">{item.durability}</span>
+					</div>
+				)}
+
+				{/* Requirements - Minimalist */}
+				{reqEntries.length > 0 && (
+					<div className="mt-1 flex flex-wrap gap-2">
+						{reqEntries.map(([key, value]) => (
+							<div
+								key={key}
+								className="flex items-center gap-1.5 rounded-md border border-fd-border/50 bg-fd-muted/20 px-2 py-1"
+							>
+								<span className="text-[9px] font-black uppercase tracking-tighter text-fd-muted-foreground/60">
+									{key}
+								</span>
+								<span className="font-mono text-[10px] font-black text-fd-foreground/70">
+									{value}
+								</span>
 							</div>
-						)}
+						))}
 					</div>
 				)}
 			</div>
@@ -363,88 +370,94 @@ export function ItemsGrid() {
 
 	return (
 		<ItemHoverCardProvider>
-			<div className="space-y-6">
-				{/* Filter Toolbar */}
-				<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between sticky top-[var(--fd-banner-height,0)] z-40 bg-fd-background/80 backdrop-blur-md py-4 border-b border-fd-border/50">
-					<div className="relative flex-1 max-w-sm">
-						<Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-fd-muted-foreground" />
-						<input
-							type="text"
-							placeholder="搜尋道具名稱..."
-							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)}
-							className="h-10 w-full rounded-full border border-fd-border bg-fd-muted/50 pl-10 pr-4 text-sm transition-all focus:border-fd-primary focus:bg-fd-background focus:outline-none focus:ring-2 focus:ring-fd-primary/20"
-						/>
-						{searchQuery && (
-							<button
-								type="button"
-								onClick={() => setSearchQuery("")}
-								className="absolute right-3 top-1/2 -translate-y-1/2 text-fd-muted-foreground hover:text-fd-foreground"
-							>
-								<X className="h-4 w-4" />
-							</button>
-						)}
-					</div>
-
-					<div className="flex flex-wrap items-center gap-2">
-						<div className="flex items-center gap-2 mr-2 text-fd-muted-foreground">
-							<SlidersHorizontal className="h-4 w-4" />
-							<span className="text-xs font-bold uppercase tracking-widest">材質篩選</span>
+			<div className="space-y-8">
+				{/* Filter Toolbar - Modern Museum Style */}
+				<div className="sticky top-[var(--fd-banner-height,0)] z-40 space-y-4 rounded-3xl border border-fd-border/50 bg-fd-background/60 py-6 backdrop-blur-xl transition-all md:px-6">
+					<div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+						{/* Search Field */}
+						<div className="relative group flex-1 max-w-md">
+							<Search className="absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-fd-muted-foreground transition-colors group-focus-within:text-fd-primary" />
+							<input
+								type="text"
+								placeholder="在收藏庫中搜尋道具..."
+								value={searchQuery}
+								onChange={(e) => setSearchQuery(e.target.value)}
+								className="h-12 w-full rounded-2xl border border-fd-border bg-fd-muted/30 pl-11 pr-10 text-[15px] font-medium transition-all focus:border-fd-primary/50 focus:bg-fd-background focus:outline-none focus:ring-4 focus:ring-fd-primary/5 shadow-inner"
+							/>
+							{searchQuery && (
+								<button
+									type="button"
+									onClick={() => setSearchQuery("")}
+									className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-1 text-fd-muted-foreground hover:bg-fd-muted hover:text-fd-foreground transition-all"
+								>
+									<X className="h-4 w-4" />
+								</button>
+							)}
 						</div>
 
-						<button
-							type="button"
-							onClick={() => setSelectedMaterial(null)}
-							className={cn(
-								"rounded-full px-4 py-1.5 text-xs font-bold transition-all",
-								!selectedMaterial
-									? "bg-fd-primary text-fd-primary-foreground shadow-lg shadow-fd-primary/20"
-									: "bg-fd-muted text-fd-muted-foreground hover:bg-fd-accent hover:text-fd-accent-foreground",
-							)}
-						>
-							全部
-						</button>
+						{/* Quick Results Counter */}
+						<div className="hidden lg:flex flex-col items-end gap-0.5 border-r border-fd-border/50 pr-8">
+							<span className="text-[10px] font-black uppercase tracking-[0.2em] text-fd-muted-foreground/50">
+								Current Collection
+							</span>
+							<span className="font-serif text-2xl font-black text-fd-foreground">
+								{filteredItems.length}{" "}
+								<span className="text-xs text-fd-muted-foreground/60">ITEMS</span>
+							</span>
+						</div>
+					</div>
 
-						{materials.map((m) => {
-							const meta = MATERIAL_META[m];
-							return (
-								<button
-									key={m}
-									type="button"
-									onClick={() => setSelectedMaterial(selectedMaterial === m ? null : m)}
-									className={cn(
-										"rounded-full px-4 py-1.5 text-xs font-bold transition-all border",
-										selectedMaterial === m
-											? meta?.badge ||
-													"bg-fd-primary text-fd-primary-foreground border-fd-primary shadow-lg shadow-fd-primary/20"
-											: "bg-fd-muted/50 text-fd-muted-foreground border-transparent hover:bg-fd-accent hover:text-fd-accent-foreground",
-									)}
-								>
-									{m}
-								</button>
-							);
-						})}
+					{/* Material Selector */}
+					<div className="flex flex-col gap-3">
+						<div className="flex items-center gap-3 px-1">
+							<div className="flex h-5 w-5 items-center justify-center rounded-md bg-fd-primary/10 text-fd-primary">
+								<SlidersHorizontal className="h-3 w-3" />
+							</div>
+							<span className="text-[10px] font-black uppercase tracking-[0.2em] text-fd-muted-foreground">
+								材質篩選庫
+							</span>
+						</div>
+
+						<div className="flex flex-wrap items-center gap-2">
+							<button
+								type="button"
+								onClick={() => setSelectedMaterial(null)}
+								className={cn(
+									"rounded-xl px-5 py-2 text-xs font-black transition-all border",
+									!selectedMaterial
+										? "bg-fd-primary text-fd-primary-foreground border-fd-primary shadow-[0_8px_20px_-6px_rgba(var(--primary),0.4)]"
+										: "bg-fd-muted/30 text-fd-muted-foreground border-fd-border/50 hover:border-fd-primary/30 hover:bg-fd-primary/5",
+								)}
+							>
+								全部典藏
+							</button>
+
+							{materials.map((m) => {
+								const meta = MATERIAL_META[m];
+								const isActive = selectedMaterial === m;
+								return (
+									<button
+										key={m}
+										type="button"
+										onClick={() => setSelectedMaterial(isActive ? null : m)}
+										className={cn(
+											"rounded-xl px-5 py-2 text-xs font-black transition-all border shadow-sm",
+											isActive
+												? meta?.badge ||
+														"bg-fd-primary text-fd-primary-foreground border-fd-primary"
+												: "bg-fd-muted/30 text-fd-muted-foreground border-fd-border/50 hover:border-fd-primary/30 hover:bg-fd-primary/5",
+										)}
+									>
+										{m}
+									</button>
+								);
+							})}
+						</div>
 					</div>
 				</div>
 
-				{/* Results Stats */}
-				<div className="flex items-center justify-between px-1 text-xs font-medium text-fd-muted-foreground">
-					<span>找到 {filteredItems.length} 個道具</span>
-					{(searchQuery || selectedMaterial) && (
-						<button
-							type="button"
-							onClick={() => {
-								setSearchQuery("");
-								setSelectedMaterial(null);
-							}}
-							className="font-bold text-fd-primary hover:underline"
-						>
-							重設篩選
-						</button>
-					)}
-				</div>
-
-				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+				{/* Grid Section */}
+				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 					<AnimatePresence mode="popLayout">
 						{filteredItems.map((item: Item) => (
 							<motion.div
@@ -453,7 +466,7 @@ export function ItemsGrid() {
 								initial={{ opacity: 0, scale: 0.9 }}
 								animate={{ opacity: 1, scale: 1 }}
 								exit={{ opacity: 0, scale: 0.9 }}
-								transition={{ duration: 0.2 }}
+								transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
 							>
 								<ItemCard item={item} />
 							</motion.div>
@@ -462,10 +475,31 @@ export function ItemsGrid() {
 				</div>
 
 				{filteredItems.length === 0 && (
-					<div className="flex flex-col items-center justify-center py-20 text-fd-muted-foreground">
-						<Search className="mb-4 h-12 w-12 opacity-20" />
-						<p className="font-serif text-lg">找不到符合條件的道具</p>
-						<p className="text-sm opacity-60">請嘗試不同的關鍵字或篩選條件</p>
+					<div className="flex flex-col items-center justify-center py-32 text-fd-muted-foreground">
+						<div className="relative mb-6">
+							<Search className="h-16 w-16 opacity-10" />
+							<motion.div
+								animate={{ scale: [1, 1.1, 1] }}
+								transition={{ duration: 2, repeat: Infinity }}
+								className="absolute -right-2 -top-2 h-4 w-4 rounded-full bg-fd-primary/20"
+							/>
+						</div>
+						<p className="font-serif text-xl font-black tracking-tight text-fd-foreground/80">
+							未發現匹配的道具
+						</p>
+						<p className="mt-2 text-[13px] font-medium opacity-60">
+							請嘗試調整您的篩選條件或關鍵字
+						</p>
+						<button
+							type="button"
+							onClick={() => {
+								setSearchQuery("");
+								setSelectedMaterial(null);
+							}}
+							className="mt-8 rounded-xl border border-fd-primary/30 px-6 py-2.5 text-xs font-black tracking-widest text-fd-primary transition-all hover:bg-fd-primary hover:text-fd-primary-foreground uppercase shadow-lg shadow-fd-primary/10"
+						>
+							重設所有篩選
+						</button>
 					</div>
 				)}
 			</div>
