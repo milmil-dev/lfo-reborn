@@ -135,8 +135,8 @@ function ItemCard({ item }: { item: Item }) {
 			initial={{ opacity: 0, y: 10 }}
 			animate={{ opacity: 1, y: 0 }}
 			className={cn(
-				"group relative flex flex-col rounded-2xl border border-fd-border bg-fd-card/40 backdrop-blur-sm transition-all duration-500 hover:z-10",
-				"hover:border-fd-primary/40 hover:shadow-[0_0_40px_rgba(var(--primary),0.05)] hover:-translate-y-1.5",
+				"group relative flex flex-col rounded-2xl border border-fd-border/45 bg-fd-card/75 backdrop-blur-md transition-all duration-500 hover:z-10",
+				"hover:border-fd-primary/45 hover:shadow-[0_18px_40px_rgba(0,0,0,0.22)] hover:-translate-y-1",
 				isRare &&
 					"border-amber-500/20 shadow-[0_0_20px_rgba(245,158,11,0.03)] hover:border-amber-500/50 hover:shadow-[0_0_30px_rgba(245,158,11,0.1)]",
 			)}
