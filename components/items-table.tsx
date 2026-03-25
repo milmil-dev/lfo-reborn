@@ -14,10 +14,11 @@ import {
 	Wrench,
 	Zap,
 } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
+import { motion } from "motion/react";
+import { useCallback, useRef, useState } from "react";
 import itemsData from "@/data/items.json";
 import { cn } from "@/lib/utils";
+import { ItemHoverCardProvider, useItemHoverCard } from "./item-hover-card";
 
 interface Item {
 	name: string;
@@ -99,6 +100,8 @@ const STAT_CONFIG: Record<string, { label: string; icon: LucideIcon; color: stri
 function ItemCard({ item }: { item: Item }) {
 	const [imgError, setImgError] = useState(false);
 	const [hovered, setHovered] = useState(false);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const { show, hide } = useItemHoverCard();
 
 	const isRare = item.name.includes("[稀有]");
 	const meta = item.material ? (MATERIAL_META[item.material] ?? null) : null;
@@ -107,19 +110,31 @@ function ItemCard({ item }: { item: Item }) {
 	const bonusEntries = Object.entries(item.stats ?? {}).filter(([, v]) => v && v !== "--");
 	const reqEntries = Object.entries(item.requirements ?? {}).filter(([, v]) => v && v !== "--");
 
+	const handleMouseEnter = useCallback(() => {
+		setHovered(true);
+		if (item.demo && containerRef.current) {
+			show(item.name, item.demo, containerRef.current.getBoundingClientRect());
+		}
+	}, [item.name, item.demo, show]);
+
+	const handleMouseLeave = useCallback(() => {
+		setHovered(false);
+		hide();
+	}, [hide]);
+
 	return (
 		<motion.div
 			layout
 			initial={{ opacity: 0, y: 10 }}
 			animate={{ opacity: 1, y: 0 }}
 			className={cn(
-				"group relative flex flex-col overflow-hidden rounded-xl border border-fd-border bg-fd-card/50 backdrop-blur-sm transition-all duration-300",
+				"group relative flex flex-col rounded-xl border border-fd-border bg-fd-card/50 backdrop-blur-sm transition-all duration-300",
 				"hover:border-fd-primary/50 hover:shadow-2xl hover:shadow-fd-primary/5 hover:-translate-y-1",
 				isRare &&
 					"border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:border-amber-500/60",
 			)}
-			onMouseEnter={() => setHovered(true)}
-			onMouseLeave={() => setHovered(false)}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
 		>
 			{/* Rare highlight ribbon */}
 			{isRare && (
@@ -130,6 +145,7 @@ function ItemCard({ item }: { item: Item }) {
 
 			{/* Image area */}
 			<div
+				ref={containerRef}
 				className="relative flex h-28 w-full items-center justify-center overflow-hidden border-b border-fd-border/30"
 				style={{
 					background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 80%), hsl(var(--fd-muted) / 0.4)`,
@@ -150,28 +166,6 @@ function ItemCard({ item }: { item: Item }) {
 						<span className="text-xl text-fd-muted-foreground/30 font-serif">?</span>
 					</div>
 				)}
-
-				{/* Demo hover overlay */}
-				<AnimatePresence>
-					{hovered && item.demo && (
-						<motion.a
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							href={item.demo}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px]"
-							onClick={(e) => e.stopPropagation()}
-						>
-							<img src={item.demo} alt="Demo" className="h-full w-full object-contain p-2" />
-							{/* Small indicator that it's clickable */}
-							<div className="absolute right-2 bottom-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white/80 backdrop-blur-sm transition-colors hover:bg-fd-primary hover:text-fd-primary-foreground">
-								<ExternalLink className="h-3 w-3" />
-							</div>
-						</motion.a>
-					)}
-				</AnimatePresence>
 
 				{/* Material/Type badges (floating) */}
 				<div className="absolute left-2 top-2 flex flex-col gap-1 z-10">
@@ -331,11 +325,13 @@ export function ItemsGrid() {
 	const data = categoryData[slug];
 
 	return (
-		<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-			{data.items.map((item: Item) => (
-				<ItemCard key={`${item.name}-${item.price}-${item.durability}`} item={item} />
-			))}
-		</div>
+		<ItemHoverCardProvider>
+			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+				{data.items.map((item: Item) => (
+					<ItemCard key={`${item.name}-${item.price}-${item.durability}`} item={item} />
+				))}
+			</div>
+		</ItemHoverCardProvider>
 	);
 }
 
