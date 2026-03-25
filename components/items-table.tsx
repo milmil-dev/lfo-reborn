@@ -207,7 +207,7 @@ function ItemCard({ item }: { item: Item }) {
 				<div className="space-y-0.5">
 					<h4
 						className={cn(
-							"line-clamp-2 min-h-[2.5rem] font-serif text-[13px] font-bold leading-tight text-fd-foreground",
+							"line-clamp-2 min-h-[2.5rem] font-sans text-[13px] font-bold leading-tight text-fd-foreground",
 							isRare && "text-amber-100 group-hover:text-amber-400 transition-colors",
 						)}
 					>
@@ -399,7 +399,7 @@ export function ItemsIndex() {
 						</div>
 
 						<div className="min-w-0 flex-1 space-y-1">
-							<h3 className="font-serif text-lg font-bold text-fd-foreground group-hover:text-fd-primary transition-colors">
+							<h3 className="font-sans text-lg font-bold text-fd-foreground group-hover:text-fd-primary transition-colors">
 								{data.title}
 							</h3>
 							<div className="flex items-center gap-2">
