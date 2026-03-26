@@ -14,16 +14,16 @@ interface BeastData {
 	images?: string[];
 }
 
-export function BeastCard() {
+export function BeastCard({ path }: { path: string }) {
 	const [data, setData] = useState<BeastData | null>(null);
 
 	useEffect(() => {
-		const slug = window.location.pathname.match(/\/docs\/beast\/([^/]+)$/)?.[1];
+		const slug = path.match(/\/docs\/beast\/([^/]+)$/)?.[1];
 		if (!slug) return;
 		const beast = (beastsData as Record<string, BeastData>)[slug];
 		if (!beast) return;
 		setData(beast);
-	}, []);
+	}, [path]);
 
 	if (!data) return null;
 

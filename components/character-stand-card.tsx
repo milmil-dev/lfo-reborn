@@ -180,12 +180,11 @@ function buildItems(char: any, transform: any, isTransform: boolean): CharacterI
 	return items;
 }
 
-export function CharacterStandCard() {
+export function CharacterStandCard({ path }: { path: string }) {
 	const [data, setData] = useState<CharacterData | null>(null);
 	const [showStats, setShowStats] = useState(false);
 
 	useEffect(() => {
-		const path = window.location.pathname;
 		const transformMatch = path.match(/\/docs\/character\/([^/]+)\/r$/);
 		const normalMatch = path.match(/\/docs\/character\/([^/]+)$/);
 		const isTransformPage = !!transformMatch;
@@ -198,60 +197,62 @@ export function CharacterStandCard() {
 		// The fumadocs IntersectionObserver already watches these MDX headings.
 		// By moving them next to the CharacterStandCard sections, the observer
 		// tracks the correct scroll positions for TOC highlighting.
-		const article = document.querySelector("article");
-		if (article) {
-			const docsTitle = article.querySelector(":scope > h1");
-			const docsDesc = article.querySelector(":scope > p");
-			if (docsTitle) (docsTitle as HTMLElement).style.display = "none";
-			if (docsDesc) (docsDesc as HTMLElement).style.display = "none";
+		if (typeof document !== "undefined") {
+			const article = document.querySelector("article");
+			if (article) {
+				const docsTitle = article.querySelector(":scope > h1");
+				const docsDesc = article.querySelector(":scope > p");
+				if (docsTitle) (docsTitle as HTMLElement).style.display = "none";
+				if (docsDesc) (docsDesc as HTMLElement).style.display = "none";
 
-			const proseBody =
-				article.querySelector("[class*='prose']") ?? article.querySelector("[class*='body']");
-			if (proseBody) {
-				// Collect MDX headings and build a map of CharacterStandCard targets
-				const mdxHeadings = Array.from(proseBody.querySelectorAll("h1[id], h2[id], h3[id]"));
-				const mdxIds = new Set(mdxHeadings.map((h) => h.id));
+				const proseBody =
+					article.querySelector("[class*='prose']") ?? article.querySelector("[class*='body']");
+				if (proseBody) {
+					// Collect MDX headings and build a map of CharacterStandCard targets
+					const mdxHeadings = Array.from(proseBody.querySelectorAll("h1[id], h2[id], h3[id]"));
+					const mdxIds = new Set(mdxHeadings.map((h) => h.id));
 
-				// Find CharacterStandCard elements with matching IDs (outside prose body)
-				const cardTargets = new Map<string, Element>();
-				for (const id of mdxIds) {
-					const all = article.querySelectorAll(`[id="${id}"]`);
-					for (const el of Array.from(all)) {
-						if (!proseBody.contains(el)) {
-							cardTargets.set(id, el);
-							break;
+					// Find CharacterStandCard elements with matching IDs (outside prose body)
+					const cardTargets = new Map<string, Element>();
+					for (const id of mdxIds) {
+						const all = article.querySelectorAll(`[id="${id}"]`);
+						for (const el of Array.from(all)) {
+							if (!proseBody.contains(el)) {
+								cardTargets.set(id, el);
+								break;
+							}
 						}
 					}
-				}
 
-				// Hide the entire prose body
-				(proseBody as HTMLElement).style.display = "none";
+					// Hide the entire prose body
+					(proseBody as HTMLElement).style.display = "none";
 
-				// Move each MDX heading next to its CharacterStandCard counterpart
-				for (const h of mdxHeadings) {
-					const el = h as HTMLElement;
-					const target = cardTargets.get(el.id);
-					if (target) {
-						// Remove duplicate ID from CharacterStandCard element
-						target.removeAttribute("id");
-					}
-					// Make heading a near-invisible anchor (1px so IntersectionObserver works)
-					Object.assign(el.style, {
-						display: "block",
-						height: "1px",
-						margin: "0",
-						padding: "0",
-						overflow: "hidden",
-						opacity: "0",
-						fontSize: "0",
-						lineHeight: "0",
-					});
-					// Insert before the CharacterStandCard section
-					if (target) {
-						target.before(el);
-					} else {
-						// No matching section - place just before the hidden prose body
-						proseBody.before(el);
+					// Move each MDX heading next to its CharacterStandCard counterpart
+					for (const h of mdxHeadings) {
+						const el = h as HTMLElement;
+						const target = cardTargets.get(el.id);
+						if (target) {
+							// Remove duplicate ID from CharacterStandCard element
+							target.removeAttribute("id");
+						}
+						// Make heading a near-invisible anchor (1px so IntersectionObserver works)
+						Object.assign(el.style, {
+							display: "block",
+							height: "1px",
+							margin: "0",
+							padding: "0",
+							overflow: "hidden",
+							opacity: "0",
+							fontSize: "0",
+							lineHeight: "0",
+						});
+						// Insert before the CharacterStandCard section
+						if (target) {
+							target.before(el);
+						} else {
+							// No matching section - place just before the hidden prose body
+							proseBody.before(el);
+						}
 					}
 				}
 			}
@@ -351,7 +352,7 @@ export function CharacterStandCard() {
 			hiddenSkills: skillData?.hiddenSkills,
 			hiddenNotes: skillData?.hiddenNotes,
 		});
-	}, []);
+	}, [path]);
 
 	if (!data) return null;
 
@@ -757,7 +758,7 @@ export function CharacterStandCard() {
 								角色型像及對話圖
 							</h2>
 							<Tabs
-								defaultValue={data.portraitGroups[0].label}
+								defaultValue={data.portraitGroups?.[0]?.label}
 								className="overflow-hidden rounded-2xl border border-fd-border/50 bg-fd-card/80 backdrop-blur-xl"
 							>
 								<TabsList className="w-full justify-start gap-0 rounded-none border-b border-fd-border/30 bg-transparent px-2">

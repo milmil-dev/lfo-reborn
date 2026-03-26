@@ -93,14 +93,13 @@ export function PlotLanding() {
    based on current URL path
    ───────────────────────────────────────────── */
 
-export function PlotIndex() {
-	const [mode] = useState<"story" | "mission" | null>(() => {
-		if (typeof window === "undefined") return null;
-		const path = window.location.pathname;
-		if (path.includes("/plot/mission")) return "mission";
-		if (path.includes("/plot/story")) return "story";
-		return null;
-	});
+export function PlotIndex({ path }: { path: string }) {
+	const [mode, setMode] = useState<"story" | "mission" | null>(null);
+
+	useEffect(() => {
+		if (path.includes("/plot/mission")) setMode("mission");
+		else if (path.includes("/plot/story")) setMode("story");
+	}, [path]);
 
 	if (mode === "story") return <StoriesGrid />;
 	if (mode === "mission") return <MissionsGrid />;
@@ -405,7 +404,7 @@ function _PlotCard({
    URL: /docs/plot/story/{id} or /docs/plot/mission/{id}
    ───────────────────────────────────────────── */
 
-export function PlotDetail() {
+export function PlotDetail({ path }: { path: string }) {
 	const [data, setData] = useState<{
 		images: string[];
 		title: string;
@@ -415,12 +414,11 @@ export function PlotDetail() {
 	} | null>(null);
 
 	useEffect(() => {
-		const path = window.location.pathname;
 		const stories = storiesData as Story[];
 		const missions = missionsData as Mission[];
 
 		const storyMatch = path.match(/\/docs\/plot\/story\/\d{3}\/([^/]+)$/);
-		if (storyMatch) {
+		if (storyMatch?.[1]) {
 			const id = storyMatch[1];
 			const story = stories.find((s) => s.id === id);
 			if (story?.images?.length) {
@@ -434,7 +432,7 @@ export function PlotDetail() {
 						isCurrent: s.id === id,
 					}));
 				setData({
-					images: story.images,
+					images: story.images ?? [],
 					title: story.title ?? story.id,
 					type: "story",
 					id,
@@ -445,12 +443,12 @@ export function PlotDetail() {
 		}
 
 		const missionMatch = path.match(/\/docs\/plot\/mission\/([^/]+)$/);
-		if (missionMatch) {
+		if (missionMatch?.[1]) {
 			const id = missionMatch[1];
 			const mission = missions.find((m) => m.id === id);
 			if (mission?.images?.length) {
 				setData({
-					images: mission.images,
+					images: mission.images ?? [],
 					title: mission.title ? `${mission.id.toUpperCase()} - ${mission.title}` : mission.id,
 					type: "mission",
 					id,
@@ -458,7 +456,7 @@ export function PlotDetail() {
 				return;
 			}
 		}
-	}, []);
+	}, [path]);
 
 	if (!data) return null;
 
