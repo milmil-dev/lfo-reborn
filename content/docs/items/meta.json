@@ -1,26 +1,3 @@
 {
-	"pages": [
-		"armor",
-		"armor2",
-		"armor3",
-		"armor4",
-		"armor5",
-		"armor6",
-		"backpack",
-		"body",
-		"consumables",
-		"consumables2",
-		"consumables3",
-		"consumables4",
-		"face",
-		"head",
-		"set",
-		"setb",
-		"setii",
-		"skin",
-		"weapon",
-		"weapon2",
-		"weapon3",
-		"---"
-	]
+	"pages": ["weapon", "armor", "consumables", "set", "head", "momo"]
 }

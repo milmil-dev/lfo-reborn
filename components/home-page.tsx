@@ -1,33 +1,32 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
-const gameData = [
+const encyclopedia = [
 	{ title: "角色資料", count: 105, href: "/docs/character" },
 	{ title: "故事連載", count: 131, href: "/docs/plot/story" },
 	{ title: "任務連載", count: 65, href: "/docs/plot/mission" },
-	{ title: "技能圖鑑", count: 104, href: "/docs/dex" },
-	{ title: "道具圖鑑", count: 21, href: "/docs/items" },
-	{ title: "死亡之塔", count: 15, href: "/docs/towers" },
+	{ title: "道具", count: 6, href: "/docs/items" },
+	{ title: "系統說明", count: 11, href: "/docs/system" },
+	{ title: "死亡之塔", count: 3, href: "/docs/towers" },
 	{ title: "兇獸檔案", count: 7, href: "/docs/beast" },
-	{ title: "音樂庭院", href: "/docs/bgm" },
-	{ title: "同人故事", href: "/docs/fans" },
+];
+
+const events = [
+	{ title: "終極拳皇盃", count: 11, href: "/docs/camp" },
+	{ title: "動漫電玩節", count: 6, href: "/docs/hkacg" },
+	{ title: "亞洲遊戲展", count: 7, href: "/docs/agsogs" },
 ];
 
 const archive = [
 	{ title: "蕃薯集中營", count: 68, href: "/docs/fanscamp" },
-	{ title: "產品資訊", href: "/docs/good" },
-	{ title: "系統說明", count: 11, href: "/docs/system" },
+	{ title: "產品資訊", count: 4, href: "/docs/good" },
+	{ title: "同人故事", count: 2, href: "/docs/fans" },
 ];
 
-const events = [
-	{ title: "動漫電玩節", href: "/docs/hkacg" },
-	{ title: "亞洲遊戲展", href: "/docs/agsogs" },
-	{ title: "終極拳皇盃", count: 11, href: "/docs/camp" },
-];
-
-const special = [
+const gallery = [
+	{ title: "圖片展覽", count: 5, href: "/docs/photo" },
+	{ title: "音樂庭院", href: "/docs/bgm" },
 	{ title: "最初的LFO", href: "/docs/start" },
-	{ title: "圖片展覽", href: "/docs/photo" },
 ];
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -269,15 +268,15 @@ export default function HomePage() {
 				</motion.div>
 
 				<div className="grid gap-x-16 gap-y-14 md:grid-cols-2">
-					<SectionBlock label="遊戲數據" sub="遊戲中值得記錄的數據" items={gameData} delay={0} />
 					<SectionBlock
-						label="官網移植計劃"
-						sub="官方網站重要資料備份"
-						items={archive}
-						delay={0.1}
+						label="遊戲百科"
+						sub="角色、劇情、道具與遊戲機制"
+						items={encyclopedia}
+						delay={0}
 					/>
-					<SectionBlock label="活動記錄" sub="線上活動歷史" items={events} delay={0} />
-					<SectionBlock label="特別區" sub="LFO相關特別收錄" items={special} delay={0.1} />
+					<SectionBlock label="活動與歷史" sub="LFO的十二年活動足跡" items={events} delay={0.1} />
+					<SectionBlock label="檔案庫" sub="來自官方與社群的珍貴紀錄" items={archive} delay={0} />
+					<SectionBlock label="展覽廳" sub="圖像、音樂與LFO起源" items={gallery} delay={0.1} />
 				</div>
 			</section>
 
