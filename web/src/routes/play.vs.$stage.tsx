@@ -8,12 +8,20 @@ import { audio } from "@/game/audio";
 import type { Fighter } from "@/game/core/fighter";
 import { Effects } from "@/game/effects";
 import { Controls } from "@/game/input";
-import { equipBonus } from "@/game/inventory";
+import { add, emptyInventory, equipBonus } from "@/game/inventory";
 import { useItemTable } from "@/game/items-data";
+import { nianyuanDrop } from "@/game/fusion";
 import { LoadingScreen } from "@/game/kit/loading";
 import { ResultBoard } from "@/game/kit/result";
-import { applyLevel, statTable } from "@/game/leveling";
-import { getActiveProfile, getInventory, type Profile, updateActiveProfile } from "@/game/profiles";
+import { applyLevel, statTable, withFusionBonus } from "@/game/leveling";
+import {
+  fusionOf,
+  getActiveProfile,
+  getInventory,
+  playKey,
+  type Profile,
+  updateActiveProfile,
+} from "@/game/profiles";
 import { BASE, loadSprite, runLoop } from "@/game/render";
 import { Screen } from "@/game/screen";
 import { Director } from "@/game/story/director";
@@ -171,7 +179,7 @@ function VsRun({
           }
         },
       },
-      `chars/${me.key}`,
+      `chars/${playKey(me)}`,
     );
     d.effects = new Effects(d.world, scene);
     const controls = new Controls();
@@ -198,8 +206,10 @@ function VsRun({
       lv: number,
       bonus?: ReturnType<typeof equipBonus>,
       points?: Profile["points"],
+      // 合體: a 合體戰神 grows by its own character's table
+      statId = f.data.attrs.id,
     ) => {
-      const c = await queryClient.fetchQuery(q.character(f.data.attrs.id)).catch(() => null);
+      const c = await queryClient.fetchQuery(q.character(statId)).catch(() => null);
       if (c) applyLevel(f, statTable(c), lv, bonus, points);
       entrants.find((x) => x.f === f)!.name = c?.name ?? f.data.name;
     };
@@ -209,11 +219,18 @@ function VsRun({
       const mid = (room.minZ + room.maxZ) / 2;
       const left = room.minX + 200;
       const right = Math.max(left + 400, Math.min(room.maxX - 200, left + 900));
-      const p = await d.addPlayer(`chars/${me.key}`, left, mid);
+      const p = await d.addPlayer(`chars/${playKey(me)}`, left, mid);
       if (p) {
         p.team = entrants[0].team;
         entrants[0].f = p;
-        await level(p, me.lv, equipBonus(getInventory(), itemsRef.current), me.points);
+        const fused = !!fusionOf(me);
+        await level(
+          p,
+          me.lv,
+          withFusionBonus(equipBonus(getInventory(), itemsRef.current), fused),
+          me.points,
+          me.charId,
+        );
         entrants[0].name = me.name;
       }
       await Promise.all(
@@ -270,7 +287,14 @@ function VsRun({
           const won = winner === entrants[0].team;
           const prev = getActiveProfile()?.honor ?? 0;
           const r = settleHonor(prev, won, entrants[0].kos);
-          updateActiveProfile((pr) => ({ ...pr, honor: r.honor }));
+          // 合體's 冰．念源體: beating the dark characters in VS may give one (fusion.ts)
+          const dark = setup.coms.some((c) => c.key.startsWith("dark"));
+          const ice = won && nianyuanDrop({ mode: "vs", dark }, Math.random(), Math.random());
+          const item = ice ? itemsRef.current.get(ice) : undefined;
+          updateActiveProfile((pr) => {
+            const inv = item ? add(pr.inv ?? emptyInventory(), item) : null;
+            return { ...pr, honor: r.honor, ...(inv ? { inv } : {}) };
+          });
           audio.sfx(won ? "johnnyallright.wav" : "johnnymove.wav");
           setOutcome({ won, line: r.line, honor: r.honor, rank: r.rank });
           setBoard(entrants.map((x) => ({ ...x })));

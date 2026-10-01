@@ -3,9 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { Fragment, type ReactNode, useEffect, useEffectEvent, useState } from "react";
 import type { CharData, Move } from "@/game/core/types";
-import { expToNext, freePoints, statsAt, statTable } from "@/game/leveling";
+import { expToNext, freePoints, statsAt, statTable, withFusionBonus } from "@/game/leveling";
 import { RANKS, rankOf } from "@/game/vs";
-import { allocatePoint, type Profile, useActiveProfile, useSkillExp } from "@/game/profiles";
+import {
+  allocatePoint,
+  fusionOf,
+  playId,
+  playKey,
+  type Profile,
+  useActiveProfile,
+  useSkillExp,
+} from "@/game/profiles";
 import { audio } from "@/game/audio";
 import { Screen } from "@/game/screen";
 import { q } from "@/lib/api";
@@ -95,7 +103,10 @@ export function CharaCard({ onClose }: { onClose?: () => void }) {
   const profile = useActiveProfile();
   const { data } = useQuery({ ...q.character(profile?.charId ?? 0), enabled: !!profile });
   if (!profile) return null;
-  const st = data ? statsAt(statTable(data), profile.lv, profile.points) : undefined;
+  // a 合體戰神 shows its own character's stats plus the fusion's (he-ti.mdx 9)
+  const st = data
+    ? withFusionBonus(statsAt(statTable(data), profile.lv, profile.points), !!fusionOf(profile))
+    : undefined;
   const free = freePoints(profile.lv, profile.points);
   const ws = (data?.weapon_skill ?? {}) as Record<string, number>;
   const rank = rankOf(profile.honor ?? 0);
@@ -133,8 +144,8 @@ export function CharaCard({ onClose }: { onClose?: () => void }) {
         className="absolute top-[9px] left-[28px]"
       />
       <img
-        src={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${profile.charId}.webp`}
-        srcSet={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${profile.charId}.webp 4x`}
+        src={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${playId(profile)}.webp`}
+        srcSet={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${playId(profile)}.webp 4x`}
         alt=""
         className="absolute top-[14px] left-[33px] h-[148px] w-[118px] max-w-none"
         draggable={false}
@@ -235,11 +246,16 @@ export function SkillList({
 }) {
   const profile = useActiveProfile();
   const exp = useSkillExp();
-  const { data: detail } = useQuery({ ...q.character(profile?.charId ?? 0), enabled: !!profile });
+  // the moves of whoever the profile plays as: its 合體戰神 while that lasts
+  const key = profile ? playKey(profile) : undefined;
+  const { data: detail } = useQuery({
+    ...q.character(profile ? playId(profile) : 0),
+    enabled: !!profile,
+  });
   const { data: char } = useQuery({
-    queryKey: ["game", "char", profile?.key],
+    queryKey: ["game", "char", key],
     queryFn: () =>
-      fetch(`${ASSETS}/game/chars/${profile?.key}.json`).then((r) => r.json() as Promise<CharData>),
+      fetch(`${ASSETS}/game/chars/${key}.json`).then((r) => r.json() as Promise<CharData>),
     enabled: !!profile,
     staleTime: Number.POSITIVE_INFINITY,
   });
