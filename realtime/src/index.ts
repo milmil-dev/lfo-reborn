@@ -2,6 +2,7 @@
   The realtime Worker: one Durable Object per game room (room.ts), reached by its code.
 
     GET /health            → { ok, protocol }
+    GET /rooms             → { rooms }       the listed rooms, for 選擇遊戲室 (directory.ts)
     GET /rooms/new         → { code }        a fresh code nobody is using
     GET /rooms/:code       WebSocket upgrade → the room (the first to arrive hosts it)
 
@@ -11,10 +12,12 @@
 import { PROTOCOL } from "../../web/src/game/net/protocol";
 import { CODE, newCode } from "./codes";
 
+export { Directory } from "./directory";
 export { Room } from "./room";
 
 export interface Env {
   ROOM: DurableObjectNamespace;
+  DIRECTORY: DurableObjectNamespace;
 }
 
 const CORS = {
@@ -34,6 +37,11 @@ export default {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
     if (url.pathname === "/health") return json({ ok: true, protocol: PROTOCOL });
+    if (url.pathname === "/rooms") {
+      const dir = env.DIRECTORY.get(env.DIRECTORY.idFromName("rooms"));
+      const list = await dir.fetch(new Request("https://directory/list"));
+      return json(await list.json(), list.status);
+    }
     if (url.pathname === "/rooms/new") {
       // a code already holding a room (its object has state) is skipped
       for (let i = 0; i < 8; i++) {

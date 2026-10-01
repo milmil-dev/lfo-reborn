@@ -13,10 +13,12 @@ import {
   canStart,
   type ClientMsg,
   type ErrorCode,
+  MAX_ROOM_NAME,
   MAX_SEATS,
   parse,
   type RoomState,
   type ServerMsg,
+  summarize,
 } from "../../web/src/game/net/protocol";
 import type { Env } from "./index";
 import { Sequencer } from "./sequencer";
@@ -53,7 +55,13 @@ export class Room extends DurableObject<Env> {
 
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
-    if (url.pathname === "/exists") return new Response(this.room ? "1" : "0");
+    // "0" = no room here; else what the list should say (null for a room that is not listed)
+    if (url.pathname === "/exists")
+      return new Response(
+        !this.room
+          ? "0"
+          : JSON.stringify(this.room.rules.listed ? summarize(this.room, Date.now()) : null),
+      );
     if (request.headers.get("Upgrade")?.toLowerCase() !== "websocket")
       return new Response("websocket only", { status: 426 });
     const code = url.pathname.split("/").pop() ?? "";
@@ -67,7 +75,7 @@ export class Room extends DurableObject<Env> {
         code,
         phase: "lobby",
         seats: [],
-        rules: { stage: "vs_school", level: 10 },
+        rules: { stage: "vs_school", level: 10, name: "", listed: true },
         build: "",
       };
       await this.save();
@@ -153,10 +161,14 @@ export class Room extends DurableObject<Env> {
         break;
       case "rules": {
         if (!host) return this.fail(ws, "not-host");
-        const { stage, level } = msg.rules ?? {};
+        const { stage, level, name, listed } = msg.rules ?? {};
         if (typeof stage === "string") room.rules.stage = stage.slice(0, 32);
         if (typeof level === "number") room.rules.level = Math.max(1, Math.min(300, level | 0));
-        for (const s of room.seats) if (!s.com) s.ready = false;
+        if (typeof name === "string") room.rules.name = name.trim().slice(0, MAX_ROOM_NAME);
+        if (typeof listed === "boolean") room.rules.listed = listed;
+        // the name and the listing change nothing about the bout: nobody has to say 準備 again
+        if (stage !== undefined || level !== undefined)
+          for (const s of room.seats) if (!s.com) s.ready = false;
         break;
       }
       case "com": {
@@ -226,6 +238,7 @@ export class Room extends DurableObject<Env> {
       sock.serializeAttachment({ seat: a.seat - below });
     }
     if (!room.seats.length) {
+      this.report(null, room.code);
       this.room = null;
       await this.ctx.storage.deleteAll();
       return;
@@ -269,6 +282,7 @@ export class Room extends DurableObject<Env> {
     room.seats = room.seats.filter((s) => s.com || s.online);
     for (const s of room.seats) if (!s.com) s.ready = false;
     if (!room.seats.some((s) => !s.com)) {
+      this.report(null, room.code);
       this.room = null;
       await this.ctx.storage.deleteAll();
       for (const sock of this.ctx.getWebSockets()) sock.close(1000, "over");
@@ -281,7 +295,26 @@ export class Room extends DurableObject<Env> {
   /* ───────── plumbing ───────── */
 
   private save() {
-    return this.room ? this.ctx.storage.put("room", this.room) : Promise.resolve();
+    const room = this.room;
+    if (!room) return Promise.resolve();
+    this.report(room);
+    return this.ctx.storage.put("room", room);
+  }
+
+  /** Tell the directory (directory.ts) what the list should say about this room — or to forget it. */
+  private report(room: RoomState | null, code = room?.code ?? "") {
+    const dir = this.env.DIRECTORY.get(this.env.DIRECTORY.idFromName("rooms"));
+    const listed = room && room.rules.listed && room.seats.length > 0;
+    const req = listed
+      ? new Request("https://directory/report", {
+          method: "POST",
+          body: JSON.stringify(summarize(room, Date.now())),
+        })
+      : new Request("https://directory/remove", {
+          method: "POST",
+          body: JSON.stringify({ code }),
+        });
+    this.ctx.waitUntil(dir.fetch(req).catch(() => {}));
   }
 
   private broadcast(msg: ServerMsg) {

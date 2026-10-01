@@ -55,8 +55,12 @@ export type Seat = {
   online: boolean;
 };
 
-/** What everyone fights under: the stage and one level for all (no save data enters a bout). */
-export type Rules = { stage: string; level: number };
+/**
+ * What everyone fights under — the stage and one level for all (no save data enters a bout) —
+ * plus the room's name and whether it is listed for anyone to join (an unlisted room is reached
+ * by its code only).
+ */
+export type Rules = { stage: string; level: number; name: string; listed: boolean };
 
 export type RoomState = {
   code: string;
@@ -66,6 +70,38 @@ export type RoomState = {
   /** the build the host joined with; everyone else has to match it */
   build: string;
 };
+
+/** A room as the 選擇遊戲室 list shows it (realtime/src/directory.ts keeps these). */
+export type RoomSummary = {
+  code: string;
+  name: string;
+  host: string;
+  stage: string;
+  level: number;
+  seats: number;
+  phase: RoomState["phase"];
+  /** ms since the epoch of the room's last change */
+  updatedAt: number;
+};
+
+export const MAX_ROOM_NAME = 24;
+
+/** The room's name, or the client's default for a host who typed none. */
+export const roomName = (room: Pick<RoomState, "rules" | "seats">) =>
+  room.rules.name || `${room.seats[0]?.name ?? "LFO"}的遊戲室`;
+
+export function summarize(room: RoomState, updatedAt: number): RoomSummary {
+  return {
+    code: room.code,
+    name: roomName(room),
+    host: room.seats[0]?.name ?? "",
+    stage: room.rules.stage,
+    level: room.rules.level,
+    seats: room.seats.length,
+    phase: room.phase,
+    updatedAt,
+  };
+}
 
 /** Every person picked a character and is ready, and there are two sides. */
 export function canStart(seats: Seat[]) {

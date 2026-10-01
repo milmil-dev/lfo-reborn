@@ -4,7 +4,7 @@
   live messages go to whoever registered for them (the bout).
 */
 import { BUILD } from "@/lib/version";
-import type { ClientMsg, ErrorCode, RoomState, ServerMsg } from "./protocol";
+import type { ClientMsg, ErrorCode, RoomState, RoomSummary, ServerMsg } from "./protocol";
 import { parse } from "./protocol";
 
 export type NetStatus = "connecting" | "open" | "closed";
@@ -27,11 +27,20 @@ export function realtimeUrl(): string | null {
   return import.meta.env.DEV ? "ws://localhost:8787" : null;
 }
 
+const http = (base: string) => base.replace(/^ws/, "http");
+
 /** Ask the Worker for a room code nobody is using. */
 export async function newRoomCode(base: string): Promise<string> {
-  const res = await fetch(`${base.replace(/^ws/, "http")}/rooms/new`);
+  const res = await fetch(`${http(base)}/rooms/new`);
   if (!res.ok) throw new Error(`rooms/new ${res.status}`);
   return ((await res.json()) as { code: string }).code;
+}
+
+/** The rooms anyone may join, waiting ones first. */
+export async function listRooms(base: string): Promise<RoomSummary[]> {
+  const res = await fetch(`${http(base)}/rooms`, { cache: "no-store" });
+  if (!res.ok) throw new Error(`rooms ${res.status}`);
+  return ((await res.json()) as { rooms: RoomSummary[] }).rooms;
 }
 
 export class RoomClient {
