@@ -102,8 +102,19 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * The data is read-only, so the deployed site has no API server: api/cmd/export
+ * (`make snapshot`) writes every response to data/assets/api/v1, served with the
+ * other assets. Same mapping as the exporter: "/items?kind=item" -> "items/kind/item.json".
+ */
+export function staticUrl(path: string) {
+  const [route, query] = path.split("?");
+  const params = [...new URLSearchParams(query)].map(([k, v]) => `/${k}/${v}`).join("");
+  return `${ASSETS}/api/v1${route}${params}.json`;
+}
+
 async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
-  const res = await fetch(`/api/v1${path}`, { signal });
+  const res = await fetch(staticUrl(path), { signal });
   if (!res.ok) {
     const body = (await res.json().catch(() => null)) as { error?: { message?: string } } | null;
     throw new ApiError(res.status, body?.error?.message ?? res.statusText);

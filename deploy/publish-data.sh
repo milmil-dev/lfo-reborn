@@ -29,7 +29,7 @@ fi
 : "${R2_SECRET_ACCESS_KEY:?set R2_SECRET_ACCESS_KEY}"
 bucket="${R2_DATA_BUCKET:-lfo-data}"
 
-for tool in bun rclone; do
+for tool in bun go rclone; do
   command -v "$tool" >/dev/null || { echo "$tool not found" >&2; exit 1; }
 done
 [ -f data/lfo.db ] || { echo "data/lfo.db missing; run \`make data\` first" >&2; exit 1; }
@@ -46,6 +46,10 @@ tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 export COPYFILE_DISABLE=1 # no macOS ._ resource-fork entries in the archives
 
+# The site has no API server: it reads these files (api/cmd/export).
+echo "Exporting the API snapshot"
+(cd api && go run ./cmd/export -db ../data/lfo.db -out ../data/assets/api/v1)
+
 echo "Packing fixtures.tar.gz"
 {
   echo data/lfo.db
@@ -57,10 +61,11 @@ echo "Packing assets.tar"
   cd data/assets
   # shellcheck disable=SC2016 # JS template literals, not shell
   bun -e '
-    // Only what the game client requests. Left out: ui/ (the pre-upscale UI, used
-    // only by the /play/kit comparison page), ui-svg/ (unused), and the old
-    // museum art in dex/chars, dex/faces, dex/scene.
-    const KEEP = ["game/", "ui-hd/", "dex/items/", "dex/skills/", "dex/logo/"];
+    // Only what the game client requests; api/ is the static API snapshot.
+    // Left out: ui/ (the pre-upscale UI, used only by the /play/kit comparison
+    // page), ui-svg/ (unused), and the old museum art in dex/chars, dex/faces,
+    // dex/scene (the API names those paths, but the game draws ui-hd/profile).
+    const KEEP = ["api/", "game/", "ui-hd/", "dex/items/", "dex/skills/", "dex/logo/"];
     // Atlas pages in chars/ and sprites/ always load through gameArt(), which
     // swaps in the @2x twin, so their SD originals are never requested. bg/,
     // faces/ and stages/ SD files are (stage previews, 1x portrait src): keep them.
