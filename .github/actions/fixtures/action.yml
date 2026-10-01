@@ -4,7 +4,7 @@
 # data/ is generated from the original game client (`make data`), which CI
 # does not have, so it reaches CI this way:
 #   fixtures.tar.gz  data/lfo.db + data/assets/game/**/*.json, for the tests
-#   assets.tar       the site's art, audio and JSON, copied into the Pages build
+#   assets.tar       the site's art, audio and JSON, copied into the deployed build
 #
 # Each run reads one object, so R2 usage stays far inside the free tier.
 # Without the secrets the step only warns: the data-backed tests skip
