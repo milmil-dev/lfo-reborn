@@ -53,8 +53,13 @@ runs:
           exit 0
         fi
         mkdir -p "$GITHUB_WORKSPACE/$DEST"
+        # GNU tar cannot detect compression on a pipe: go by the extension.
+        case "$OBJECT" in
+          *.tar.gz | *.tgz) flags=-xz ;;
+          *) flags=-x ;;
+        esac
         curl -fsSL --retry 3 \
           --aws-sigv4 "aws:amz:auto:s3" --user "$KEY_ID:$SECRET" \
           "https://$ACCOUNT_ID.r2.cloudflarestorage.com/$BUCKET/$OBJECT" \
-          | tar -x -C "$GITHUB_WORKSPACE/$DEST"
+          | tar "$flags" -C "$GITHUB_WORKSPACE/$DEST"
         echo "$OBJECT: $(find "$GITHUB_WORKSPACE/$DEST" -type f | wc -l) files in $DEST"
