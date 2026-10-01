@@ -10,6 +10,8 @@ export const KEY = {
   bindings: "lfo-reborn.bindings",
   /** the 王者爭霸 in progress, for the browser session (game/champion-store.ts) */
   cup: "lfo-reborn.cup",
+  /** the last release whose 更新內容 the player opened (routes/index.tsx) */
+  seenRelease: "lfo-reborn.seenRelease",
   /** dev: every run meets the first 兇獸 (sessionStorage "1") */
   forceRaid: "lfo-reborn.forceRaid",
 } as const;

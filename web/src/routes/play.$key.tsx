@@ -39,7 +39,15 @@ export const Route = createFileRoute("/play/$key")({
 // the whole gravel yard of the gate stage, from the building's foot down to the fence
 const FLOOR = { minZ: 250, maxZ: 590 };
 
-type Hud = { hp: number; maxHp: number; mp: number; maxMp: number; status: string[] };
+type Hud = {
+  hp: number;
+  maxHp: number;
+  mp: number;
+  maxMp: number;
+  sp: number;
+  maxSp: number;
+  status: string[];
+};
 type LogKey = { id: number; keys: string };
 
 function Training() {
@@ -62,6 +70,8 @@ function Training() {
   optsRef.current = opts;
   const resetRef = useRef<() => void>(() => {});
   const dropRef = useRef<() => void>(() => {});
+  // the player's fighter, for the 出招表's clicks
+  const fighterRef = useRef<Fighter | null>(null);
   // 異轉能量計, mirrored from the loop for the HUD
   const [tran, setTran] = useState(NO_TRAN);
   const tranRef = useRef<() => void>(() => {});
@@ -87,6 +97,7 @@ function Training() {
     const scene = new Scene(host.current, { stage });
     const world = new World({ minX: 60, maxX: stage.width - 60, ...FLOOR });
     const me = world.spawn(player.data, 1, 700, 530, 1);
+    fighterRef.current = me;
     const foe = world.spawn(dummy.data, 2, 900, 530, -1);
     foe.showBars = true;
     void scene.add(me, player);
@@ -158,6 +169,7 @@ function Training() {
         f.facing = face;
         f.hp = f.maxHp;
         f.mp = f.maxMp;
+        f.sp = f.maxSp;
         f.goto(f.action("STAND"));
       }
     };
@@ -249,6 +261,8 @@ function Training() {
             maxHp: me.maxHp,
             mp: me.mp,
             maxMp: me.maxMp,
+            sp: me.sp,
+            maxSp: me.maxSp,
             status: [...me.status.keys()],
           });
           setTran(tr);
@@ -257,6 +271,8 @@ function Training() {
             maxHp: foe.maxHp,
             mp: foe.mp,
             maxMp: foe.maxMp,
+            sp: foe.sp,
+            maxSp: foe.maxSp,
             status: [...foe.status.keys()],
           });
         }
@@ -310,7 +326,8 @@ function Training() {
             maxHp: me.maxHp,
             mp: me.mp,
             maxMp: me.maxMp,
-            sp: 100,
+            sp: me.sp,
+            maxSp: me.maxSp,
             status: me.status,
           }}
           scale={scale}
@@ -338,7 +355,8 @@ function Training() {
             maxHp: foe.maxHp,
             mp: foe.mp,
             maxMp: foe.maxMp,
-            sp: 100,
+            sp: foe.sp,
+            maxSp: foe.maxSp,
             status: foe.status,
           }}
           scale={scale}
@@ -407,6 +425,7 @@ function Training() {
                 skills={skillBySlot}
                 mp={me?.mp ?? 0}
                 lit={lit}
+                onCast={(m) => fighterRef.current?.cast(m.slot)}
                 onClose={() => setOpts((o) => ({ ...o, list: false }))}
               />
             </motion.aside>

@@ -53,13 +53,15 @@ export function tryPickups(
   events: FighterEvent[],
 ) {
   for (const f of fighters) {
-    if (f.isItem || f.effect || f.holding || f.team === 0) continue;
+    if (f.isItem || f.effect || f.team === 0) continue;
     const input = inputs.get(f.id);
     if (!input || !f.fresh(input, "attack") || !f.idle) continue;
     let best: Fighter | null = null;
     let bestD = Number.POSITIVE_INFINITY;
     for (const it of fighters) {
       if (!it.isItem || it.itemState !== "ground" || it.dead) continue;
+      // hands full: only a key can still be taken (it goes on the ring)
+      if (f.holding && it.itemType !== KEY_TYPE) continue;
       const dx = Math.abs(it.x - f.x);
       const dz = Math.abs(it.z - f.z);
       if (dx > REACH_X || dz > REACH_Z) continue;
@@ -69,10 +71,21 @@ export function tryPickups(
       }
     }
     if (!best) continue;
-    pickUp(f, best, events);
+    if (best.itemType === KEY_TYPE) takeKey(f, best, events);
+    else pickUp(f, best, events);
     // the press was the pick-up, not a punch
     inputs.set(f.id, { ...input, attack: false });
   }
+}
+
+/** item type of the stage keys */
+export const KEY_TYPE = 700;
+
+/** A key off the floor: gone from the field, onto the picker's key ring. */
+function takeKey(f: Fighter, key: Fighter, events: FighterEvent[]) {
+  key.dead = true;
+  events.push({ type: "sound", name: "getkey.wav", x: f.x });
+  events.push({ type: "key", fighter: f.id, key: key.data.attrs.id });
 }
 
 export function pickUp(f: Fighter, item: Fighter, events: FighterEvent[]) {
@@ -248,4 +261,13 @@ export function afterItemHit(item: Fighter) {
     item.heldBy = null;
     item.dead = true;
   }
+}
+
+/** A shield takes a blocked hit out of its durability; at 0 it breaks and is gone. */
+export function wearShield(shield: Fighter, damage: number) {
+  shield.hp -= Math.max(1, damage);
+  if (shield.hp > 0) return;
+  if (shield.heldBy?.holding === shield) shield.heldBy.holding = null;
+  shield.heldBy = null;
+  shield.dead = true;
 }

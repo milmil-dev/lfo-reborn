@@ -20,13 +20,17 @@ export const GRAVITY = 1.7;
  * weapon, 400 throwable, 500 potion, 600 shield, 900 bow, 1000 arrow). Skill effects carry types
  * too (800 …), so "has a type" is not "is an item".
  */
-const FIELD_ITEM_TYPES = new Set([100, 200, 300, 400, 500, 600, 900, 1000]);
+/** 700: the stage keys (金 / 藍 / 橙 / 綠 / 紫鑰匙 and the script keys), picked up onto the key ring */
+const FIELD_ITEM_TYPES = new Set([100, 200, 300, 400, 500, 600, 700, 900, 1000]);
 /** frame states that loop in the air until touching the floor */
 const AIR_WAIT = new Set([103, 2151]);
 const COMBO_WINDOW = 20; // ticks allowed across a whole input sequence
 const DOUBLE_TAP = 10; // ticks between taps that start a run
 const ROLL_SPEED = 4; // px per tick along the depth while rolling on the floor
 const BUTTONS = Object.keys(EMPTY_INPUT) as Button[];
+/** SP (體力) without a level table: the att row's usual default */
+const DEFAULT_SP = 1000;
+const SP_REFILL_TICKS = 20 * 30; // empty to full in 20 s while not guarding
 
 export type Key = "G" | "F" | "B" | "U" | "D" | "A" | "J";
 
@@ -44,6 +48,8 @@ export type FighterEvent =
     }
   | { type: "land"; fighter: number }
   | { type: "pick"; fighter: number; item: number }
+  /** a key picked up: it goes on the key ring (the director's), not into the hands */
+  | { type: "key"; fighter: number; key: number }
   | { type: "spawn"; fighter: number; bla: Bla }
   /** an element took hold of (on) or let go of (off) a fighter */
   | { type: "status"; fighter: number; kind: StatusKind; on: boolean };
@@ -65,6 +71,8 @@ export class Fighter {
   ticksLeft = 1;
   hp: number;
   mp: number;
+  /** 體力: blocking a hit spends it, and with none left a hit can't be blocked */
+  sp = 0;
   hitStop = 0;
   /** increments every time a frame with hit boxes is entered, so one swing hits each target once */
   attackSerial = 0;
@@ -78,9 +86,12 @@ export class Fighter {
   /** level (a story monster's, or the player's profile) and the EXP a KO is worth */
   level = 1;
   reward = 0;
+  /** share of that EXP a KO pays: half for an endless spawner's monsters (system/exp.mdx) */
+  rewardScale = 1;
   /** stat overrides from the player's level; null = the .spt values */
   hpMax: number | null = null;
   mpMax: number | null = null;
+  spMax: number | null = null;
   /** damage dealt / taken multipliers from STR and DEF */
   power = 1;
   guard = 1;
@@ -108,6 +119,8 @@ export class Fighter {
   moveBonus = 1;
 
   private prev: InputState = { ...EMPTY_INPUT };
+  /** a special asked for by slot through cast(), tried on the next tick */
+  private queued: number | null = null;
   private buffer: { key: Key; t: number }[] = [];
   private lastTap: { dir: -1 | 1; t: number } | null = null;
   private altAttack = false;
@@ -123,6 +136,7 @@ export class Fighter {
   ) {
     this.hp = data.attrs.hp;
     this.mp = data.attrs.mp;
+    this.sp = this.maxSp;
     // most sprites start at frame 0; some items (potions) start at 1
     this.frame = this.frameAt(0) ?? Object.values(data.frames)[0];
     this.goto(this.action("STAND"));
@@ -133,6 +147,9 @@ export class Fighter {
   }
   get maxMp() {
     return Math.max(this.mpMax ?? this.data.attrs.mp, ...this.data.moves.map((m) => m.mp));
+  }
+  get maxSp() {
+    return this.spMax ?? DEFAULT_SP;
   }
   get airborne() {
     return this.y < 0 || this.vy < 0;
@@ -226,7 +243,11 @@ export class Fighter {
       return;
     }
 
-    if (!this.recover(input, pressed, events) && !this.tryMove(pressed, events))
+    if (
+      !this.recover(input, pressed, events) &&
+      !this.castQueued(events) &&
+      !this.tryMove(pressed, events)
+    )
       this.control(input, pressed);
     // a roll carries its fighter along the depth for as long as it lasts
     if (/LIEDOWNROLL[UD]$/.test(this.anim))
@@ -241,13 +262,18 @@ export class Fighter {
     if (this.fallAcc > 0) this.fallAcc = Math.max(0, this.fallAcc - 0.5);
     if (this.dizzyAcc > 0) this.dizzyAcc = Math.max(0, this.dizzyAcc - 0.5);
     if (this.mp < this.maxMp && !this.airborne) this.mp = Math.min(this.maxMp, this.mp + 1);
+    if (this.sp < this.maxSp && !this.anim.startsWith("GUARD"))
+      this.sp = Math.min(this.maxSp, this.sp + this.maxSp / SP_REFILL_TICKS);
     this.prev = { ...input };
   }
 
   goto(id: number, events?: FighterEvent[]) {
     const f = this.frameAt(id);
     if (!f) {
-      if (id !== 0) this.goto(this.action("STAND"), events);
+      // some props' STAND points at a frame they lack: fall back to frame 0, never loop
+      const stand = this.action("STAND");
+      if (id !== stand && this.frameAt(stand)) this.goto(stand, events);
+      else if (id !== 0 && this.frameAt(0)) this.goto(0, events);
       return;
     }
     this.frameId = id;
@@ -319,17 +345,40 @@ export class Fighter {
       } else if (m.keys.every((k) => k.length === 1)) {
         continue; // bare A / J only ever work as chains
       }
-      if (!this.frameAt(m.to)) continue;
-      if (!this.infiniteMp && this.mp < m.mp) continue;
-      if (!this.infiniteMp) this.mp -= m.mp;
-      this.buffer = [];
-      this.vx = 0;
-      this.moveBonus = skillBonus(this.skillLevels[m.slot] ?? 1);
-      this.goto(m.to, events);
-      events.push({ type: "move", fighter: this.id, move: m, name: this.frame.n });
-      return true;
+      if (this.perform(m, events)) return true;
     }
     return false;
+  }
+
+  /**
+   * 出招表: perform the special in `slot` on the next tick, as if its command had been typed
+   * (clicking a skill icon). Dropped if the fighter can't start a special then.
+   */
+  cast(slot: number) {
+    this.queued = slot;
+  }
+
+  private castQueued(events: FighterEvent[]) {
+    const slot = this.queued;
+    this.queued = null;
+    if (slot === null || !this.canSpecial()) return false;
+    const m = this.data.moves.find(
+      (m) => m.slot === slot && !m.from && m.keys.some((k) => k.length > 1),
+    );
+    return !!m && this.perform(m, events);
+  }
+
+  /** Start a special: its frame must exist and its MP be there; pays the MP. */
+  private perform(m: Move, events: FighterEvent[]) {
+    if (!this.frameAt(m.to)) return false;
+    if (!this.infiniteMp && this.mp < m.mp) return false;
+    if (!this.infiniteMp) this.mp -= m.mp;
+    this.buffer = [];
+    this.vx = 0;
+    this.moveBonus = skillBonus(this.skillLevels[m.slot] ?? 1);
+    this.goto(m.to, events);
+    events.push({ type: "move", fighter: this.id, move: m, name: this.frame.n });
+    return true;
   }
 
   private groundNeutral() {
@@ -431,7 +480,8 @@ export class Fighter {
         return this.goto(this.action(this.altAttack ? "ATTACK1" : "ATTACK2"));
       }
       if (input.jump) return this.startJump(h, false);
-      if (input.defend && !heavy) {
+      // no SP, no guard ("你現時的 SP 不足")
+      if (input.defend && !heavy && this.sp > 0) {
         this.vx = this.vz = 0;
         if (this.holding?.itemType === 600 && this.data.actions.SHIELDUSE !== undefined)
           return this.goto(this.action("SHIELDUSE"));
@@ -485,7 +535,7 @@ export class Fighter {
         ? this.itemAttack(h !== 0 && h === this.facing, "air")
         : this.goto(this.action("ATTACKJUMP"));
 
-    if (a === "GUARD" && !input.defend) return this.goto(this.action("GUARDEN"));
+    if (a === "GUARD" && (!input.defend || this.sp <= 0)) return this.goto(this.action("GUARDEN"));
     // a charge (…POWERUP) loops while 攻 is held and lets go into its …POWERUP2
     if (
       /POWERUP$/.test(this.anim) &&
@@ -571,6 +621,9 @@ export class Fighter {
     if (/^(B_)?(FALL|BOUNCE)/.test(f.n) && this.airborne) return this.goto(this.frameId);
     // at 0 HP a fighter stays down: it is out (the story removes it, training revives it)
     if ((f.n === "LIEDOWN" || f.n === "B_LIEDOWN") && this.hp <= 0) return this.goto(this.frameId);
+    // the raised shield stays up while 防 is held
+    if (f.n === "SHIELDUSE" && input.defend && this.holding?.itemType === 600)
+      return this.goto(this.frameId, events);
     if (f.n === "LIEDOWN" || f.n === "B_LIEDOWN")
       return this.goto(this.action(f.n === "LIEDOWN" ? "GETUP" : "B_GETUP"), events);
     // a roll ends getting up
@@ -584,7 +637,9 @@ export class Fighter {
     // which loops until 防 is let go (control() then plays GUARDEN)
     if (f.n === "GUARDST" || f.n === "GUARD")
       return this.goto(
-        input.defend ? this.action("GUARD") : this.action(f.n === "GUARD" ? "GUARDEN" : "STAND"),
+        input.defend && this.sp > 0
+          ? this.action("GUARD")
+          : this.action(f.n === "GUARD" ? "GUARDEN" : "STAND"),
         events,
       );
     if (f.n.startsWith("DIZZY")) return this.goto(this.action("STAND"), events);
@@ -659,13 +714,14 @@ export class Fighter {
   hash(h: Hasher) {
     h.num(this.id).num(this.team).str(this.data.key);
     h.num(this.x).num(this.y).num(this.z).num(this.vx).num(this.vy).num(this.vz);
-    h.num(this.facing).num(this.frameId).num(this.ticksLeft).num(this.hp).num(this.mp);
+    h.num(this.facing).num(this.frameId).num(this.ticksLeft).num(this.hp).num(this.mp).num(this.sp);
     h.num(this.hitStop).num(this.attackSerial).num(this.fallAcc).num(this.dizzyAcc);
     h.bool(this.infiniteMp).bool(this.effect).bool(this.dead).num(this.level).num(this.reward);
-    h.num(this.hpMax ?? -1)
+    h.num(this.rewardScale)
+      .num(this.hpMax ?? -1)
       .num(this.mpMax ?? -1)
-      .num(this.power)
-      .num(this.guard);
+      .num(this.spMax ?? -1);
+    h.num(this.power).num(this.guard);
     h.num(this.holding?.id ?? 0)
       .num(this.heldBy?.id ?? 0)
       .num(this.thrownBy?.id ?? 0);
@@ -676,6 +732,7 @@ export class Fighter {
     for (const slot of Object.keys(this.skillLevels))
       h.num(Number(slot)).num(this.skillLevels[Number(slot)]);
     for (const b of BUTTONS) h.bool(this.prev[b]);
+    h.num(this.queued ?? -1);
     for (const k of this.buffer) h.str(k.key).num(k.t);
     h.num(this.lastTap?.dir ?? 0).num(this.lastTap?.t ?? -1);
     h.bool(this.altAttack).num(this.jumpDir).bool(this.jumpRun).num(this.t);

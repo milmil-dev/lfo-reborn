@@ -9,6 +9,7 @@ import { Controls } from "@/game/input";
 import { KeyConfig } from "@/game/key-config";
 import {
   applyLevel,
+  withTranCaps,
   expScale,
   gainExp,
   monsterExp,
@@ -58,6 +59,8 @@ import {
   DialogFrame,
   GoArrow,
   HitCounter,
+  KEY_NAME,
+  KeyBox,
   MiniMap,
   StatusBox,
   useHudScale,
@@ -143,6 +146,11 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
   const [gain, setGain] = useState<{ id: number; name: string; icon: string | null } | null>(null);
   // 兇獸突襲 announcements, in the client's own words
   const [notice, setNotice] = useState<{ id: number; text: string } | null>(null);
+  // 鑰匙: the key ring, as the director reports it
+  const [keys, setKeys] = useState<number[]>([]);
+  // the locked-door line, read by the game loop (which must not restart when the language does)
+  const lockedRef = useRef((key: number) => t`這道門鎖上了，需要「${KEY_NAME[key] ?? t`鑰匙`}」。`);
+  lockedRef.current = (key: number) => t`這道門鎖上了，需要「${KEY_NAME[key] ?? t`鑰匙`}」。`;
   useEffect(() => {
     if (!notice) return;
     const id = setTimeout(() => setNotice(null), 3200);
@@ -183,6 +191,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
   // 異轉能量計 (shown once the character may transform), mirrored from the loop
   const [tran, setTran] = useState<typeof NO_TRAN | null>(null);
   const tranRef = useRef<() => void>(() => {});
+  // 出招表: a click on a skill icon performs it
+  const castRef = useRef<(slot: number) => void>(() => {});
   // 道具欄: the backpack's field items (potions, weapons, throwables), ten slots after the fist
   const bag = useInventory().bag;
   const money = useMoney();
@@ -214,7 +224,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
     return () => removeEventListener("keydown", onKey);
   }, []);
   const pausedRef = useRef(false);
-  pausedRef.current = menu !== "none";
+  // the skill table floats over the fight (its icons cast); every other menu holds the stage
+  pausedRef.current = menu !== "none" && menu !== "skill";
 
   useEffect(() => {
     if (!host.current) return;
@@ -230,7 +241,6 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
     let prog = { lv: profile?.lv ?? 1, exp: profile?.exp ?? 0 };
     let table: StatTable | null = null;
     let leveled: number | null = null; // fighter id the level was applied to
-    let sp = 0;
     let prevBar = { item: false, drop: false };
     // 兇獸突襲: whether this run meets a beast (rolled once), and the beast once it is in
     let raid: Beast | null = null;
@@ -331,6 +341,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         music: (file) => audio.music(file, 0.35),
         sound: (file) => audio.sfx(file, { volume: 0.7 }),
         shake: (n) => scene.quake(n),
+        keys: setKeys,
+        locked: (key) => setNotice({ id: Date.now(), text: lockedRef.current(key) }),
         status: (s) => {
           setStatus(s);
           if (s.kind === "complete" || s.kind === "gameover") settleCarried();
@@ -362,7 +374,6 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
                   if (!was && tranReady(tr)) audio.sfx("ready_transform.wav", { volume: 0.9 });
                 }
                 damage += e.damage;
-                sp = Math.min(100, sp + e.damage / 12);
                 best = Math.max(best, combo.n);
                 const target = d.world.fighters.find((f) => f.id === e.target);
                 if (target && target.hp <= 0 && !downed.has(target.id)) {
@@ -379,7 +390,9 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
                   }
                   // 升級: a KO pays the monster's EXP, scaled by the level difference
                   const amount = Math.round(
-                    monsterExp(target.level, target.reward) * expScale(prog.lv, target.level),
+                    monsterExp(target.level, target.reward) *
+                      expScale(prog.lv, target.level) *
+                      target.rewardScale,
                   );
                   gained += amount;
                   const saved = awardExp(amount);
@@ -438,6 +451,9 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
     );
     const d = director;
     d.effects = new Effects(d.world, scene);
+    castRef.current = (slot) => {
+      if (!d.drama) d.player?.cast(slot);
+    };
     const controls = new Controls();
     if (import.meta.env.DEV)
       Object.assign(window, {
@@ -492,8 +508,14 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
           );
           void queryClient
             .fetchQuery(q.character(hero.data.attrs.id))
-            .then((c) => {
-              table = statTable(c);
+            .then(async (c) => {
+              // qualified for 異轉: the form's higher att maximums apply (星奇 400 → 600)
+              const tran =
+                unlocked(prog.lv, hasToken(hero.data.attrs.id)) &&
+                (await queryClient
+                  .fetchQuery(q.character(hero.data.attrs.id + 7000))
+                  .catch(() => null));
+              table = withTranCaps(statTable(c), tran ? statTable(tran) : null);
               const inv = getInventory();
               applyLevel(
                 hero,
@@ -541,7 +563,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
             maxHp: p.maxHp,
             mp: p.mp,
             maxMp: p.maxMp,
-            sp,
+            sp: p.sp,
+            maxSp: p.maxSp,
             status: [...p.status.keys()],
           });
           const width = Number(d.story.rooms[String(d.bg)]?.width) || 0;
@@ -610,6 +633,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
 
       {hudOn && !hudHidden && vitals && (
         <>
+          <KeyBox keys={keys} scale={scale} />
           <StatusBox
             v={vitals}
             scale={scale}
@@ -719,7 +743,11 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         )}
       </AnimatePresence>
       <FloatingPanel open={menu === "skill"} scale={Math.min(1.25, scale * 1.1)}>
-        <SkillList onClose={() => setMenu("none")} />
+        <SkillList
+          mp={vitals?.mp}
+          onCast={(m) => castRef.current(m.slot)}
+          onClose={() => setMenu("none")}
+        />
       </FloatingPanel>
       {/* the Item plate's 背包 / 裝備 — the stage waits while it is open */}
       <FloatingPanel open={menu === "item"} scale={Math.min(1.2, scale)}>

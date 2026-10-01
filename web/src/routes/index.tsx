@@ -1,12 +1,14 @@
 import { useLingui } from "@lingui/react/macro";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { BookOpenIcon, Volume2Icon, VolumeXIcon } from "lucide-react";
+import { BookOpenIcon, ScrollTextIcon, Volume2Icon, VolumeXIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { audio } from "@/game/audio";
 import { KeyConfig } from "@/game/key-config";
 import { PrologueLines } from "@/game/kit/art";
 import { GlossButton } from "@/game/kit/buttons";
+import { LATEST_RELEASE, ReleaseNotes } from "@/game/kit/release-notes";
+import { KEY } from "@/lib/storage-keys";
 import { Screen } from "@/game/screen";
 import { MUSEUM_URL } from "@/lib/links";
 import { useActiveProfile } from "@/game/profiles";
@@ -37,7 +39,23 @@ const MAIN_LABEL: Record<Main, string> = {
 
 let entered = false; // intro plays once per visit
 
-type Phase = "gate" | "intro" | "title" | "keys" | "leaving";
+type Phase = "gate" | "intro" | "title" | "keys" | "news" | "leaving";
+
+/** 更新內容: the newest release the player has opened the notes for (a dot until then) */
+function readSeen() {
+  try {
+    return localStorage.getItem(KEY.seenRelease);
+  } catch {
+    return null;
+  }
+}
+function writeSeen(v: string) {
+  try {
+    localStorage.setItem(KEY.seenRelease, v);
+  } catch {
+    // blocked storage: the dot comes back next visit
+  }
+}
 
 const WITH_CONTINUE: Main[] = ["continue", "start", "keys", "profile"];
 const FIRST_TIME: Main[] = ["start", "keys", "profile"];
@@ -54,6 +72,16 @@ function TitleScreen() {
   const [sel, setSel] = useState(0);
   const [muted, setMuted] = useState(audio.muted);
   const [flash, setFlash] = useState(0);
+  const [seen, setSeen] = useState(readSeen);
+  const unseen = LATEST_RELEASE !== null && seen !== LATEST_RELEASE;
+  const openNews = () => {
+    audio.sfx("johnnychoose.wav", { volume: 0.6 });
+    setPhase("news");
+    if (LATEST_RELEASE) {
+      writeSeen(LATEST_RELEASE);
+      setSeen(LATEST_RELEASE);
+    }
+  };
 
   const toTitle = useCallback(() => {
     entered = true;
@@ -99,7 +127,7 @@ function TitleScreen() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || phase === "keys") return;
+      if (e.metaKey || e.ctrlKey || phase === "keys" || phase === "news") return;
       const move = (fn: () => void) => {
         e.preventDefault();
         audio.sfx("johnnymove.wav", { volume: 0.6 });
@@ -129,7 +157,8 @@ function TitleScreen() {
     } else if (phase === "intro") toTitle();
   };
 
-  const showTitle = phase === "title" || phase === "keys" || phase === "leaving";
+  const showTitle =
+    phase === "title" || phase === "keys" || phase === "news" || phase === "leaving";
 
   return (
     <div
@@ -147,9 +176,18 @@ function TitleScreen() {
       )}
 
       {/* the build: release version and the commit CI built it from */}
-      <p className="pointer-events-none absolute right-3 bottom-2 z-10 font-lfo text-[10px] text-white/40 tabular-nums">
+      <button
+        type="button"
+        onClick={showTitle ? openNews : undefined}
+        className={
+          showTitle
+            ? "absolute right-3 bottom-2 z-10 font-lfo text-[10px] text-white/40 tabular-nums hover:text-white/80"
+            : "pointer-events-none absolute right-3 bottom-2 z-10 font-lfo text-[10px] text-white/40 tabular-nums"
+        }
+        aria-label={t`更新內容`}
+      >
         {BUILD}
-      </p>
+      </button>
 
       <Screen>
         {/* ── press any key ── */}
@@ -266,6 +304,10 @@ function TitleScreen() {
           </motion.div>
         )}
 
+        <AnimatePresence>
+          {phase === "news" && <ReleaseNotes key="news" onClose={() => setPhase("title")} />}
+        </AnimatePresence>
+
         {/* white flash on every confirm */}
         <AnimatePresence>
           {flash > 0 && (
@@ -295,6 +337,20 @@ function TitleScreen() {
             <BookOpenIcon className="size-3.5" />
             {t`圖鑑館`}
           </a>
+          <button
+            type="button"
+            onClick={openNews}
+            className="relative mr-auto ml-2 flex items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5 backdrop-blur hover:text-white"
+          >
+            <ScrollTextIcon className="size-3.5" />
+            {t`更新內容`}
+            {unseen && (
+              <span
+                className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-[#e8343c] ring-2 ring-black/60"
+                aria-label={t`有新版本`}
+              />
+            )}
+          </button>
           <button
             type="button"
             onClick={() => setMuted(audio.toggleMute())}

@@ -10,3 +10,6 @@ interface ImportMetaEnv {
 
 /** web/package.json's version, which release-please bumps (vite.config.ts `define`) */
 declare const __APP_VERSION__: string;
+
+/** the repo's CHANGELOG.md, written by release-please (vite.config.ts `define`) */
+declare const __CHANGELOG__: string;

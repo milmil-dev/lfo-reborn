@@ -320,7 +320,8 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
             maxHp: me.maxHp,
             mp: me.mp,
             maxMp: me.maxMp,
-            sp: 100,
+            sp: me.sp,
+            maxSp: me.maxSp,
           });
         if (me && director.world.tick % 6 === 0) {
           const width = Number(story.rooms[String(director.bg)]?.width) || 0;
@@ -583,7 +584,11 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
         )}
       </AnimatePresence>
       <FloatingPanel open={overlay === "skill"} scale={Math.min(1.25, scale * 1.1)}>
-        <SkillList onClose={() => setOverlay("none")} />
+        <SkillList
+          mp={vitals?.mp}
+          onCast={(m) => directorRef.current?.player?.cast(m.slot)}
+          onClose={() => setOverlay("none")}
+        />
       </FloatingPanel>
       <FloatingPanel open={overlay === "shop" && !!shop} scale={Math.min(1.3, scale * 1.1)}>
         {shop && (

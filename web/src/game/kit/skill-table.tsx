@@ -46,6 +46,7 @@ export function SkillTable({
   mp,
   lit,
   exp,
+  onCast,
   onClose,
   className,
 }: {
@@ -56,6 +57,8 @@ export function SkillTable({
   exp?: Record<number, number>;
   /** the move just performed, flashed in the grid */
   lit?: Move | null;
+  /** clicking a skill performs it (in a fight); without it a click only selects */
+  onCast?: (move: Move) => void;
   onClose?: () => void;
   className?: string;
 }) {
@@ -105,8 +108,11 @@ export function SkillTable({
             type="button"
             onMouseEnter={() => setSel(i)}
             onFocus={() => setSel(i)}
-            onClick={() => setSel(i)}
-            className="absolute size-[55px]"
+            onClick={() => {
+              setSel(i);
+              if (onCast && usable) onCast(move);
+            }}
+            className={cn("absolute size-[55px]", onCast && usable && "cursor-pointer")}
             style={{ left: x, top: y }}
             aria-label={s?.name ?? move.keys.join(" / ")}
           >
@@ -196,12 +202,24 @@ export function SkillTable({
         </div>
       )}
       {onClose && (
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-[283px] left-[280px] size-[26px] rounded-full"
-          aria-label={t`關閉`}
-        />
+        <>
+          {/* the client's closetablebutton (24 × 23) sits in the frame's top-right notch */}
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-[3px] left-[313.5px] h-[23px] w-[24px] transition hover:brightness-125 active:scale-95"
+            aria-label={t`關閉`}
+          >
+            <Ui name={`${G}/closetablebutton`} w={24} h={23} />
+          </button>
+          {/* the round button under the description closes it too */}
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-[283px] left-[280px] size-[26px] rounded-full"
+            aria-label={t`關閉`}
+          />
+        </>
       )}
     </div>
   );

@@ -1,13 +1,14 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { EVENT } from "./director";
+import { EVENT, obtainableKeys } from "./director";
 import type { StoryData } from "./types";
 
 /*
   Can every story be finished? A model of the director's stage rules — phases advance when they
   have played (enemies down, drama done), HALT holds a room until a CHANGEPHASE moves it, CH_DOOR
   re-routes or locks a door while its phase lasts, RAN_DOOR and doors with several targets lead
-  anywhere they list, WARP / TELEPORT carry the player on — walked from the start room until an
+  anywhere they list, WARP / TELEPORT carry the player on, a locked door (lok) opens once its key
+  is in reach (spawned in a room played, or given by ADDKEY) — walked from the start room until an
   ending (COMPLETE) is reached or nothing more opens.
 */
 
@@ -41,6 +42,17 @@ function finishable(d: StoryData) {
   const random = new Map<number, Set<number>>();
   const warps = new Set<number>();
   const moved = new Set<number>();
+  // locks whose key the stage never hands out are open (director.obtainableKeys)
+  const live = obtainableKeys(d);
+  // 鑰匙: keys within reach, and the rooms whose way on waits for one
+  const keys = new Set<number>();
+  const waiting = new Set<number>();
+  const gotKey = (k: number) => {
+    if (keys.has(k)) return;
+    keys.add(k);
+    for (const r of waiting) moved.add(r);
+    waiting.clear();
+  };
   let complete = false;
 
   const run = (bg: number, p: number) => {
@@ -54,6 +66,10 @@ function finishable(d: StoryData) {
         doors.set(`${bg}:${a[0]}`, { to: a[1], door: a[2], phase: p });
       else if (op === EVENT.RAN_DOOR) random.set(bg, (random.get(bg) ?? new Set()).add(a[0]));
       else if ((op === EVENT.WARP || op === EVENT.TELEPORT) && rooms.has(a[0])) warps.add(a[0]);
+      else if (op === EVENT.ADDKEY) gotKey(a[0]);
+      else if (op === EVENT.SPAWN || op === EVENT.SPAWN_ALT || op === EVENT.BOSS)
+        for (const m of d.groups[String(a[6])] ?? [])
+          if (m.sprite >= 700 && m.sprite < 800) gotKey(m.sprite);
     }
   };
   const play = (bg: number) => {
@@ -83,6 +99,11 @@ function finishable(d: StoryData) {
     for (const l of d.links[String(bg)] ?? []) {
       const o = doors.get(`${bg}:${l.link}`);
       if (o && o.to === bg && o.door === l.link) continue; // locked
+      const lock = d.locks?.[`${bg}:${l.link}`];
+      if (lock && live.has(lock) && !keys.has(lock)) {
+        waiting.add(bg);
+        continue;
+      }
       outs.add(o ? o.to : l.toBg);
     }
     for (const w of warps) outs.add(w);
