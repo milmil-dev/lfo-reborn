@@ -84,7 +84,7 @@ echo "Packing assets.tar"
 files=$(wc -l <"$tmp/assets.list" | tr -d ' ')
 echo "  $files files, $(du -h "$tmp/assets.tar" | cut -f1)"
 if [ "$files" -gt 19000 ]; then
-  echo "warning: $files asset files; Workers static assets allow 20,000 per version (incl. the web build)" >&2
+  echo "warning: $files asset files; Cloudflare Pages allows 20,000 per deployment (incl. the web build)" >&2
 fi
 
 for f in fixtures.tar.gz assets.tar; do
