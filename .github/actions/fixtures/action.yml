@@ -1,0 +1,47 @@
+# Unpacks data/lfo.db + data/assets/game/**/*.json into the workspace.
+#
+# data/ is generated from the original game client (`make data`), which CI
+# does not have. deploy/publish-data.sh uploads this subset as
+# fixtures.tar.gz to a private R2 bucket; the data-backed tests in web/ and
+# api/ skip themselves when it is missing, so a run without the secrets still
+# passes — it just tests less, and says so.
+
+name: Data fixtures
+description: Download the published data fixtures from R2
+
+inputs:
+  account-id:
+    description: Cloudflare account ID
+    required: true
+  access-key-id:
+    description: R2 access key ID (read access to the data bucket)
+    required: true
+  secret-access-key:
+    description: R2 secret access key
+    required: true
+  bucket:
+    description: Private R2 bucket holding fixtures.tar.gz
+    required: false
+    default: lfo-data
+
+runs:
+  using: composite
+  steps:
+    - name: Download fixtures
+      shell: bash
+      env:
+        ACCOUNT_ID: ${{ inputs.account-id }}
+        KEY_ID: ${{ inputs.access-key-id }}
+        SECRET: ${{ inputs.secret-access-key }}
+        BUCKET: ${{ inputs.bucket }}
+      run: |
+        if [ -z "$ACCOUNT_ID" ] || [ -z "$KEY_ID" ] || [ -z "$SECRET" ]; then
+          echo "::warning::R2 secrets not set; data-backed tests will be skipped"
+          exit 0
+        fi
+        curl -fsSL --retry 3 \
+          --aws-sigv4 "aws:amz:auto:s3" --user "$KEY_ID:$SECRET" \
+          "https://$ACCOUNT_ID.r2.cloudflarestorage.com/$BUCKET/fixtures.tar.gz" \
+          | tar -xz -C "$GITHUB_WORKSPACE"
+        echo "lfo.db: $(du -h "$GITHUB_WORKSPACE/data/lfo.db" | cut -f1)," \
+          "game JSON: $(find "$GITHUB_WORKSPACE/data/assets/game" -name '*.json' | wc -l) files"

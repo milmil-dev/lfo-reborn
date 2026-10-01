@@ -1,0 +1,56 @@
+# Vet, test and build the Go API on every PR and push to main. No deploy yet:
+# the API (and the WebSocket lobby) gets a host later; until then this keeps
+# it green. The tests read data/lfo.db, which comes from the R2 fixtures.
+
+name: API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - api/**
+      - .github/workflows/api.yml
+      - .github/actions/**
+  pull_request:
+    paths:
+      - api/**
+      - .github/workflows/api.yml
+      - .github/actions/**
+
+concurrency:
+  group: api-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  api:
+    name: Test API
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: api
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: api/go.mod
+          cache-dependency-path: api/go.sum
+
+      - uses: ./.github/actions/fixtures
+        with:
+          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          bucket: ${{ vars.R2_DATA_BUCKET || 'lfo-data' }}
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test
+        run: go test ./...
+
+      - name: Build
+        run: go build ./...
