@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.3.0...v0.4.0) (2026-10-01)
+
+
+### Features
+
+* **game:** 合體 fusion at 毛毛高 ([#12](https://github.com/milmil-dev/lfo-reborn/issues/12)) ([01cd169](https://github.com/milmil-dev/lfo-reborn/commit/01cd16998f5eaccd092cda24c2e15136d055a3d8))
+
+
+### Bug Fixes
+
+* **story:** always finish scripted moves so drama scenes cannot hang ([#10](https://github.com/milmil-dev/lfo-reborn/issues/10)) ([aea19a2](https://github.com/milmil-dev/lfo-reborn/commit/aea19a25a684e0878d2f6390bed2c147d71000ed))
+
 ## [0.3.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.2.0...v0.3.0) (2026-10-01)
 
 
