@@ -1,11 +1,11 @@
 # Lint, typecheck, test and build the SPA on every PR and push to main, then
-# deploy it as Cloudflare Workers static assets (wrangler.jsonc): main ->
-# production, same-repo PRs -> a preview URL.
+# deploy it to Cloudflare Pages: main -> production, same-repo PRs -> a
+# preview URL.
 #
 # The game's art, audio and JSON (data/assets) ship inside the
 # deployment under /assets, the default ASSETS base, so every request players
 # make is a static asset request: free and unmetered. R2 only holds the
-# archive CI copies them from (one read per deploy). Wrangler uploads only files
+# archive CI copies them from (one read per deploy). Pages uploads only files
 # whose content changed, so redeploys stay small.
 
 name: Web
@@ -100,27 +100,24 @@ jobs:
           secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           bucket: ${{ vars.R2_DATA_BUCKET || 'lfo-data' }}
 
-      # wrangler.jsonc at the repo root; uploads only assets whose hash changed.
-      - name: Deploy to production
-        if: env.DEPLOY == 'true' && github.event_name == 'push'
-        working-directory: .
-        run: pnpm dlx wrangler@4 deploy --message "$DEPLOY_SHA"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          DEPLOY_SHA: ${{ github.sha }}
-
-      # A version that does not take traffic, reachable at
-      # pr-<n>-lfo-reborn.<subdomain>.workers.dev.
-      - name: Upload PR preview
-        if: env.DEPLOY == 'true' && github.event_name == 'pull_request'
-        working-directory: .
+      # Classic Cloudflare Pages (not Workers): a Pages project accepts a custom
+      # subdomain whose DNS lives elsewhere (www.lforeborn.v6.rocks at dynv6,
+      # CNAME -> lfo-reborn.pages.dev), which a Worker custom domain cannot.
+      # main -> production, other branches -> <branch>.lfo-reborn.pages.dev.
+      # Uploads only files whose hash changed; with no 404.html, unknown paths
+      # get index.html (SPA routing).
+      - name: Deploy to Cloudflare Pages
+        if: env.DEPLOY == 'true'
         run: >-
-          pnpm dlx wrangler@4 versions upload
-          --preview-alias "pr-$PR_NUMBER"
-          --message "$DEPLOY_SHA"
+          pnpm dlx wrangler@4 pages deploy dist
+          --project-name="$PAGES_PROJECT"
+          --branch="$DEPLOY_BRANCH"
+          --commit-hash="$DEPLOY_SHA"
+          --commit-dirty=true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          DEPLOY_SHA: ${{ github.event.pull_request.head.sha }}
+          PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'lfo-reborn' }}
+          # Branch names are user-controlled: pass them through env, never inline.
+          DEPLOY_BRANCH: ${{ github.head_ref || github.ref_name }}
+          DEPLOY_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
