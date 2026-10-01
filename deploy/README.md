@@ -94,7 +94,9 @@ Without the R2 secrets CI still passes, but skips the data-backed tests (with a 
 `realtime/` is a Cloudflare Worker with one Durable Object per game room (`Room`): the waiting room's
 seats and rules, and during a bout a 30 Hz sequencer that stamps every seat's input into a frame.
 It never runs the game — every player's browser steps the same deterministic engine from the same
-frames (lockstep) — so a room costs a few messages a second and nothing else.
+frames (lockstep) — so a room costs a few messages a second and nothing else. One more object
+(`Directory`) holds the public room list that 選擇遊戲室 polls (`GET /rooms`, a storage read every
+few seconds per viewer); `wrangler deploy` applies the object migrations in `wrangler.jsonc`.
 
 - `.github/workflows/realtime.yml` type-checks and tests it on PRs and deploys it from `main`
   (`wrangler deploy`). The deploy needs the `CLOUDFLARE_API_TOKEN` to carry *Workers Scripts: Edit*

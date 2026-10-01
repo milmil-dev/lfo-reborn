@@ -9,6 +9,7 @@ import {
   ChatPanel,
   Head,
   LevelArrows,
+  Pill,
   ROW_STEP,
   ROW_Y,
   Row,
@@ -16,9 +17,10 @@ import {
   TeamBadge,
 } from "@/game/kit/room";
 import { Ui } from "@/game/kit/ui";
-import { newRoomCode, realtimeUrl, RoomClient } from "@/game/net/client";
+import { realtimeUrl, RoomClient } from "@/game/net/client";
 import { NetRun } from "@/game/net/net-run";
-import { canStart, MAX_SEATS, type RoomState } from "@/game/net/protocol";
+import { canStart, MAX_SEATS, roomName, type RoomState } from "@/game/net/protocol";
+import { RoomList } from "@/game/net/room-list";
 import { getActiveProfile, useActiveProfile } from "@/game/profiles";
 import { Screen } from "@/game/screen";
 import { catalogQuery } from "@/game/stage-select";
@@ -28,14 +30,21 @@ import { cn } from "@/lib/cn";
 import { usePageTitle } from "@/lib/title";
 
 /*
-  連線遊戲室 — a room on the realtime Worker (realtime/), reached by a four-letter code the host
-  reads out. The same waitplayer/ rows as the local room: everyone picks a character and a team
-  and says 準備; the host sets the stage and the one level everyone fights at, adds COM players
-  and starts. The bout itself is game/net/net-run.tsx.
+  連線對戰 — without a code, the client's 選擇遊戲室 list (game/net/room-list.tsx): the listed
+  rooms, a code box for a friend's room, and 建立遊戲室. With a code, the room itself on the
+  realtime Worker (realtime/): the same waitplayer/ rows as the local room — everyone picks a
+  character and a team and says 準備; the host sets the stage and the one level everyone fights
+  at, names the room, lists or hides it, adds COM players and starts. The bout is
+  game/net/net-run.tsx.
 */
 
 export const Route = createFileRoute("/play/online")({
-  validateSearch: z.object({ code: z.string().optional().catch(undefined) }),
+  validateSearch: z.object({
+    code: z.string().optional().catch(undefined),
+    // a room being made: its name and listing, which the host sends once seated
+    name: z.string().optional().catch(undefined),
+    listed: z.boolean().optional().catch(undefined),
+  }),
   beforeLoad: () => {
     if (!getActiveProfile()) throw redirect({ to: "/play/profile" });
   },
@@ -50,18 +59,32 @@ export const Route = createFileRoute("/play/online")({
 
 function OnlinePage() {
   const { t } = useLingui();
-  const { code } = Route.useSearch();
+  const navigate = useNavigate();
+  const { code, name, listed } = Route.useSearch();
   const base = realtimeUrl();
-  usePageTitle(code ? t`連線遊戲室 ${code}` : t`連線對戰`);
+  usePageTitle(code ? t`連線遊戲室 ${code}` : t`選擇遊戲室`);
   return (
     <div className="fixed inset-0 overflow-hidden bg-black text-foreground select-none">
       <StartGate onStart={() => audio.music("lfo_character.ogg", 0.35)} />
       {!base ? (
         <Notice text={t`連線對戰尚未開放：這個版本沒有設定對戰伺服器。`} />
       ) : code ? (
-        <RoomView base={base} code={code.toUpperCase()} />
+        <RoomView
+          base={base}
+          code={code.toUpperCase()}
+          pending={name !== undefined ? { name, listed: listed ?? true } : null}
+        />
       ) : (
-        <Entry base={base} />
+        <Screen>
+          <RoomList
+            base={base}
+            onJoin={(c) => void navigate({ to: "/play/online", search: { code: c } })}
+            onCreate={(c, n, l) =>
+              void navigate({ to: "/play/online", search: { code: c, name: n, listed: l } })
+            }
+            onBack={() => void navigate({ to: "/play/lobby" })}
+          />
+        </Screen>
       )}
     </div>
   );
@@ -83,76 +106,17 @@ function Notice({ text }: { text: string }) {
   );
 }
 
-/** Make a room, or type a friend's code. */
-function Entry({ base }: { base: string }) {
-  const { t } = useLingui();
-  const navigate = useNavigate();
-  const [code, setCode] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+type Pending = { name: string; listed: boolean };
 
-  const go = (c: string) => void navigate({ to: "/play/online", search: { code: c } });
-  const create = async () => {
-    setBusy(true);
-    setError(null);
-    try {
-      audio.sfx("johnnyconfirm.wav");
-      go(await newRoomCode(base));
-    } catch {
-      setError(t`連接不到對戰伺服器。`);
-    } finally {
-      setBusy(false);
-    }
-  };
-  const join = () => {
-    const c = code.trim().toUpperCase();
-    if (c.length < 4) return audio.sfx("guard.wav");
-    audio.sfx("johnnyconfirm.wav");
-    go(c);
-  };
-
-  return (
-    <Screen>
-      <Ui name="newgame/backg2" w={800} h={600} className="absolute inset-0 opacity-60" />
-      <div className="absolute top-[22px] left-[24px]">
-        <p className="font-black text-[24px] text-white italic [text-shadow:0_2px_0_#000]">
-          {t`連線對戰`}
-        </p>
-        <p className="mt-1 font-bold text-[14px] text-[#ffe08a] [text-shadow:0_1px_2px_#000]">
-          {t`開一間遊戲室，把房號告訴朋友；或輸入朋友的房號加入。`}
-        </p>
-      </div>
-      <div className="absolute top-[200px] left-[24px] w-[433px] space-y-6">
-        <Pill onClick={() => void create()} disabled={busy} className="w-[220px]">
-          {busy ? t`建立中…` : t`建立遊戲室`}
-        </Pill>
-        <div className="flex items-center gap-3">
-          <input
-            type="text"
-            value={code}
-            maxLength={8}
-            autoCapitalize="characters"
-            spellCheck={false}
-            placeholder={t`房號`}
-            aria-label={t`房號`}
-            onChange={(e) => setCode(e.target.value.toUpperCase())}
-            onKeyDown={(e) => e.key === "Enter" && join()}
-            className="h-[38px] w-[150px] rounded-full border-2 border-white/40 bg-black/40 px-4 text-center font-lfo text-[16px] text-white tracking-[0.3em] outline-none focus:border-[#ffd27a]"
-          />
-          <Pill onClick={join} className="w-[120px]">
-            {t`加入`}
-          </Pill>
-        </div>
-        {error && <p className="text-[#ff8a8a] text-[12px]">{error}</p>}
-        <Pill onClick={() => void navigate({ to: "/play/lobby" })} dim>
-          {t`返回大廳`}
-        </Pill>
-      </div>
-    </Screen>
-  );
-}
-
-function RoomView({ base, code }: { base: string; code: string }) {
+function RoomView({
+  base,
+  code,
+  pending,
+}: {
+  base: string;
+  code: string;
+  pending: Pending | null;
+}) {
   const profile = useActiveProfile();
   const { data: catalog } = useSuspenseQuery(catalogQuery);
   const stages = catalog.filter((e) => e.mode === "vs");
@@ -169,7 +133,7 @@ function RoomView({ base, code }: { base: string; code: string }) {
     };
   }, [base, code, name]);
   return client ? (
-    <ConnectedRoom client={client} code={code} roster={roster} stages={stages} />
+    <ConnectedRoom client={client} code={code} roster={roster} stages={stages} pending={pending} />
   ) : (
     <Screen>
       <Ui name="newgame/backg2" w={800} h={600} className="absolute inset-0 opacity-60" />
@@ -182,11 +146,13 @@ function ConnectedRoom({
   code,
   roster,
   stages,
+  pending,
 }: {
   client: RoomClient;
   code: string;
   roster: ReturnType<typeof useRoster>;
   stages: { key: string; title: string }[];
+  pending: Pending | null;
 }) {
   const { t } = useLingui();
   const navigate = useNavigate();
@@ -212,6 +178,13 @@ function ConnectedRoom({
   useEffect(() => {
     if (me && !picked && profile?.key) client.send({ t: "seat", key: profile.key });
   }, [client, me, picked, profile?.key]);
+  // the room's maker names it and lists (or hides) it, once seated as its host
+  const [named, setNamed] = useState(false);
+  useEffect(() => {
+    if (named || !pending || !room || you !== 0) return;
+    setNamed(true);
+    client.send({ t: "rules", rules: { name: pending.name, listed: pending.listed } });
+  }, [client, named, pending, room, you]);
 
   const leave = () => {
     audio.sfx("johnnymove.wav", { volume: 0.6 });
@@ -244,7 +217,12 @@ function ConnectedRoom({
     client.send({ t: "start" });
   };
   const chat = [
-    { who: null, text: t`遊戲室「${code}」：把這個房號告訴朋友，他們在「連線對戰」輸入就能加入。` },
+    {
+      who: null,
+      text: room?.rules.listed
+        ? t`遊戲室「${code}」已公開在列表；朋友也可以在「選擇遊戲室」輸入房號加入。`
+        : t`遊戲室「${code}」不在列表上：把這個房號告訴朋友，他們在「選擇遊戲室」輸入就能加入。`,
+    },
     { who: null, text: t`所有人都會以房間的等級出戰，招式等級一律 LV 1。` },
     ...net.chat.map((l) => ({ who: room?.seats[l.seat]?.name ?? `P${l.seat + 1}`, text: l.text })),
   ];
@@ -264,7 +242,8 @@ function ConnectedRoom({
       <Ui name="newgame/backg2" w={800} h={600} className="absolute inset-0 opacity-60" />
       <div className="absolute top-[22px] left-[24px] w-[440px]">
         <p className="truncate font-black text-[24px] text-white italic [text-shadow:0_2px_0_#000]">
-          {t`連線遊戲室`} <span className="font-lfo tracking-[0.3em]">{code}</span>
+          {room ? roomName(room) : t`連線遊戲室`}{" "}
+          <span className="font-lfo text-[18px] tracking-[0.3em]">{code}</span>
         </p>
         <p className="mt-1 font-bold text-[14px] text-[#ffe08a] [text-shadow:0_1px_2px_#000]">
           VS · {entry?.title ?? room?.rules.stage ?? "…"} · LV {room?.rules.level ?? "…"}
@@ -394,6 +373,12 @@ function ConnectedRoom({
                   }
                 />
               </span>
+              <Tag
+                tone={room.rules.listed ? "green" : "dim"}
+                onClick={() => client.send({ t: "rules", rules: { listed: !room.rules.listed } })}
+              >
+                {room.rules.listed ? t`公開` : t`私人`}
+              </Tag>
               {room.seats.length < MAX_SEATS && (
                 <Tag
                   onClick={() => {
@@ -443,23 +428,5 @@ function ConnectedRoom({
 
       <ChatPanel lines={chat} onSend={(text) => client.send({ t: "chat", text })} />
     </Screen>
-  );
-}
-
-function Pill({
-  className,
-  dim,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & { dim?: boolean }) {
-  return (
-    <button
-      type="button"
-      {...props}
-      className={cn(
-        "rounded-full border-2 border-white/60 px-5 py-2 font-bold text-[13px] text-white transition disabled:opacity-40",
-        dim ? "bg-black/30 hover:bg-white/15" : "bg-white/20 hover:bg-white/30",
-        className,
-      )}
-    />
   );
 }

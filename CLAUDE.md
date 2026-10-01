@@ -56,7 +56,10 @@ select, `/play/$key` a training ground driven by the original frame data.
   is one Durable Object per room code — the waiting room (seats, rules: stage + one level for all, COM seats,
   chat, WebSocket hibernation, line-up persisted in storage) and, once started, the `Sequencer`: a 30 Hz clock
   that stamps each seat's input for tick k into frame k, repeating a late seat's last input. It never runs the
-  game. `wrangler types` writes `worker-configuration.d.ts` (gitignored).
+  game. `Directory` is one object for the whole site: listed rooms report to it on every change (and remove
+  themselves when they empty), `GET /rooms` reads it for the 選擇遊戲室 screen (`game/net/room-list.tsx`,
+  built from the client's `selectroom/` art), and an entry quiet for ten minutes is checked against its room
+  before it is shown. `wrangler types` writes `worker-configuration.d.ts` (gitignored).
 - `web/src/game/net/protocol.ts` is the wire (JSON; inputs as 9-bit masks) and is compiled by both sides: keep it
   free of DOM and `@/` imports. `client.ts` is the socket + snapshot; `net-run.tsx` the lockstep bout: the World
   is stepped only when a frame arrives, my presses are sent for tick k + `INPUT_DELAY`, the host runs COM brains,

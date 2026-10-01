@@ -96,6 +96,25 @@ export function Tag({
   );
 }
 
+/** A round text button beside the art (離開遊戲室, 返回 …). */
+export function Pill({
+  className,
+  dim,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { dim?: boolean }) {
+  return (
+    <button
+      type="button"
+      {...props}
+      className={cn(
+        "rounded-full border-2 border-white/60 px-5 py-2 font-bold text-[13px] text-white transition disabled:opacity-40",
+        dim ? "bg-black/30 hover:bg-white/15" : "bg-white/20 hover:bg-white/30",
+        className,
+      )}
+    />
+  );
+}
+
 export function Key({ children }: { children: React.ReactNode }) {
   return (
     <kbd className="rounded border border-white/30 px-1 font-lfo text-[9px] text-white/60">
