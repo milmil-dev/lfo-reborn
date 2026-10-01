@@ -49,7 +49,3 @@ export const fmt = (n: number) => n.toLocaleString("zh-HK");
 /** Inline style that feeds the entity colour into the tint utilities. */
 export const entity = (color: string | null | undefined) =>
   (color ? { "--entity": color } : {}) as CSSProperties;
-
-/** Stable view-transition names so list art morphs into the detail hero. */
-export const vt = (kind: string, id: number) =>
-  ({ viewTransitionName: `${kind}-${id}` }) as CSSProperties;
