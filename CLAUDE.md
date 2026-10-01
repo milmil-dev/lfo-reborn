@@ -34,6 +34,11 @@ select, `/play/$key` a training ground driven by the original frame data.
   `spm` moves, attributes, atlas rects) + packed atlas PNGs, stage art, BGM and SFX (`make data` runs it).
 - `game/core/` is the engine: pure TypeScript, fixed 30 Hz ticks, input-driven and deterministic so it can
   later run under netcode. Keep DOM/Pixi out of it. Tests in `engine.test.ts` run against real frame data.
+- Determinism is a contract: `World.hash()` digests the whole state each tick (peers compare it to catch a
+  desync), and `core/determinism.test.ts` replays one script into two worlds and bans `Math.random`,
+  `Math.sin/cos/pow/exp/log…`, `Date.now` and locale APIs in `core/`. Chance the game needs goes through a
+  seeded generator kept in the world state. Everything that drives a fighter must be data on it (so
+  `skillLevels`, not a callback) and must be fed to `Fighter.hash()`.
 - Frame rules: a frame lasts `d + 1` ticks; `nx = -1` returns to the default action; entering a frame sets
   `vx = dvx * facing` / `vy = dvy` when non-zero; basic actions come from the `act` table (STAND 0, WALK 10,
   RUN 40, JUMPSTU 400, JUMPU 450, ATTACK1 500 …); specials from `spm` (G 防 A 攻 J 跳, F/B relative to facing,
