@@ -1,0 +1,23 @@
+version: "2"
+sql:
+  - engine: "sqlite"
+    schema: "internal/db/schema.sql"
+    queries: "internal/store/queries"
+    gen:
+      go:
+        package: "store"
+        out: "internal/store"
+        emit_json_tags: true
+        emit_interface: true
+        emit_pointers_for_null_types: true
+        # JSON-in-TEXT columns go out as raw JSON instead of quoted strings
+        overrides:
+          - { column: "characters.stats_default", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "characters.stats_growth", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "characters.stats_max", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "characters.weapon_skill", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "characters.faces", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "skills.keys", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "items.req", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "items.mods", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
+          - { column: "items.users", go_type: "github.com/lfo-wiki/api/internal/jsoncol.Raw" }
