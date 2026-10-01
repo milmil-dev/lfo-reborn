@@ -34,6 +34,12 @@ export class Effects {
   /** Call after each world step with its events. */
   update(events: FighterEvent[]) {
     for (const e of events) {
+      // a picked-up item can spawn things of its own (a bow's arrows): have them ready
+      if (e.type === "pick") {
+        const item = this.world.fighters.find((f) => f.id === e.item);
+        if (item) this.preload(item.data);
+        continue;
+      }
       if (e.type !== "spawn") continue;
       const owner = this.world.fighters.find((f) => f.id === e.fighter);
       const assets = this.ready.get(e.bla.type);

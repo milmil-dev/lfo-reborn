@@ -616,6 +616,9 @@ export class Fighter {
     if (/^(B_)?(FALL|BOUNCE)/.test(f.n) && this.airborne) return this.goto(this.frameId);
     // at 0 HP a fighter stays down: it is out (the story removes it, training revives it)
     if ((f.n === "LIEDOWN" || f.n === "B_LIEDOWN") && this.hp <= 0) return this.goto(this.frameId);
+    // the raised shield stays up while 防 is held
+    if (f.n === "SHIELDUSE" && input.defend && this.holding?.itemType === 600)
+      return this.goto(this.frameId, events);
     if (f.n === "LIEDOWN" || f.n === "B_LIEDOWN")
       return this.goto(this.action(f.n === "LIEDOWN" ? "GETUP" : "B_GETUP"), events);
     // a roll ends getting up

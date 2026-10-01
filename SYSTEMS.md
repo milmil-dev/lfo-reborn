@@ -24,10 +24,13 @@ Legend: [x] done · [~] partial · [ ] not started · (server) needs other playe
 ## Combat core
 - [x] Frame engine, specials (`spm`), effects (`bla`), hit / guard / fall / dizzy
 - [x] Held 攻 / 跳 / 防, guard hold
-- [x] Combo counter, GO!! arrow, HUD (`gameinterface/default`)
-- [x] Level / EXP / stat growth, LEVELUP pose (`PACKET_LEVELUP`)
+- [x] Combo counter, GO!! arrow, HUD (`gameinterface/default`): status box and dial measured against the original client; 出招表 icons cast on click, its notch carries the client's closetablebutton
+- [x] 更新內容 on the title screen: each release from CHANGELOG.md (release-please), a dot until the newest has been opened
+- [x] Level / EXP / stat growth, LEVELUP pose (`PACKET_LEVELUP`): cap LV 150, LV 300 with the character's 異轉信物 (`tran.mdx`); a qualified character's STR / DEF / AGI cap rises to its 異轉 form's att max (`fanscamp/76.mdx`); endless spawners' monsters pay half EXP (`exp.mdx`). The EXP curve and points per level were server-side: the remake's
+- [x] 體力 (SP): a pool sized by the SP stat; blocking a hit costs SP equal to its damage, without enough the guard breaks and with none 防 doesn't guard (client strings 「你現時的 SP 不足」, `fanscamp/24.mdx`); refills on its own. Running's SP drain (「跑步時SP下降率減半」) pending — its rate is unknown
+- [x] 自由模式 (profile screen): new characters start at LV 150 and every 異轉 is open without its 信物
 - [x] Items in the field: pick up / carry / throw / drink / heavy objects (`core/items.ts`, 164 field items from `bun stories.ts --items`)
-- [~] Weapons: sword / long weapon swings and throws from the `wpn` weapon points, durability; bow arrows, shield blocking and the `wea` weapon-skill bonus pending
+- [x] Weapons: sword / long weapon swings and throws from the `wpn` weapon points, durability; bows fire on their own frames (aid 310's `bla` → arrow 1000 / 1100, flying for the holder's team); a raised shield (SHIELDUSE, held while 防 is) stops frontal hits, its durability taking the damage until it breaks. The `wea` weapon-skill row is 70 for every weapon of every character, so it changes nothing
 - [x] Loot: stage `itm` tables roll on each KO (field items drop, the rest go to the backpack)
 - [x] Save store: profiles, backpack, money, bank and 信物 in one Zustand store (`game/profiles.ts`, `lfo-reborn.save`; saves from before the rename carried over), old per-key saves carried over; screens read it live
 - [x] Gamepad on every screen (`game/pad-bridge.ts`): d-pad / stick → arrows, ✕ Enter, ○ back, □ 攻, △ 異轉, Start menu, Select 出招表, L1 / R1 item / drop; in a fight the face buttons stay 攻 跳 防
@@ -42,7 +45,7 @@ Legend: [x] done · [~] partial · [ ] not started · (server) needs other playe
 - [x] 能力點 (`game/leveling.ts`): 3 points a level, spent with the chara table's up-arrows (+15 HP / MP / SP or +2 STR / DEF / AGI, up to the character's max), the AP box showing what is left; equipment checks its stat requirements (items.req, the client's 「你的 STR 不足以裝備這件物品。」); the 能力重設員 gives the points back from LV 10 for $500 × LV. Point values, the reset level and fee are the remake's (the server's are lost)
 - [x] 角色資料 window on the client's chartable (photo, label sheet, values, AP box, medal); chara / skill / smiley / item windows float over the game with the HUD still up
 - [~] 招式等級 (`core/skills.ts`): each use of a special is a point (saved per profile), LV 2–5 at 10 / 40 / 100 / 250, +6 % damage a level (its projectiles too), shown in the 出招表. The client kept skill EXP and the per-level effects on the server: thresholds and bonus are the remake's, per-level visuals not reproduced
-- [~] 變身 / 異轉 transformation: 異轉能量計 (tranicon) in the status box fills on hits, Y / click transforms into the base id + 7000 form (its TRANSFORM burst, its own moves), drains 45 s, cancel once 30 % spent, ends on KO. Story needs LV 150 + the account's 信物 (`lfo.tokens`); the training ground always allows it. 信物 come from the card shop; the post-150 stat caps pending
+- [~] 變身 / 異轉 transformation: 異轉能量計 (tranicon) in the status box fills on hits, Y / click transforms into the base id + 7000 form (its TRANSFORM burst, its own moves), drains 45 s, cancel once 30 % spent, ends on KO. Story needs LV 150 + the account's 信物 (`lfo.tokens`); the training ground always allows it. 信物 come from the card shop; the post-150 stat caps follow the form's att max
 - [ ] Team skill / 合體 (`PACKET_TEAMSKILL`, `he-ti.mdx`, 念源體 items)
 - [ ] Followers / 摩摩星 (`PACKET_CREATEFOLLOWER`, `mmsinterface/`, `momo.mdx`)
 

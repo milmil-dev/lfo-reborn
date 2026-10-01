@@ -110,3 +110,56 @@ describe.skipIf(!hasData)("field items", () => {
     expect(item.hp).toBeLessThan(item.data.attrs.hp);
   });
 });
+
+const hasGear = ["sprites/900", "sprites/1100", "sprites/601"].every((p) =>
+  existsSync(`${root}/${p}.json`),
+);
+
+describe.skipIf(!hasData || !hasGear)("bows and shields", () => {
+  it("a bow's release spawns its arrow for the holder's team, and the arrow hurts", () => {
+    const { world, hero, item: bow } = setup(900);
+    const dummy = world.spawn(load("chars/victor"), 2, 760, 450, -1);
+    play(world, hero.id, [], 20);
+    play(world, hero.id, [{ attack: true }, {}], 5);
+    expect(hero.holding).toBe(bow);
+    const events = play(world, hero.id, [{ attack: true }, {}], 20);
+    expect(hero.anim === "BOWSHOOT" || events.some((e) => e.type === "spawn")).toBe(true);
+    const spawn = events.find((e) => e.type === "spawn");
+    if (spawn?.type !== "spawn") throw new Error("the bow fired nothing");
+    expect(spawn.fighter).toBe(bow.id);
+    // what the effects layer does with it: the arrow flies for the holder
+    const arrow = world.spawnEffect(bow, spawn.bla, load(`sprites/${spawn.bla.type}`));
+    expect(arrow.team).toBe(hero.team);
+    expect(arrow.vx).toBeGreaterThan(0);
+    const before = dummy.hp;
+    play(world, hero.id, [], 40);
+    expect(dummy.hp).toBeLessThan(before);
+  });
+
+  it("a raised shield blocks a frontal hit and wears down instead of the holder", () => {
+    const { world, hero, item: shield } = setup(601);
+    const foe = world.spawn(load("chars/victor"), 2, 545, 450, -1);
+    play(world, hero.id, [], 20);
+    play(world, hero.id, [{ attack: true }, {}], 5);
+    expect(hero.holding).toBe(shield);
+    hero.facing = 1;
+    const hp = hero.hp;
+    const sp = hero.sp;
+    const dur = shield.hp;
+    let blocked = 0;
+    for (let i = 0; i < 60; i++) {
+      const ev = world.step(
+        new Map([
+          [hero.id, { ...EMPTY_INPUT, defend: true }],
+          [foe.id, { ...EMPTY_INPUT, attack: i % 3 === 0 }],
+        ]),
+      );
+      blocked += ev.filter((e) => e.type === "hit" && e.blocked && e.target === hero.id).length;
+    }
+    expect(hero.anim).toBe("SHIELDUSE");
+    expect(blocked).toBeGreaterThan(0);
+    expect(hero.hp).toBe(hp);
+    expect(hero.sp).toBe(sp);
+    expect(shield.hp).toBeLessThan(dur);
+  });
+});
