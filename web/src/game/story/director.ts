@@ -6,7 +6,7 @@ import { crossesWall, type Point, type Segment, slide, wallSegments } from "./wa
 import type { Fighter, FighterEvent } from "../core/fighter";
 import type { Effects } from "../effects";
 import { type CharData, type InputState, TICK_HZ } from "../core/types";
-import { World } from "../core/world";
+import { World, type WorldSnapshot } from "../core/world";
 import type { Command, DialogueLine, Room, StoryData } from "./types";
 
 /*
@@ -67,7 +67,17 @@ export function obtainableKeys(story: StoryData) {
 }
 
 /** `local`: another player at this machine (a VS guest), fed from the step's `locals` */
-type Kind = "enemy" | "npc" | "item" | "player" | "com" | "local";
+export type Kind = "enemy" | "npc" | "item" | "player" | "com" | "local";
+
+/** The Director at one tick (rollback netcode): the world and who everyone in it is. */
+export type DirectorSnapshot = {
+  world: WorldSnapshot;
+  kinds: [Fighter, Kind][];
+  paths: [Fighter, string][];
+  dying: [Fighter, number][];
+  tick: number;
+  aiGrace: number;
+};
 
 const PLAYER_HANDLE = 9000;
 /** a defeated enemy lies still this long, then blinks this long before it is gone (ticks) */
@@ -168,6 +178,8 @@ export class Director {
   effects: Effects | null = null;
   drama = false;
   status: StoryStatus["kind"] = "playing";
+  /** a bout rather than a story (VS, online): no script runs and nobody's death ends it */
+  arena = false;
 
   private readonly paths = new Map<Fighter, string>();
   private readonly kind = new Map<Fighter, Kind>();
@@ -282,8 +294,11 @@ export class Director {
     await this.enterRoom(bg, null, x);
   }
 
-  /** One fixed tick: inputs (`locals` by fighter id for the other players here), world, then story logic. */
-  step(playerInput: InputState, locals?: ReadonlyMap<number, InputState>) {
+  /**
+   * One fixed tick: inputs (`locals` by fighter id for the other players here), world, then story
+   * logic. `silent` while rollback netcode replays ticks already shown: no sounds or sparks twice.
+   */
+  step(playerInput: InputState, locals?: ReadonlyMap<number, InputState>, silent = false) {
     this.tick++;
     if (this.aiGrace > 0 && !this.drama) this.aiGrace--;
     const inputs = new Map<number, InputState>();
@@ -318,7 +333,7 @@ export class Director {
       }
       [f.x, f.z] = slide(this.walls, x, z, f.x, f.z);
     }
-    this.ui.fx(events);
+    if (!silent) this.ui.fx(events);
 
     this.preloadNearby();
     // walking along a strip: the room under the player gives the floor band and the room id
@@ -343,7 +358,7 @@ export class Director {
     )
       void this.addPlayer(this.playerPath ?? "chars/stinky");
     this.cleanup();
-    if (!this.drama && this.status === "playing") {
+    if (!this.arena && !this.drama && this.status === "playing") {
       this.runSpawners();
       this.checkDrama();
       this.checkPhase();
@@ -857,6 +872,46 @@ export class Director {
     const f = await this.spawn(path, team, x, z, "local", x > this.world.stage.maxX / 2 ? -1 : 1);
     this.report();
     return f;
+  }
+
+  /* ───────── netcode ───────── */
+
+  /** The world and who is in it right now, to come back to with restore(). */
+  snapshot(): DirectorSnapshot {
+    const here = (f: Fighter) => this.world.fighters.includes(f);
+    return {
+      world: this.world.snapshot(),
+      kinds: [...this.kind].filter(([f]) => here(f)),
+      paths: [...this.paths].filter(([f]) => here(f)),
+      dying: [...this.dying].filter(([f]) => here(f)),
+      tick: this.tick,
+      aiGrace: this.aiGrace,
+    };
+  }
+
+  /**
+   * Become `s` again: the world is restored in place (the same Fighter objects), fighters spawned
+   * since leave the view and fighters removed since come back into it.
+   */
+  restore(s: DirectorSnapshot) {
+    const { added, removed } = this.world.restore(s.world);
+    for (const f of removed) {
+      this.ui.removed(f);
+      this.movers.delete(f);
+      this.ai.delete(f);
+    }
+    this.kind.clear();
+    for (const [f, k] of s.kinds) this.kind.set(f, k);
+    this.paths.clear();
+    for (const [f, p] of s.paths) this.paths.set(f, p);
+    this.dying.clear();
+    for (const [f, t] of s.dying) this.dying.set(f, t);
+    this.tick = s.tick;
+    this.aiGrace = s.aiGrace;
+    for (const f of added) {
+      const path = this.paths.get(f);
+      if (path) this.ui.added(f, path);
+    }
   }
 
   /** Drop a field item (weapon, potion …) from the air at a spot, e.g. an enemy's loot. */

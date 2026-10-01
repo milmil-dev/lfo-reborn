@@ -6,7 +6,7 @@ import { q } from "@/lib/api";
 import { type Brain, newBrain, think } from "../ai";
 import { audio } from "../audio";
 import type { Fighter } from "../core/fighter";
-import { EMPTY_INPUT, type InputState } from "../core/types";
+import { EMPTY_INPUT, type InputState, TICK_HZ } from "../core/types";
 import { Effects } from "../effects";
 import { Controls } from "../input";
 import { LoadingScreen } from "../kit/loading";
@@ -15,21 +15,23 @@ import { applyLevel, statTable } from "../leveling";
 import { getActiveProfile, updateActiveProfile } from "../profiles";
 import { BASE, loadSprite } from "../render";
 import { Screen } from "../screen";
-import { Director } from "../story/director";
+import { Director, type DirectorSnapshot } from "../story/director";
 import { BottomBar, HitCounter, StatusBox, useHudScale, type Vitals } from "../story/hud";
 import { RoomScene } from "../story/room-scene";
 import type { StoryData } from "../story/types";
 import { comSkill, decided, engineTeam, RANKS, settleHonor } from "../vs";
 import type { RoomClient } from "./client";
 import { HASH_EVERY, INPUT_DELAY, packInput, type RoomState, unpackInput } from "./protocol";
+import { MAX_AHEAD, Rollback, type Sim } from "./rollback";
 
 /*
-  An online bout in lockstep. Every peer runs the same World; the room's frames (one input mask
-  per seat per tick) are the only thing that moves it, so the World is stepped when a frame
-  arrives, never on the local clock. My own presses go to the room for a tick INPUT_DELAY ahead
-  and come back in a frame like everyone else's; the host runs the COM seats' brains and sends
-  their presses the same way. Every HASH_EVERY ticks each peer reports World.hash() and the room
-  calls out a desync. Everyone fights at the room's level, so no save data enters the bout.
+  An online bout with rollback (rollback.ts). Every peer runs the same World on its own clock:
+  my presses land INPUT_DELAY ticks ahead and are known by then, the other seats are guessed
+  to keep pressing what they last pressed, and the room's frames (one input mask per seat per
+  tick) confirm each tick or rewind it and replay. The host runs the COM seats' brains and sends
+  their presses like its own. Every HASH_EVERY confirmed ticks each peer reports World.hash() and
+  the room calls out a desync. Everyone fights at the room's level, so no save data enters the
+  bout.
 */
 
 type Entrant = {
@@ -40,6 +42,9 @@ type Entrant = {
   kos: number;
   f: Fighter | null;
 };
+
+/** ticks the local clock keeps ahead of the room's latest frame: the horizon of guessed presses */
+const LEAD = 3;
 type Outcome = { won: boolean; line: string | null; honor: number; rank: number };
 
 export function NetRun({
@@ -64,6 +69,8 @@ export function NetRun({
   const [board, setBoard] = useState<Entrant[] | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [desync, setDesync] = useState<number | null>(null);
+  // a correction arrived from further back than the snapshots kept: this peer fell too far behind
+  const [lost, setLost] = useState(false);
   const profile = getActiveProfile();
 
   useEffect(() => {
@@ -74,9 +81,17 @@ export function NetRun({
     let stop = () => {};
     // frames may start before the sprites are in: queue them from the first moment
     const queue: { k: number; m: number[] }[] = [];
+    // the room's clock, as its frames arrive: the local clock runs at that rate (a Durable Object's
+    // timer is not exactly 30 Hz) and LEAD ticks ahead of it, which is as far as presses are guessed
+    let interval = 1000 / TICK_HZ;
+    let lastFrameAt = 0;
     const off = client.onMessage((msg) => {
-      if (msg.t === "f") queue.push(msg);
-      else if (msg.t === "desync") setDesync(msg.k);
+      if (msg.t === "f") {
+        queue.push(msg);
+        const now = performance.now();
+        if (lastFrameAt) interval = interval * 0.9 + Math.min(100, now - lastFrameAt) * 0.1;
+        lastFrameAt = now;
+      } else if (msg.t === "desync") setDesync(msg.k);
     });
 
     const run = async () => {
@@ -142,10 +157,10 @@ export function NetRun({
         `chars/${me.key}`,
       );
       d.effects = new Effects(d.world, scene);
+      d.arena = true;
       const controls = new Controls();
       // the host runs the computer players
       const brains = new Map<number, Brain>();
-      if (import.meta.env.DEV) Object.assign(window, { __lfo: { director: d, scene, entrants } });
 
       await d.start();
       const stage = d.world.stage;
@@ -185,34 +200,61 @@ export function NetRun({
       setLoading(false);
       client.send({ t: "loaded" });
 
-      let applied = -1;
+      // the bout runs on the local clock; the room's frames confirm or correct it (rollback.ts)
+      const sim: Sim = {
+        step: (masks, silent) => {
+          const locals = new Map<number, InputState>();
+          let mine: InputState = EMPTY_INPUT;
+          entrants.forEach((e, i) => {
+            if (!e.f) return;
+            const input = unpackInput(masks[i] ?? 0);
+            if (e.you) mine = input;
+            else locals.set(e.f.id, input);
+          });
+          d.step(mine, locals, silent);
+        },
+        snapshot: () => d.snapshot(),
+        restore: (s) => d.restore(s as DirectorSnapshot),
+        hash: () => d.world.hash(),
+      };
+      const rb = new Rollback(sim, room.seats.length);
+      if (import.meta.env.DEV)
+        Object.assign(window, { __lfo: { director: d, scene, entrants, rb } });
       let endAt = 0;
-      const apply = (fr: { k: number; m: number[] }) => {
-        if (fr.k <= applied) return;
-        applied = fr.k;
-        const locals = new Map<number, InputState>();
-        let mine: InputState = EMPTY_INPUT;
-        entrants.forEach((e, i) => {
-          if (!e.f) return;
-          const input = unpackInput(fr.m[i] ?? 0);
-          if (e.you) mine = input;
-          else locals.set(e.f.id, input);
-        });
-        d.step(mine, locals);
-        const k = fr.k;
-        client.send({ t: "i", k: k + INPUT_DELAY, m: packInput(controls.sample()) });
+      let ended = false;
+      let nextHash = HASH_EVERY;
+
+      /** My presses (and the COM presses this peer drives) for a tick ahead, then one step. */
+      const localTick = () => {
+        const k = rb.tick + INPUT_DELAY;
+        const mine = packInput(controls.sample());
+        rb.setLocal(you, k, mine);
+        client.send({ t: "i", k, m: mine });
         for (const [i, b] of brains) {
           const f = entrants[i].f;
-          if (f)
-            client.send({
-              t: "i",
-              k: k + INPUT_DELAY,
-              s: i,
-              m: packInput(think(f, d.world.fighters, b)),
-            });
+          if (!f) continue;
+          const m = packInput(think(f, d.world.fighters, b));
+          rb.setLocal(i, k, m);
+          client.send({ t: "i", k, s: i, m });
         }
-        if (k > 0 && k % HASH_EVERY === 0) client.send({ t: "h", k, x: d.world.hash() });
+        rb.advance();
+        afterTick(rb.tick - 1);
+      };
+      /** The room's frames in; then the hashes of the ticks they confirmed out. */
+      const takeFrames = () => {
+        while (queue.length) {
+          const fr = queue.shift()!;
+          rb.frame(fr.k, fr.m);
+        }
+        while (nextHash <= rb.confirmed) {
+          const x = rb.hashAfter(nextHash);
+          if (x !== null) client.send({ t: "h", k: nextHash, x });
+          nextHash += HASH_EVERY;
+        }
+        if (rb.lost) setLost(true);
+      };
 
+      const afterTick = (k: number) => {
         const p = entrants[you].f;
         if (p && k % 3 === 0)
           setVitals({
@@ -232,11 +274,13 @@ export function NetRun({
           comboN = 0;
           setCombo((c) => ({ ...c, n: 0 }));
         }
+        // last team standing — held for 45 ticks, since a rollback can take a knock-out back
         const alive = entrants.filter((x) => x.f).map((x) => ({ team: x.team, hp: x.f!.hp }));
-        if (!endAt) {
-          if (decided(alive) !== null) endAt = k + 45;
-        } else if (k === endAt) {
-          const winner = decided(alive);
+        const winner = decided(alive);
+        if (winner === null) endAt = 0;
+        else if (!endAt) endAt = k + 45;
+        else if (k >= endAt && !ended) {
+          ended = true;
           const won = winner === entrants[you].team;
           const r = settleHonor(getActiveProfile()?.honor ?? 0, won, entrants[you].kos);
           updateActiveProfile((pr) => ({ ...pr, honor: r.honor }));
@@ -247,11 +291,23 @@ export function NetRun({
         }
       };
 
+      let acc = 0;
+      let last = performance.now();
       let raf = 0;
-      const frame = () => {
-        // a burst (we loaded late) is caught up a few ticks a frame
-        let n = 0;
-        while (queue.length && n++ < 10) apply(queue.shift()!);
+      const frame = (now: number) => {
+        acc += Math.min(250, now - last);
+        last = now;
+        takeFrames();
+        // the local clock follows the room's rate (24 – 36 Hz), holding LEAD ticks ahead of its
+        // latest frame: too far ahead it waits, too far behind (we loaded late, or stalled) it
+        // catches up a few ticks a frame — and never past what the snapshots can take back
+        const dt = Math.min(1000 / 24, Math.max(1000 / 36, interval));
+        while (acc >= dt) {
+          acc -= dt;
+          if (rb.ahead <= LEAD && !rb.lost) localTick();
+        }
+        for (let n = 0; n < 4 && rb.ahead < LEAD - 1 && rb.ahead < MAX_AHEAD && !rb.lost; n++)
+          localTick();
         d.setViewWidth((el.clientWidth * 600) / Math.max(1, el.clientHeight));
         scene.draw();
         raf = requestAnimationFrame(frame);
@@ -289,9 +345,11 @@ export function NetRun({
         />
       )}
       <HitCounter hits={combo.n} id={combo.id} scale={scale} />
-      {desync !== null && (
+      {(desync !== null || lost) && (
         <p className="absolute inset-x-0 top-[14%] z-40 text-center font-bold text-[#ff6b6b] text-sm [text-shadow:0_1px_2px_#000]">
-          {t`同步失敗（第 ${desync} 格）：各人看到的戰況已不一致。`}
+          {lost
+            ? t`連線太慢，跟不上房間的進度：這一局無法同步。`
+            : t`同步失敗（第 ${desync} 格）：各人看到的戰況已不一致。`}
         </p>
       )}
       <AnimatePresence>

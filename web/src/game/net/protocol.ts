@@ -12,8 +12,12 @@ import type { Button, InputState } from "../core/types";
 import { EMPTY_INPUT } from "../core/types";
 
 export const PROTOCOL = 1;
-/** Ticks between sampling a press and the tick the room lands it on (≈ 100 ms at 30 Hz). */
-export const INPUT_DELAY = 3;
+/**
+ * Ticks between sampling a press and the tick the room lands it on (≈ 66 ms at 30 Hz). Rollback
+ * (game/net/rollback.ts) hides the rest of the way to the room: a peer's late input rewinds the
+ * world and replays.
+ */
+export const INPUT_DELAY = 2;
 /** Every peer reports its World.hash() this often; the room compares them. */
 export const HASH_EVERY = 30;
 export const MAX_SEATS = 4;
