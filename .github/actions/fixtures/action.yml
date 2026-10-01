@@ -1,15 +1,26 @@
-# Unpacks data/lfo.db + data/assets/game/**/*.json into the workspace.
+# Downloads one archive that deploy/publish-data.sh put in the private R2
+# bucket and unpacks it.
 #
 # data/ is generated from the original game client (`make data`), which CI
-# does not have. deploy/publish-data.sh uploads this subset as
-# fixtures.tar.gz to a private R2 bucket; the data-backed tests in web/ and
-# api/ skip themselves when it is missing, so a run without the secrets still
-# passes — it just tests less, and says so.
+# does not have, so it reaches CI this way:
+#   fixtures.tar.gz  data/lfo.db + data/assets/game/**/*.json, for the tests
+#   assets.tar       the site's art, audio and JSON, copied into the Pages build
+#
+# Each run reads one object, so R2 usage stays far inside the free tier.
+# Without the secrets the step only warns: the data-backed tests skip
+# themselves, and the deploy step (which needs secrets anyway) does not run.
 
-name: Data fixtures
-description: Download the published data fixtures from R2
+name: R2 data
+description: Download and unpack an archive from the private R2 data bucket
 
 inputs:
+  object:
+    description: Object key in the bucket (fixtures.tar.gz or assets.tar)
+    required: true
+  dest:
+    description: Directory to unpack into, relative to the workspace
+    required: false
+    default: .
   account-id:
     description: Cloudflare account ID
     required: true
@@ -20,28 +31,30 @@ inputs:
     description: R2 secret access key
     required: true
   bucket:
-    description: Private R2 bucket holding fixtures.tar.gz
+    description: Private R2 bucket
     required: false
     default: lfo-data
 
 runs:
   using: composite
   steps:
-    - name: Download fixtures
+    - name: Download ${{ inputs.object }}
       shell: bash
       env:
         ACCOUNT_ID: ${{ inputs.account-id }}
         KEY_ID: ${{ inputs.access-key-id }}
         SECRET: ${{ inputs.secret-access-key }}
         BUCKET: ${{ inputs.bucket }}
+        OBJECT: ${{ inputs.object }}
+        DEST: ${{ inputs.dest }}
       run: |
         if [ -z "$ACCOUNT_ID" ] || [ -z "$KEY_ID" ] || [ -z "$SECRET" ]; then
-          echo "::warning::R2 secrets not set; data-backed tests will be skipped"
+          echo "::warning::R2 secrets not set; skipping $OBJECT (data-backed tests will be skipped)"
           exit 0
         fi
+        mkdir -p "$GITHUB_WORKSPACE/$DEST"
         curl -fsSL --retry 3 \
           --aws-sigv4 "aws:amz:auto:s3" --user "$KEY_ID:$SECRET" \
-          "https://$ACCOUNT_ID.r2.cloudflarestorage.com/$BUCKET/fixtures.tar.gz" \
-          | tar -xz -C "$GITHUB_WORKSPACE"
-        echo "lfo.db: $(du -h "$GITHUB_WORKSPACE/data/lfo.db" | cut -f1)," \
-          "game JSON: $(find "$GITHUB_WORKSPACE/data/assets/game" -name '*.json' | wc -l) files"
+          "https://$ACCOUNT_ID.r2.cloudflarestorage.com/$BUCKET/$OBJECT" \
+          | tar -x -C "$GITHUB_WORKSPACE/$DEST"
+        echo "$OBJECT: $(find "$GITHUB_WORKSPACE/$DEST" -type f | wc -l) files in $DEST"

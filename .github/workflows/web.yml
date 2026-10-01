@@ -1,8 +1,12 @@
 # Lint, typecheck, test and build the SPA on every PR and push to main, then
 # deploy it to Cloudflare Pages: main -> production, same-repo PRs -> a
-# preview URL. The game art itself is not part of this build; it lives in the
-# R2 assets bucket (deploy/publish-data.sh) and the build points at it through
-# VITE_ASSETS_URL.
+# preview URL.
+#
+# The game's art, audio and JSON (data/assets) ship inside the Pages
+# deployment under /assets, the default ASSETS base, so every request players
+# make is a Pages static request: free and unmetered. R2 only holds the
+# archive CI copies them from (one read per deploy). Pages uploads only files
+# whose content changed, so redeploys stay small.
 
 name: Web
 
@@ -35,6 +39,11 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    env:
+      # Forks get no secrets, so only pushes and same-repo PRs deploy.
+      DEPLOY: >-
+        ${{ github.event_name == 'push' ||
+        github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - uses: actions/checkout@v7
 
@@ -50,6 +59,7 @@ jobs:
 
       - uses: ./.github/actions/fixtures
         with:
+          object: fixtures.tar.gz
           account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
@@ -66,15 +76,22 @@ jobs:
 
       - name: Build
         run: pnpm run build
-        env:
-          # Public R2 bucket / custom domain serving data/assets.
-          VITE_ASSETS_URL: ${{ vars.VITE_ASSETS_URL }}
 
-      # Forks get no secrets, so only pushes and same-repo PRs deploy.
+      # Lands next to Vite's hashed bundles in dist/assets; the trees don't
+      # overlap (data/assets holds only dex/ game/ ui/ ui-hd/ ui-svg/).
+      - name: Add game assets
+        if: env.DEPLOY == 'true'
+        uses: ./.github/actions/fixtures
+        with:
+          object: assets.tar
+          dest: web/dist/assets
+          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          bucket: ${{ vars.R2_DATA_BUCKET || 'lfo-data' }}
+
       - name: Deploy to Cloudflare Pages
-        if: >-
-          github.event_name == 'push' ||
-          github.event.pull_request.head.repo.full_name == github.repository
+        if: env.DEPLOY == 'true'
         run: >-
           pnpm dlx wrangler@4 pages deploy dist
           --project-name="$PAGES_PROJECT"
