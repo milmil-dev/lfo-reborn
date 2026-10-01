@@ -1,0 +1,802 @@
+:root {
+	--night: #060d1a;
+	--night-2: #0b1830;
+	--ice: #bfe6ff;
+	--ice-glow: #58b8ff;
+	--line: rgba(160, 212, 255, 0.42);
+	--line-soft: rgba(160, 212, 255, 0.16);
+	--chrome: linear-gradient(180deg, #f4f7fb 0%, #9aa6b8 42%, #5d6878 52%, #c9d2de 100%);
+	--lfo-red: #e2343c;
+	--lfo-yellow: #ffd84a;
+	--text: #eaf4ff;
+	--text-dim: #8fa6c2;
+	--sans: "Noto Sans TC", system-ui, sans-serif;
+	--mono: "IBM Plex Mono", ui-monospace, monospace;
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	color-scheme: dark;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+	background: var(--night);
+	color: var(--text);
+	font-family: var(--sans);
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: 0;
+	cursor: pointer;
+}
+
+#app {
+	position: fixed;
+	inset: 0;
+}
+
+.scene {
+	position: absolute;
+	inset: 0;
+	visibility: hidden;
+	opacity: 0;
+}
+.scene[data-active] {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* ───────── shared bits ───────── */
+
+/* the original chrome LFO logo (intro/3dlogo.png, rebuilt from interface8 by the pipeline) */
+.chrome-logo {
+	width: min(440px, 72vw);
+	height: auto;
+	filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 24px rgba(88, 184, 255, 0.28));
+}
+.chrome-logo.big {
+	width: min(560px, 80vw);
+}
+
+/* the glowing LFO mark, cropped out of interface13 (x106 y294, 180×68) */
+.glow-logo {
+	--s: 1.6;
+	width: calc(180px * var(--s));
+	height: calc(68px * var(--s));
+	background: url(./assets/img/interface13.png) calc(-106px * var(--s)) calc(-294px * var(--s)) / calc(512px * var(--s)) no-repeat;
+	filter: drop-shadow(0 0 18px rgba(88, 184, 255, 0.55));
+}
+.glow-logo.big {
+	--s: 2.4;
+}
+
+.hud-btn {
+	position: relative;
+	padding: 6px 14px;
+	font-size: 13px;
+	letter-spacing: 0.12em;
+	color: var(--ice);
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	background: rgba(8, 18, 36, 0.45);
+	backdrop-filter: blur(8px);
+	transition:
+		background 0.2s,
+		border-color 0.2s,
+		color 0.2s;
+}
+.hud-btn:hover,
+.hud-btn[aria-pressed="true"] {
+	background: rgba(88, 184, 255, 0.18);
+	border-color: var(--ice);
+	color: #fff;
+}
+.hud-btn kbd {
+	font-family: var(--mono);
+	font-size: 10px;
+	opacity: 0.6;
+	margin-left: 6px;
+}
+:focus-visible {
+	outline: 2px solid var(--ice-glow);
+	outline-offset: 3px;
+}
+
+.motes {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	mix-blend-mode: screen;
+}
+
+/* the chrome line that sweeps across between scenes */
+.wipe {
+	position: fixed;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 2px;
+	pointer-events: none;
+	background: linear-gradient(90deg, transparent, var(--ice) 30%, #fff 50%, var(--ice) 70%, transparent);
+	box-shadow:
+		0 0 24px 4px rgba(88, 184, 255, 0.6),
+		0 0 80px 10px rgba(88, 184, 255, 0.25);
+	transform: scaleX(0);
+	opacity: 0;
+}
+
+/* ───────── 0 boot ───────── */
+
+#boot {
+	display: grid;
+	place-items: center;
+	background: radial-gradient(ellipse at 50% 45%, #0e2244 0%, var(--night) 62%);
+}
+#boot > * {
+	grid-area: 1 / 1;
+}
+.hud-ring {
+	width: min(62vmin, 520px);
+	fill: none;
+	stroke: var(--line);
+	stroke-width: 0.6;
+	animation: spin 60s linear infinite;
+}
+.hud-ring .dash {
+	stroke-dasharray: 2 6;
+	stroke: var(--line-soft);
+}
+@keyframes spin {
+	to {
+		transform: rotate(1turn);
+	}
+}
+#boot .logo {
+	translate: 0 -3.4rem;
+}
+.press {
+	translate: 0 4.2rem;
+	display: grid;
+	gap: 6px;
+	justify-items: center;
+	animation: breathe 2.4s ease-in-out infinite;
+}
+.press-zh {
+	font-size: 15px;
+	letter-spacing: 0.4em;
+	text-shadow: 0 0 12px var(--ice-glow);
+}
+.press-en {
+	font-family: var(--mono);
+	font-size: 11px;
+	letter-spacing: 0.5em;
+	color: var(--text-dim);
+}
+@keyframes breathe {
+	50% {
+		opacity: 0.35;
+	}
+}
+.boot-foot {
+	align-self: end;
+	margin: 0 0 28px;
+	font-size: 11px;
+	letter-spacing: 0.2em;
+	color: var(--text-dim);
+	opacity: 0.6;
+}
+
+/* ───────── 1 prologue ───────── */
+
+#prologue {
+	background: #000;
+	overflow: hidden;
+}
+.pano {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	display: grid;
+	grid-template-columns: 511px 289px;
+	width: 800px;
+	transform-origin: 50% 0;
+	will-change: transform;
+}
+/* tiles are 512² with a transparent last row/column: lay them on a 511px grid so neighbours overlap it */
+.pano {
+	grid-auto-rows: 511px;
+}
+.pano img {
+	display: block;
+	max-width: none;
+	width: 513px;
+	height: 513px;
+}
+.pano img:nth-child(even) {
+	width: 290px;
+	object-fit: cover;
+	object-position: left top;
+}
+.pano-shade {
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(ellipse at 50% 55%, transparent 30%, rgba(3, 8, 18, 0.7) 100%),
+		linear-gradient(180deg, rgba(3, 8, 18, 0.35), rgba(3, 8, 18, 0.1) 40%, rgba(3, 8, 18, 0.55));
+}
+.prologue-line {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	translate: -50% -50%;
+	width: min(92vw, 900px);
+	margin: 0;
+	text-align: center;
+	font-size: clamp(20px, 2.6vw, 34px);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	line-height: 1.6;
+	color: #f2f9ff;
+	text-shadow:
+		0 0 2px #fff,
+		0 0 14px var(--ice-glow),
+		0 0 40px rgba(88, 184, 255, 0.6);
+	text-wrap: balance;
+}
+.skip {
+	position: absolute;
+	right: 28px;
+	bottom: 28px;
+}
+
+/* ───────── 2 title ───────── */
+
+#title {
+	overflow: hidden;
+	background: var(--night);
+}
+.title-bg {
+	position: absolute;
+	inset: -3%;
+	overflow: hidden;
+	will-change: transform;
+}
+/* cliff + forest rows of the opening panorama, scaled to cover */
+.pano.mini {
+	top: 50%;
+	transform: translate(-50%, -50%) scale(var(--k, 2));
+	transform-origin: 50% 50%;
+}
+.title-bg::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(90deg, rgba(4, 10, 22, 0.94) 0%, rgba(4, 10, 22, 0.7) 38%, rgba(4, 10, 22, 0.15) 70%),
+		linear-gradient(0deg, rgba(4, 10, 22, 0.9), transparent 45%);
+}
+.title-grid {
+	position: relative;
+	height: 100%;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+	align-items: center;
+	gap: 4vw;
+	padding: 0 7vw;
+}
+.title-left {
+	display: grid;
+	gap: 44px;
+	justify-items: start;
+}
+.menu {
+	display: grid;
+	gap: 4px;
+	min-width: min(380px, 80vw);
+}
+.menu-item {
+	color: inherit;
+	text-decoration: none;
+	display: grid;
+	grid-template-columns: 38px 1fr auto;
+	align-items: baseline;
+	padding: 14px 18px 14px 14px;
+	text-align: left;
+	border-radius: 10px;
+	position: relative;
+	transition: background 0.25s var(--ease-out);
+}
+.menu-item::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	height: 1px;
+	width: 0;
+	background: var(--ice);
+	box-shadow: 0 0 10px var(--ice-glow);
+	transition: width 0.35s var(--ease-out);
+}
+.menu-item:not(:disabled):hover,
+.menu-item:not(:disabled):focus-visible {
+	background: linear-gradient(90deg, rgba(88, 184, 255, 0.16), transparent);
+}
+.menu-item:not(:disabled):hover::before,
+.menu-item:not(:disabled):focus-visible::before {
+	width: 10px;
+}
+.menu-item:disabled {
+	cursor: default;
+	opacity: 0.38;
+}
+.mi-idx {
+	font-family: var(--mono);
+	font-size: 11px;
+	color: var(--ice-glow);
+}
+.mi-zh {
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: 0.24em;
+}
+.mi-sub {
+	font-size: 12px;
+	color: var(--text-dim);
+	letter-spacing: 0.12em;
+}
+.keyart {
+	margin: 0;
+	justify-self: end;
+	width: min(38vw, 560px);
+	aspect-ratio: 1;
+	position: relative;
+	padding: 10px;
+	border-radius: 18px;
+	background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02));
+	box-shadow:
+		inset 0 0 0 1px rgba(220, 235, 255, 0.35),
+		0 30px 80px -20px rgba(0, 0, 0, 0.8),
+		0 0 60px -10px rgba(88, 184, 255, 0.35);
+	backdrop-filter: blur(10px);
+	rotate: 2deg;
+}
+.keyart img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	border-radius: 10px;
+}
+.keyart figcaption {
+	position: absolute;
+	right: 22px;
+	bottom: -26px;
+	font-family: var(--mono);
+	font-size: 10px;
+	letter-spacing: 0.3em;
+	color: var(--text-dim);
+}
+
+/* ───────── 3 chapter card ───────── */
+
+#chapter {
+	display: grid;
+	place-items: center;
+	background: radial-gradient(ellipse at 50% 50%, #0c1d3a, #000 70%);
+}
+.card {
+	position: relative;
+	width: min(760px, 88vw);
+	display: grid;
+	gap: 6px;
+}
+.card-line {
+	height: 14px;
+	margin: 6px 0 4px;
+	border-radius: 2px;
+	/* the noisy band + ice glow from the original title strip */
+	background:
+		linear-gradient(180deg, transparent 55%, rgba(120, 190, 255, 0.9) 55%, #4a9eff 80%, transparent 80%),
+		repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0 1px, rgba(255, 255, 255, 0.08) 1px 3px),
+		linear-gradient(180deg, #8d96a3, #3a414c);
+	box-shadow: 0 0 30px rgba(88, 184, 255, 0.45);
+	transform-origin: left center;
+	grid-row: 2;
+}
+.card-num,
+.card-title {
+	margin: 0;
+	font-weight: 900;
+	font-style: italic;
+	letter-spacing: 0.35em;
+	color: #fff;
+	text-shadow:
+		2px 2px 0 #1b2a44,
+		0 0 18px rgba(88, 184, 255, 0.55);
+}
+.card-num {
+	grid-row: 1;
+	font-size: clamp(26px, 4vw, 44px);
+}
+.card-title {
+	grid-row: 3;
+	justify-self: center;
+	font-size: clamp(34px, 6vw, 68px);
+}
+.card-branch {
+	grid-row: 4;
+	justify-self: center;
+	margin: 10px 0 0;
+	font-size: 13px;
+	letter-spacing: 0.5em;
+	color: var(--text-dim);
+}
+.card-stage {
+	position: absolute;
+	right: 36px;
+	bottom: 32px;
+	margin: 0;
+	font-family: var(--mono);
+	font-size: 15px;
+	color: #d7dde6;
+	white-space: pre;
+}
+
+/* ───────── 4 story ───────── */
+
+#story {
+	overflow: hidden;
+	background: #000;
+}
+.stage {
+	position: absolute;
+	inset: 0;
+}
+.world {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 604px;
+	transform-origin: 0 0;
+	opacity: 0;
+	will-change: transform;
+}
+.world img {
+	display: block;
+	user-select: none;
+	-webkit-user-drag: none;
+}
+.world.plaza {
+	width: 2556px;
+	height: 626px;
+}
+.world.gate {
+	width: 1652px;
+}
+.gate .l-base {
+	position: absolute;
+	inset: 0 auto auto 0;
+}
+.gate .l-rob {
+	position: absolute;
+	left: 420px;
+	top: 470px;
+}
+.gate .l-lamp {
+	position: absolute;
+	left: 120px;
+	top: 330px;
+	scale: 1.25;
+	transform-origin: bottom left;
+	filter: brightness(0.8);
+}
+.gate .l-tree {
+	position: absolute;
+	left: 1360px;
+	top: 300px;
+	scale: 1.3;
+	transform-origin: bottom left;
+	filter: brightness(0.85);
+}
+.vignette {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background:
+		radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.55)),
+		linear-gradient(0deg, rgba(3, 8, 18, 0.85) 0%, transparent 38%);
+}
+
+.portrait {
+	position: absolute;
+	bottom: calc(clamp(150px, 24vh, 210px) - 8px);
+	left: max(4vw, calc(50% - 560px));
+	width: calc(170.67px * var(--ps));
+	height: calc(228px * var(--ps));
+	--ps: 1.5;
+	pointer-events: none;
+	z-index: 2;
+	filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.55));
+}
+.portrait[data-side="right"] {
+	left: auto;
+	right: max(4vw, calc(50% - 560px));
+}
+.portrait[data-side="right"] .portrait-img {
+	scale: -1 1;
+}
+.portrait-img {
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-size: calc(512px * var(--ps)) calc(512px * var(--ps));
+	transform-origin: 50% 100%;
+}
+
+.dialog {
+	position: absolute;
+	left: 50%;
+	bottom: 28px;
+	translate: -50% 0;
+	width: min(1120px, calc(100vw - 40px));
+	min-height: clamp(130px, 22vh, 190px);
+	padding: 34px 64px 26px 56px;
+	border-radius: 18px;
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 30%),
+		linear-gradient(180deg, rgba(20, 36, 64, 0.78), rgba(6, 12, 24, 0.86));
+	backdrop-filter: blur(16px) saturate(140%);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.45),
+		inset 0 0 0 1px rgba(190, 210, 235, 0.28),
+		0 20px 60px -10px rgba(0, 0, 0, 0.7);
+	z-index: 3;
+	cursor: pointer;
+}
+/* chrome rim, like the metal frame of the in-game dialog */
+.dialog::before {
+	content: "";
+	position: absolute;
+	inset: -3px;
+	border-radius: 21px;
+	padding: 3px;
+	background: var(--chrome);
+	-webkit-mask:
+		linear-gradient(#000 0 0) content-box,
+		linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	opacity: 0.85;
+	pointer-events: none;
+}
+.bolt {
+	position: absolute;
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: radial-gradient(circle at 35% 30%, #fff, #8e99a8 55%, #3d4552);
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+.bolt.tl {
+	left: 12px;
+	top: 12px;
+}
+.bolt.tr {
+	right: 12px;
+	top: 12px;
+}
+.bolt.bl {
+	left: 12px;
+	bottom: 12px;
+}
+.bolt.br {
+	right: 12px;
+	bottom: 12px;
+}
+.dialog[data-side="left"] {
+	padding-left: calc(170.67px * 1.5 + 12px);
+}
+.dialog[data-side="right"] {
+	padding-right: calc(170.67px * 1.5 + 12px);
+}
+.nameplate {
+	position: absolute;
+	top: -17px;
+	left: 44px;
+	margin: 0;
+	padding: 5px 22px 6px;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.3em;
+	color: #0b1424;
+	border-radius: 999px;
+	background: var(--chrome);
+	box-shadow:
+		0 4px 14px rgba(0, 0, 0, 0.5),
+		inset 0 1px 0 #fff;
+}
+.dialog[data-side="left"] .nameplate {
+	left: calc(170.67px * 1.5 + 4px);
+}
+.dialog[data-side="right"] .nameplate {
+	left: auto;
+	right: calc(170.67px * 1.5 + 4px);
+}
+.nameplate:empty {
+	display: none;
+}
+.dialog-text {
+	margin: 0;
+	font-size: clamp(17px, 1.6vw, 22px);
+	line-height: 1.85;
+	letter-spacing: 0.06em;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+	min-height: 2lh;
+}
+.dialog-text .ch {
+	opacity: 0;
+}
+.dialog-text .ch.on {
+	opacity: 1;
+	transition: opacity 0.2s linear;
+}
+.dialog[data-narration] .dialog-text {
+	text-align: center;
+	color: var(--ice);
+	letter-spacing: 0.14em;
+	text-shadow: 0 0 12px rgba(88, 184, 255, 0.5);
+}
+/* the red ▼ from the original frame */
+.next {
+	position: absolute;
+	right: 30px;
+	bottom: 22px;
+	width: 12px;
+	height: 12px;
+	opacity: 0;
+	background: var(--lfo-red);
+	clip-path: polygon(0 0, 100% 0, 50% 100%);
+	filter: drop-shadow(0 0 6px rgba(226, 52, 60, 0.8));
+}
+.dialog[data-done] .next {
+	opacity: 1;
+	animation: bob 0.9s ease-in-out infinite;
+}
+@keyframes bob {
+	50% {
+		translate: 0 4px;
+	}
+}
+
+.story-hud {
+	position: absolute;
+	top: 22px;
+	right: 22px;
+	display: flex;
+	gap: 8px;
+	z-index: 4;
+}
+
+.log {
+	position: absolute;
+	inset: 0;
+	z-index: 5;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	padding: 28px max(6vw, calc(50% - 420px));
+	background: rgba(4, 9, 20, 0.86);
+	backdrop-filter: blur(18px);
+}
+.log[hidden] {
+	display: none;
+}
+.log header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--line-soft);
+	letter-spacing: 0.3em;
+	font-size: 14px;
+	color: var(--text-dim);
+}
+.log ol {
+	list-style: none;
+	margin: 0;
+	padding: 18px 0;
+	overflow: auto;
+	display: grid;
+	gap: 16px;
+	align-content: start;
+}
+.log li {
+	display: grid;
+	grid-template-columns: 5em 1fr;
+	gap: 16px;
+	line-height: 1.7;
+}
+.log b {
+	color: var(--ice);
+	letter-spacing: 0.2em;
+	font-weight: 500;
+}
+
+@media (max-width: 760px) {
+	.title-grid {
+		grid-template-columns: 1fr;
+		align-content: center;
+		padding: 0 20px;
+	}
+	.keyart {
+		display: none;
+	}
+	.glow-logo.big {
+		--s: 1.7;
+	}
+	.portrait {
+		--ps: 0.95;
+		bottom: calc(clamp(150px, 24vh, 210px) + 20px);
+	}
+	.dialog,
+	.dialog[data-side] {
+		padding: 30px 22px 22px;
+	}
+	.dialog[data-side] .nameplate {
+		left: 20px;
+		right: auto;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hud-ring,
+	.press,
+	.dialog[data-done] .next {
+		animation: none;
+	}
+}
+
+/* interstitial beats (battle placeholder, chapter end) */
+.beat {
+	position: absolute;
+	inset: 0;
+	z-index: 6;
+	display: grid;
+	place-content: center;
+	justify-items: center;
+	gap: 10px;
+	background: radial-gradient(ellipse at 50% 50%, rgba(10, 24, 50, 0.82), rgba(0, 0, 0, 0.94) 70%);
+}
+.beat p {
+	margin: 0;
+}
+.beat-vs {
+	font-size: clamp(64px, 12vw, 140px);
+	font-weight: 900;
+	font-style: italic;
+	color: var(--lfo-yellow);
+	text-shadow:
+		3px 3px 0 var(--lfo-red),
+		0 0 40px rgba(255, 216, 74, 0.5);
+}
+.beat-names {
+	font-size: clamp(20px, 2.4vw, 30px);
+	font-weight: 700;
+	letter-spacing: 0.4em;
+	text-shadow: 0 0 14px var(--ice-glow);
+}
+.beat-note {
+	font-size: 12px;
+	letter-spacing: 0.3em;
+	color: var(--text-dim);
+}

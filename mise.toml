@@ -1,0 +1,6 @@
+[tools]
+go = "1.27.0"
+sqlc = "latest"
+bun = "latest"
+node = "24"
+pnpm = "11"
