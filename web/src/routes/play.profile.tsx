@@ -16,16 +16,17 @@ import { GlassPanel } from "@/game/kit/frames";
 import { Ui } from "@/game/kit/ui";
 import { DataPanel, type PanelData, ProfileFrame } from "@/game/hd";
 import {
-  getActiveSlot,
   freeSlot,
+  getActiveSlot,
   getSlots,
   newProfile,
-  type Profile,
+  playKey,
   saveSlot,
   setActiveSlot,
-  useOwnedChars,
-  useFreeplay,
   setFreeplay,
+  type Profile,
+  useFreeplay,
+  useOwnedChars,
   useSlots,
   useTokens,
 } from "@/game/profiles";
@@ -128,7 +129,8 @@ function SlotPanel({ p, bright }: { p: Profile | null; bright: boolean }) {
     exp: p.exp,
     money: p.money,
     honor: p.honor,
-    head: `${P}/${p.key}_head.webp`,
+    // 合體: the slot shows the 合體戰神 while it lasts (he-ti.mdx 4)
+    head: `${P}/${playKey(p)}_head.webp`,
     created: p.created,
   };
   return <DataPanel data={panel} bright={bright} />;

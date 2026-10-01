@@ -19,7 +19,7 @@ import {
   TeamBadge,
 } from "@/game/kit/room";
 import { Ui } from "@/game/kit/ui";
-import { getActiveProfile, useActiveProfile } from "@/game/profiles";
+import { getActiveProfile, playKey, useActiveProfile } from "@/game/profiles";
 import { Screen } from "@/game/screen";
 import { catalogQuery } from "@/game/stage-select";
 import { rosterQueries, StartGate, useRoster } from "@/game/ui";
@@ -151,7 +151,7 @@ function WaitingRoom() {
       ? [t`鍵盤 2：T F G H 移動，Z 攻擊、X 跳躍、C 防禦，V 道具、B 丟棄。`]
       : []),
   ];
-  const me = roster.find((r) => r.key === profile?.key);
+  const me = roster.find((r) => profile && r.key === playKey(profile));
   const rowY = (slot: number) => ROW_Y + slot * ROW_STEP;
 
   return (

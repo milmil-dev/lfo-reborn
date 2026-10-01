@@ -1,10 +1,11 @@
 import { type Brain, newBrain, think } from "../ai";
 import { pickUp } from "../core/items";
+import { type Mover, newMover, steer } from "./movers";
 import { segmentAt, type StitchedRoom, stitch, stripOf } from "./stitch";
 import { crossesWall, type Point, type Segment, slide, wallSegments } from "./walls";
 import type { Fighter, FighterEvent } from "../core/fighter";
 import type { Effects } from "../effects";
-import { type CharData, EMPTY_INPUT, type InputState, TICK_HZ } from "../core/types";
+import { type CharData, type InputState, TICK_HZ } from "../core/types";
 import { World } from "../core/world";
 import type { Command, DialogueLine, Room, StoryData } from "./types";
 
@@ -126,7 +127,6 @@ type Spawner = {
   boss: boolean;
 };
 type RoomState = { phase: number; done: boolean; played: Set<number> };
-type Mover = { x: number; z: number; run: boolean; tick: number };
 type Waiter = { test: () => boolean; resolve: () => void };
 
 export class Director {
@@ -892,33 +892,8 @@ export class Director {
   }
 
   private moverInput(f: Fighter, m: Mover): InputState {
-    const input = { ...EMPTY_INPUT };
-    m.tick++;
-    const dx = m.x - f.x;
-    const dz = m.z - f.z;
-    const doneX = Math.abs(dx) < (m.run ? 12 : 5);
-    const doneZ = Math.abs(dz) < 4;
-    if (doneX && doneZ) {
-      this.movers.delete(f);
-      f.vx = f.vz = 0;
-      if (f.anim === "WALK" || f.anim === "RUN") f.goto(f.action("STAND"));
-      return input;
-    }
-    if (!doneX) {
-      // a run starts with a double tap, then the direction is held
-      const hold = !m.run || m.tick > 3 || m.tick === 1;
-      input.right = dx > 0 && hold;
-      input.left = dx < 0 && hold;
-    }
-    if (!doneZ) {
-      input.down = dz > 0;
-      input.up = dz < 0;
-    }
-    if (m.tick > TICK_HZ * 12) {
-      // give up rather than stall a scene
-      f.x = m.x;
-      f.z = m.z;
-    }
+    const { input, done } = steer(f, m, this.world.stage);
+    if (done) this.movers.delete(f);
     return input;
   }
 
@@ -1096,7 +1071,7 @@ export class Director {
       case "runex":
       case "walk": {
         const f = this.handle(n(0));
-        if (f) this.movers.set(f, { x: n(1), z: n(2), run: cmd.startsWith("run"), tick: 0 });
+        if (f) this.movers.set(f, newMover(n(1), n(2), cmd.startsWith("run")));
         return;
       }
       case "faceleft":
