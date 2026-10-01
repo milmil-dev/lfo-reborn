@@ -1,4 +1,5 @@
 import { Fighter, type FighterEvent, type Stage } from "./fighter";
+import { Hasher } from "./hash";
 import { DURATION, HOLDS, inflict } from "./status";
 
 /** 咀咒藥水 / 毒性藥水 / 解毒藥水 */
@@ -83,6 +84,20 @@ export class World {
     // whoever ran out of HP this tick goes down, however it happened
     for (const f of this.fighters) f.knockOut();
     return events;
+  }
+
+  /**
+   * A digest of the whole state (core/hash.ts): peers that ran the same inputs must agree on
+   * it after every tick, so comparing digests catches a desync. `onUse` is code, not state —
+   * peers have to install the same one.
+   */
+  hash(): number {
+    const h = new Hasher();
+    const { minX, maxX, minZ, maxZ } = this.stage;
+    h.num(minX).num(maxX).num(minZ).num(maxZ);
+    h.num(this.tick).num(this.nextId).num(this.fighters.length);
+    for (const f of this.fighters) f.hash(h);
+    return h.value;
   }
 
   /**
