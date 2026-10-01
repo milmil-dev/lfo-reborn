@@ -89,9 +89,32 @@ that run them count against the metered 100k/day Workers budget.
 
 Without the R2 secrets CI still passes, but skips the data-backed tests (with a warning) and does not deploy.
 
-## Not deployed yet
+## Realtime Worker (online rooms)
+
+`realtime/` is a Cloudflare Worker with one Durable Object per game room (`Room`): the waiting room's
+seats and rules, and during a bout a 30 Hz sequencer that stamps every seat's input into a frame.
+It never runs the game — every player's browser steps the same deterministic engine from the same
+frames (lockstep) — so a room costs a few messages a second and nothing else.
+
+- `.github/workflows/realtime.yml` type-checks and tests it on PRs and deploys it from `main`
+  (`wrangler deploy`). The deploy needs the `CLOUDFLARE_API_TOKEN` to carry *Workers Scripts: Edit*
+  and *Durable Objects: Edit* as well as Pages — extend the existing token or add those scopes.
+- The site reaches it through `VITE_REALTIME_URL` (GitHub variable `REALTIME_URL`, e.g.
+  `wss://lfo-realtime.<account>.workers.dev`), which `web.yml` passes to the build. Unset, the
+  「連線 VS 對戰」 door says the server is not configured; `vp dev` falls back to `ws://localhost:8787`
+  (`cd realtime && pnpm run dev`).
+
+| Service                  | Free limit                        | One four-player room-hour                      |
+| ------------------------ | --------------------------------- | ---------------------------------------------- |
+| Durable Object requests  | 100k / day (WS messages 20:1 in)  | ≈ 21,600 (4 × 30 Hz; outgoing frames are free) |
+| Durable Object duration  | 13,000 GB-s / day                 | ≈ 450 GB-s (awake only while a bout runs)      |
+| Durable Object storage   | 5M reads, 100k writes / day       | a handful of writes (the line-up)              |
+
+So the free plan carries about 4–5 four-player room-hours a day; Workers Paid ($5/month) includes
+≈ 46 and then charges well under a cent per room-hour. Sending inputs every other tick would halve
+the request count if that ever matters.
+
+## Not deployed
 
 The Go API is not hosted: the site reads its responses as a static snapshot (`api/cmd/export`, refreshed by
-`make data` and `publish-data.sh`). The `/ws/lobby` WebSocket from the online mode does need a server; when the
-API gets a host it needs a single long-running instance (the lobby keeps its state in
-memory), `data/lfo.db` alongside it, and `LFO_CORS_ORIGINS` set to the site's domain.
+`make data` and `publish-data.sh`).

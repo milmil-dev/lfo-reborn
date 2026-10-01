@@ -7,6 +7,7 @@ Monorepo in the same shape as TraderMemos (Go API + React web); its tech stack, 
 pipeline/   Bun + sharp — reads the original client, writes data/lfo.db + data/assets/**
 api/        Go — echo v5, sqlc, modernc SQLite (read-only), serves /api/v1 only (data, no static files)
 web/        Vite+ (vp) React 19 SPA — TanStack Router/Query/Virtual, Tailwind v4, coss ui, Lingui, GSAP, motion
+realtime/   Cloudflare Worker — one Durable Object per online game room (seats, rules, input sequencer)
 legacy/     the old museum's MDX pages and extracted JSON, kept as source material for later content work
 prototype/relogin/  story-mode prototype (Bun), to be ported into web/
 ```
@@ -48,6 +49,20 @@ select, `/play/$key` a training ground driven by the original frame data.
   device per seat (`kb`, `kb2`, `pad<n>`), `Controls` is the single-player case; `game/audio.ts` WebAudio SFX + BGM.
 - VS (`game/vs.ts`, `/play/room`, `/play/vs/$stage`): you + up to three guests at this machine and/or COM players,
   four fighters in all; guests are `Director` fighters of kind `local`, fed through `step(input, locals)`.
+
+## Online rooms (`realtime/`, `web/src/game/net/`, route `/play/online`)
+
+- `realtime/` is a Cloudflare Worker (`pnpm run dev` → ws://localhost:8787, `check`, `test`, `deploy`): `Room`
+  is one Durable Object per room code — the waiting room (seats, rules: stage + one level for all, COM seats,
+  chat, WebSocket hibernation, line-up persisted in storage) and, once started, the `Sequencer`: a 30 Hz clock
+  that stamps each seat's input for tick k into frame k, repeating a late seat's last input. It never runs the
+  game. `wrangler types` writes `worker-configuration.d.ts` (gitignored).
+- `web/src/game/net/protocol.ts` is the wire (JSON; inputs as 9-bit masks) and is compiled by both sides: keep it
+  free of DOM and `@/` imports. `client.ts` is the socket + snapshot; `net-run.tsx` the lockstep bout: the World
+  is stepped only when a frame arrives, my presses are sent for tick k + `INPUT_DELAY`, the host runs COM brains,
+  everyone reports `World.hash()` every `HASH_EVERY` ticks. Spawn every fighter identically on every peer (team,
+  facing by seat) — any per-client difference is a desync.
+- `VITE_REALTIME_URL` points the site at the Worker (deploy/README.md); unset in production the door stays shut.
 - In dev, `window.__lfo` exposes the training world for scripted checks.
 
 ## API (`api/`)

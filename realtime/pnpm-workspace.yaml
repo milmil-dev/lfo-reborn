@@ -1,0 +1,7 @@
+packages:
+  - "."
+
+# wrangler's runtime (workerd) and esbuild fetch their binaries in a build script
+allowBuilds:
+  esbuild: true
+  workerd: true
