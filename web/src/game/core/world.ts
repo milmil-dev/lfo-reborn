@@ -13,6 +13,7 @@ import {
   knockItem,
   ownerOf,
   syncHeld,
+  wearShield,
   teamOf,
   tryPickups,
 } from "./items";
@@ -92,16 +93,18 @@ export class World {
   spawnEffect(owner: Fighter, bla: Bla, data: CharData) {
     const { cx, cy } = owner.frame;
     const facing = (bla.facing ? -owner.facing : owner.facing) as 1 | -1;
+    // a held item's spawn (a bow's arrow) fights for whoever holds it
+    const by = owner.heldBy ?? owner;
     const f = this.spawn(
       data,
-      owner.team,
+      by.team,
       owner.x + owner.facing * (bla.x - cx),
       owner.z + bla.z,
       facing,
     );
     f.effect = true;
-    f.power = owner.power;
-    f.moveBonus = owner.moveBonus;
+    f.power = by.power;
+    f.moveBonus = by.moveBonus;
     f.y = owner.y + bla.y - cy;
     f.goto(bla.aid);
     // launch velocity from the bla row (frames with their own dvx / dvy override it later)
@@ -173,6 +176,24 @@ export class World {
   ) {
     const fromBehind = (a.x - b.x) * b.facing < 0;
     const guardUp = b.anim.startsWith("GUARD") && !fromBehind;
+    // a raised shield (SHIELDUSE) stops a frontal hit outright; the shield takes it instead
+    const shield = b.holding?.itemType === 600 ? b.holding : null;
+    if (shield && b.anim === "SHIELDUSE" && !fromBehind) {
+      ownerOf(a).hitStop = b.hitStop = HIT_STOP;
+      b.vx = a.facing * 2;
+      const dmg = atk.hp > 0 ? Math.max(1, Math.round(atk.hp * a.power * a.moveBonus)) : 0;
+      wearShield(shield, dmg);
+      events.push({
+        type: "hit",
+        attacker: ownerOf(a).id,
+        target: b.id,
+        damage: 0,
+        x: box.x + box.w / 2,
+        y: box.y + box.h / 2,
+        blocked: true,
+      });
+      return;
+    }
     const x = box.x + box.w / 2;
     const y = box.y + box.h / 2;
     // a weapon's hit freezes the one swinging it

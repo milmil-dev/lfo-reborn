@@ -249,3 +249,12 @@ export function afterItemHit(item: Fighter) {
     item.dead = true;
   }
 }
+
+/** A shield takes a blocked hit out of its durability; at 0 it breaks and is gone. */
+export function wearShield(shield: Fighter, damage: number) {
+  shield.hp -= Math.max(1, damage);
+  if (shield.hp > 0) return;
+  if (shield.heldBy?.holding === shield) shield.heldBy.holding = null;
+  shield.heldBy = null;
+  shield.dead = true;
+}
