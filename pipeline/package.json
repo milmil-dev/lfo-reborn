@@ -1,0 +1,14 @@
+{
+	"name": "lfo-pipeline",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "bun build.ts"
+	},
+	"dependencies": {
+		"sharp": "^0.35.5"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	}
+}
