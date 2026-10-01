@@ -2,7 +2,7 @@ import { useLingui } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { Fragment, type ReactNode, useEffect, useEffectEvent, useState } from "react";
-import type { CharData } from "@/game/core/types";
+import type { CharData, Move } from "@/game/core/types";
 import { expToNext, freePoints, statsAt, statTable } from "@/game/leveling";
 import { RANKS, rankOf } from "@/game/vs";
 import { allocatePoint, type Profile, useActiveProfile, useSkillExp } from "@/game/profiles";
@@ -223,7 +223,16 @@ export function CharaCard({ onClose }: { onClose?: () => void }) {
 }
 
 /** 出招表 on the client's skill table, for the character this profile plays. */
-export function SkillList({ onClose }: { onClose: () => void }) {
+export function SkillList({
+  mp,
+  onCast,
+  onClose,
+}: {
+  /** the fighter's MP right now (the table's glow); the character's base MP without it */
+  mp?: number;
+  onCast?: (move: Move) => void;
+  onClose: () => void;
+}) {
   const profile = useActiveProfile();
   const exp = useSkillExp();
   const { data: detail } = useQuery({ ...q.character(profile?.charId ?? 0), enabled: !!profile });
@@ -236,7 +245,16 @@ export function SkillList({ onClose }: { onClose: () => void }) {
   });
   if (!char) return null;
   const skills = new Map((detail?.skills ?? []).map((s) => [s.slot, s]));
-  return <SkillTable data={char} skills={skills} mp={char.attrs.mp} exp={exp} onClose={onClose} />;
+  return (
+    <SkillTable
+      data={char}
+      skills={skills}
+      mp={mp ?? char.attrs.mp}
+      exp={exp}
+      onCast={onCast}
+      onClose={onClose}
+    />
+  );
 }
 
 export function SmileyBox({ onPick }: { onPick: (s: SmileyDef) => void }) {

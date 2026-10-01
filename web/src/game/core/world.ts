@@ -172,7 +172,7 @@ export class World {
     events: FighterEvent[],
   ) {
     const fromBehind = (a.x - b.x) * b.facing < 0;
-    const guarding = b.anim.startsWith("GUARD") && !fromBehind;
+    const guardUp = b.anim.startsWith("GUARD") && !fromBehind;
     const x = box.x + box.w / 2;
     const y = box.y + box.h / 2;
     // a weapon's hit freezes the one swinging it
@@ -180,7 +180,12 @@ export class World {
 
     const dmg =
       atk.hp > 0 ? Math.max(1, Math.round((atk.hp * a.power * a.moveBonus) / b.guard)) : 0;
+    // blocking costs 體力: as much SP as the hit would take in HP; without that much the guard
+    // breaks and the hit lands in full ("你現時的 SP 不足")
+    const guarding = guardUp && b.sp >= dmg;
+    if (guardUp && !guarding) b.sp = 0;
     if (guarding && atk.fall < 90) {
+      b.sp = Math.max(0, b.sp - dmg);
       const chip = Math.round(dmg * 0.1);
       b.hp = Math.max(0, b.hp - chip);
       b.vx = a.facing * Math.max(2, Math.abs(atk.dx) * 0.5);

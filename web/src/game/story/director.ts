@@ -545,6 +545,8 @@ export class Director {
           f.hp = Math.round(f.data.attrs.hp * (m.hpMul || 1));
           f.level = m.level || 1;
           f.reward = m.exp;
+          // 無限重生的怪物的經驗值會是原來的一半
+          if (!Number.isFinite(s.left)) f.rewardScale = 0.5;
           f.showBars = true;
           s.alive.add(f);
         }

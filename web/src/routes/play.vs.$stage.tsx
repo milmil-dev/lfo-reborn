@@ -248,7 +248,8 @@ function VsRun({
             maxHp: p.maxHp,
             mp: p.mp,
             maxMp: p.maxMp,
-            sp: 100,
+            sp: p.sp,
+            maxSp: p.maxSp,
             status: [...p.status.keys()],
           });
         if (tick % 30 === 0) setSeconds(Math.floor(tick / 30));

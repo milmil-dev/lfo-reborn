@@ -11,7 +11,13 @@
   so the numbers below are this remake's: a chapter of 第一章 takes a new character to about LV 3.
 */
 
-export const MAX_LEVEL = 100;
+/**
+ * The level cap (system/tran.mdx): LV 150, or LV 300 for a character whose account holds its
+ * 異轉信物 — "所有未能或未符合異轉的角色，最多只能升級至LV150".
+ */
+export const MAX_LEVEL = 300;
+export const BASE_MAX_LEVEL = 150;
+export const levelCap = (canTransform: boolean) => (canTransform ? MAX_LEVEL : BASE_MAX_LEVEL);
 
 export type Stats = { hp: number; mp: number; sp: number; str: number; def: number; agi: number };
 export type StatTable = { default: Stats; growth: Stats; max: Stats };
@@ -67,15 +73,15 @@ export function statsAt(t: StatTable, level: number, points: Points = {}): Stats
 export const RESET_LEVEL = 10;
 export const resetFee = (level: number) => 500 * level;
 
-/** Add EXP; returns the new level / EXP-into-level and how many levels were gained. */
-export function gainExp(level: number, exp: number, amount: number) {
+/** Add EXP up to `cap`; returns the new level / EXP-into-level and how many levels were gained. */
+export function gainExp(level: number, exp: number, amount: number, cap = BASE_MAX_LEVEL) {
   let lv = level;
   let e = exp + Math.max(0, Math.round(amount));
-  while (lv < MAX_LEVEL && e >= expToNext(lv)) {
+  while (lv < cap && e >= expToNext(lv)) {
     e -= expToNext(lv);
     lv++;
   }
-  if (lv >= MAX_LEVEL) e = 0;
+  if (lv >= cap) e = 0;
   return { level: lv, exp: e, gained: lv - level };
 }
 
@@ -95,10 +101,12 @@ export function applyLevel(
     level: number;
     hpMax: number | null;
     mpMax: number | null;
+    spMax: number | null;
     power: number;
     guard: number;
     hp: number;
     mp: number;
+    sp: number;
   },
   t: StatTable,
   level: number,
@@ -112,12 +120,27 @@ export function applyLevel(
   const first = f.hpMax === null;
   const hpUp = s.hp - (f.hpMax ?? s.hp);
   const mpUp = s.mp - (f.mpMax ?? s.mp);
+  const spUp = s.sp - (f.spMax ?? s.sp);
   f.level = level;
   f.hpMax = s.hp;
   f.mpMax = s.mp;
+  f.spMax = s.sp;
   f.power = Math.sqrt(s.str / Math.max(1, t.default.str));
   f.guard = Math.sqrt(s.def / Math.max(1, t.default.def));
   // first application fills up; a level-up adds the gained headroom
   f.hp = first ? s.hp : Math.min(s.hp, f.hp + Math.max(0, hpUp));
   f.mp = first ? s.mp : Math.min(s.mp, f.mp + Math.max(0, mpUp));
+  f.sp = first ? s.sp : Math.min(s.sp, f.sp + Math.max(0, spUp));
+}
+
+/**
+ * 異轉's raised caps (system/tran.mdx "角色的能力上限可以繼續提升"; fanscamp/76: past 400 STR /
+ * DEF / AGI only with the 信物 and LV 150): a qualified character grows to the higher of its own
+ * and its transformed form's att maximums (星奇 400 → 新生星奇 600).
+ */
+export function withTranCaps(t: StatTable, form: StatTable | null): StatTable {
+  if (!form) return t;
+  const max = { ...t.max };
+  for (const k of Object.keys(max) as (keyof Stats)[]) max[k] = Math.max(max[k], form.max[k]);
+  return { ...t, max };
 }

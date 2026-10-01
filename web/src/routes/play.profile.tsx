@@ -24,6 +24,8 @@ import {
   saveSlot,
   setActiveSlot,
   useOwnedChars,
+  useFreeplay,
+  setFreeplay,
   useSlots,
   useTokens,
 } from "@/game/profiles";
@@ -218,6 +220,7 @@ function ProfileSelect() {
 
   // 儲物室: the characters and 異轉信物 the account holds from cards
   const owned = useOwnedChars();
+  const freeplay = useFreeplay();
   const tokens = useTokens();
   const { data: sprites } = useQuery({
     queryKey: ["game", "index"],
@@ -478,12 +481,30 @@ function ProfileSelect() {
 
         {/* one bottom row on a shared baseline: storage left, the keys in the middle, back right */}
         <div className="absolute inset-x-[24px] bottom-[16px] flex h-[30px] items-center justify-between">
-          <MetalButton onClick={() => setStorage(true)} className="h-[30px] w-[128px] text-[13px]">
-            {t`儲物室`}
-            {owned.length > 0 && (
-              <span className="ml-1.5 font-lfo text-[10px] opacity-80">{owned.length}</span>
-            )}
-          </MetalButton>
+          <div className="flex gap-2">
+            <MetalButton
+              onClick={() => setStorage(true)}
+              className="h-[30px] w-[128px] text-[13px]"
+            >
+              {t`儲物室`}
+              {owned.length > 0 && (
+                <span className="ml-1.5 font-lfo text-[10px] opacity-80">{owned.length}</span>
+              )}
+            </MetalButton>
+            {/* 自由模式: new characters at LV 150, 異轉 without its 信物, every character open */}
+            <MetalButton
+              onClick={() => {
+                setFreeplay(!freeplay);
+                audio.sfx("johnnyconfirm.wav", { volume: 0.6 });
+              }}
+              active={freeplay}
+              aria-pressed={freeplay}
+              title={t`新角色由 LV 150 開始，不需異轉信物，全部角色開放`}
+              className="h-[30px] w-[128px] text-[13px]"
+            >
+              {freeplay ? t`自由模式 開` : t`自由模式 關`}
+            </MetalButton>
+          </div>
           <p className="whitespace-nowrap text-[12px] text-white/80 [text-shadow:0_1px_1px_rgb(0_0_0/0.35)]">
             {t`↑↓ 或滾輪選擇　Enter 進入／新建　Delete 刪除　Esc 返回`}
           </p>

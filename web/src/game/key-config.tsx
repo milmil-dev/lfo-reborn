@@ -12,6 +12,7 @@ import {
   codeLabel,
   DEFAULT_BINDINGS,
   getBindings,
+  keyCode,
   onBindings,
   type PadButton,
   setBindings,
@@ -88,8 +89,9 @@ export function KeyConfig({ onClose }: { onClose: () => void }) {
     const onKey = (e: KeyboardEvent) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      if (e.code !== "Escape") {
-        assignKey(ROWS[listening.row] as Button, e.code);
+      const code = keyCode(e);
+      if (code && code !== "Escape") {
+        assignKey(ROWS[listening.row] as Button, code);
         audio.sfx("johnnyconfirm.wav", { volume: 0.6 });
       }
       setListening(null);

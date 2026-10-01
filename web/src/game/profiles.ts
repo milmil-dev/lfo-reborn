@@ -13,7 +13,8 @@ import { KEY, moveKey } from "@/lib/storage-keys";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { emptyInventory, type Inventory, type Owned } from "./inventory";
-import { gainExp } from "./leveling";
+import { gainExp, levelCap } from "./leveling";
+import { TRAN_LEVEL } from "./transform";
 
 export type Profile = {
   key: string; // sprite key, e.g. "stinky"
@@ -48,6 +49,12 @@ type Save = {
   tokens: number[];
   /** 人物卡: characters the account owns beyond the 22 of the create screen, by sprite key */
   chars: string[];
+  /**
+   * 自由模式 (the profile screen's switch): new characters start at LV 150, every character
+   * counts as holding its 異轉信物 (so 異轉 and the LV 300 cap are open) and every character is
+   * open to create
+   */
+  freeplay?: boolean;
 };
 
 /* ───────── the saves written before the store (one localStorage key each) ───────── */
@@ -123,7 +130,7 @@ export const newProfile = (key: string, charId: number, name: string): Profile =
   charId,
   name,
   created: Date.now(),
-  lv: 1,
+  lv: get().freeplay ? TRAN_LEVEL : 1,
   exp: 0,
   money: 1000,
   honor: 0,
@@ -181,7 +188,7 @@ export function resetPoints(): { ok: boolean; line: string } {
 export function awardExp(amount: number): { profile: Profile; gained: number } | null {
   let gained = 0;
   const profile = updateActiveProfile((p) => {
-    const r = gainExp(p.lv, p.exp, amount);
+    const r = gainExp(p.lv, p.exp, amount, levelCap(hasToken(p.charId)));
     gained = r.gained;
     return { ...p, lv: r.level, exp: r.exp };
   });
@@ -216,7 +223,11 @@ export const grantChar = (key: string) =>
 
 /** 異轉信物: held by the account (every profile on every server), by base character id. */
 export const getTokens = () => get().tokens;
-export const hasToken = (charId: number) => get().tokens.includes(charId);
+export const hasToken = (charId: number) => !!get().freeplay || get().tokens.includes(charId);
+
+/** 自由模式: see Save.freeplay. */
+export const getFreeplay = () => !!get().freeplay;
+export const setFreeplay = (on: boolean) => set({ freeplay: on });
 export const grantToken = (charId: number) =>
   set((s) => ({ tokens: s.tokens.includes(charId) ? s.tokens : [...s.tokens, charId] }));
 
@@ -235,6 +246,7 @@ export const useMoney = () =>
   useSave((s) => (s.active === null ? 0 : (s.slots[s.active]?.money ?? 0)));
 export const useBank = () => useSave(bankOf);
 export const useTokens = () => useSave((s) => s.tokens);
+export const useFreeplay = () => useSave((s) => !!s.freeplay);
 const NO_CHARS: string[] = [];
 export const useOwnedChars = () => useSave((s) => s.chars ?? NO_CHARS);
 const NO_SKILLS: Record<number, number> = {};

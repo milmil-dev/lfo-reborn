@@ -1,4 +1,4 @@
-import { createReadStream, readFileSync, statSync } from "node:fs";
+import { createReadStream, existsSync, readFileSync, statSync } from "node:fs";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { dirname, extname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,6 +14,9 @@ const here = dirname(fileURLToPath(import.meta.url));
 const { version } = JSON.parse(readFileSync(resolve(here, "package.json"), "utf8")) as {
   version: string;
 };
+// 更新內容: release-please's CHANGELOG.md at the repo root, inlined for the title screen
+const changelogPath = resolve(here, "../CHANGELOG.md");
+const changelog = existsSync(changelogPath) ? readFileSync(changelogPath, "utf8") : "";
 
 /*
   The pipeline's output (data/assets: art, UI, audio, JSON) is static: in dev and `vp preview`
@@ -75,7 +78,7 @@ const assets = {
 };
 
 export default defineConfig({
-  define: { __APP_VERSION__: JSON.stringify(version) },
+  define: { __APP_VERSION__: JSON.stringify(version), __CHANGELOG__: JSON.stringify(changelog) },
   resolve: {
     alias: { "@": resolve(here, "./src") },
   },

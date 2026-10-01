@@ -5,9 +5,11 @@ import {
   expToNext,
   freePoints,
   gainExp,
+  levelCap,
   POINT_GAIN,
   statsAt,
   type StatTable,
+  withTranCaps,
 } from "./leveling";
 
 // stinky's att row
@@ -21,6 +23,12 @@ describe("leveling", () => {
   it("carries EXP over several levels", () => {
     const r = gainExp(1, 0, expToNext(1) + expToNext(2) + 5);
     expect(r).toEqual({ level: 3, exp: 5, gained: 2 });
+  });
+
+  it("stops at LV 150, or LV 300 with 異轉", () => {
+    expect(gainExp(150, 0, 1e9)).toEqual({ level: 150, exp: 0, gained: 0 });
+    expect(gainExp(149, 0, 1e9, levelCap(false)).level).toBe(150);
+    expect(gainExp(149, 0, 1e9, levelCap(true)).level).toBe(300);
   });
 
   it("grows stats from the att row", () => {
@@ -46,12 +54,31 @@ describe("leveling", () => {
   });
 
   it("a level-up raises max HP and adds the headroom", () => {
-    const f = { level: 1, hpMax: null, mpMax: null, power: 1, guard: 1, hp: 1100, mp: 700 };
+    const f = {
+      level: 1,
+      hpMax: null as number | null,
+      mpMax: null as number | null,
+      spMax: null as number | null,
+      power: 1,
+      guard: 1,
+      hp: 1100,
+      mp: 700,
+      sp: 0,
+    };
     applyLevel(f, stinky, 1);
+    expect(f.sp).toBe(1050);
     f.hp = 500;
     applyLevel(f, stinky, 11);
     expect(f.hpMax).toBe(1170);
     expect(f.hp).toBe(570);
+    expect(f.spMax).toBe(1115);
     expect(f.power).toBeGreaterThan(1);
+  });
+
+  it("異轉 lifts the caps to the form's (星奇 STR 400 → 新生星奇 600)", () => {
+    const form = { ...stinky, max: { ...stinky.max, str: 600, def: 600, agi: 600 } };
+    expect(statsAt(stinky, 300).str).toBe(400);
+    expect(statsAt(withTranCaps(stinky, form), 300).str).toBe(587);
+    expect(withTranCaps(stinky, null)).toBe(stinky);
   });
 });

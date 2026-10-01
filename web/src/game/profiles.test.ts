@@ -32,6 +32,19 @@ describe("save store", () => {
     expect(s.hasToken(2)).toBe(true);
   });
 
+  it("自由模式: new characters start at LV 150 and every 異轉 is open", async () => {
+    const s = await fresh();
+    expect(s.newProfile("stinky", 2, "x").lv).toBe(1);
+    expect(s.hasToken(2)).toBe(false);
+    s.setFreeplay(true);
+    expect(s.newProfile("stinky", 2, "x").lv).toBe(150);
+    expect(s.hasToken(2)).toBe(true);
+    // and EXP carries a LV 150 character past 150
+    s.saveSlot(0, s.newProfile("stinky", 2, "x"));
+    s.setActiveSlot(0);
+    expect(s.awardExp(1e9)?.profile.lv).toBe(300);
+  });
+
   it("carries a save from before the rename over to the new key", async () => {
     let s = await fresh();
     s.saveSlot(0, stinky);
