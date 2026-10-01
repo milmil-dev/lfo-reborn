@@ -287,6 +287,8 @@ async function exportStory(key: string) {
 	const scripts: string[] = [];
 	const events: number[][] = [];
 	const loot: { sprite: number; p: number }[] = [];
+	// lok BG PORTAL LOCK: a door that needs a key (701 ~ 705, the coloured keys; -1 = open)
+	const locks: Record<string, number> = {};
 	let mapId = 0;
 	// the stage's own music (VS stages and towers have no script that plays any)
 	let bgm: string | null = null;
@@ -301,6 +303,7 @@ async function exportStory(key: string) {
 		else if (r[0] === "evt") events.push(r.slice(1).map(Number));
 		// the stage's loot table: sprite id and drop weight (field items and equipment alike)
 		else if (r[0] === "itm") loot.push({ sprite: n(2), p: n(3) });
+		else if (r[0] === "lok" && n(3) > 0) locks[`${n(1)}:${n(2)}`] = n(3);
 	}
 
 	// the map with this id
@@ -364,7 +367,7 @@ async function exportStory(key: string) {
 		const n = nameTable.get(id);
 		if (n && n !== "-") names[id] = n;
 	}
-	await Bun.write(`${OUT}/stories/${key}.json`, JSON.stringify({ key, area, mapId, bgm, start, rooms, links, groups, events, scripts: scriptCmds, dialogue, sprites, names, loot }));
+	await Bun.write(`${OUT}/stories/${key}.json`, JSON.stringify({ key, area, mapId, bgm, start, rooms, links, groups, events, scripts: scriptCmds, dialogue, sprites, names, loot, locks }));
 	console.log(`${key}: rooms ${Object.keys(rooms).length}, events ${events.length}, scripts ${scriptCmds.length}, dialogue ${Object.keys(dialogue).length}, sprites ${ids.size}, bg images ${bgImages.size}`);
 }
 

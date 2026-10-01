@@ -163,3 +163,19 @@ describe.skipIf(!hasData || !hasGear)("bows and shields", () => {
     expect(shield.hp).toBeLessThan(dur);
   });
 });
+
+describe.skipIf(!hasData || !existsSync(`${root}/sprites/701.json`))("鑰匙", () => {
+  it("攻 by a key puts it on the ring (a key event), not in the hands — hands full or not", () => {
+    const { world, hero, item: bat } = setup(101);
+    play(world, hero.id, [], 20);
+    play(world, hero.id, [{ attack: true }, {}], 5);
+    expect(hero.holding).toBe(bat);
+    const key = world.spawn(load("sprites/701"), 0, hero.x + 10, hero.z, 1);
+    play(world, hero.id, [], 20);
+    expect(key.itemState).toBe("ground");
+    const events = play(world, hero.id, [{ attack: true }, {}], 2);
+    expect(events).toContainEqual({ type: "key", fighter: hero.id, key: 701 });
+    expect(key.dead).toBe(true);
+    expect(hero.holding).toBe(bat);
+  });
+});

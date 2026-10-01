@@ -34,7 +34,7 @@ msgid "{0}：{1} 對 {2}"
 msgstr "{0}：{1} 對 {2}"
 
 #. placeholder {0}: vitals?.name ?? ""
-#: src/routes/play.story.$story.tsx:813
+#: src/routes/play.story.$story.tsx:823
 msgid "{0}倒下了……"
 msgstr "{0}倒下了……"
 
@@ -64,7 +64,7 @@ msgstr "{0}的遊戲室"
 msgid "{0}線"
 msgstr "{0}線"
 
-#: src/routes/play.story.$story.tsx:814
+#: src/routes/play.story.$story.tsx:824
 msgid "{stageName} · 完成"
 msgstr "{stageName} · 完成"
 
@@ -261,11 +261,11 @@ msgstr "再來一局"
 msgid "再來一屆"
 msgstr "再來一屆"
 
-#: src/routes/play.story.$story.tsx:850
+#: src/routes/play.story.$story.tsx:860
 msgid "再玩一次"
 msgstr "再玩一次"
 
-#: src/routes/play.story.$story.tsx:845
+#: src/routes/play.story.$story.tsx:855
 msgid "再試一次"
 msgstr "再試一次"
 
@@ -273,7 +273,7 @@ msgstr "再試一次"
 msgid "最新"
 msgstr "最新"
 
-#: src/routes/play.story.$story.tsx:820
+#: src/routes/play.story.$story.tsx:830
 msgid "最高連擊"
 msgstr "最高連擊"
 
@@ -351,7 +351,7 @@ msgstr "合成"
 msgid "合成道具成功！你已取得物品「{name}」。"
 msgstr "合成道具成功！你已取得物品「{name}」。"
 
-#: src/routes/play.story.$story.tsx:817
+#: src/routes/play.story.$story.tsx:827
 #: src/routes/play.vs.$stage.tsx:333
 msgid "名稱"
 msgstr "名稱"
@@ -399,12 +399,12 @@ msgstr "大廳"
 #~ msgstr "奧義"
 
 #: src/routes/play.lobby.tsx:757
-#: src/routes/play.story.$story.tsx:689
+#: src/routes/play.story.$story.tsx:699
 msgid "好友"
 msgstr "好友"
 
 #: src/routes/play.lobby.tsx:529
-#: src/routes/play.story.$story.tsx:698
+#: src/routes/play.story.$story.tsx:708
 msgid "好友名單：單機重現中沒有其他玩家在線。"
 msgstr "好友名單：單機重現中沒有其他玩家在線。"
 
@@ -418,7 +418,7 @@ msgid "對戰場地"
 msgstr "對戰場地"
 
 #: src/routes/play.lobby.tsx:505
-#: src/routes/play.story.$story.tsx:668
+#: src/routes/play.story.$story.tsx:678
 msgid "展開介面"
 msgstr "展開介面"
 
@@ -499,7 +499,7 @@ msgstr "找不到這一頁"
 #~ msgstr "找不到這件物品"
 
 #: src/routes/play.lobby.tsx:756
-#: src/routes/play.story.$story.tsx:688
+#: src/routes/play.story.$story.tsx:698
 msgid "技能"
 msgstr "技能"
 
@@ -562,7 +562,7 @@ msgid "按手掣按鈕…"
 msgstr "按手掣按鈕…"
 
 #: src/routes/play.lobby.tsx:563
-#: src/routes/play.story.$story.tsx:799
+#: src/routes/play.story.$story.tsx:809
 msgid "按鍵設定"
 msgstr "按鍵設定"
 
@@ -630,13 +630,13 @@ msgstr "搜尋故事、角色、地區…"
 msgid "撤回"
 msgstr "撤回"
 
-#: src/routes/play.story.$story.tsx:822
+#: src/routes/play.story.$story.tsx:832
 #: src/routes/play.vs.$stage.tsx:333
 msgid "擊倒"
 msgstr "擊倒"
 
 #: src/routes/play.lobby.tsx:761
-#: src/routes/play.story.$story.tsx:693
+#: src/routes/play.story.$story.tsx:703
 msgid "收起介面"
 msgstr "收起介面"
 
@@ -704,12 +704,12 @@ msgstr "方向鍵選擇 · Enter 更改 · Esc 返回"
 msgid "是"
 msgstr "是"
 
-#: src/routes/play.story.$story.tsx:819
+#: src/routes/play.story.$story.tsx:829
 msgid "時間"
 msgstr "時間"
 
-#: src/routes/play.story.$story.tsx:691
-#: src/routes/play.story.$story.tsx:796
+#: src/routes/play.story.$story.tsx:701
+#: src/routes/play.story.$story.tsx:806
 msgid "暫停"
 msgstr "暫停"
 
@@ -830,7 +830,7 @@ msgid "獨立"
 msgstr "獨立"
 
 #. placeholder {0}: gain.name
-#: src/routes/play.story.$story.tsx:768
+#: src/routes/play.story.$story.tsx:778
 msgid "獲得 {0}"
 msgstr "獲得 {0}"
 
@@ -929,7 +929,7 @@ msgstr "等級 {n}"
 msgid "系統選單"
 msgstr "系統選單"
 
-#: src/routes/play.story.$story.tsx:825
+#: src/routes/play.story.$story.tsx:835
 #: src/routes/play.vs.$stage.tsx:333
 msgid "結果"
 msgstr "結果"
@@ -942,7 +942,7 @@ msgstr "維修"
 #~ msgid "編號"
 #~ msgstr "編號"
 
-#: src/routes/play.story.$story.tsx:821
+#: src/routes/play.story.$story.tsx:831
 msgid "總傷害"
 msgstr "總傷害"
 
@@ -954,7 +954,7 @@ msgstr "總傷害"
 msgid "繼續"
 msgstr "繼續"
 
-#: src/routes/play.story.$story.tsx:798
+#: src/routes/play.story.$story.tsx:808
 msgid "繼續遊戲"
 msgstr "繼續遊戲"
 
@@ -964,7 +964,7 @@ msgstr "繼續遊戲"
 
 #: src/routes/play.lobby.tsx:760
 #: src/routes/play.lobby.tsx:823
-#: src/routes/play.story.$story.tsx:692
+#: src/routes/play.story.$story.tsx:702
 msgid "聊天"
 msgstr "聊天"
 
@@ -1002,7 +1002,7 @@ msgstr "自由模式 關"
 #~ msgstr "行走"
 
 #: src/routes/play.lobby.tsx:758
-#: src/routes/play.story.$story.tsx:690
+#: src/routes/play.story.$story.tsx:700
 msgid "表情"
 msgstr "表情"
 
@@ -1046,7 +1046,7 @@ msgstr "角色名字"
 #~ msgstr "角色圖鑑"
 
 #: src/routes/play.lobby.tsx:755
-#: src/routes/play.story.$story.tsx:687
+#: src/routes/play.story.$story.tsx:697
 msgid "角色資料"
 msgstr "角色資料"
 
@@ -1114,6 +1114,12 @@ msgstr "返回大廳"
 msgid "返回選角"
 msgstr "返回選角"
 
+#. placeholder {0}: KEY_NAME[key] ?? t`鑰匙`
+#: src/routes/play.story.$story.tsx:152
+#: src/routes/play.story.$story.tsx:153
+msgid "這道門鎖上了，需要「{0}」。"
+msgstr "這道門鎖上了，需要「{0}」。"
+
 #: src/routes/play.index.tsx:222
 #~ msgid "速度"
 #~ msgstr "速度"
@@ -1162,7 +1168,7 @@ msgstr "選擇角色"
 #~ msgid "重新登入<0/>小朋友齊打交"
 #~ msgstr "重新登入<0/>小朋友齊打交"
 
-#: src/routes/play.story.$story.tsx:800
+#: src/routes/play.story.$story.tsx:810
 msgid "重新開始"
 msgstr "重新開始"
 
@@ -1174,7 +1180,7 @@ msgstr "重新開始"
 msgid "重置"
 msgstr "重置"
 
-#: src/routes/play.story.$story.tsx:824
+#: src/routes/play.story.$story.tsx:834
 msgid "金錢"
 msgstr "金錢"
 
@@ -1185,6 +1191,11 @@ msgstr "金錢"
 #: src/routes/play.lobby.tsx:179
 #~ msgid "鐵匠（修理 / 合成）：還在重建中。"
 #~ msgstr "鐵匠（修理 / 合成）：還在重建中。"
+
+#: src/routes/play.story.$story.tsx:152
+#: src/routes/play.story.$story.tsx:153
+msgid "鑰匙"
+msgstr "鑰匙"
 
 #: src/game/stage-select.tsx:391
 msgid "開始"
@@ -1211,7 +1222,7 @@ msgstr "開啟聲音"
 msgid "開設遊戲室"
 msgstr "開設遊戲室"
 
-#: src/routes/play.story.$story.tsx:701
+#: src/routes/play.story.$story.tsx:711
 msgid "關卡中不能聊天，回到大廳再聊吧。"
 msgstr "關卡中不能聊天，回到大廳再聊吧。"
 
@@ -1256,9 +1267,9 @@ msgstr "隊伍"
 msgid "離開"
 msgstr "離開"
 
-#: src/routes/play.story.$story.tsx:801
-#: src/routes/play.story.$story.tsx:846
-#: src/routes/play.story.$story.tsx:849
+#: src/routes/play.story.$story.tsx:811
+#: src/routes/play.story.$story.tsx:856
+#: src/routes/play.story.$story.tsx:859
 msgid "離開故事"
 msgstr "離開故事"
 

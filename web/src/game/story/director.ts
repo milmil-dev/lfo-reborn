@@ -46,6 +46,25 @@ export const EVENT = {
   RAN_DOOR: 38,
 } as const;
 
+/**
+ * The keys a stage can actually hand out: key sprites (700 ~ 799) in the groups its spawn rows
+ * use, and ADDKEY's. A lok row whose key the stage never gives (mission_school5's 705, the sealed
+ * 720 ~ 722) is left open, as the client's server — whose DoorPool decided which locks were
+ * live — evidently did.
+ */
+export function obtainableKeys(story: StoryData) {
+  const keys = new Set<number>();
+  for (const e of story.events) {
+    if (!e || e[0] === null) continue;
+    const type = e[2];
+    if (type === EVENT.ADDKEY) keys.add(e[3]);
+    else if (type === EVENT.SPAWN || type === EVENT.SPAWN_ALT || type === EVENT.BOSS)
+      for (const m of story.groups[String(e[9])] ?? [])
+        if (m.sprite >= 700 && m.sprite < 800) keys.add(m.sprite);
+  }
+  return keys;
+}
+
 type Kind = "enemy" | "npc" | "item" | "player" | "com";
 
 const PLAYER_HANDLE = 9000;
@@ -77,6 +96,10 @@ export type StoryUI = {
   shake(amount: number): void;
   status(s: StoryStatus): void;
   fx(events: FighterEvent[]): void;
+  /** the key ring changed (key sprite ids held) */
+  keys?(keys: number[]): void;
+  /** the player walked into a locked door without its key */
+  locked?(key: number): void;
 };
 
 export type StoryStatus = {
@@ -151,6 +174,19 @@ export class Director {
   >();
   /** CHANGEPHASE rows already used up (their TIMES), by row */
   private readonly phaseChanges = new Map<string, number>();
+  /** 鑰匙: the keys the player holds (sprite ids: 701 ~ 705 picked up, 710 … given by ADDKEY) */
+  readonly keys = new Set<number>();
+  /** locked doors already opened, by `bg:door` (both sides of a doorway) */
+  private readonly opened = new Set<string>();
+  /** the locked door the player is pushing against (told once until they step away) */
+  private lockedAt: string | null = null;
+  /**
+   * Key gates: a room that turns the player back in a loop (a drama, a warp, a CHANGEPHASE to
+   * itself) until they come with the key its later REMOVEKEY takes. The client's server opened
+   * them (PACKET_KEYUSE / OPENDOOR): with the key, the loop's phases jump to the unlock phase.
+   * By `bg:phase` of the loop.
+   */
+  private readonly gates = new Map<string, { key: number; to: number }>();
   private spawners: Spawner[] = [];
   private pendingDrama: { script: number; x1: number; x2: number; once: boolean; key: number }[] =
     [];
@@ -178,6 +214,48 @@ export class Director {
     private readonly playerPath?: string,
   ) {
     this.world = new World({ minX: 0, maxX: 1, minZ: 0, maxZ: 1 });
+    this.obtainable = obtainableKeys(story);
+    this.findGates();
+  }
+
+  private findGates() {
+    const ev = this.story.events;
+    for (const [bg, used, type, key] of ev) {
+      if (type !== EVENT.REMOVEKEY) continue;
+      // the room's self-loop before the REMOVEKEY phase: CHANGEPHASE at c back to L
+      const loops = ev.filter(
+        (e) =>
+          e[0] === bg && e[2] === EVENT.CHANGEPHASE && e[3] === bg && e[4] < e[1] && e[1] < used,
+      );
+      const loop = loops.sort((a, b) => b[1] - a[1])[0];
+      if (!loop) continue;
+      const [, end, , , start] = loop;
+      // the unlock: the first phase after the loop with something to play
+      let to = 0;
+      for (let p = end + 1; p <= used && !to; p++)
+        if (ev.some((e) => e[0] === bg && e[1] === p)) to = p;
+      if (!to) continue;
+      for (let p = start; p <= end; p++) this.gates.set(`${bg}:${p}`, { key, to });
+    }
+  }
+
+  /* ───────── 鑰匙 ───────── */
+
+  private giveKey(key: number) {
+    if (this.keys.has(key)) return;
+    this.keys.add(key);
+    this.ui.keys?.([...this.keys]);
+  }
+  private takeKey(key: number) {
+    if (!this.keys.delete(key)) return;
+    this.ui.keys?.([...this.keys]);
+  }
+  /** The keys this stage hands out (a lock with any other key is open); set in the constructor. */
+  private readonly obtainable: Set<number>;
+  /** The key a door still needs, or null when it is open. */
+  lockOf(bg: number, door: number) {
+    const key = this.story.locks?.[`${bg}:${door}`];
+    return key && this.obtainable.has(key) && !this.opened.has(`${bg}:${door}`) ? key : null;
   }
 
   /* ───────── lifecycle ───────── */
@@ -214,6 +292,8 @@ export class Director {
     const before = this.world.fighters.map((f) => [f, f.x, f.z] as const);
     const events = this.world.step(inputs);
     this.effects?.update(events);
+    for (const e of events)
+      if (e.type === "key" && e.fighter === this.player?.id) this.giveKey(e.key);
     // the room's walls are lines on the floor nothing crosses (story/walls.ts); a move that would
     // cross one slides along it instead
     // (the client's ObstaclePool blocks Player, Enemy, Item and Blaster alike: a projectile that
@@ -460,6 +540,12 @@ export class Director {
           this.randomDoors.set(this.bg, list);
           break;
         }
+        case EVENT.ADDKEY:
+          this.giveKey(a[0]);
+          break;
+        case EVENT.REMOVEKEY:
+          this.takeKey(a[0]);
+          break;
         case EVENT.COMPLETE:
           this.status = "complete";
           this.report();
@@ -561,6 +647,15 @@ export class Director {
       (p) => !p.x2 || (px !== undefined && px >= p.x1 && px <= p.x2),
     );
     if (!d) return;
+    // a key gate the player has the key for: the door opens instead of turning them back
+    const state = this.roomState(this.bg);
+    const gate = this.gates.get(`${this.bg}:${state.phase}`);
+    if (gate && this.keys.has(gate.key)) {
+      this.pendingDrama = [];
+      this.ui.sound("dropkey.wav");
+      this.setPhase(this.bg, gate.to);
+      return;
+    }
     this.pendingDrama.splice(this.pendingDrama.indexOf(d), 1);
     this.roomState(this.bg).played.add(d.key);
     void this.runScript(d.script);
@@ -569,6 +664,7 @@ export class Director {
   private checkExits() {
     const p = this.player;
     if (!p || this.busy) return;
+    let pushing: string | null = null;
     for (const e of this.room.exits) {
       // a little slack around the box: a door's box often sits half behind the shop front,
       // leaving only a thin strip of it on the walkable side
@@ -591,9 +687,24 @@ export class Director {
       const from = (e as { bg?: number }).bg ?? this.bg;
       const link = this.exitTo(from, e.link);
       if (!link || !this.story.rooms[String(link.toBg)]) continue;
+      // a locked door (lok): its key opens it for good, from both sides; without it, it holds
+      const key = this.lockOf(from, e.link);
+      if (key) {
+        if (!this.keys.has(key)) {
+          pushing = `${from}:${e.link}`;
+          if (this.lockedAt !== pushing) this.ui.locked?.(key);
+          continue;
+        }
+        this.takeKey(key);
+        this.opened.add(`${from}:${e.link}`);
+        this.opened.add(`${link.toBg}:${link.toLink}`);
+        this.ui.sound("dropkey.wav");
+      }
+      this.lockedAt = null;
       void this.travel(link.toBg, link.toLink);
       return;
     }
+    this.lockedAt = pushing;
   }
 
   private async travel(bg: number, link: number) {

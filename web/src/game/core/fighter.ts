@@ -19,7 +19,8 @@ export const GRAVITY = 1.7;
  * weapon, 400 throwable, 500 potion, 600 shield, 900 bow, 1000 arrow). Skill effects carry types
  * too (800 …), so "has a type" is not "is an item".
  */
-const FIELD_ITEM_TYPES = new Set([100, 200, 300, 400, 500, 600, 900, 1000]);
+/** 700: the stage keys (金 / 藍 / 橙 / 綠 / 紫鑰匙 and the script keys), picked up onto the key ring */
+const FIELD_ITEM_TYPES = new Set([100, 200, 300, 400, 500, 600, 700, 900, 1000]);
 /** frame states that loop in the air until touching the floor */
 const AIR_WAIT = new Set([103, 2151]);
 const COMBO_WINDOW = 20; // ticks allowed across a whole input sequence
@@ -45,6 +46,8 @@ export type FighterEvent =
     }
   | { type: "land"; fighter: number }
   | { type: "pick"; fighter: number; item: number }
+  /** a key picked up: it goes on the key ring (the director's), not into the hands */
+  | { type: "key"; fighter: number; key: number }
   | { type: "spawn"; fighter: number; bla: Bla }
   /** an element took hold of (on) or let go of (off) a fighter */
   | { type: "status"; fighter: number; kind: StatusKind; on: boolean };

@@ -59,6 +59,8 @@ import {
   DialogFrame,
   GoArrow,
   HitCounter,
+  KEY_NAME,
+  KeyBox,
   MiniMap,
   StatusBox,
   useHudScale,
@@ -144,6 +146,11 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
   const [gain, setGain] = useState<{ id: number; name: string; icon: string | null } | null>(null);
   // 兇獸突襲 announcements, in the client's own words
   const [notice, setNotice] = useState<{ id: number; text: string } | null>(null);
+  // 鑰匙: the key ring, as the director reports it
+  const [keys, setKeys] = useState<number[]>([]);
+  // the locked-door line, read by the game loop (which must not restart when the language does)
+  const lockedRef = useRef((key: number) => t`這道門鎖上了，需要「${KEY_NAME[key] ?? t`鑰匙`}」。`);
+  lockedRef.current = (key: number) => t`這道門鎖上了，需要「${KEY_NAME[key] ?? t`鑰匙`}」。`;
   useEffect(() => {
     if (!notice) return;
     const id = setTimeout(() => setNotice(null), 3200);
@@ -334,6 +341,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         music: (file) => audio.music(file, 0.35),
         sound: (file) => audio.sfx(file, { volume: 0.7 }),
         shake: (n) => scene.quake(n),
+        keys: setKeys,
+        locked: (key) => setNotice({ id: Date.now(), text: lockedRef.current(key) }),
         status: (s) => {
           setStatus(s);
           if (s.kind === "complete" || s.kind === "gameover") settleCarried();
@@ -617,6 +626,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
 
       {hudOn && !hudHidden && vitals && (
         <>
+          <KeyBox keys={keys} scale={scale} />
           <StatusBox
             v={vitals}
             scale={scale}
