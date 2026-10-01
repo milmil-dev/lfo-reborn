@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: LFO 圖鑑 API
+  version: 0.1.0
+  description: Read-only data extracted from the original Little Fighter Online client by pipeline/build.ts.
+servers:
+  - url: /api/v1
+paths:
+  /stats:
+    get:
+      summary: Entity counts
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Count" } } } } }
+  /characters:
+    get:
+      summary: Every character, heroes first then 7xxx forms
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/CharacterRow" } } } } }
+  /characters/{id}:
+    get:
+      summary: One character with skills, other forms and roster neighbours
+      parameters: [{ name: id, in: path, required: true, schema: { type: integer } }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/CharacterDetail" } } } }
+        "404": { $ref: "#/components/responses/NotFound" }
+  /skills:
+    get:
+      summary: Every skill with its owner
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/SkillRow" } } } } }
+  /items:
+    get:
+      summary: Every item of one kind (compact rows)
+      parameters: [{ name: kind, in: query, required: true, schema: { type: string, enum: [equipment, item] } }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/ItemRow" } } } } }
+        "400": { $ref: "#/components/responses/BadRequest" }
+  /items/{id}:
+    get:
+      summary: One item with description, requirements and allowed characters
+      parameters: [{ name: id, in: path, required: true, schema: { type: integer } }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/ItemDetail" } } } }
+        "404": { $ref: "#/components/responses/NotFound" }
+  /search:
+    get:
+      summary: Full-text search across characters, equipment, items and skills (≤ 8 hits per kind)
+      parameters: [{ name: q, in: query, required: true, schema: { type: string, maxLength: 64 } }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/SearchHit" } } } } }
+components:
+  responses:
+    NotFound: { description: Not found, content: { application/json: { schema: { $ref: "#/components/schemas/Error" } } } }
+    BadRequest: { description: Bad request, content: { application/json: { schema: { $ref: "#/components/schemas/Error" } } } }
+  schemas:
+    Error:
+      type: object
+      properties: { error: { type: object, properties: { code: { type: string }, message: { type: string } } } }
+    Count: { type: object, properties: { kind: { type: string }, n: { type: integer } } }
+    Stats:
+      type: object
+      properties: { hp: { type: integer }, mp: { type: integer }, sp: { type: integer }, str: { type: integer }, def: { type: integer }, agi: { type: integer } }
+    CharRef:
+      type: object
+      properties: { id: { type: integer }, name: { type: string }, head: { type: [string, "null"] }, color: { type: [string, "null"] } }
+    CharacterRow:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        name_en: { type: string }
+        base_id: { type: [integer, "null"] }
+        head: { type: [string, "null"] }
+        portrait: { type: [string, "null"] }
+        color: { type: [string, "null"] }
+        skill_count: { type: integer }
+    Skill:
+      type: object
+      properties:
+        id: { type: integer }
+        char_id: { type: integer }
+        slot: { type: integer }
+        name: { type: string }
+        tier: { type: integer }
+        mp: { type: integer }
+        keys: { type: array, items: { type: string }, description: "G 防 A 攻 J 跳 F/B/U/D directions" }
+        chain: { type: integer }
+        ultimate: { type: integer }
+        icon: { type: [string, "null"] }
+    SkillRow:
+      allOf:
+        - $ref: "#/components/schemas/Skill"
+        - type: object
+          properties: { char_name: { type: string }, char_head: { type: [string, "null"] }, char_color: { type: [string, "null"] } }
+    CharacterDetail:
+      allOf:
+        - $ref: "#/components/schemas/CharacterRow"
+        - type: object
+          properties:
+            hp: { type: integer }
+            mp: { type: integer }
+            walk: { type: number }
+            run: { type: number }
+            jump_h: { type: number }
+            jump_d: { type: number }
+            weight: { type: number }
+            stats_default: { $ref: "#/components/schemas/Stats" }
+            stats_growth: { $ref: "#/components/schemas/Stats" }
+            stats_max: { $ref: "#/components/schemas/Stats" }
+            weapon_skill: { type: object, additionalProperties: { type: integer } }
+            faces: { type: array, items: { type: string } }
+            skills: { type: array, items: { $ref: "#/components/schemas/Skill" } }
+            forms: { type: array, items: { $ref: "#/components/schemas/CharRef" } }
+            prev: { oneOf: [{ $ref: "#/components/schemas/CharRef" }, { type: "null" }] }
+            next: { oneOf: [{ $ref: "#/components/schemas/CharRef" }, { type: "null" }] }
+    ItemRow:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        category: { type: string }
+        part: { type: integer, description: "equipment slot (0 accessory, 1 head, 3 hand-held, 4 body, 5 shield, 6 hands, 7 shoes, 8 ring; 9+ not worn)" }
+        type: { type: integer, description: ".spt type (100 weapon … 2000+ equipment)" }
+        req_lv: { type: integer }
+        req: { $ref: "#/components/schemas/Stats", description: "stats needed to wear it (the client's 你的 STR 不足以裝備這件物品 …)" }
+        mods: { $ref: "#/components/schemas/Stats" }
+        mod_total: { type: integer }
+        durability: { type: integer }
+        material: { type: integer, description: "material it is mended with (item 2900 + n: 0 布料 … 8 魔精石); -1 = cannot be repaired" }
+        price: { type: integer }
+        users: { type: array, items: { type: integer }, description: "character ids that may use it; empty = anyone" }
+        icon: { type: [string, "null"] }
+        color: { type: [string, "null"] }
+    ItemDetail:
+      allOf:
+        - $ref: "#/components/schemas/ItemRow"
+        - type: object
+          properties:
+            description: { type: [string, "null"] }
+            kind: { type: string }
+            users: { type: array, items: { $ref: "#/components/schemas/CharRef" } }
+    SearchHit:
+      type: object
+      properties:
+        kind: { type: string, enum: [character, equipment, item, skill] }
+        id: { type: integer }
+        name: { type: string }
+        meta: { type: string }
+        image: { type: [string, "null"] }
+        color: { type: [string, "null"] }
+        owner: { type: integer }
