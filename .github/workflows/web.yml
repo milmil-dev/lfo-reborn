@@ -76,6 +76,9 @@ jobs:
 
       - name: Build
         run: pnpm run build
+        env:
+          # Stamped into the app next to the version from web/package.json.
+          VITE_GIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
       # Lands next to Vite's hashed bundles in dist/assets; the trees don't
       # overlap (data/assets holds only dex/ game/ ui/ ui-hd/ ui-svg/).

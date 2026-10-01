@@ -1,0 +1,32 @@
+# Opens a Release PR from the conventional commits on main. Merging it tags
+# vX.Y.Z, updates CHANGELOG.md, VERSION and web/package.json, and publishes a
+# GitHub Release. One version for the whole monorepo (web, api, pipeline).
+#
+# Needs Settings -> Actions -> General -> "Allow GitHub Actions to create and
+# approve pull requests". With a RELEASE_PLEASE_TOKEN PAT (contents +
+# pull-requests write) the Release PR triggers CI like a human PR; with the
+# fallback GITHUB_TOKEN its checks need a manual run.
+
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v5
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
