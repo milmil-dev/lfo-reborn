@@ -10,6 +10,7 @@ import { Screen } from "@/game/screen";
 import { StartGate } from "@/game/ui";
 import { cn } from "@/lib/cn";
 import { ASSETS } from "@/lib/assets";
+import { usePageTitle } from "@/lib/title";
 
 export const Route = createFileRoute("/play/server")({ component: ServerSelect });
 
@@ -39,6 +40,7 @@ const SERVERS = [
 
 function ServerSelect() {
   const { t } = useLingui();
+  usePageTitle(t`選擇伺服器`);
   const navigate = useNavigate();
   const [sel, setSel] = useState(() =>
     Math.max(

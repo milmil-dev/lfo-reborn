@@ -15,6 +15,7 @@ import type { StoryData } from "@/game/story/types";
 import { StartGate } from "@/game/ui";
 import { cn } from "@/lib/cn";
 import { ASSETS } from "@/lib/assets";
+import { usePageTitle } from "@/lib/title";
 
 /*
   STAGE / MISSION select. The entries are the client's own list (LOADSTORYLIST, exported by
@@ -38,6 +39,10 @@ type CatalogEntry = {
   synopsis: string;
   exported: boolean;
 };
+
+/** "第1話 學校" for a story line, the bare title for a mission or VS stage */
+export const stageLabel = (e: Pick<CatalogEntry, "chapter" | "title">) =>
+  e.chapter > 0 ? `第${e.chapter}話 ${e.title}` : e.title;
 
 export const catalogQuery = queryOptions({
   queryKey: ["story", "catalog"],
@@ -80,6 +85,7 @@ function matches(e: CatalogEntry, leadName: string, words: string[]) {
 
 export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
   const { t } = useLingui();
+  usePageTitle(mode === "mission" ? t`任務` : mode === "vs" ? t`對戰場地` : t`故事模式`);
   const navigate = useNavigate();
   const profile = useActiveProfile();
   const myLead = profile?.key ?? "stinky";
@@ -88,6 +94,12 @@ export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
   const nameOf = useCallback(
     (key: string | null) => (key ? (chars.find((c) => c.key === key)?.name ?? key) : ""),
     [chars],
+  );
+  // whose line a row is labelled with: a profile playing someone else's line (Fox on
+  // stinky_school) sees it as a common one, played as themselves
+  const leadOf = useCallback(
+    (e: { lead: string | null }) => (profile && e.lead !== profile.key ? null : e.lead),
+    [profile],
   );
 
   // a profile sees the line the client gives its character on every stage; a guest without one
@@ -99,8 +111,8 @@ export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
   const [query, setQuery] = useState("");
   const list = useMemo(() => {
     const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    return stories.filter((e) => matches(e, nameOf(e.lead), words));
-  }, [stories, query, nameOf]);
+    return stories.filter((e) => matches(e, nameOf(leadOf(e)), words));
+  }, [stories, query, nameOf, leadOf]);
   const n = list.length;
   const loop = n > RADIUS * 2;
 
@@ -188,7 +200,7 @@ export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
   });
   const firstRoom = story?.rooms[String(story.start.bg)];
   const preview = firstRoom?.layers.find((l) => !l.object)?.img.replace(/\.\w+$/, ".webp");
-  const lead = current?.lead ?? myLead;
+  const lead = (current && leadOf(current)) ?? myLead;
   const restored = stories.filter((e) => e.exported).length;
 
   // a stage is picked while setting up a game room: the client plays lfo_character there
@@ -208,14 +220,16 @@ export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
             bright={k === cursor}
             locked={!e.exported}
             onClick={() => (k === cursor ? go() : move(k - cursor))}
-            aria-label={`第${e.chapter}話 ${e.title} ${nameOf(e.lead)}`}
+            aria-label={`第${e.chapter}話 ${e.title} ${nameOf(leadOf(e))}`}
           >
             {e.chapter > 0 && (
               <span className="w-[58px] shrink-0 text-white/85 tabular-nums">第{e.chapter}話</span>
             )}
             <span className="truncate">{e.title}</span>
-            {e.lead && (
-              <span className="ml-auto shrink-0 text-[12px] text-white/75">{nameOf(e.lead)}線</span>
+            {leadOf(e) && (
+              <span className="ml-auto shrink-0 text-[12px] text-white/75">
+                {nameOf(leadOf(e))}線
+              </span>
             )}
             {!e.exported && <LockDot />}
           </StageBar>
@@ -343,8 +357,8 @@ export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
                 ? t`任務`
                 : mode === "vs"
                   ? t`對戰場地`
-                  : current?.lead
-                    ? t`${nameOf(current.lead)}線`
+                  : current && leadOf(current)
+                    ? t`${nameOf(leadOf(current))}線`
                     : t`共通線`}
             </p>
             <p

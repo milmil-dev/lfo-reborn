@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/react/macro";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -19,12 +19,14 @@ import { Screen } from "@/game/screen";
 import { Director } from "@/game/story/director";
 import { BottomBar, HitCounter, StatusBox, useHudScale, type Vitals } from "@/game/story/hud";
 import { RoomScene } from "@/game/story/room-scene";
+import { catalogQuery, stageLabel } from "@/game/stage-select";
 import type { StoryData } from "@/game/story/types";
 import { StartGate } from "@/game/ui";
 import { comSkill, decided, engineTeam, RANKS, type RoomSetup, settleHonor } from "@/game/vs";
 import { CUP_HONOR, playRound, yourTeam } from "@/game/champion";
 import { useCup } from "@/game/champion-store";
 import { q } from "@/lib/api";
+import { usePageTitle } from "@/lib/title";
 
 /*
   A VS bout: the stage of the waiting room, you and the COM players on their teams, last team
@@ -41,7 +43,9 @@ export const Route = createFileRoute("/play/vs/$stage")({
   beforeLoad: () => {
     if (!getActiveProfile()) throw redirect({ to: "/play/profile" });
   },
-  loader: async ({ params }) => {
+  loader: async ({ params, context: { queryClient } }) => {
+    // the catalog names the stage (tab title, result board); fetched alongside the stage itself
+    void queryClient.prefetchQuery(catalogQuery);
     const res = await fetch(`${BASE}/stories/${params.stage}.json`);
     if (!res.ok) throw new Error(`stage ${params.stage} not found`);
     return (await res.json()) as StoryData;
@@ -62,6 +66,9 @@ type Outcome = { won: boolean; line: string | null; honor: number; rank: number 
 
 function VsPage() {
   const story = Route.useLoaderData();
+  const { data: catalog } = useQuery(catalogQuery);
+  const entry = catalog?.find((e) => e.key === story.key);
+  usePageTitle(catalog ? (entry ? stageLabel(entry) : story.key) : null);
   const { room, cup } = Route.useSearch();
   const [run, setRun] = useState(0);
   const [started, setStarted] = useState(false);

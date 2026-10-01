@@ -38,6 +38,7 @@ import { statsAt, statTable } from "@/game/leveling";
 import { q } from "@/lib/api";
 import { ASSETS } from "@/lib/assets";
 import { cn } from "@/lib/cn";
+import { usePageTitle } from "@/lib/title";
 
 export const Route = createFileRoute("/play/profile")({ component: ProfileSelect });
 
@@ -176,6 +177,7 @@ function WheelCard({
 
 function ProfileSelect() {
   const { t } = useLingui();
+  usePageTitle(t`人物檔案`);
   const navigate = useNavigate();
   const slots = useSlots();
   // the carousel: every character the account has, then an empty card for a new one

@@ -21,6 +21,7 @@ import { Screen } from "@/game/screen";
 import { rosterQueries, StartGate, useRoster } from "@/game/ui";
 import { ASSETS } from "@/lib/assets";
 import { cn } from "@/lib/cn";
+import { usePageTitle } from "@/lib/title";
 
 /*
   王者爭霸 on the client's bracket (champion/championbox, 800 × 600): the eight teams under the
@@ -50,6 +51,7 @@ const NODE = [
 
 function Champion() {
   const { t } = useLingui();
+  usePageTitle(t`王者爭霸`);
   const navigate = useNavigate();
   const profile = useActiveProfile();
   const roster = useRoster().filter((r) => r.id < 7000);

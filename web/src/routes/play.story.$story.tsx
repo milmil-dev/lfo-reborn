@@ -50,7 +50,7 @@ import {
 import { charge, drain, NO_TRAN, press, ready as tranReady, unlocked } from "@/game/transform";
 import { Screen } from "@/game/screen";
 import { BASE, type CharAssets, loadChar, loadForm, loadSprite, runLoop } from "@/game/render";
-import { catalogQuery } from "@/game/stage-select";
+import { catalogQuery, stageLabel } from "@/game/stage-select";
 import { Director, type StoryStatus } from "@/game/story/director";
 import {
   BottomBar,
@@ -70,9 +70,12 @@ import { LoadingScreen } from "@/game/kit/loading";
 import { KEY } from "@/lib/storage-keys";
 import { asset, q } from "@/lib/api";
 import { cn } from "@/lib/cn";
+import { usePageTitle } from "@/lib/title";
 
 export const Route = createFileRoute("/play/story/$story")({
-  loader: async ({ params }) => {
+  loader: async ({ params, context: { queryClient } }) => {
+    // the catalog names the stage (tab title, result board); fetched alongside the stage itself
+    void queryClient.prefetchQuery(catalogQuery);
     const res = await fetch(`${BASE}/stories/${params.story}.json`);
     if (!res.ok) throw new Error(`story ${params.story} not found`);
     return (await res.json()) as StoryData;
@@ -97,6 +100,9 @@ type Score = {
 
 function StoryPage() {
   const story = Route.useLoaderData();
+  const { data: catalog } = useQuery(catalogQuery);
+  const entry = catalog?.find((e) => e.key === story.key);
+  usePageTitle(catalog ? (entry ? stageLabel(entry) : story.key) : null);
   const [run, setRun] = useState(0); // bumping this restarts the story from the top
   const [started, setStarted] = useState(false);
   const onStart = useCallback(() => setStarted(true), []);
@@ -113,11 +119,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
   // the stage's own name for the result board (第 n 話 for story lines)
   const { data: catalog } = useQuery(catalogQuery);
   const entry = catalog?.find((e) => e.key === story.key);
-  const stageName = entry
-    ? entry.chapter > 0
-      ? `第${entry.chapter}話 ${entry.title}`
-      : entry.title
-    : story.key;
+  const stageName = entry ? stageLabel(entry) : story.key;
   // read from inside the stage's loop, which must not restart when the catalog arrives
   const stageNameRef = useRef(stageName);
   stageNameRef.current = stageName;

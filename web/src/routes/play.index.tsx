@@ -11,6 +11,7 @@ import { NAME_MAX, nameProblem } from "@/game/names";
 import { BASE } from "@/game/render";
 import { Screen } from "@/game/screen";
 import { rosterQueries, StartGate, useRoster } from "@/game/ui";
+import { usePageTitle } from "@/lib/title";
 
 /*
   選擇角色 — the original create-character screen, laid out from the client itself:
@@ -337,6 +338,7 @@ function ScanLabels({ points }: { points: [number, number][] }) {
 
 function SelectScreen() {
   const { t } = useLingui();
+  usePageTitle(t`選擇角色`);
   const navigate = useNavigate();
   const { pick, slot: profileSlot } = Route.useSearch();
   const { data: profile } = useSuspenseQuery(profileQuery);
