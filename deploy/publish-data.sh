@@ -4,11 +4,11 @@
 #
 #   fixtures.tar.gz  data/lfo.db + data/assets/game/**/*.json, what the tests read
 #   assets.tar       data/assets as the site serves it; CI copies it into the
-#                    Pages build, so players never touch R2
+#                    deployed build, so players never touch R2
 #
 # assets.tar holds only what the game client requests (see the filter below):
 # ~2 GB and ~15k files instead of 4.1 GB / 19k, keeping the deployment under
-# Pages' 20,000-file limit.
+# the 20,000-file limit.
 #
 # Needs bun, rclone and, in the environment or a root .env:
 #   CLOUDFLARE_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY  (read+write on the bucket)
@@ -79,7 +79,7 @@ echo "Packing assets.tar"
 files=$(wc -l <"$tmp/assets.list" | tr -d ' ')
 echo "  $files files, $(du -h "$tmp/assets.tar" | cut -f1)"
 if [ "$files" -gt 19000 ]; then
-  echo "warning: $files asset files; Cloudflare Pages allows 20,000 per deployment (incl. the web build)" >&2
+  echo "warning: $files asset files; Workers static assets allow 20,000 per version (incl. the web build)" >&2
 fi
 
 for f in fixtures.tar.gz assets.tar; do
