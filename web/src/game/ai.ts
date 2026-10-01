@@ -31,6 +31,11 @@ export const newBrain = (skill: number, rand = Math.random): Brain => ({
 });
 
 const REACH = 55;
+/** the shortest wait between two punches (ticks), plus up to 45 more for a slow brain */
+const PUNCH_GAP = 30;
+/** how long a brain waits after its target gets up before it strikes again (ticks) */
+const AFTER_GETUP = 20;
+const DOWN = /^(B_)?(FALL|BOUNCE|LIEDOWN|GETUP)|CROUCH2STAND/;
 const KEY: Record<string, keyof InputState | "F" | "B"> = {
   G: "defend",
   A: "attack",
@@ -72,6 +77,12 @@ export function think(f: Fighter, fighters: Fighter[], b: Brain, rand = Math.ran
   const dx = foe.x - f.x;
   const dz = foe.z - f.z;
   const toward = dx > 0 ? 1 : -1;
+  // a target on the floor or getting up is let be: wait a beat after it is back on its feet,
+  // so a knocked-down player can't be pinned there
+  if (DOWN.test(foe.anim)) {
+    b.cooldown = Math.max(b.cooldown, AFTER_GETUP);
+    return input;
+  }
 
   // guard against an attack about to land
   if (b.guard > 0) {
@@ -138,7 +149,7 @@ export function think(f: Fighter, fighters: Fighter[], b: Brain, rand = Math.ran
   if (Math.abs(dx) <= REACH + 10 && Math.abs(dz) <= 12 && b.cooldown <= 0) {
     b.press = !b.press;
     input.attack = b.press;
-    if (!b.press) b.cooldown = 18 + rand() * 30 * (1 - b.skill * 0.5);
+    if (!b.press) b.cooldown = PUNCH_GAP + rand() * 45 * (1 - b.skill * 0.5);
   }
   return input;
 }

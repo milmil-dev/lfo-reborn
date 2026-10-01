@@ -23,8 +23,13 @@ export const GRAVITY = 1.7;
 const FIELD_ITEM_TYPES = new Set([100, 200, 300, 400, 500, 600, 700, 900, 1000]);
 /** frame states that loop in the air until touching the floor */
 const AIR_WAIT = new Set([103, 2151]);
-const COMBO_WINDOW = 20; // ticks allowed across a whole input sequence
-const DOUBLE_TAP = 10; // ticks between taps that start a run
+/**
+ * ticks allowed between one command key and the next (a whole 防 防 ← ↑ → 攻 can take its time;
+ * the client gives its double taps the same 15 frames, LFO.exe 0x531437)
+ */
+const KEY_GAP = 15;
+/** ticks between two taps of a direction that count as a double tap (LFO.exe 0x5312d5 / 0x531437) */
+const DOUBLE_TAP = 15;
 const ROLL_SPEED = 4; // px per tick along the depth while rolling on the floor
 /** SP (體力) without a level table: the att row's usual default */
 const DEFAULT_SP = 1000;
@@ -121,6 +126,11 @@ export class Fighter {
   private queued: number | null = null;
   private buffer: { key: Key; t: number }[] = [];
   private lastTap: { dir: -1 | 1; t: number } | null = null;
+  /** when each direction was last tapped, and the directions double-tapped this tick */
+  private lastPress: Partial<Record<Button, number>> = {};
+  private doubleTap = new Set<Button>();
+  /** a 防 sidestep's way along the depth (-1 into the screen, 1 out), set as it starts */
+  private sidestep = 0;
   private altAttack = false;
   private jumpDir = 0;
   private jumpRun = false;
@@ -148,6 +158,10 @@ export class Fighter {
   }
   get maxSp() {
     return this.spMax ?? DEFAULT_SP;
+  }
+  /** rolling (DODGE) and rolling on the floor: the client's [Dodge Pick] body — hits miss it */
+  get dodging() {
+    return this.anim === "DODGE" || /LIEDOWNROLL[UD]$/.test(this.anim);
   }
   get airborne() {
     return this.y < 0 || this.vy < 0;
@@ -323,7 +337,21 @@ export class Fighter {
     }
     if (pressed("attack")) push("A");
     if (pressed("jump")) push("J");
-    this.buffer = this.buffer.filter((k) => this.t - k.t <= COMBO_WINDOW).slice(-8);
+    // a command lives while its keys keep coming: each within KEY_GAP of the one before
+    let keep = this.buffer.length;
+    if (keep && this.t - this.buffer[keep - 1].t > KEY_GAP) keep = 0;
+    while (keep > 1 && this.buffer[keep - 1].t - this.buffer[keep - 2].t <= KEY_GAP) keep--;
+    this.buffer = this.buffer.slice(keep ? keep - 1 : this.buffer.length).slice(-8);
+    // double taps of each direction (the client's 0x460 / 0x46c / 0x478 / 0x47c flags)
+    this.doubleTap.clear();
+    for (const b of ["left", "right", "up", "down"] as const) {
+      if (!pressed(b)) continue;
+      const last = this.lastPress[b];
+      if (last !== undefined && this.t - last <= DOUBLE_TAP) {
+        this.doubleTap.add(b);
+        delete this.lastPress[b];
+      } else this.lastPress[b] = this.t;
+    }
     void input;
   }
 
@@ -533,6 +561,36 @@ export class Fighter {
         ? this.itemAttack(h !== 0 && h === this.facing, "air")
         : this.goto(this.action("ATTACKJUMP"));
 
+    // 防 held (LFO.exe 0x533e33, the GUARD state): a double tap of ← / → rolls that way, of
+    // ↑ / ↓ sidesteps along the depth
+    if ((a === "GUARD" || a === "GUARDST") && !heavy) {
+      for (const [b, dir] of [
+        ["left", -1],
+        ["right", 1],
+      ] as const)
+        if (this.doubleTap.has(b) && this.data.actions.DODGE !== undefined) {
+          this.facing = dir;
+          this.buffer = [];
+          return this.goto(this.action("DODGE"));
+        }
+      for (const [b, way, name] of [
+        ["up", -1, "DODGEUPST"],
+        ["down", 1, "DODGEDNST"],
+      ] as const)
+        if (this.doubleTap.has(b) && this.data.actions[name] !== undefined) {
+          this.sidestep = way;
+          this.buffer = [];
+          this.vx = 0;
+          return this.goto(this.action(name));
+        }
+    }
+    // a roll keeps its speed (LFO.exe 0x533a3b): the run speed along the facing, or 0.7 of it
+    // with ↑ / ↓ held, which also carries it along the depth at speed / 2.8
+    if (a === "DODGE") {
+      this.vx = run * this.facing * (v ? 0.7 : 1);
+      this.vz = (v * run) / 2.8;
+      return;
+    }
     if (a === "GUARD" && (!input.defend || this.sp <= 0)) return this.goto(this.action("GUARDEN"));
     // a charge (…POWERUP) loops while 攻 is held and lets go into its …POWERUP2
     if (
@@ -589,6 +647,18 @@ export class Fighter {
     // the take-off ends: leave the floor (by frame number, not name: some characters label their
     // airborne JUMPU frames "JUMPSTU")
     if (/^(HEAVY)?JUMPST/.test(f.n) && f.nx === -1 && !this.inAction("JUMPU")) return this.launch();
+    // a 防 sidestep (DODGEUPST / DODGEDNST, one frame) hops along the depth as DODGEUP / DODGEDN,
+    // an airborne state that ends on landing
+    if (f.n === "DODGEUPST" || f.n === "DODGEDNST") {
+      const name = this.sidestep < 0 ? "DODGEUP" : "DODGEDN";
+      if (this.data.actions[name] !== undefined) {
+        this.goto(this.action(name), events);
+        this.vz = this.sidestep * this.data.attrs.run * 0.8;
+        this.vy = -this.data.attrs.jumpH * 0.5;
+        this.y = -1;
+        return;
+      }
+    }
     if (f.nx === -1) {
       // the client's stage convention: XST → X → XEN (THWST → THW → THWEN, HEAVYPICKST …),
       // and STAND2X → X (STAND2DRINK → DRINK)
@@ -641,6 +711,7 @@ export class Fighter {
         events,
       );
     if (f.n.startsWith("DIZZY")) return this.goto(this.action("STAND"), events);
+
     this.goto(this.act(this.airborne ? "JUMPU" : "STAND"), events);
   }
 

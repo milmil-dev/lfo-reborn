@@ -337,3 +337,59 @@ describe.skipIf(!hasData)("體力 (SP) and 防", () => {
     expect(hero.sp).toBeCloseTo(hero.maxSp / 2, 0);
   });
 });
+
+describe.skipIf(!hasData)("rolls and commands (LFO.exe's GUARD state)", () => {
+  const guardThen = (world: World, id: number, b: keyof InputState) =>
+    play(world, id, [
+      { defend: true },
+      { defend: true },
+      { defend: true },
+      { defend: true, [b]: true },
+      { defend: true },
+      { defend: true, [b]: true },
+    ]);
+
+  it("防 + ← ← rolls back, 防 + → → forward, and a roll can't be hit", () => {
+    const { world, hero } = setup();
+    hero.facing = 1;
+    guardThen(world, hero.id, "left");
+    expect(hero.anim).toBe("DODGE");
+    expect(hero.facing).toBe(-1);
+    const x = hero.x;
+    play(world, hero.id, [{}, {}, {}]);
+    expect(hero.x).toBeLessThan(x - 15);
+    expect(hero.dodging).toBe(true);
+
+    const { world: w2, hero: h2 } = setup();
+    h2.facing = -1;
+    guardThen(w2, h2.id, "right");
+    expect(h2.anim).toBe("DODGE");
+    expect(h2.facing).toBe(1);
+  });
+
+  it("防 + ↑ ↑ sidesteps into the screen as a hop", () => {
+    const { world, hero } = setup();
+    const z = hero.z;
+    guardThen(world, hero.id, "up");
+    play(world, hero.id, [], 6);
+    expect(hero.z).toBeLessThan(z - 10);
+    play(world, hero.id, [], 60);
+    expect(hero.airborne).toBe(false);
+  });
+
+  it("a command typed key by key, half a second apart, still comes out", () => {
+    const { world, hero } = setup();
+    // 防 → ↑ 跳 (GFUJ) with 12 idle ticks between the keys
+    const gap = Array.from({ length: 11 }, () => ({}));
+    const events = play(world, hero.id, [
+      { defend: true },
+      ...gap,
+      { right: true },
+      ...gap,
+      { up: true },
+      ...gap,
+      { jump: true },
+    ]);
+    expect(events.some((e) => e.type === "move")).toBe(true);
+  });
+});

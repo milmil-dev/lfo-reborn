@@ -145,6 +145,7 @@ export class World {
           b === a ||
           b === owner ||
           b.effect ||
+          b.dodging ||
           b.team === team ||
           team === 0 ||
           b.team === 0 ||
