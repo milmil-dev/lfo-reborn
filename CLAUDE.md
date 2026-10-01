@@ -55,9 +55,9 @@ select, `/play/$key` a training ground driven by the original frame data.
 
 - pnpm + Vite+: `pnpm run dev` (proxies /api to :8080), `pnpm run check`, `pnpm run test`, `pnpm run build`.
 - Static assets: every URL goes through `ASSETS` (`src/lib/assets.ts`). Dev and `vp preview` serve `data/assets` at
-  `/assets` from a middleware in `vite.config.ts`; the Cloudflare Pages deploy unpacks the same tree into `dist/assets`
-  after the build, so `VITE_ASSETS_URL` stays unset and the build must never write under `dist/assets/{game,ui-hd,dex}`
-  or emit a `404.html`. Never hard-code `/assets` in components. Assets the game loads must be in the deploy's keep list
+  `/assets` from a middleware in `vite.config.ts`; the deploy (Cloudflare Workers static assets, `wrangler.jsonc`, no
+  Worker script so nothing is metered) unpacks the same tree into `dist/assets` after the build, so `VITE_ASSETS_URL`
+  stays unset and the build must never write under `dist/assets/{game,ui-hd,dex}`. Never hard-code `/assets` in components. Assets the game loads must be in the deploy's keep list
   (`deploy/publish-data.sh`: game/, ui-hd/, dex/items|skills|logo).
 - File routes in `src/routes/`; `src/routeTree.gen.ts` is generated — don't edit or format it.
 - UI components come from the coss registry: `pnpm dlx shadcn@latest add @coss/<name> --overwrite --yes` (lands in `src/components/ui/`).
@@ -71,8 +71,8 @@ select, `/play/$key` a training ground driven by the original frame data.
 
 ## CI, deploy and versions
 
-- GitHub repo `milmil-dev/lfo-reborn`. `.github/workflows/web.yml` (install, `check`, `test`, `build`, deploy to
-  Cloudflare Pages: main → production, PRs → preview) and `api.yml` (`go vet`, `go test`, `go build`; not deployed) run on
+- GitHub repo `milmil-dev/lfo-reborn`. `.github/workflows/web.yml` (install, `check`, `test`, `build`, deploy as
+  Cloudflare Workers static assets via `wrangler.jsonc`: main → `wrangler deploy`, PRs → a `pr-<n>` preview alias) and `api.yml` (`go vet`, `go test`, `go build`; not deployed) run on
   `web/**` / `api/**` changes. `data/` is not in git: `make publish-data` uploads the asset tarball and the test fixtures
   (`data/lfo.db` + `data/assets/game/**/*.json`) to private R2, which CI unpacks — a test reading another path needs the
   fixture list in `deploy/publish-data.sh` updated.
