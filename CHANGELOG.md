@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.1.0...v0.2.0) (2026-10-01)
+
+
+### Features
+
+* **game:** playtest fixes, SP guarding, original level caps and release notes ([#4](https://github.com/milmil-dev/lfo-reborn/issues/4)) ([0102e51](https://github.com/milmil-dev/lfo-reborn/commit/0102e5177f5aa08a784b8655f9b287707eddb457))
+
 ## 0.1.0 (2026-10-01)
 
 
