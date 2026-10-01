@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>LFO 重新登入</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<main id="app">
+			<!-- 0. boot: needs a gesture before audio can play -->
+			<section class="scene" id="boot" data-active>
+				<svg class="hud-ring" viewBox="0 0 200 200" aria-hidden="true">
+					<circle cx="100" cy="100" r="92" />
+					<circle cx="100" cy="100" r="78" class="dash" />
+					<path d="M100 2v14M100 184v14M2 100h14M184 100h14" />
+				</svg>
+				<img class="logo chrome-logo" src="/assets/dex/logo/lfo-hk.png" alt="LFO 小朋友齊打交 Online" />
+				<button class="press" type="button">
+					<span class="press-zh">按任意鍵重新登入</span>
+					<span class="press-en">PRESS ANY KEY</span>
+				</button>
+				<p class="boot-foot">© U1 Technology 2004 · LFO 資料博物館 復刻</p>
+			</section>
+
+			<!-- 1. prologue: camera tilts down the opening panorama -->
+			<section class="scene" id="prologue">
+				<div class="pano" aria-hidden="true">
+					<img src="/assets/img/interface20.png" alt="" /><img src="/assets/img/interface21.png" alt="" />
+					<img src="/assets/img/interface22.png" alt="" /><img src="/assets/img/interface23.png" alt="" />
+					<img src="/assets/img/interface24.png" alt="" /><img src="/assets/img/interface25.png" alt="" />
+					<img src="/assets/img/interface26.png" alt="" /><img src="/assets/img/interface27.png" alt="" />
+				</div>
+				<div class="pano-shade" aria-hidden="true"></div>
+				<canvas class="motes" aria-hidden="true"></canvas>
+				<p class="prologue-line" aria-live="polite"></p>
+				<button class="hud-btn skip" type="button">略過 <kbd>Esc</kbd></button>
+			</section>
+
+			<!-- 2. title / main menu -->
+			<section class="scene" id="title">
+				<div class="title-bg" aria-hidden="true">
+					<div class="pano mini">
+						<img src="/assets/img/interface24.png" alt="" /><img src="/assets/img/interface25.png" alt="" />
+						<img src="/assets/img/interface26.png" alt="" /><img src="/assets/img/interface27.png" alt="" />
+					</div>
+				</div>
+				<canvas class="motes" aria-hidden="true"></canvas>
+				<div class="title-grid">
+					<div class="title-left">
+						<img class="logo chrome-logo big" src="/assets/dex/logo/lfo-hk.png" alt="LFO 小朋友齊打交 Online" />
+						<nav class="menu" aria-label="主選單">
+							<button class="menu-item" data-go="chapter" type="button">
+								<span class="mi-idx">01</span><span class="mi-zh">開始故事</span
+								><span class="mi-sub">第一話 · 學校</span>
+							</button>
+							<a class="menu-item" href="/dex/characters">
+								<span class="mi-idx">02</span><span class="mi-zh">角色圖鑑</span><span class="mi-sub">149 名角色</span>
+							</a>
+							<a class="menu-item" href="/dex/equipment">
+								<span class="mi-idx">03</span><span class="mi-zh">裝備道具</span><span class="mi-sub">裝備 · 道具</span>
+							</a>
+							<a class="menu-item" href="/dex/skills">
+								<span class="mi-idx">04</span><span class="mi-zh">技能圖鑑</span><span class="mi-sub">全角色出招表</span>
+							</a>
+							<button class="menu-item" type="button" disabled>
+								<span class="mi-idx">05</span><span class="mi-zh">死亡之塔</span><span class="mi-sub">未開放</span>
+							</button>
+						</nav>
+					</div>
+					<figure class="keyart">
+						<img src="/assets/img/interface9.png" alt="LFO 全角色主視覺" />
+						<figcaption>SERVER 01 · 香港</figcaption>
+					</figure>
+				</div>
+			</section>
+
+			<!-- 3. chapter title card -->
+			<section class="scene" id="chapter">
+				<div class="card">
+					<span class="card-line" aria-hidden="true"></span>
+					<p class="card-num"></p>
+					<h1 class="card-title"></h1>
+					<p class="card-branch"></p>
+				</div>
+				<p class="card-stage"></p>
+			</section>
+
+			<!-- 4. story -->
+			<section class="scene" id="story">
+				<div class="stage" data-scene="plaza">
+					<div class="world plaza"><img src="/assets/img/school1b.png" alt="" /></div>
+					<div class="world gate">
+						<img class="l-base" src="/assets/img/school2_base.png" alt="" />
+						<img class="l-rob" src="/assets/img/school2_rob.png" alt="" />
+						<img class="l-lamp" src="/assets/img/school2_front2.png" alt="" />
+						<img class="l-tree" src="/assets/img/school2_tree.png" alt="" />
+					</div>
+				</div>
+				<div class="vignette" aria-hidden="true"></div>
+
+				<div class="portrait" aria-hidden="true"><div class="portrait-img"></div></div>
+
+				<div class="dialog" role="group" aria-label="對話">
+					<i class="bolt tl"></i><i class="bolt tr"></i><i class="bolt bl"></i><i class="bolt br"></i>
+					<p class="nameplate"></p>
+					<p class="dialog-text" aria-live="polite"></p>
+					<span class="next" aria-hidden="true"></span>
+				</div>
+
+				<div class="story-hud">
+					<button class="hud-btn" data-act="auto" type="button" aria-pressed="false">自動</button>
+					<button class="hud-btn" data-act="log" type="button">記錄</button>
+					<button class="hud-btn" data-act="exit" type="button">返回</button>
+				</div>
+
+				<aside class="log" hidden>
+					<header><span>對話記錄</span><button class="hud-btn" data-act="log" type="button">關閉</button></header>
+					<ol></ol>
+				</aside>
+			</section>
+
+			<div class="wipe" aria-hidden="true"></div>
+		</main>
+		<script type="module" src="./app.ts"></script>
+	</body>
+</html>
