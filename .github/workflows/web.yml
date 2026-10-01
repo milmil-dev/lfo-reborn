@@ -40,10 +40,13 @@ jobs:
       contents: read
       deployments: write
     env:
-      # Forks get no secrets, so only pushes and same-repo PRs deploy.
+      # Deploy only with every secret in place: forks get none, and a deploy
+      # without the R2 keys would ship a site with no game assets.
       DEPLOY: >-
-        ${{ github.event_name == 'push' ||
-        github.event.pull_request.head.repo.full_name == github.repository }}
+        ${{ (github.event_name == 'push' ||
+        github.event.pull_request.head.repo.full_name == github.repository) &&
+        secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' &&
+        secrets.R2_ACCESS_KEY_ID != '' && secrets.R2_SECRET_ACCESS_KEY != '' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -79,6 +82,10 @@ jobs:
         env:
           # Stamped into the app next to the version from web/package.json.
           VITE_GIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Skip deploy
+        if: env.DEPLOY != 'true'
+        run: echo "::notice::Not deploying (fork PR or deploy secrets missing; see deploy/README.md)"
 
       # Lands next to Vite's hashed bundles in dist/assets; the trees don't
       # overlap (data/assets holds only dex/ game/ ui/ ui-hd/ ui-svg/).
