@@ -8,6 +8,7 @@ import { IconButton } from "@/game/kit/buttons";
 import { NewGameRoom } from "@/game/kit/new-game";
 import { InfoPanel, OkCaption, PreviewFrame, StageBar } from "@/game/kit/stage";
 import { useActiveProfile } from "@/game/profiles";
+import { linesFor } from "@/game/story/lines";
 import { BASE } from "@/game/render";
 import { Screen } from "@/game/screen";
 import type { StoryData } from "@/game/story/types";
@@ -32,6 +33,8 @@ type CatalogEntry = {
   mode: "story" | "mission" | "vs";
   area: string;
   lead: string | null;
+  /** charIds whose line plays this file; 0 = anyone the stage gives no line of their own */
+  players: number[];
   synopsis: string;
   exported: boolean;
 };
@@ -87,12 +90,12 @@ export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
     [chars],
   );
 
-  // a character's own story line only appears while playing that character (common lines and
-  // missions for everyone); a guest without a profile plays each line as its lead, so sees them all
-  const stories = useMemo(
-    () => catalog.filter((e) => e.mode === mode && (!profile || !e.lead || e.lead === profile.key)),
-    [catalog, mode, profile],
-  );
+  // a profile sees the line the client gives its character on every stage; a guest without one
+  // plays each line as its lead, so sees them all
+  const stories = useMemo(() => {
+    const ofMode = catalog.filter((e) => e.mode === mode);
+    return profile ? linesFor(ofMode, profile.charId) : ofMode;
+  }, [catalog, mode, profile]);
   const [query, setQuery] = useState("");
   const list = useMemo(() => {
     const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
