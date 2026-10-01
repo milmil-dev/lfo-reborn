@@ -394,7 +394,8 @@ export class Fighter {
       this.goto(this.action("FALLRECOVERY"), events);
       return true;
     }
-    if (/^(B_)?(LIEDOWN|BOUNCE)/.test(n) && !this.airborne && (input.up || input.down)) {
+    // not from a roll already under way (LIEDOWNROLL…): a held ↑ / ↓ would restart it every tick
+    if (/^(B_)?(LIEDOWN|BOUNCE\d)$/.test(n) && !this.airborne && (input.up || input.down)) {
       const roll = `${n.startsWith("B_") ? "B_" : ""}LIEDOWNROLL${input.up ? "U" : "D"}`;
       if (this.data.actions[roll] === undefined) return false;
       this.vx = 0;
@@ -564,7 +565,8 @@ export class Fighter {
     // default action
     // a fall frame that ends in mid-air holds until the landing (some creatures' FALL frames
     // have no loop of their own)
-    if (/^(B_)?FALL/.test(f.n) && this.airborne) return this.goto(this.frameId);
+    // (a hard landing's bounce, too, holds until it comes back down)
+    if (/^(B_)?(FALL|BOUNCE)/.test(f.n) && this.airborne) return this.goto(this.frameId);
     // at 0 HP a fighter stays down: it is out (the story removes it, training revives it)
     if ((f.n === "LIEDOWN" || f.n === "B_LIEDOWN") && this.hp <= 0) return this.goto(this.frameId);
     if (f.n === "LIEDOWN" || f.n === "B_LIEDOWN")
@@ -617,6 +619,8 @@ export class Fighter {
     this.vy = 0;
     events.push({ type: "land", fighter: this.id });
     const n = this.anim;
+    // flipped back upright in the air (跳 on the way down): lands on its feet
+    if (/^(B_)?FALLRECOVERY$/.test(n)) return this.goto(this.act("JUMPLAND"), events);
     if (n.startsWith("FALL") || n.startsWith("B_FALL")) {
       this.vx *= 0.5;
       this.fallAcc = 0;
