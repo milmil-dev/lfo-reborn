@@ -17,8 +17,8 @@ const { version } = JSON.parse(readFileSync(resolve(here, "package.json"), "utf8
 
 /*
   The pipeline's output (data/assets: art, UI, audio, JSON) is static: in dev and `vp preview`
-  Vite serves it at /assets itself; the Cloudflare Pages deployment unpacks the same tree into
-  dist/assets after the build (deploy/publish-data.sh, .github/workflows/web.yml), so the build
+  Vite serves it at /assets itself; the deployment (Cloudflare Workers static assets, wrangler.jsonc)
+  unpacks the same tree into dist/assets after the build (deploy/publish-data.sh, .github/workflows/web.yml), so the build
   must never write under dist/assets/{game,ui-hd,dex}. VITE_ASSETS_URL can point elsewhere
   (src/lib/assets.ts). The Go server only answers /api.
 */
