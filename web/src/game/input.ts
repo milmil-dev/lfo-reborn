@@ -128,6 +128,19 @@ const typing = (e: KeyboardEvent) =>
   e.target instanceof HTMLTextAreaElement ||
   (e.target instanceof HTMLElement && e.target.isContentEditable);
 
+const SIDE = ["", "Left", "Right"];
+const MODIFIER = /^(Shift|Control|Alt|Meta)(Left|Right)$/;
+/**
+ * The key's code. Some setups (remote desktops, IMEs, injected events) send modifiers with an
+ * empty code: rebuild it from the key and its side, so R-Shift still reads as ShiftRight.
+ */
+export function keyCode(e: KeyboardEvent) {
+  if (e.code && e.code !== "Unidentified") return e.code;
+  if (["Shift", "Control", "Alt", "Meta"].includes(e.key) && SIDE[e.location])
+    return e.key + SIDE[e.location];
+  return e.code;
+}
+
 /** Keyboard + first gamepad, sampled once per tick. */
 export class Controls {
   private keys = new Set<Button>();
@@ -136,19 +149,38 @@ export class Controls {
   private byCode = new Map<string, Button>();
   private readonly off: () => void;
 
+  // a held key whose keyup never came (an IME or the OS took a Shift release) and that is
+  // pressed again: let go of it for one tick so the press still has an edge
+  private retap = new Set<Button>();
+
   private readonly down = (e: KeyboardEvent) => {
+    this.syncModifiers(e);
     if (typing(e)) return;
-    const b = this.byCode.get(e.code);
-    if (!b || e.metaKey || e.ctrlKey) return;
+    const code = keyCode(e);
+    const b = this.byCode.get(code);
+    // ⌘ / Ctrl shortcuts stay the browser's, unless the bound key is that modifier itself
+    if (!b || ((e.metaKey || e.ctrlKey) && !MODIFIER.test(code))) return;
     e.preventDefault();
+    if (!e.repeat && this.keys.has(b)) this.retap.add(b);
     this.keys.add(b);
     this.latched.add(b);
   };
   private readonly up = (e: KeyboardEvent) => {
-    const b = this.byCode.get(e.code);
+    this.syncModifiers(e);
+    const b = this.byCode.get(keyCode(e));
     if (b) this.keys.delete(b);
   };
-  private readonly blur = () => this.keys.clear();
+  /** A button bound to Shift / Ctrl / Alt / ⌘ is up once the event says that modifier is. */
+  private syncModifiers(e: KeyboardEvent) {
+    for (const [code, b] of this.byCode) {
+      const mod = MODIFIER.exec(code)?.[1];
+      if (mod && this.keys.has(b) && !e.getModifierState(mod)) this.keys.delete(b);
+    }
+  }
+  private readonly blur = () => {
+    this.keys.clear();
+    this.retap.clear();
+  };
 
   constructor(private readonly target: Window = window) {
     this.rebind();
@@ -170,6 +202,11 @@ export class Controls {
     for (const b of this.keys) s[b] = true;
     for (const b of this.latched) s[b] = true;
     this.latched.clear();
+    for (const b of this.retap) {
+      s[b] = false;
+      this.latched.add(b);
+    }
+    this.retap.clear();
     const pad = navigator.getGamepads?.()[0];
     if (pad) {
       const ax = pad.axes[0] ?? 0;

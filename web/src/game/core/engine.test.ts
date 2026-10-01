@@ -34,9 +34,9 @@ describe.skipIf(!hasData)("fighter engine (stinky)", () => {
     const form = load("stinky_r");
     hero.morph(form);
     expect(hero.anim).toBe("TRANSFORM");
+    expect(hero.hp).toBe(700);
     const events = play(world, hero.id, [], 40);
     expect(hero.data.attrs.id).toBe(7002);
-    expect(hero.hp).toBe(700);
     expect(hero.x).toBe(500);
     expect(events.some((e) => e.type === "spawn" && e.bla.type === 819)).toBe(true);
     expect(hero.anim).toBe("STAND");
@@ -246,5 +246,94 @@ describe.skipIf(!hasData)("fighter engine (stinky)", () => {
     }
     expect(hits).toBeGreaterThan(3);
     expect(dummy.hp).toBeLessThan(start);
+  });
+});
+
+const propDir = resolve(process.cwd(), "../data/assets/game/sprites");
+describe.skipIf(!existsSync(`${propDir}/5006.json`))("story props", () => {
+  it("spawns a prop whose STAND names a frame it lacks (sprite 5006) without looping", () => {
+    const world = new World(stage);
+    const data = JSON.parse(readFileSync(`${propDir}/5006.json`, "utf8")) as CharData;
+    const prop = world.spawn(data, 0, 500, 450, 1);
+    expect(prop.frameId).toBe(0);
+    world.step(new Map());
+    expect(prop.frameId).toBe(0);
+  });
+});
+
+describe.skipIf(!existsSync(`${dir}/diluns.json`))("出招表 clicks", () => {
+  it("cast() performs the slot's special on the next tick and pays its MP", () => {
+    const world = new World(stage);
+    const hero = world.spawn(load("diluns"), 1, 500, 450, 1);
+    const move = hero.data.moves.find((m) => m.keys.includes("GDJ"))!;
+    const mp = hero.mp;
+    hero.cast(move.slot);
+    const events = play(world, hero.id, [], 1);
+    expect(events.some((e) => e.type === "move" && e.move === move)).toBe(true);
+    expect(hero.mp).toBeLessThanOrEqual(mp - move.mp + 1);
+  });
+
+  it("is dropped without the MP for it", () => {
+    const world = new World(stage);
+    const hero = world.spawn(load("diluns"), 1, 500, 450, 1);
+    const move = hero.data.moves.find((m) => m.keys.includes("GDJ"))!;
+    hero.mp = move.mp - 10;
+    hero.cast(move.slot);
+    const events = play(world, hero.id, [], 1);
+    expect(events.some((e) => e.type === "move")).toBe(false);
+  });
+});
+
+describe.skipIf(!hasData)("體力 (SP) and 防", () => {
+  const guardUp = (world: World, id: number) =>
+    play(
+      world,
+      id,
+      Array.from({ length: 6 }, () => ({ defend: true })),
+    );
+
+  it("a blocked hit spends SP; with none left the guard won't go up and hits land", () => {
+    const world = new World(stage);
+    const hero = world.spawn(load("stinky"), 1, 500, 450, 1);
+    const foe = world.spawn(load("victor"), 2, 540, 450, -1);
+    guardUp(world, hero.id);
+    expect(hero.anim.startsWith("GUARD")).toBe(true);
+    const sp = hero.sp;
+    const hp = hero.hp;
+    for (let i = 0; i < 40 && hero.sp === sp; i++)
+      world.step(
+        new Map([
+          [hero.id, { ...EMPTY_INPUT, defend: true }],
+          [foe.id, { ...EMPTY_INPUT, attack: i % 2 === 0 }],
+        ]),
+      );
+    expect(hero.sp).toBeLessThan(sp);
+    expect(hp - hero.hp).toBeLessThan(10); // only the chip
+
+    // too little SP for the hit: the guard breaks and it lands in full
+    hero.sp = 1;
+    const before = hero.hp;
+    for (let i = 0; i < 40 && hero.hp === before; i++)
+      world.step(
+        new Map([
+          [hero.id, { ...EMPTY_INPUT, defend: true }],
+          [foe.id, { ...EMPTY_INPUT, attack: i % 2 === 0 }],
+        ]),
+      );
+    expect(before - hero.hp).toBeGreaterThan(10);
+    expect(hero.sp).toBeLessThan(5);
+
+    // with no SP at all 防 doesn't raise a guard
+    const { world: w2, hero: h2 } = setup();
+    h2.sp = 0;
+    play(w2, h2.id, [{ defend: true }]);
+    expect(h2.anim.startsWith("GUARD")).toBe(false);
+  });
+
+  it("SP refills on its own when not guarding", () => {
+    const { world, hero } = setup();
+    hero.sp = 0;
+    play(world, hero.id, [], 300);
+    expect(hero.sp).toBeCloseTo(hero.maxSp / 2, 0);
   });
 });

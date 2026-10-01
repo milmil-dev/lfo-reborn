@@ -39,8 +39,9 @@ function HudDigits({ text, h = 20 }: { text: string; h?: number }) {
         <Ui
           key={`${i}-${c}`}
           name={`gameinterface/default/digit${c === ":" ? 10 : c}`}
+          // the digit art is 17 × 20: a fixed width keeps the line centred before it loads
+          w={(h * 17) / 20}
           h={h}
-          className="w-auto"
         />
       ))}
     </span>
@@ -170,8 +171,9 @@ export function DialBar({
           </button>
         );
       })}
-      <div className="absolute top-[34px] left-[129px] -translate-x-1/2">
-        <HudDigits text={clock} h={10} />
+      {/* centred in the green lens, measured from exp1: x 72.75 – 156.25, y 26 – 57 */}
+      <div className="absolute top-[26px] left-[72.75px] flex h-[31px] w-[83.5px] items-center justify-center">
+        <HudDigits text={clock} h={11} />
       </div>
       <Ui
         name="gameinterface/default/lv"
@@ -182,10 +184,11 @@ export function DialBar({
       <div className="absolute top-[70px] left-[118px]">
         <HudDigits text={String(level)} h={19} />
       </div>
-      <p className="absolute top-[93px] left-[92px] font-lfo text-[#c8ff9a] text-[9px] tabular-nums leading-none">
+      {/* white figures right after the art's EXP: / MONEY: labels, grouped with commas */}
+      <p className="absolute top-[91px] left-[76px] text-[12px] text-white tabular-nums leading-none [text-shadow:1px_1px_0_#000]">
         {exp.toLocaleString()}
       </p>
-      <p className="absolute top-[103px] left-[92px] font-lfo text-[#c8ff9a] text-[9px] tabular-nums leading-none">
+      <p className="absolute top-[102px] left-[92px] text-[12px] text-white tabular-nums leading-none [text-shadow:1px_1px_0_#000]">
         {money.toLocaleString()}
       </p>
     </div>

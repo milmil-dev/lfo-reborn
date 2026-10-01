@@ -12,7 +12,7 @@ import {
 import { StatusPanel } from "../kit/frames";
 import { Ui } from "../kit/ui";
 import { ASSETS } from "@/lib/assets";
-import { RANKS, rankOf } from "@/game/vs";
+import { rankOf } from "@/game/vs";
 import { BOX_H, layoutMap } from "@/game/minimap";
 import type { StoryData } from "@/game/story/types";
 
@@ -81,6 +81,7 @@ export type Vitals = {
   mp: number;
   maxMp: number;
   sp: number;
+  maxSp: number;
   /** elements on the character that the client marks with an icon (core/status.ts) */
   status?: string[];
   /** 勳銜 honor: the rank's medal sits beside the name (a player only) */
@@ -142,7 +143,7 @@ function TranGauge({ t }: { t: TranGaugeState }) {
       srcSet={`${src(t.icon)} 4x`}
       alt=""
       draggable={false}
-      className={cn("absolute inset-0 size-[38px] max-w-none", className)}
+      className={cn("absolute inset-0 size-[30px] max-w-none", className)}
       style={style}
       onError={(e) => {
         // only the first forty characters have their own icon in the client
@@ -154,7 +155,7 @@ function TranGauge({ t }: { t: TranGaugeState }) {
     <button
       type="button"
       onClick={t.onPress}
-      className="pointer-events-auto absolute top-[72px] left-[140px] size-[38px] rounded-full"
+      className="pointer-events-auto absolute top-[61px] left-[122px] size-[30px] rounded-full"
       aria-label={`異轉 ${Math.floor(fill)}%`}
     >
       {img("opacity-70 grayscale brightness-50")}
@@ -191,37 +192,38 @@ export function StatusBox({
 }) {
   return (
     <Anchor corner={corner} scale={scale}>
-      <StatusPanel className="m-[6px]">
+      <StatusPanel className={corner === "tl" ? "mt-px ml-[12px]" : "mt-px mr-[12px]"}>
         {/*
-          laid out as the client draws it (measured from the 1280 × 720 game, from the frame's
-          top line, ~9 below the art's top under the pipe): the whole
-          chartablephoto at a quarter (29.5 × 37) top-left, the statusbar at its own size beside it,
-          the 勳銜 medal to its right, the name underneath — no frame round the photo, no numbers
+          laid out as the client draws it, measured against a screenshot of the original (box at
+          12, 1 on the 800 × 600 HUD): the head top-left (chartablephoto at 35 × 44), the
+          statusbar at its own size from x 61.5, the 勳銜 medal tucked under the head's right
+          edge, the name along the bottom (baseline ~99) and the 異 orb centred at 137, 76 — no
+          frame round the photo, no numbers, no rank text
         */}
         <img
           src={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${v.charId}.webp`}
           srcSet={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${v.charId}.webp 4x`}
           alt=""
-          className="absolute top-[18px] left-[18px] h-[37px] w-[29.5px] max-w-none"
+          className="absolute top-[18px] left-[12px] h-[44px] w-[35px] max-w-none"
           onError={(e) => {
             // monsters have no portrait in the client's table
             e.currentTarget.style.display = "none";
           }}
           draggable={false}
         />
-        <div className="absolute top-[14px] left-[67px] h-[24px] w-[63px]">
+        <div className="absolute top-[14.5px] left-[61.5px] h-[24px] w-[63px]">
           <Fill value={v.hp} max={v.maxHp} row={0} color="#ff0000" />
           <Fill value={v.mp} max={v.maxMp} row={1} color="#0000ff" />
-          <Fill value={v.sp} max={100} row={2} color="#ffffff" />
+          <Fill value={v.sp} max={v.maxSp} row={2} color="#ffffff" />
           <Ui name="gameinterface/default/statusbar" w={63} h={24} className="absolute inset-0" />
         </div>
         {v.honor !== undefined && (
           <Ui
             name={`medal/medal0${rankOf(v.honor) + 1}`}
-            // native size (40 × 40, the medal itself ~15 × 22 in the middle)
-            w={40}
-            h={40}
-            className="absolute top-[30px] left-[120px]"
+            // 40 × 40 art (the medal ~15 × 22 in the middle) drawn at 30: a small ribbon by the head
+            w={30}
+            h={30}
+            className="absolute top-[44.5px] left-[35.5px]"
             alt=""
           />
         )}
@@ -232,16 +234,9 @@ export function StatusBox({
               <Ui key={k} name={`gameinterface/default/${STATUS_ICON[k]}`} w={16} h={16} />
             ))}
         </div>
-        <div className="absolute top-[66px] left-[12px] flex max-w-[160px] items-baseline gap-[6px]">
-          <p className="truncate text-[13px] text-white [text-shadow:1px_1px_0_#000,0_0_2px_#000]">
-            {v.name}
-          </p>
-          {v.honor !== undefined && (
-            <span className="shrink-0 text-[#ffe08a] text-[11px] [text-shadow:1px_1px_0_#000]">
-              {RANKS[rankOf(v.honor)]}
-            </span>
-          )}
-        </div>
+        <p className="absolute top-[87px] left-[5.5px] max-w-[112px] truncate text-[14px] text-white leading-none [text-shadow:1px_1px_0_#000,0_0_2px_#000]">
+          {v.name}
+        </p>
         {tran && <TranGauge t={tran} />}
       </StatusPanel>
     </Anchor>
