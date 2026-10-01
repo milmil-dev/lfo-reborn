@@ -164,6 +164,43 @@ describe.skipIf(!hasData)("fighter engine (stinky)", () => {
     expect(foe.hp).toBeLessThan(foe.maxHp);
   });
 
+  it("gets up at the end of a roll even with ↑ still held", () => {
+    const { world, hero } = setup();
+    hero.goto(hero.action("LIEDOWN"));
+    play(
+      world,
+      hero.id,
+      Array.from({ length: 40 }, () => ({ up: true })),
+    );
+    expect(hero.down).toBe(false);
+    expect(["CROUCH2STAND", "STAND", "WALK"]).toContain(hero.anim);
+  });
+
+  it("跳 on the way down flips back upright and lands on its feet", () => {
+    const { world, hero } = setup();
+    hero.vy = -8;
+    hero.y = -1;
+    hero.goto(hero.action("FALL1A"));
+    play(world, hero.id, [{}, {}, {}, {}, {}, { jump: true }]);
+    expect(hero.anim).toBe("FALLRECOVERY");
+    play(world, hero.id, [], 6);
+    expect(hero.down).toBe(false);
+  });
+
+  it("a hard landing bounces and lies down without standing up in mid-air", () => {
+    const { world, hero } = setup();
+    hero.vy = -16;
+    hero.y = -1;
+    hero.goto(hero.action("FALL1A"));
+    const seen = new Set<string>();
+    for (let i = 0; i < 30; i++) {
+      world.step(new Map([[hero.id, EMPTY_INPUT]]));
+      seen.add(hero.anim);
+    }
+    expect(seen.has("JUMPU")).toBe(false);
+    expect(seen.has("LIEDOWN")).toBe(true);
+  });
+
   it("a fighter at 0 HP falls and stays down", () => {
     const world = new World(stage);
     const hero = world.spawn(load("stinky"), 1, 500, 450, 1);
