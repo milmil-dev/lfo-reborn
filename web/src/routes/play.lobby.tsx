@@ -341,15 +341,17 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
           });
         }
       },
-      () => {
+      (frame) => {
         director.setViewWidth((el.clientWidth * 600) / Math.max(1, el.clientHeight));
-        scene.draw();
-        // keep the bubble over the player's head and the name under the feet
+        scene.draw(undefined, frame);
+        // keep the bubble over the player's head and the name under the feet, where the
+        // sprite is drawn this frame
         if (me && tag.current) {
           const s = el.clientHeight / 600;
-          tag.current.style.transform = `translate(${(me.x - director.camera.x) * s}px, ${(me.z + me.y - 96) * s}px) translate(-50%, -100%)`;
+          const p = scene.renderPos(me);
+          tag.current.style.transform = `translate(${(p.x - scene.cameraX) * s}px, ${(p.z + p.y - 96) * s}px) translate(-50%, -100%)`;
           if (feet.current)
-            feet.current.style.transform = `translate(${(me.x - director.camera.x) * s}px, ${(me.z + 6) * s}px) scale(${s}) translate(-50%, 0)`;
+            feet.current.style.transform = `translate(${(p.x - scene.cameraX) * s}px, ${(p.z + 6) * s}px) scale(${s}) translate(-50%, 0)`;
         }
       },
     );
