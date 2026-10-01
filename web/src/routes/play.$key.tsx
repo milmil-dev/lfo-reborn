@@ -20,6 +20,7 @@ import { StartGate } from "@/game/ui";
 import { LoadingScreen } from "@/game/kit/loading";
 import { q } from "@/lib/api";
 import { cn } from "@/lib/cn";
+import { usePageTitle } from "@/lib/title";
 
 export const Route = createFileRoute("/play/$key")({
   loader: async ({ params }) => {
@@ -47,6 +48,7 @@ function Training() {
   // entered from the lobby (VS mode) with a profile, or straight from 選擇角色
   const inLobby = useActiveProfile() !== null;
   const { player, dummy, stage, form } = Route.useLoaderData();
+  usePageTitle(t`${player.data.name} · 訓練場`);
   const navigate = useNavigate();
   const host = useRef<HTMLDivElement>(null);
   const [me, setMe] = useState<Hud | null>(null);

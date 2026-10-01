@@ -13,6 +13,7 @@ import { rosterQueries, StartGate, useRoster } from "@/game/ui";
 import { canLaunch, COM_LEVELS, type Com, MAX_FIGHTERS, TEAM_COUNT } from "@/game/vs";
 import { ASSETS } from "@/lib/assets";
 import { cn } from "@/lib/cn";
+import { usePageTitle } from "@/lib/title";
 
 /*
   遊戲室 — the VS waiting room (waitplayer/): the line-up as the client's rows (players /
@@ -87,6 +88,7 @@ function WaitingRoom() {
   const roster = useRoster().filter((r) => r.id < 7000);
   const entry = catalog.find((e) => e.key === stage);
   const roomName = name || t`${profile?.name ?? "LFO"}的遊戲室`;
+  usePageTitle(roomName);
 
   const [team, setTeam] = useState(1);
   const [coms, setComs] = useState<Com[]>([]);

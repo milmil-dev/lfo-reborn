@@ -4,6 +4,7 @@ import { useState } from "react";
 import { UI_HD, uiUrl } from "@/game/kit/ui";
 import { cn } from "@/lib/cn";
 import { ASSETS } from "@/lib/assets";
+import { usePageTitle } from "@/lib/title";
 
 export const Route = createFileRoute("/play/kit")({ component: Kit });
 
@@ -22,6 +23,7 @@ const manifest = queryOptions({
 });
 
 function Kit() {
+  usePageTitle("UI kit");
   const { data = {} } = useQuery(manifest);
   const [zoom, setZoom] = useState(2);
   const [mode, setMode] = useState<"side" | "onion">("side");

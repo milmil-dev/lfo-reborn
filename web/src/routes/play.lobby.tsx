@@ -75,6 +75,7 @@ import type { StoryData } from "@/game/story/types";
 import { StartGate } from "@/game/ui";
 import { LoadingScreen } from "@/game/kit/loading";
 import { z } from "zod";
+import { usePageTitle } from "@/lib/title";
 
 export const Route = createFileRoute("/play/lobby")({
   beforeLoad: () => {
@@ -130,6 +131,8 @@ type Line = { id: number; who: string | null; text: string };
 type Say = { id: number; text?: string; smiley?: SmileyDef };
 
 function Lobby() {
+  const { t } = useLingui();
+  usePageTitle(t`大廳`);
   const story = Route.useLoaderData();
   const [started, setStarted] = useState(false);
   const onStart = useCallback(() => {

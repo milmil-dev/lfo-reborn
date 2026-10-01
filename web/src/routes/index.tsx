@@ -12,6 +12,7 @@ import { MUSEUM_URL } from "@/lib/links";
 import { useActiveProfile } from "@/game/profiles";
 import { ASSETS } from "@/lib/assets";
 import { BUILD } from "@/lib/version";
+import { usePageTitle } from "@/lib/title";
 
 export const Route = createFileRoute("/")({ component: TitleScreen });
 
@@ -43,6 +44,7 @@ const FIRST_TIME: Main[] = ["start", "keys", "profile"];
 
 function TitleScreen() {
   const { t } = useLingui();
+  usePageTitle("");
   const navigate = useNavigate();
   const [phase, setPhase] = useState<Phase>(entered ? "title" : "gate");
   const [shot, setShot] = useState(0); // intro shot
