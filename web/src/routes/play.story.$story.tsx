@@ -67,6 +67,7 @@ import { RoomScene } from "@/game/story/room-scene";
 import type { DialogueLine, StoryData } from "@/game/story/types";
 import { StartGate } from "@/game/ui";
 import { LoadingScreen } from "@/game/kit/loading";
+import { KEY } from "@/lib/storage-keys";
 import { asset, q } from "@/lib/api";
 import { cn } from "@/lib/cn";
 
@@ -236,8 +237,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
     void fetch(`${BASE}/beasts.json`)
       .then((r) => (r.ok ? (r.json() as Promise<Beast[]>) : []))
       .then((list) => {
-        // dev: sessionStorage lfo.forceRaid = "1" makes every run meet the first beast
-        const forced = import.meta.env.DEV && sessionStorage.getItem("lfo.forceRaid") === "1";
+        // dev: sessionStorage lfo-reborn.forceRaid = "1" makes every run meet the first beast
+        const forced = import.meta.env.DEV && sessionStorage.getItem(KEY.forceRaid) === "1";
         raid = forced ? (list[0] ?? null) : rollRaid(list);
       })
       .catch(() => {});

@@ -29,7 +29,7 @@ Legend: [x] done · [~] partial · [ ] not started · (server) needs other playe
 - [x] Items in the field: pick up / carry / throw / drink / heavy objects (`core/items.ts`, 164 field items from `bun stories.ts --items`)
 - [~] Weapons: sword / long weapon swings and throws from the `wpn` weapon points, durability; bow arrows, shield blocking and the `wea` weapon-skill bonus pending
 - [x] Loot: stage `itm` tables roll on each KO (field items drop, the rest go to the backpack)
-- [x] Save store: profiles, backpack, money, bank and 信物 in one Zustand store (`game/profiles.ts`, `lfo.save`), old per-key saves carried over; screens read it live
+- [x] Save store: profiles, backpack, money, bank and 信物 in one Zustand store (`game/profiles.ts`, `lfo-reborn.save`; saves from before the rename carried over), old per-key saves carried over; screens read it live
 - [x] Gamepad on every screen (`game/pad-bridge.ts`): d-pad / stick → arrows, ✕ Enter, ○ back, □ 攻, △ 異轉, Start menu, Select 出招表, L1 / R1 item / drop; in a fight the face buttons stay 攻 跳 防
 - [~] Item bar: 10 slots from the backpack's field items (1–0 pick, ` fist, I take into hand, O drop; the held item follows through room changes); key items / doors (`PACKET_KEY*`, `OPENDOOR`) pending
 - [x] Knock-down recovery: ↑ / ↓ on the floor rolls (LIEDOWNROLLU / D, B_ variants) and gets up; 跳 on the way down flips back (FALLRECOVERY)

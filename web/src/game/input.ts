@@ -1,3 +1,4 @@
+import { KEY, moveKey } from "@/lib/storage-keys";
 import type { Button, InputState } from "./core/types";
 import { EMPTY_INPUT } from "./core/types";
 
@@ -38,7 +39,8 @@ export const DEFAULT_BINDINGS: Bindings = {
   pad: { attack: 2, jump: 0, defend: 1 },
 };
 
-const STORE = "lfo.bindings";
+const STORE = KEY.bindings;
+moveKey(() => localStorage, "lfo.bindings", STORE);
 let current: Bindings = load();
 const listeners = new Set<() => void>();
 

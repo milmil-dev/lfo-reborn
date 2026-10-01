@@ -64,7 +64,7 @@ select, `/play/$key` a training ground driven by the original frame data.
 - UI copy is authored in zh-HK through Lingui macros; run `pnpm run i18n:extract && pnpm run i18n:compile` after changing strings.
 - Motion primitives live in `src/components/motion.tsx`; respect `prefers-reduced-motion`.
 - State: server data through TanStack Query; the player's save (profiles, backpack, money, bank, 異轉信物) in the
-  Zustand store in `src/game/profiles.ts`, persisted as `lfo.save`. Screens read it with its hooks (`useInventory`,
+  Zustand store in `src/game/profiles.ts`, persisted as `lfo-reborn.save` (every browser key is in `src/lib/storage-keys.ts`). Screens read it with its hooks (`useInventory`,
   `useMoney` …) instead of keeping copies; game loops use its plain getters / setters. The fight itself stays in the
   engine classes, outside React.
 - Verify UI changes in the browser (both API and web running) before calling them done.
