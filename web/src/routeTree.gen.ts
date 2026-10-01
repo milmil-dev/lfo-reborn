@@ -16,6 +16,7 @@ import { Route as PlayChampionRouteImport } from './routes/play.champion'
 import { Route as PlayKitRouteImport } from './routes/play.kit'
 import { Route as PlayLobbyRouteImport } from './routes/play.lobby'
 import { Route as PlayMissionsRouteImport } from './routes/play.missions'
+import { Route as PlayOnlineRouteImport } from './routes/play.online'
 import { Route as PlayProfileRouteImport } from './routes/play.profile'
 import { Route as PlayRoomRouteImport } from './routes/play.room'
 import { Route as PlayServerRouteImport } from './routes/play.server'
@@ -57,6 +58,11 @@ const PlayLobbyRoute = PlayLobbyRouteImport.update({
 const PlayMissionsRoute = PlayMissionsRouteImport.update({
   id: '/play/missions',
   path: '/play/missions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlayOnlineRoute = PlayOnlineRouteImport.update({
+  id: '/play/online',
+  path: '/play/online',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlayProfileRoute = PlayProfileRouteImport.update({
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/play/kit': typeof PlayKitRoute
   '/play/lobby': typeof PlayLobbyRoute
   '/play/missions': typeof PlayMissionsRoute
+  '/play/online': typeof PlayOnlineRoute
   '/play/profile': typeof PlayProfileRoute
   '/play/room': typeof PlayRoomRoute
   '/play/server': typeof PlayServerRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/play/kit': typeof PlayKitRoute
   '/play/lobby': typeof PlayLobbyRoute
   '/play/missions': typeof PlayMissionsRoute
+  '/play/online': typeof PlayOnlineRoute
   '/play/profile': typeof PlayProfileRoute
   '/play/room': typeof PlayRoomRoute
   '/play/server': typeof PlayServerRoute
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/play/kit': typeof PlayKitRoute
   '/play/lobby': typeof PlayLobbyRoute
   '/play/missions': typeof PlayMissionsRoute
+  '/play/online': typeof PlayOnlineRoute
   '/play/profile': typeof PlayProfileRoute
   '/play/room': typeof PlayRoomRoute
   '/play/server': typeof PlayServerRoute
@@ -153,6 +162,7 @@ export interface FileRouteTypes {
     | '/play/kit'
     | '/play/lobby'
     | '/play/missions'
+    | '/play/online'
     | '/play/profile'
     | '/play/room'
     | '/play/server'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/play/kit'
     | '/play/lobby'
     | '/play/missions'
+    | '/play/online'
     | '/play/profile'
     | '/play/room'
     | '/play/server'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/play/kit'
     | '/play/lobby'
     | '/play/missions'
+    | '/play/online'
     | '/play/profile'
     | '/play/room'
     | '/play/server'
@@ -202,6 +214,7 @@ export interface RootRouteChildren {
   PlayKitRoute: typeof PlayKitRoute
   PlayLobbyRoute: typeof PlayLobbyRoute
   PlayMissionsRoute: typeof PlayMissionsRoute
+  PlayOnlineRoute: typeof PlayOnlineRoute
   PlayProfileRoute: typeof PlayProfileRoute
   PlayRoomRoute: typeof PlayRoomRoute
   PlayServerRoute: typeof PlayServerRoute
@@ -263,6 +276,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlayMissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/play/online': {
+      id: '/play/online'
+      path: '/play/online'
+      fullPath: '/play/online'
+      preLoaderRoute: typeof PlayOnlineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/play/profile': {
       id: '/play/profile'
       path: '/play/profile'
@@ -322,6 +342,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlayKitRoute: PlayKitRoute,
   PlayLobbyRoute: PlayLobbyRoute,
   PlayMissionsRoute: PlayMissionsRoute,
+  PlayOnlineRoute: PlayOnlineRoute,
   PlayProfileRoute: PlayProfileRoute,
   PlayRoomRoute: PlayRoomRoute,
   PlayServerRoute: PlayServerRoute,

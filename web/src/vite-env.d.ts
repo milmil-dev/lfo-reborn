@@ -6,6 +6,8 @@ interface ImportMetaEnv {
   readonly VITE_ASSETS_URL?: string;
   /** the commit a CI build was made from (web.yml passes github.sha) */
   readonly VITE_GIT_SHA?: string;
+  /** the realtime Worker (realtime/) for online rooms, ws(s)://…; dev falls back to ws://localhost:8787 */
+  readonly VITE_REALTIME_URL?: string;
 }
 
 /** web/package.json's version, which release-please bumps (vite.config.ts `define`) */

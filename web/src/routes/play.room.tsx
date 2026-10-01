@@ -6,6 +6,18 @@ import { useEffect, useEffectEvent, useState } from "react";
 import { z } from "zod";
 import { audio } from "@/game/audio";
 import { availableDevices, type Device, onDevices, padIndex } from "@/game/input";
+import {
+  Arrow,
+  ChatPanel,
+  Head,
+  Key,
+  LevelArrows,
+  ROW_STEP,
+  ROW_Y,
+  Row,
+  Tag,
+  TeamBadge,
+} from "@/game/kit/room";
 import { Ui } from "@/game/kit/ui";
 import { getActiveProfile, useActiveProfile } from "@/game/profiles";
 import { Screen } from "@/game/screen";
@@ -21,16 +33,15 @@ import {
   stepLevel,
   TEAM_COUNT,
 } from "@/game/vs";
-import { ASSETS } from "@/lib/assets";
 import { cn } from "@/lib/cn";
 import { usePageTitle } from "@/lib/title";
 
 /*
-  遊戲室 — the VS waiting room (waitplayer/): the line-up as the client's rows (players /
-  computerslot / addcom, 433 × 33), each with the character's head (waitsprite<id>), a team badge
-  and, for a COM, ◀ ▶ to change character and ▲ ▼ its level; LAUNCH? starts the bout. Other
-  players at this machine join on the second keyboard layout or a gamepad of their own (their
-  row names the device). The room chat on the right (chat_area) carries the client's own room lines.
+  遊戲室 — the VS waiting room (waitplayer/, pieces in kit/room.tsx): the line-up as the client's
+  rows, each with the character's head, a team badge and, for a COM, ◀ ▶ to change character and
+  ▲ ▼ its level; LAUNCH? starts the bout. Other players at this machine join on the second
+  keyboard layout or a gamepad of their own (their row names the device). The room chat on the
+  right carries the client's own room lines.
 */
 
 export const Route = createFileRoute("/play/room")({
@@ -49,46 +60,6 @@ export const Route = createFileRoute("/play/room")({
     ]),
   component: WaitingRoom,
 });
-
-const ROW_X = 24;
-const ROW_Y = 150;
-const ROW_STEP = 46;
-const TEAM_COLOR = ["#9aa0aa", "#e5484d", "#3e8ef7", "#3fbf6b", "#f2c230"];
-
-function Head({ id }: { id: number }) {
-  return (
-    <img
-      src={`${ASSETS}/ui-hd/waitplayer/waitsprite${id}.webp`}
-      alt=""
-      draggable={false}
-      className="h-[25px] w-[33px]"
-      onError={(e) => {
-        e.currentTarget.style.visibility = "hidden";
-      }}
-    />
-  );
-}
-
-function TeamBadge({ team, onClick }: { team: number; onClick?: () => void }) {
-  const { t } = useLingui();
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={!onClick}
-      className="relative grid h-[28px] w-[40px] place-items-center"
-      aria-label={team ? t`第${team}隊` : t`獨立`}
-    >
-      <Ui name="waitplayer/team" w={40} h={28} className="absolute inset-0" />
-      <span
-        className="relative font-bold text-[12px] text-white [text-shadow:0_1px_1px_#000]"
-        style={{ color: team ? TEAM_COLOR[team] : "#5b616b", textShadow: "none" }}
-      >
-        {team ? team : t`獨`}
-      </span>
-    </button>
-  );
-}
 
 function WaitingRoom() {
   const { t } = useLingui();
@@ -202,7 +173,7 @@ function WaitingRoom() {
           {me && <Head id={me.id} />}
           <span className="truncate font-bold text-[13px] text-white">{profile?.name}</span>
           <span className="font-lfo text-[10px] text-white/70">LV {profile?.lv}</span>
-          <DeviceTag>{deviceLabel("kb")}</DeviceTag>
+          <Tag>{deviceLabel("kb")}</Tag>
           <span className="ml-auto" />
           <TeamBadge team={team} onClick={() => setTeam((x) => cycle(x, 1, TEAM_COUNT + 1))} />
         </Row>
@@ -239,7 +210,7 @@ function WaitingRoom() {
                     {t`玩家${i + 2}`}{" "}
                     <span className="text-[10px] text-white/60">{who?.name ?? g.key}</span>
                   </span>
-                  <DeviceTag onClick={() => cycleDevice(i)}>{deviceLabel(g.device)}</DeviceTag>
+                  <Tag onClick={() => cycleDevice(i)}>{deviceLabel(g.device)}</Tag>
                   <span className="ml-auto flex items-center gap-1">
                     <span className="w-[42px] text-right font-lfo text-[10px] text-white/80">
                       LV {g.lv}
@@ -362,96 +333,8 @@ function WaitingRoom() {
           {t`離開遊戲室`}
         </button>
 
-        {/* the room chat */}
-        <div className="absolute top-[4px] left-[488px] h-[592px] w-[305px]">
-          <Ui name="waitplayer/chat_area" w={305} h={592} className="absolute inset-0" />
-          <div className="absolute top-[10px] left-[12px] w-[281px] space-y-[6px] text-[12px]">
-            {lines.map((l) => (
-              <p key={l} className="text-[#ffe9a8]">
-                <span className="text-[#ffb27a]">{t`【系統】`}</span>
-                {l}
-              </p>
-            ))}
-          </div>
-        </div>
+        <ChatPanel lines={lines.map((text) => ({ who: null, text }))} />
       </Screen>
     </div>
-  );
-}
-
-function Row({
-  y,
-  art,
-  children,
-}: {
-  y: number;
-  art: "players" | "computerslot" | "addcom";
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="absolute h-[33px] w-[433px]" style={{ left: ROW_X, top: y }}>
-      <Ui name={`waitplayer/${art}`} w={433} h={33} className="absolute inset-0" />
-      <div className="absolute inset-y-0 right-[4px] left-[34px] flex items-center gap-[6px]">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-/** The device a seat reads; clicking (a guest's) moves on to the next free one. */
-function DeviceTag({ onClick, children }: { onClick?: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={!onClick}
-      className={cn(
-        "shrink-0 rounded-full bg-black/40 px-[7px] py-px font-lfo text-[9px] text-[#ffe08a] whitespace-nowrap",
-        onClick && "hover:bg-black/60",
-      )}
-    >
-      {children}
-    </button>
-  );
-}
-
-function Key({ children }: { children: React.ReactNode }) {
-  return (
-    <kbd className="rounded border border-white/30 px-1 font-lfo text-[9px] text-white/60">
-      {children}
-    </kbd>
-  );
-}
-
-function Arrow({ dir, onClick }: { dir: "l" | "r"; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="h-[25px] w-[23px] shrink-0"
-      aria-label={dir === "l" ? "◀" : "▶"}
-    >
-      <Ui name={`waitplayer/arrow_${dir}_s`} w={23} h={25} />
-    </button>
-  );
-}
-
-function LevelArrows({ onUp, onDown }: { onUp: () => void; onDown: () => void }) {
-  return (
-    <span className="relative block h-[25px] w-[17px] shrink-0">
-      <Ui name="waitplayer/arrow_ud_s" w={17} h={25} className="absolute inset-0" />
-      <button
-        type="button"
-        onClick={onUp}
-        className="absolute inset-x-0 top-0 h-1/2"
-        aria-label="LV +"
-      />
-      <button
-        type="button"
-        onClick={onDown}
-        className="absolute inset-x-0 bottom-0 h-1/2"
-        aria-label="LV -"
-      />
-    </span>
   );
 }
