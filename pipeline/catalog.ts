@@ -1,8 +1,11 @@
 // The client's own list of playable stages (LOADSTORYLIST/loadstorylist*.dat), as one catalog:
 //   data/assets/game/stories/catalog.json
-//   [{ key, mode, area, leadId, lead, synopsis, exported }]
+//   [{ key, mode, area, leadId, lead, players, synopsis, exported }]
 // Each .dat line is `<mode> <charId> story/<folder>/<name>.sty|stz` — mode 10 story, 20 mission,
-// 0 VS; charId 0 = anyone may play it, otherwise the lead it belongs to. `~` lines are disabled.
+// 0 VS; `~` lines are disabled. A stage is listed once per character with the file that character
+// plays (Woody plays davis_greek1, Kiki dennis_china5), and charId 0 names the file for anyone
+// without a line of their own (stinky_school): a stage with no 0 line (egypt) is only for the
+// characters it names. `players` keeps every charId that plays the file.
 // The title is the client's own stage name: the .sty `sty <id>` row indexes STORY/MISC/stagename.tzw.
 // The synopsis is the first line of the stage's string table (its opening narration).
 import { readStrings, unpackLfo } from "./lfo";
@@ -36,6 +39,8 @@ type Entry = {
 	area: string;
 	leadId: number;
 	lead: string | null;
+	/** charIds whose line plays this file; 0 = anyone the stage gives no line of their own */
+	players: number[];
 	synopsis: string;
 	exported: boolean;
 };
@@ -62,7 +67,12 @@ for (const f of lists) {
 		if (!m) continue; // comments, blank and ~disabled lines
 		const [, mode, charId, folder, name] = m;
 		const key = name.toLowerCase();
-		if (seen.has(key) || !MODES[mode]) continue;
+		if (!MODES[mode]) continue;
+		const known = seen.get(key);
+		if (known) {
+			if (!known.players.includes(Number(charId))) known.players.push(Number(charId));
+			continue;
+		}
 		const lead = byId.get(Number(charId));
 		let synopsis = "";
 		const sp = strings.get(key);
@@ -76,6 +86,7 @@ for (const f of lists) {
 			area: folder.toLowerCase().split(/[\\/]/)[0],
 			leadId: Number(charId),
 			lead: lead?.key ?? null,
+			players: [Number(charId)],
 			synopsis,
 			exported: exported.has(key),
 		});
@@ -94,6 +105,7 @@ for (const key of ["tower01", "tower02", "tower03", "tower_lantau"])
 			area: "tower",
 			leadId: 0,
 			lead: null,
+			players: [0],
 			synopsis: "",
 			exported: exported.has(key),
 		});
