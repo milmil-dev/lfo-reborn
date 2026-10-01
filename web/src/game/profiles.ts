@@ -3,12 +3,13 @@
   account's characters (as many as it likes, as in the newer client) and which one is playing, each server's bank, and the
   account's 異轉信物.
 
-  One Zustand store persisted under `lfo.save` is the single source of truth. React screens read
+  One Zustand store persisted under `lfo-reborn.save` is the single source of truth. React screens read
   it through the hooks at the bottom (and re-render when anything changes it); the game loops and
   pure helpers use the plain getters and setters, which read and write the same store.
   Storage can be blocked: the store then lives for the session only.
 */
 import { freePoints, RESET_LEVEL, resetFee } from "./leveling";
+import { KEY, moveKey } from "@/lib/storage-keys";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { emptyInventory, type Inventory, type Owned } from "./inventory";
@@ -82,10 +83,12 @@ function legacySave(): Save {
 
 /* ───────── the store ───────── */
 
-// the older keys seed the first state; once `lfo.save` exists it wins
+// a save from before the rename moves to the new key; the older per-item keys seed the first
+// state when there is no save at all
+moveKey(() => localStorage, "lfo.save", KEY.save);
 export const useSave = create<Save>()(
   persist(() => legacySave(), {
-    name: "lfo.save",
+    name: KEY.save,
     version: 1,
     storage: createJSONStorage(() => localStorage),
   }),

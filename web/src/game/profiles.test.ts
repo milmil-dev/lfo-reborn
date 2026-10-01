@@ -32,6 +32,19 @@ describe("save store", () => {
     expect(s.hasToken(2)).toBe(true);
   });
 
+  it("carries a save from before the rename over to the new key", async () => {
+    let s = await fresh();
+    s.saveSlot(0, stinky);
+    const saved = localStorage.getItem("lfo-reborn.save")!;
+    localStorage.clear();
+    localStorage.setItem("lfo.save", saved);
+    s = await fresh();
+    expect(s.getSlots()[0]?.name).toBe("星仔");
+    expect(localStorage.getItem("lfo-reborn.save")).not.toBeNull();
+    // the old key stays for an older build
+    expect(localStorage.getItem("lfo.save")).toBe(saved);
+  });
+
   it("persists every change under one key and reads it back", async () => {
     let s = await fresh();
     s.saveSlot(1, stinky);
@@ -41,7 +54,7 @@ describe("save store", () => {
     s.saveBank([{ uid: 9, id: 101, dur: 5 }]);
     s.grantToken(2);
     s.grantToken(2);
-    expect(JSON.parse(localStorage.getItem("lfo.save") ?? "{}").state.active).toBe(1);
+    expect(JSON.parse(localStorage.getItem("lfo-reborn.save") ?? "{}").state.active).toBe(1);
 
     s = await fresh();
     expect(s.getActiveProfile()?.money).toBe(750);
