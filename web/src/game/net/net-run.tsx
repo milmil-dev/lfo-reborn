@@ -309,7 +309,8 @@ export function NetRun({
         for (let n = 0; n < 4 && rb.ahead < LEAD - 1 && rb.ahead < MAX_AHEAD && !rb.lost; n++)
           localTick();
         d.setViewWidth((el.clientWidth * 600) / Math.max(1, el.clientHeight));
-        scene.draw();
+        // drawn between the last tick and the next, like runLoop does for the local modes
+        scene.draw(undefined, { alpha: Math.min(1, acc / dt), tick: d.world.tick });
         raf = requestAnimationFrame(frame);
       };
       raf = requestAnimationFrame(frame);
