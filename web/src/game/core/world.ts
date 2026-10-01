@@ -1,5 +1,12 @@
-import { Fighter, type FighterEvent, type Stage } from "./fighter";
+import { Fighter, type FighterEvent, type FighterSnapshot, type Stage } from "./fighter";
 import { Hasher } from "./hash";
+
+/** The world at one tick: the same Fighter objects, each with its state copied (Fighter.save). */
+export type WorldSnapshot = {
+  tick: number;
+  nextId: number;
+  fighters: { f: Fighter; s: FighterSnapshot }[];
+};
 import { DURATION, HOLDS, inflict } from "./status";
 
 /** 咀咒藥水 / 毒性藥水 / 解毒藥水 */
@@ -99,6 +106,37 @@ export class World {
     h.num(this.tick).num(this.nextId).num(this.fighters.length);
     for (const f of this.fighters) f.hash(h);
     return h.value;
+  }
+
+  /** The state right now, to come back to with restore() (rollback netcode). */
+  snapshot(): WorldSnapshot {
+    return {
+      tick: this.tick,
+      nextId: this.nextId,
+      fighters: this.fighters.map((f) => ({ f, s: f.save() })),
+    };
+  }
+
+  /**
+   * Become `snap` again, keeping the Fighter objects the view and the game layer hold on to:
+   * fighters spawned since leave, fighters removed since come back. Returns both lists so the
+   * view can follow.
+   */
+  restore(snap: WorldSnapshot): { added: Fighter[]; removed: Fighter[] } {
+    const before = new Set(this.fighters);
+    const byId = new Map(snap.fighters.map(({ f }) => [f.id, f]));
+    this.fighters.length = 0;
+    for (const { f, s } of snap.fighters) {
+      f.load(s, byId);
+      this.fighters.push(f);
+    }
+    this.tick = snap.tick;
+    this.nextId = snap.nextId;
+    const after = new Set(this.fighters);
+    return {
+      added: this.fighters.filter((f) => !before.has(f)),
+      removed: [...before].filter((f) => !after.has(f)),
+    };
   }
 
   /**

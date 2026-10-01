@@ -99,8 +99,12 @@ frames (lockstep) — so a room costs a few messages a second and nothing else. 
 few seconds per viewer); `wrangler deploy` applies the object migrations in `wrangler.jsonc`.
 
 - `.github/workflows/realtime.yml` type-checks and tests it on PRs and deploys it from `main`
-  (`wrangler deploy`). The deploy needs the `CLOUDFLARE_API_TOKEN` to carry *Workers Scripts: Edit*
-  and *Durable Objects: Edit* as well as Pages — extend the existing token or add those scopes.
+  (`wrangler deploy`). The deploy needs the `CLOUDFLARE_API_TOKEN` to carry *Account · Workers Scripts ·
+  Edit* (Durable Object classes and their migrations are part of the script; there is no separate
+  permission) and *Account · Account Settings · Read*, as well as *Cloudflare Pages · Edit* for web.yml —
+  make one token from the "Edit Cloudflare Workers" template plus the Pages row and replace the secret.
+  The account also needs its `workers.dev` subdomain registered (Workers & Pages → Overview), since a
+  non-interactive deploy cannot pick one.
 - The site reaches it through `VITE_REALTIME_URL` (GitHub variable `REALTIME_URL`, e.g.
   `wss://lfo-realtime.<account>.workers.dev`), which `web.yml` passes to the build. Unset, the
   「連線 VS 對戰」 door says the server is not configured; `vp dev` falls back to `ws://localhost:8787`

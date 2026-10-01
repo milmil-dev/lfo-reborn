@@ -395,7 +395,7 @@ msgstr ""
 
 #. placeholder {0}: RANKS[outcome.rank]
 #. placeholder {1}: outcome.honor
-#: src/game/net/net-run.tsx:308
+#: src/game/net/net-run.tsx:366
 #: src/routes/play.vs.$stage.tsx:422
 msgid "勳銜：{0}　榮譽 {1}"
 msgstr ""
@@ -441,11 +441,11 @@ msgstr ""
 msgid "合體期 {days} 天"
 msgstr ""
 
-#: src/game/net/net-run.tsx:294
+#: src/game/net/net-run.tsx:352
 msgid "同步失敗（第 {desync} 格）：各人看到的戰況已不一致。"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:859
 #: src/routes/play.vs.$stage.tsx:423
 msgid "名稱"
@@ -781,7 +781,7 @@ msgstr ""
 msgid "撤回"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:864
 #: src/routes/play.vs.$stage.tsx:423
 msgid "擊倒"
@@ -1001,7 +1001,7 @@ msgid "獨"
 msgstr ""
 
 #: src/game/kit/room.tsx:39
-#: src/game/net/net-run.tsx:313
+#: src/game/net/net-run.tsx:371
 #: src/routes/play.vs.$stage.tsx:427
 msgid "獨立"
 msgstr ""
@@ -1135,7 +1135,7 @@ msgstr ""
 msgid "系統選單"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:867
 #: src/routes/play.vs.$stage.tsx:423
 msgid "結果"
@@ -1329,7 +1329,7 @@ msgstr ""
 msgid "返回大廳"
 msgstr ""
 
-#: src/game/net/net-run.tsx:323
+#: src/game/net/net-run.tsx:381
 msgid "返回遊戲室"
 msgstr ""
 
@@ -1361,6 +1361,10 @@ msgstr ""
 
 #: src/routes/play.online.tsx:262
 msgid "連接中…"
+msgstr ""
+
+#: src/game/net/net-run.tsx:351
+msgid "連線太慢，跟不上房間的進度：這一局無法同步。"
 msgstr ""
 
 #: src/routes/play.online.tsx:55
@@ -1564,7 +1568,7 @@ msgstr ""
 msgid "防禦"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.vs.$stage.tsx:423
 msgid "隊伍"
 msgstr ""

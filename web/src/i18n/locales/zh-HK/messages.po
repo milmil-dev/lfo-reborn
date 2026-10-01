@@ -395,7 +395,7 @@ msgstr "加入電腦玩家"
 
 #. placeholder {0}: RANKS[outcome.rank]
 #. placeholder {1}: outcome.honor
-#: src/game/net/net-run.tsx:308
+#: src/game/net/net-run.tsx:366
 #: src/routes/play.vs.$stage.tsx:422
 msgid "勳銜：{0}　榮譽 {1}"
 msgstr "勳銜：{0}　榮譽 {1}"
@@ -441,11 +441,11 @@ msgstr "合體成功！你成為了合體戰神「{0}」。"
 msgid "合體期 {days} 天"
 msgstr "合體期 {days} 天"
 
-#: src/game/net/net-run.tsx:294
+#: src/game/net/net-run.tsx:352
 msgid "同步失敗（第 {desync} 格）：各人看到的戰況已不一致。"
 msgstr "同步失敗（第 {desync} 格）：各人看到的戰況已不一致。"
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:859
 #: src/routes/play.vs.$stage.tsx:423
 msgid "名稱"
@@ -781,7 +781,7 @@ msgstr "搜尋故事、角色、地區…"
 msgid "撤回"
 msgstr "撤回"
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:864
 #: src/routes/play.vs.$stage.tsx:423
 msgid "擊倒"
@@ -1001,7 +1001,7 @@ msgid "獨"
 msgstr "獨"
 
 #: src/game/kit/room.tsx:39
-#: src/game/net/net-run.tsx:313
+#: src/game/net/net-run.tsx:371
 #: src/routes/play.vs.$stage.tsx:427
 msgid "獨立"
 msgstr "獨立"
@@ -1135,7 +1135,7 @@ msgstr "等級 {n}"
 msgid "系統選單"
 msgstr "系統選單"
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:867
 #: src/routes/play.vs.$stage.tsx:423
 msgid "結果"
@@ -1329,7 +1329,7 @@ msgstr "返回"
 msgid "返回大廳"
 msgstr "返回大廳"
 
-#: src/game/net/net-run.tsx:323
+#: src/game/net/net-run.tsx:381
 msgid "返回遊戲室"
 msgstr "返回遊戲室"
 
@@ -1362,6 +1362,10 @@ msgstr "連接不到對戰伺服器。"
 #: src/routes/play.online.tsx:262
 msgid "連接中…"
 msgstr "連接中…"
+
+#: src/game/net/net-run.tsx:351
+msgid "連線太慢，跟不上房間的進度：這一局無法同步。"
+msgstr "連線太慢，跟不上房間的進度：這一局無法同步。"
 
 #: src/routes/play.online.tsx:55
 #: src/routes/play.online.tsx:119
@@ -1564,7 +1568,7 @@ msgstr "防具店"
 msgid "防禦"
 msgstr "防禦"
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.vs.$stage.tsx:423
 msgid "隊伍"
 msgstr "隊伍"

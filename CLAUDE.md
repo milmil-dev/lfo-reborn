@@ -61,10 +61,14 @@ select, `/play/$key` a training ground driven by the original frame data.
   built from the client's `selectroom/` art), and an entry quiet for ten minutes is checked against its room
   before it is shown. `wrangler types` writes `worker-configuration.d.ts` (gitignored).
 - `web/src/game/net/protocol.ts` is the wire (JSON; inputs as 9-bit masks) and is compiled by both sides: keep it
-  free of DOM and `@/` imports. `client.ts` is the socket + snapshot; `net-run.tsx` the lockstep bout: the World
-  is stepped only when a frame arrives, my presses are sent for tick k + `INPUT_DELAY`, the host runs COM brains,
-  everyone reports `World.hash()` every `HASH_EVERY` ticks. Spawn every fighter identically on every peer (team,
-  facing by seat) — any per-client difference is a desync.
+  free of DOM and `@/` imports. `client.ts` is the socket + snapshot; `net-run.tsx` the bout, with rollback
+  (`rollback.ts`): the World runs on the local clock at the room's frame rate, `LEAD` ticks ahead of its latest
+  frame; my presses are sent for tick k + `INPUT_DELAY` and are known by then, the other seats are guessed to
+  keep their last input, a frame that contradicts the guess restores the snapshot before that tick
+  (`Director.snapshot/restore` → `World.snapshot/restore` → `Fighter.save/load`, same objects, same ids) and
+  replays silently. The host runs COM brains; everyone reports `World.hash()` of confirmed ticks every
+  `HASH_EVERY`. Spawn every fighter identically on every peer (team, facing by seat) and set `Director.arena`
+  for a bout — any per-client difference is a desync. New fighter state goes into `save/load` as well as `hash`.
 - `VITE_REALTIME_URL` points the site at the Worker (deploy/README.md); unset in production the door stays shut.
 - In dev, `window.__lfo` exposes the training world for scripted checks.
 
