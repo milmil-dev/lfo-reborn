@@ -20,7 +20,7 @@ msgstr ""
 msgid "　已集齊六粒，加上闇念源體便可找毛毛高合體！"
 msgstr ""
 
-#: src/game/net/room-list.tsx:311
+#: src/game/net/room-list.tsx:319
 msgid "（未選擇）"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgid "{0} · 訓練場"
 msgstr ""
 
 #. placeholder {0}: all.length
-#: src/game/net/room-list.tsx:189
+#: src/game/net/room-list.tsx:197
 msgid "{0} 間公開的遊戲室。點一間再按「加入」，或輸入朋友的房號。"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgid "{0}的異轉信物"
 msgstr ""
 
 #. placeholder {0}: profile?.name ?? "LFO"
-#: src/game/net/room-list.tsx:325
+#: src/game/net/room-list.tsx:333
 #: src/game/stage-select.tsx:413
 #: src/routes/play.room.tsx:72
 msgid "{0}的遊戲室"
@@ -290,7 +290,7 @@ msgstr ""
 msgid "公開"
 msgstr ""
 
-#: src/game/net/room-list.tsx:362
+#: src/game/net/room-list.tsx:370
 msgid "公開在遊戲室列表（否則只有知道房號的人能加入）"
 msgstr ""
 
@@ -368,7 +368,7 @@ msgstr ""
 msgid "力量"
 msgstr ""
 
-#: src/game/net/room-list.tsx:316
+#: src/game/net/room-list.tsx:324
 msgid "加入"
 msgstr ""
 
@@ -395,7 +395,7 @@ msgstr ""
 
 #. placeholder {0}: RANKS[outcome.rank]
 #. placeholder {1}: outcome.honor
-#: src/game/net/net-run.tsx:308
+#: src/game/net/net-run.tsx:366
 #: src/routes/play.vs.$stage.tsx:422
 msgid "勳銜：{0}　榮譽 {1}"
 msgstr ""
@@ -405,7 +405,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/game/kit/new-game.tsx:125
-#: src/game/net/room-list.tsx:366
+#: src/game/net/room-list.tsx:374
 msgid "取消"
 msgstr ""
 
@@ -441,11 +441,11 @@ msgstr ""
 msgid "合體期 {days} 天"
 msgstr ""
 
-#: src/game/net/net-run.tsx:294
+#: src/game/net/net-run.tsx:352
 msgid "同步失敗（第 {desync} 格）：各人看到的戰況已不一致。"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:859
 #: src/routes/play.vs.$stage.tsx:423
 msgid "名稱"
@@ -533,7 +533,7 @@ msgstr ""
 msgid "已出售 {name}"
 msgstr ""
 
-#: src/game/net/room-list.tsx:250
+#: src/game/net/room-list.tsx:258
 msgid "已滿"
 msgstr ""
 
@@ -562,16 +562,16 @@ msgstr ""
 msgid "帶來魔劍和魔精石，我幫你把兇獸的力量鑲進劍裡。"
 msgstr ""
 
-#: src/game/net/room-list.tsx:369
+#: src/game/net/room-list.tsx:377
 msgid "建立"
 msgstr ""
 
-#: src/game/net/room-list.tsx:369
+#: src/game/net/room-list.tsx:377
 msgid "建立中…"
 msgstr ""
 
-#: src/game/net/room-list.tsx:322
-#: src/game/net/room-list.tsx:336
+#: src/game/net/room-list.tsx:330
+#: src/game/net/room-list.tsx:344
 msgid "建立遊戲室"
 msgstr ""
 
@@ -598,8 +598,8 @@ msgstr ""
 msgid "戰鬥：選擇遊戲模式"
 msgstr ""
 
-#: src/game/net/room-list.tsx:295
-#: src/game/net/room-list.tsx:302
+#: src/game/net/room-list.tsx:303
+#: src/game/net/room-list.tsx:310
 msgid "房號"
 msgstr ""
 
@@ -781,7 +781,7 @@ msgstr ""
 msgid "撤回"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:864
 #: src/routes/play.vs.$stage.tsx:423
 msgid "擊倒"
@@ -869,7 +869,7 @@ msgstr ""
 msgid "暫時未有更新紀錄。"
 msgstr ""
 
-#: src/game/net/room-list.tsx:265
+#: src/game/net/room-list.tsx:273
 msgid "暫時沒有公開的遊戲室 — 開一間吧！"
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgid "獨"
 msgstr ""
 
 #: src/game/kit/room.tsx:39
-#: src/game/net/net-run.tsx:313
+#: src/game/net/net-run.tsx:371
 #: src/routes/play.vs.$stage.tsx:427
 msgid "獨立"
 msgstr ""
@@ -1100,7 +1100,7 @@ msgstr ""
 #~ msgid "第一話〈學校〉由誰的視角開始，決定了之後整段冒險。每位主角都有自己的必殺技和出招。"
 #~ msgstr ""
 
-#: src/game/net/room-list.tsx:250
+#: src/game/net/room-list.tsx:258
 msgid "等候中"
 msgstr ""
 
@@ -1135,7 +1135,7 @@ msgstr ""
 msgid "系統選單"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.story.$story.tsx:867
 #: src/routes/play.vs.$stage.tsx:423
 msgid "結果"
@@ -1265,7 +1265,7 @@ msgstr ""
 msgid "請離"
 msgstr ""
 
-#: src/game/net/room-list.tsx:188
+#: src/game/net/room-list.tsx:196
 #: src/routes/play.lobby.tsx:623
 #: src/routes/play.lobby.tsx:639
 msgid "讀取中…"
@@ -1315,7 +1315,7 @@ msgstr ""
 msgid "輸入訊息，Enter 送出"
 msgstr ""
 
-#: src/game/net/room-list.tsx:329
+#: src/game/net/room-list.tsx:337
 #: src/game/stage-select.tsx:400
 #: src/routes/play.index.tsx:553
 #: src/routes/play.online.tsx:257
@@ -1329,7 +1329,7 @@ msgstr ""
 msgid "返回大廳"
 msgstr ""
 
-#: src/game/net/net-run.tsx:323
+#: src/game/net/net-run.tsx:381
 msgid "返回遊戲室"
 msgstr ""
 
@@ -1355,12 +1355,16 @@ msgstr ""
 #~ msgid "速度"
 #~ msgstr ""
 
-#: src/game/net/room-list.tsx:186
+#: src/game/net/room-list.tsx:194
 msgid "連接不到對戰伺服器。"
 msgstr ""
 
 #: src/routes/play.online.tsx:262
 msgid "連接中…"
+msgstr ""
+
+#: src/game/net/net-run.tsx:351
+msgid "連線太慢，跟不上房間的進度：這一局無法同步。"
 msgstr ""
 
 #: src/routes/play.online.tsx:55
@@ -1388,7 +1392,7 @@ msgstr ""
 #~ msgid "進入訓練場"
 #~ msgstr ""
 
-#: src/game/net/room-list.tsx:250
+#: src/game/net/room-list.tsx:258
 msgid "進行中"
 msgstr ""
 
@@ -1409,7 +1413,7 @@ msgid "遊戲室「{code}」已公開在列表；朋友也可以在「選擇遊�
 msgstr ""
 
 #: src/game/kit/new-game.tsx:157
-#: src/game/net/room-list.tsx:338
+#: src/game/net/room-list.tsx:346
 msgid "遊戲室名稱"
 msgstr ""
 
@@ -1446,7 +1450,7 @@ msgstr ""
 msgid "選擇角色"
 msgstr ""
 
-#: src/game/net/room-list.tsx:182
+#: src/game/net/room-list.tsx:190
 #: src/routes/play.online.tsx:65
 msgid "選擇遊戲室"
 msgstr ""
@@ -1564,7 +1568,7 @@ msgstr ""
 msgid "防禦"
 msgstr ""
 
-#: src/game/net/net-run.tsx:309
+#: src/game/net/net-run.tsx:367
 #: src/routes/play.vs.$stage.tsx:423
 msgid "隊伍"
 msgstr ""
