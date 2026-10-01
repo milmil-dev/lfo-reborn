@@ -5,15 +5,17 @@ import { audio } from "./audio";
 import { Ui } from "./kit/ui";
 
 // the original mode menu (interface/gamemenu1): five stacked buttons in one piece of art
-export type Mode = "story" | "vs" | "mission" | "champion" | "exit" | "cancel";
+export type Mode = "story" | "vs" | "mission" | "champion" | "online" | "exit" | "cancel";
 const ROWS: { id: Mode; label: string }[] = [
   { id: "story", label: "開始 STORY 模式" },
   { id: "vs", label: "開始 VS 模式" },
   { id: "mission", label: "開始 MISSION 模式" },
   { id: "exit", label: "離開 LFO" },
   { id: "cancel", label: "取消" },
-  // 王者爭霸 was a scheduled event online, never a row of this menu: it hangs below the art
+  // 王者爭霸 was a scheduled event online, never a row of this menu: it hangs below the art,
+  // and so does the online room (the client's VS was online by nature; here it is its own door)
   { id: "champion", label: "LFO 皇者爭霸戰" },
+  { id: "online", label: "連線 VS 對戰" },
 ];
 
 /** The game-mode menu, opened from the lobby's FIGHT button. */
@@ -72,20 +74,24 @@ export function ModeMenu({ onPick }: { onPick: (m: Mode) => void }) {
             style={{ top: i * 41.2 + 3, height: 35 }}
           />
         ))}
-        <button
-          type="button"
-          onMouseEnter={() => setSel(5)}
-          onClick={() => {
-            audio.sfx("johnnyconfirm.wav");
-            onPick("champion");
-          }}
-          className={cn(
-            "absolute top-[214px] left-[5px] h-[34px] w-[182px] rounded-[6px] border-2 border-[#c99a2e] bg-[linear-gradient(#5a1a12,#2a0a08)] font-bold text-[13px] text-[#ffd27a] transition",
-            sel === 5 && "shadow-[0_0_10px_#ffd447] ring-2 ring-[#ffd447]",
-          )}
-        >
-          LFO 皇者爭霸戰
-        </button>
+        {ROWS.slice(5).map((r, i) => (
+          <button
+            key={r.id}
+            type="button"
+            onMouseEnter={() => setSel(5 + i)}
+            onClick={() => {
+              audio.sfx("johnnyconfirm.wav");
+              onPick(r.id);
+            }}
+            className={cn(
+              "absolute left-[5px] h-[34px] w-[182px] rounded-[6px] border-2 border-[#c99a2e] bg-[linear-gradient(#5a1a12,#2a0a08)] font-bold text-[13px] text-[#ffd27a] transition",
+              sel === 5 + i && "shadow-[0_0_10px_#ffd447] ring-2 ring-[#ffd447]",
+            )}
+            style={{ top: 214 + i * 40 }}
+          >
+            {r.label}
+          </button>
+        ))}
       </motion.div>
     </motion.div>
   );

@@ -1,0 +1,74 @@
+# Type-check, test and deploy the realtime Worker (online game rooms) on every
+# PR and push to main. The Worker is one Durable Object per room on the
+# Workers Free plan (deploy/README.md has the budget); the site reaches it
+# through VITE_REALTIME_URL, which web.yml passes at build time.
+
+name: Realtime
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - realtime/**
+      - web/src/game/net/protocol.ts
+      - web/src/game/core/types.ts
+      - .github/workflows/realtime.yml
+  pull_request:
+    paths:
+      - realtime/**
+      - web/src/game/net/protocol.ts
+      - web/src/game/core/types.ts
+      - .github/workflows/realtime.yml
+
+concurrency:
+  group: realtime-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    working-directory: realtime
+
+jobs:
+  realtime:
+    name: Test and deploy realtime
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      # Deploy from main only, with a token that may edit Workers (deploy/README.md).
+      DEPLOY: >-
+        ${{ github.event_name == 'push' &&
+        secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.16.0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: realtime/pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm run check
+
+      - name: Test
+        run: pnpm run test
+
+      - name: Skip deploy
+        if: env.DEPLOY != 'true'
+        run: echo "::notice::Not deploying the Worker (not main, or deploy secrets missing)"
+
+      - name: Deploy Worker
+        if: env.DEPLOY == 'true'
+        run: pnpm exec wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

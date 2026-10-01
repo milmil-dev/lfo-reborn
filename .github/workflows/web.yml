@@ -82,6 +82,8 @@ jobs:
         env:
           # Stamped into the app next to the version from web/package.json.
           VITE_GIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          # The realtime Worker for online rooms (realtime.yml deploys it); unset = the door stays shut.
+          VITE_REALTIME_URL: ${{ vars.REALTIME_URL }}
 
       - name: Skip deploy
         if: env.DEPLOY != 'true'

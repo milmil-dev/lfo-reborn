@@ -380,8 +380,10 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
             if (e.type === "sound")
               audio.sfx(e.name, { volume: 0.5, pan: me ? (e.x - me.x) / 600 : 0 });
             // 招式等級: every special the player performs counts towards its level
-            else if (e.type === "move" && me && e.fighter === me.id) addSkillExp(e.move.slot);
-            else if (e.type === "hit") {
+            else if (e.type === "move" && me && e.fighter === me.id) {
+              addSkillExp(e.move.slot);
+              me.skillLevels[e.move.slot] = skillLevel(getSkillExp(e.move.slot));
+            } else if (e.type === "hit") {
               scene.spark(e.x, e.y, e.blocked);
               scene.damage(e.x, e.y - 30, e.damage, e.blocked);
               audio.sfx(e.blocked ? "guard.wav" : `hit${1 + (e.damage % 3)}.wav`, { volume: 0.7 });
@@ -522,7 +524,12 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         if (p && leveled !== p.id) {
           leveled = p.id;
           const hero = p;
-          hero.skillLevel = (slot) => skillLevel(getSkillExp(slot));
+          hero.skillLevels = Object.fromEntries(
+            Object.entries(getActiveProfile()?.skills ?? {}).map(([slot, exp]) => [
+              slot,
+              skillLevel(exp),
+            ]),
+          );
           // 合體: a 合體戰神 grows by its own character's table (he-ti.mdx 7), with the bonus
           const fused = fusionOf(getActiveProfile());
           const statId = fused ? getActiveProfile()!.charId : hero.data.attrs.id;

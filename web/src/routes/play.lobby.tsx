@@ -429,6 +429,7 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
       else if (m === "vs") void navigate({ to: "/play/vs" });
       else if (m === "mission") void navigate({ to: "/play/missions" });
       else if (m === "champion") void navigate({ to: "/play/champion" });
+      else if (m === "online") void navigate({ to: "/play/online", search: { code: undefined } });
       else if (m === "exit") void navigate({ to: "/" });
     },
     [navigate],

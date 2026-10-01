@@ -1,4 +1,5 @@
 import type { Bla, Button, CharData, Frame, InputState, Move } from "./types";
+import type { Hasher } from "./hash";
 import { stepLoose } from "./items";
 import { skillBonus } from "./skills";
 import { isHeld, type StatusKind, tickStatus } from "./status";
@@ -26,6 +27,7 @@ const AIR_WAIT = new Set([103, 2151]);
 const COMBO_WINDOW = 20; // ticks allowed across a whole input sequence
 const DOUBLE_TAP = 10; // ticks between taps that start a run
 const ROLL_SPEED = 4; // px per tick along the depth while rolling on the floor
+const BUTTONS = Object.keys(EMPTY_INPUT) as Button[];
 /** SP (體力) without a level table: the att row's usual default */
 const DEFAULT_SP = 1000;
 const SP_REFILL_TICKS = 20 * 30; // empty to full in 20 s while not guarding
@@ -55,6 +57,63 @@ export type FighterEvent =
 const EFFECT_LIFE = 150; // ticks: a safety net for effects that loop forever
 
 export type Stage = { minX: number; maxX: number; minZ: number; maxZ: number };
+
+/**
+ * Everything a fighter is at one tick (World.snapshot): rollback netcode restores it and
+ * re-simulates. Other fighters are referred to by id; `data` is the shared sprite data.
+ */
+export type FighterSnapshot = {
+  data: CharData;
+  team: number;
+  x: number;
+  y: number;
+  z: number;
+  vx: number;
+  vy: number;
+  vz: number;
+  facing: 1 | -1;
+  frameId: number;
+  ticksLeft: number;
+  hp: number;
+  mp: number;
+  sp: number;
+  hitStop: number;
+  attackSerial: number;
+  hitBy: string[];
+  fallAcc: number;
+  dizzyAcc: number;
+  infiniteMp: boolean;
+  effect: boolean;
+  dead: boolean;
+  level: number;
+  reward: number;
+  rewardScale: number;
+  hpMax: number | null;
+  mpMax: number | null;
+  spMax: number | null;
+  power: number;
+  guard: number;
+  holding: number;
+  heldBy: number;
+  thrownBy: number;
+  itemState: "ground" | "sky" | "held" | "thrown";
+  angle: number;
+  hidden: boolean;
+  heldAid: number;
+  showBars: boolean;
+  pendingLevelUp: boolean;
+  status: [StatusKind, number][];
+  skillLevels: Record<number, number>;
+  moveBonus: number;
+  prev: InputState;
+  queued: number | null;
+  buffer: { key: Key; t: number }[];
+  lastTap: { dir: -1 | 1; t: number } | null;
+  altAttack: boolean;
+  jumpDir: number;
+  jumpRun: boolean;
+  t: number;
+};
 
 export class Fighter {
   x = 0;
@@ -111,8 +170,8 @@ export class Fighter {
   pendingLevelUp = false;
   /** elements on this fighter and the ticks each has left (core/status.ts) */
   readonly status = new Map<StatusKind, number>();
-  /** 招式等級: the level of each special (by slot); the game layer fills it from the save */
-  skillLevel: (slot: number) => number = () => 1;
+  /** 招式等級 by skill slot (a missing slot is LV 1); the game layer fills it from the save */
+  skillLevels: Record<number, number> = {};
   /** damage multiplier of the special being performed (1 outside one) */
   moveBonus = 1;
 
@@ -373,7 +432,7 @@ export class Fighter {
     if (!this.infiniteMp) this.mp -= m.mp;
     this.buffer = [];
     this.vx = 0;
-    this.moveBonus = skillBonus(this.skillLevel(m.slot));
+    this.moveBonus = skillBonus(this.skillLevels[m.slot] ?? 1);
     this.goto(m.to, events);
     events.push({ type: "move", fighter: this.id, move: m, name: this.frame.n });
     return true;
@@ -699,5 +758,153 @@ export class Fighter {
       this.frame.s === 103
     )
       return this.goto(this.act("JUMPLAND"), events);
+  }
+
+  /* ───────── netcode ───────── */
+
+  /**
+   * Feeds every field that drives the simulation into `h`, always in the same order, so two
+   * fighters with the same history hash alike and any divergence shows — position, timers,
+   * the input buffer, what is held. Drawing-only state (showBars) and the frame data stay out;
+   * the data is pinned by its key.
+   */
+  hash(h: Hasher) {
+    h.num(this.id).num(this.team).str(this.data.key);
+    h.num(this.x).num(this.y).num(this.z).num(this.vx).num(this.vy).num(this.vz);
+    h.num(this.facing).num(this.frameId).num(this.ticksLeft).num(this.hp).num(this.mp).num(this.sp);
+    h.num(this.hitStop).num(this.attackSerial).num(this.fallAcc).num(this.dizzyAcc);
+    h.bool(this.infiniteMp).bool(this.effect).bool(this.dead).num(this.level).num(this.reward);
+    h.num(this.rewardScale)
+      .num(this.hpMax ?? -1)
+      .num(this.mpMax ?? -1)
+      .num(this.spMax ?? -1);
+    h.num(this.power).num(this.guard);
+    h.num(this.holding?.id ?? 0)
+      .num(this.heldBy?.id ?? 0)
+      .num(this.thrownBy?.id ?? 0);
+    h.str(this.itemState).num(this.angle).bool(this.hidden).num(this.heldAid);
+    h.bool(this.pendingLevelUp).num(this.moveBonus);
+    for (const [kind, left] of this.status) h.str(kind).num(left);
+    for (const tag of this.hitBy) h.str(tag);
+    for (const slot of Object.keys(this.skillLevels))
+      h.num(Number(slot)).num(this.skillLevels[Number(slot)]);
+    for (const b of BUTTONS) h.bool(this.prev[b]);
+    h.num(this.queued ?? -1);
+    for (const k of this.buffer) h.str(k.key).num(k.t);
+    h.num(this.lastTap?.dir ?? 0).num(this.lastTap?.t ?? -1);
+    h.bool(this.altAttack).num(this.jumpDir).bool(this.jumpRun).num(this.t);
+  }
+
+  /** The whole state, copied: what hash() reads, plus the sprite data and team to come back to. */
+  save(): FighterSnapshot {
+    return {
+      data: this.data,
+      team: this.team,
+      x: this.x,
+      y: this.y,
+      z: this.z,
+      vx: this.vx,
+      vy: this.vy,
+      vz: this.vz,
+      facing: this.facing,
+      frameId: this.frameId,
+      ticksLeft: this.ticksLeft,
+      hp: this.hp,
+      mp: this.mp,
+      sp: this.sp,
+      hitStop: this.hitStop,
+      attackSerial: this.attackSerial,
+      hitBy: [...this.hitBy],
+      fallAcc: this.fallAcc,
+      dizzyAcc: this.dizzyAcc,
+      infiniteMp: this.infiniteMp,
+      effect: this.effect,
+      dead: this.dead,
+      level: this.level,
+      reward: this.reward,
+      rewardScale: this.rewardScale,
+      hpMax: this.hpMax,
+      mpMax: this.mpMax,
+      spMax: this.spMax,
+      power: this.power,
+      guard: this.guard,
+      holding: this.holding?.id ?? 0,
+      heldBy: this.heldBy?.id ?? 0,
+      thrownBy: this.thrownBy?.id ?? 0,
+      itemState: this.itemState,
+      angle: this.angle,
+      hidden: this.hidden,
+      heldAid: this.heldAid,
+      showBars: this.showBars,
+      pendingLevelUp: this.pendingLevelUp,
+      status: [...this.status],
+      skillLevels: { ...this.skillLevels },
+      moveBonus: this.moveBonus,
+      prev: { ...this.prev },
+      queued: this.queued,
+      buffer: this.buffer.map((k) => ({ ...k })),
+      lastTap: this.lastTap ? { ...this.lastTap } : null,
+      altAttack: this.altAttack,
+      jumpDir: this.jumpDir,
+      jumpRun: this.jumpRun,
+      t: this.t,
+    };
+  }
+
+  /** Become `s` again; `byId` resolves the fighters it refers to (the one held, the holder …). */
+  load(s: FighterSnapshot, byId: ReadonlyMap<number, Fighter>) {
+    this.data = s.data;
+    this.team = s.team;
+    this.x = s.x;
+    this.y = s.y;
+    this.z = s.z;
+    this.vx = s.vx;
+    this.vy = s.vy;
+    this.vz = s.vz;
+    this.facing = s.facing;
+    this.frameId = s.frameId;
+    this.frame = this.frameAt(s.frameId) ?? this.frame;
+    this.ticksLeft = s.ticksLeft;
+    this.hp = s.hp;
+    this.mp = s.mp;
+    this.sp = s.sp;
+    this.hitStop = s.hitStop;
+    this.attackSerial = s.attackSerial;
+    this.hitBy.clear();
+    for (const tag of s.hitBy) this.hitBy.add(tag);
+    this.fallAcc = s.fallAcc;
+    this.dizzyAcc = s.dizzyAcc;
+    this.infiniteMp = s.infiniteMp;
+    this.effect = s.effect;
+    this.dead = s.dead;
+    this.level = s.level;
+    this.reward = s.reward;
+    this.rewardScale = s.rewardScale;
+    this.hpMax = s.hpMax;
+    this.mpMax = s.mpMax;
+    this.spMax = s.spMax;
+    this.power = s.power;
+    this.guard = s.guard;
+    this.holding = byId.get(s.holding) ?? null;
+    this.heldBy = byId.get(s.heldBy) ?? null;
+    this.thrownBy = byId.get(s.thrownBy) ?? null;
+    this.itemState = s.itemState;
+    this.angle = s.angle;
+    this.hidden = s.hidden;
+    this.heldAid = s.heldAid;
+    this.showBars = s.showBars;
+    this.pendingLevelUp = s.pendingLevelUp;
+    this.status.clear();
+    for (const [kind, left] of s.status) this.status.set(kind, left);
+    this.skillLevels = { ...s.skillLevels };
+    this.moveBonus = s.moveBonus;
+    this.prev = { ...s.prev };
+    this.queued = s.queued;
+    this.buffer = s.buffer.map((k) => ({ ...k }));
+    this.lastTap = s.lastTap ? { ...s.lastTap } : null;
+    this.altAttack = s.altAttack;
+    this.jumpDir = s.jumpDir;
+    this.jumpRun = s.jumpRun;
+    this.t = s.t;
   }
 }
