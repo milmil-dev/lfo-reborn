@@ -6,7 +6,7 @@ import { useEffect, useEffectEvent, useState } from "react";
 import { z } from "zod";
 import { audio } from "@/game/audio";
 import { Ui } from "@/game/kit/ui";
-import { getActiveProfile, useActiveProfile } from "@/game/profiles";
+import { getActiveProfile, playKey, useActiveProfile } from "@/game/profiles";
 import { Screen } from "@/game/screen";
 import { catalogQuery } from "@/game/stage-select";
 import { rosterQueries, StartGate, useRoster } from "@/game/ui";
@@ -140,7 +140,7 @@ function WaitingRoom() {
     t`注意︰其他玩家不准在遊戲開始後加入。`,
     t`VS模式勝利條件:「最先打倒隊方所有成員」！`,
   ];
-  const me = roster.find((r) => r.key === profile?.key);
+  const me = roster.find((r) => profile && r.key === playKey(profile));
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-black text-foreground select-none">

@@ -44,20 +44,24 @@ import {
   stock,
 } from "@/game/shop";
 import { compose, repair } from "@/game/smith";
+import { FusionBox } from "@/game/kit/fusion-box";
 import { type Npc, npcNear } from "@/game/npcs";
 import {
   getActiveProfile,
   getBank,
   getInventory,
-  getServer,
   getOwnedChars,
+  getServer,
   getTokens,
   grantChar,
   grantToken,
-  type Profile,
+  nianyuanIn,
+  playId,
+  playKey,
+  resetPoints,
   saveBank,
   saveInventory,
-  resetPoints,
+  type Profile,
   updateActiveProfile,
   useActiveProfile,
   useBank,
@@ -294,13 +298,14 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
     });
     const director = d;
     directorRef.current = director;
+    if (import.meta.env.DEV) Object.assign(window, { __lfo: { director } });
     director.effects = new Effects(director.world, scene);
     const controls = new Controls();
     if (import.meta.env.DEV) Object.assign(window, { __lfo: { director, scene } });
 
     let me: Fighter | null = null;
     void director.start().then(async () => {
-      me = await director.addPlayer(`chars/${profile.key}`);
+      me = await director.addPlayer(`chars/${playKey(profile)}`);
       setLoading(false);
     });
 
@@ -314,7 +319,7 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
         if (me && director.world.tick % 6 === 0)
           setVitals({
             name: profile.name,
-            charId: profile.charId,
+            charId: playId(profile),
             honor: getActiveProfile()?.honor ?? 0,
             hp: me.hp,
             maxHp: me.maxHp,
@@ -387,6 +392,13 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
           const r = resetPoints();
           if (r.ok) audio.sfx("johnnyallright.wav");
           toast(`${near.name}：${r.line}`);
+        } else if (near.kind === "nianyuan") {
+          // 娃卡卡 tells which 念源體 the character holds (he-ti.mdx 合體方法 1)
+          const held = nianyuanIn(getInventory());
+          toast(
+            `${near.name}：${held.map((n) => `${n.name}${n.row ? "✓" : "✗"}`).join(" ")}` +
+              (held.every((n) => n.row) ? t`　已集齊六粒，加上闇念源體便可找毛毛高合體！` : ""),
+          );
         } else {
           setTalking(near);
           setOverlay("npc");
@@ -567,6 +579,13 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
           />
         )}
         {overlay === "keys" && <KeyConfig key="keys" onClose={() => setOverlay("system")} />}
+        {overlay === "npc" && talking?.kind === "fusion" && (
+          <FusionBox
+            key="fusion"
+            onClose={() => setOverlay("none")}
+            onRelog={() => void navigate({ to: "/play/profile" })}
+          />
+        )}
         {overlay === "npc" && talking?.kind === "tower" && (
           <SystemMenu
             key="npc"

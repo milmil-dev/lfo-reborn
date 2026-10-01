@@ -10,6 +10,7 @@
   The level curve and the monster EXP formula were server-side and never shipped with the client,
   so the numbers below are this remake's: a chapter of 第一章 takes a new character to about LV 3.
 */
+import { FUSION_BONUS } from "./fusion";
 
 /**
  * The level cap (system/tran.mdx): LV 150, or LV 300 for a character whose account holds its
@@ -138,6 +139,14 @@ export function applyLevel(
  * DEF / AGI only with the 信物 and LV 150): a qualified character grows to the higher of its own
  * and its transformed form's att maximums (星奇 400 → 新生星奇 600).
  */
+/** A 合體戰神's extra 800 HP / MP / SP and 400 STR / DEF / AGI (fusion.ts), on top of `bonus`. */
+export function withFusionBonus(bonus: Stats, fused: boolean): Stats {
+  if (!fused) return bonus;
+  const out = { ...bonus };
+  for (const k of Object.keys(out) as (keyof Stats)[]) out[k] += FUSION_BONUS[k];
+  return out;
+}
+
 export function withTranCaps(t: StatTable, form: StatTable | null): StatTable {
   if (!form) return t;
   const max = { ...t.max };
