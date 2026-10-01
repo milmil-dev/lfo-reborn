@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.2.0...v0.3.0) (2026-10-01)
+
+
+### Features
+
+* **game:** bows fire arrows and shields block ([#6](https://github.com/milmil-dev/lfo-reborn/issues/6)) ([7fd28bd](https://github.com/milmil-dev/lfo-reborn/commit/7fd28bd26d5e3a0dde87e94e9761973e7e888fcd))
+* **game:** keys and locked doors ([#8](https://github.com/milmil-dev/lfo-reborn/issues/8)) ([08eb2f3](https://github.com/milmil-dev/lfo-reborn/commit/08eb2f3ba01ad62b31cee1cd8899cc9454c482e8))
+
 ## [0.2.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.1.0...v0.2.0) (2026-10-01)
 
 
