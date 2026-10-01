@@ -53,7 +53,9 @@ select, `/play/$key` a training ground driven by the original frame data.
 
 ## Web (`web/`)
 
-- pnpm + Vite+: `pnpm run dev` (proxies /api to :8080), `pnpm run check`, `pnpm run test`, `pnpm run build`.
+- pnpm + Vite+: `pnpm run dev`, `pnpm run check`, `pnpm run test`, `pnpm run build`.
+- No API server is deployed: `get()` in `src/lib/api.ts` reads the static snapshot `make snapshot` (`api/cmd/export`) writes to
+  `data/assets/api/v1` (`/items?kind=item` → `items/kind/item.json`). A new endpoint the web uses must be added to the exporter.
 - Static assets: every URL goes through `ASSETS` (`src/lib/assets.ts`). Dev and `vp preview` serve `data/assets` at
   `/assets` from a middleware in `vite.config.ts`; the deploy (Cloudflare Workers static assets, `wrangler.jsonc`, no
   Worker script so nothing is metered) unpacks the same tree into `dist/assets` after the build, so `VITE_ASSETS_URL`
