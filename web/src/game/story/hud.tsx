@@ -1,0 +1,520 @@
+import { AnimatePresence, motion } from "motion/react";
+import { type CSSProperties, type ReactNode, useEffect, useState } from "react";
+import { cn } from "@/lib/cn";
+import {
+  type BarSlot,
+  ChapterCardArt,
+  ComboNumber,
+  DialBar,
+  GoArrowArt,
+  HitBadge,
+} from "../kit/art";
+import { StatusPanel } from "../kit/frames";
+import { Ui } from "../kit/ui";
+import { ASSETS } from "@/lib/assets";
+import { RANKS, rankOf } from "@/game/vs";
+import { BOX_H, layoutMap } from "@/game/minimap";
+import type { StoryData } from "@/game/story/types";
+
+export { DialogFrame } from "../kit/frames";
+
+/*
+  The in-game HUD, laid out like the original client (status box top-left, dial + item bar at
+  the bottom, HIT counter, GO!!, chapter cards) in its 800 × 600 pixels and scaled with the
+  viewport. All chrome is the SVG/CSS kit in game/kit; only the portraits are art.
+*/
+
+export function useHudScale() {
+  const [s, setS] = useState(1);
+  useEffect(() => {
+    const fit = () => setS(Math.min(innerHeight / 600, innerWidth / 800));
+    fit();
+    addEventListener("resize", fit);
+    return () => removeEventListener("resize", fit);
+  }, []);
+  return s;
+}
+
+/** A block positioned in 800×600 space and scaled from one of the viewport's corners. */
+function Anchor({
+  corner,
+  scale,
+  children,
+  className,
+}: {
+  corner: "tl" | "tr" | "bl" | "br";
+  scale: number;
+  children: ReactNode;
+  className?: string;
+}) {
+  const [v, h] = [corner[0] === "t" ? "top" : "bottom", corner[1] === "l" ? "left" : "right"];
+  return (
+    <div
+      className={cn("pointer-events-none absolute", className)}
+      style={{ [v]: 0, [h]: 0, transform: `scale(${scale})`, transformOrigin: `${v} ${h}` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** The screen's width in HUD units (the HUD is drawn at `scale`). */
+function useViewWidth(scale: number) {
+  // clientWidth: the visible width, without a scrollbar the strip would otherwise run under
+  const read = () => (typeof document === "undefined" ? 800 : document.documentElement.clientWidth);
+  const [w, setW] = useState(read);
+  useEffect(() => {
+    const on = () => setW(read());
+    addEventListener("resize", on);
+    return () => removeEventListener("resize", on);
+  }, []);
+  return w / Math.max(0.01, scale);
+}
+
+/* ───────── top-left status box ───────── */
+
+export type Vitals = {
+  name: string;
+  charId: number;
+  hp: number;
+  maxHp: number;
+  mp: number;
+  maxMp: number;
+  sp: number;
+  /** elements on the character that the client marks with an icon (core/status.ts) */
+  status?: string[];
+  /** 勳銜 honor: the rank's medal sits beside the name (a player only) */
+  honor?: number;
+};
+
+const STATUS_ICON: Record<string, string> = {
+  poison: "effect_poison",
+  confuse: "effect_confusion",
+  stone: "effect_stone",
+};
+
+/**
+ * One bar of the original statusbar (63 × 24), as LFO.exe draws it: statusbarwhite (63 × 3)
+ * tinted and stretched to the ratio, rows 9 px apart from y 1 (HP red, MP blue, SP white),
+ * the frame drawn over the top.
+ */
+function Fill({
+  value,
+  max,
+  row,
+  color,
+}: {
+  value: number;
+  max: number;
+  row: number;
+  color: string;
+}) {
+  const ratio = Math.max(0, Math.min(1, max > 0 ? value / max : 0));
+  return (
+    <div
+      className="absolute left-0 h-[3px] transition-[width] duration-100"
+      style={{ top: 1 + row * 9, width: 63 * ratio, background: color }}
+    />
+  );
+}
+
+/**
+ * 異轉能量計: the character's tranformicon, dark and filling from the bottom as hits land,
+ * pulsing when full; while transformed it drains. Clicking it transforms / cancels.
+ */
+export type TranGaugeState = {
+  gauge: number;
+  active: boolean;
+  ready: boolean;
+  /** the base character id whose tranicon is shown */
+  icon: number;
+  /** the key that presses it, shown on the icon */
+  keyHint: string;
+  onPress: () => void;
+};
+
+function TranGauge({ t }: { t: TranGaugeState }) {
+  const src = (id: number) => `${ASSETS}/ui-hd/interface/tranformicon/tranicon${id}.webp`;
+  const fill = Math.max(0, Math.min(100, t.gauge));
+  const img = (className: string, style?: CSSProperties) => (
+    <img
+      src={src(t.icon)}
+      srcSet={`${src(t.icon)} 4x`}
+      alt=""
+      draggable={false}
+      className={cn("absolute inset-0 size-[38px] max-w-none", className)}
+      style={style}
+      onError={(e) => {
+        // only the first forty characters have their own icon in the client
+        if (!e.currentTarget.src.endsWith("tranicon1.webp")) e.currentTarget.src = src(1);
+      }}
+    />
+  );
+  return (
+    <button
+      type="button"
+      onClick={t.onPress}
+      className="pointer-events-auto absolute top-[72px] left-[140px] size-[38px] rounded-full"
+      aria-label={`異轉 ${Math.floor(fill)}%`}
+    >
+      {img("opacity-70 grayscale brightness-50")}
+      {img("", { clipPath: `inset(${100 - fill}% 0 0 0)` })}
+      {(t.ready || t.active) && (
+        <motion.span
+          className={cn(
+            "absolute -inset-[3px] rounded-full ring-2",
+            t.active ? "ring-[#ffd24a]" : "ring-[#7fe3ff]",
+          )}
+          animate={{ opacity: [0.35, 1, 0.35], scale: [0.96, 1.06, 0.96] }}
+          transition={{ duration: t.active ? 0.6 : 1.1, repeat: Number.POSITIVE_INFINITY }}
+        />
+      )}
+      {t.ready && (
+        <span className="absolute -right-[4px] -bottom-[4px] rounded-[3px] bg-black/80 px-[3px] font-lfo text-[8px] text-[#7fe3ff]">
+          {t.keyHint}
+        </span>
+      )}
+    </button>
+  );
+}
+
+export function StatusBox({
+  v,
+  scale,
+  corner = "tl",
+  tran,
+}: {
+  v: Vitals;
+  scale: number;
+  corner?: "tl" | "tr";
+  tran?: TranGaugeState;
+}) {
+  return (
+    <Anchor corner={corner} scale={scale}>
+      <StatusPanel className="m-[6px]">
+        {/*
+          laid out as the client draws it (measured from the 1280 × 720 game, from the frame's
+          top line, ~9 below the art's top under the pipe): the whole
+          chartablephoto at a quarter (29.5 × 37) top-left, the statusbar at its own size beside it,
+          the 勳銜 medal to its right, the name underneath — no frame round the photo, no numbers
+        */}
+        <img
+          src={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${v.charId}.webp`}
+          srcSet={`${ASSETS}/ui-hd/gameinterface/default/chartablephoto${v.charId}.webp 4x`}
+          alt=""
+          className="absolute top-[18px] left-[18px] h-[37px] w-[29.5px] max-w-none"
+          onError={(e) => {
+            // monsters have no portrait in the client's table
+            e.currentTarget.style.display = "none";
+          }}
+          draggable={false}
+        />
+        <div className="absolute top-[14px] left-[67px] h-[24px] w-[63px]">
+          <Fill value={v.hp} max={v.maxHp} row={0} color="#ff0000" />
+          <Fill value={v.mp} max={v.maxMp} row={1} color="#0000ff" />
+          <Fill value={v.sp} max={100} row={2} color="#ffffff" />
+          <Ui name="gameinterface/default/statusbar" w={63} h={24} className="absolute inset-0" />
+        </div>
+        {v.honor !== undefined && (
+          <Ui
+            name={`medal/medal0${rankOf(v.honor) + 1}`}
+            // native size (40 × 40, the medal itself ~15 × 22 in the middle)
+            w={40}
+            h={40}
+            className="absolute top-[30px] left-[120px]"
+            alt=""
+          />
+        )}
+        <div className="absolute top-[40px] left-[67px] flex gap-[2px]">
+          {(v.status ?? [])
+            .filter((k) => STATUS_ICON[k])
+            .map((k) => (
+              <Ui key={k} name={`gameinterface/default/${STATUS_ICON[k]}`} w={16} h={16} />
+            ))}
+        </div>
+        <div className="absolute top-[66px] left-[12px] flex max-w-[160px] items-baseline gap-[6px]">
+          <p className="truncate text-[13px] text-white [text-shadow:1px_1px_0_#000,0_0_2px_#000]">
+            {v.name}
+          </p>
+          {v.honor !== undefined && (
+            <span className="shrink-0 text-[#ffe08a] text-[11px] [text-shadow:1px_1px_0_#000]">
+              {RANKS[rankOf(v.honor)]}
+            </span>
+          )}
+        </div>
+        {tran && <TranGauge t={tran} />}
+      </StatusPanel>
+    </Anchor>
+  );
+}
+
+/* ───────── bottom dial + item bar ───────── */
+
+export function BottomBar({
+  scale,
+  seconds,
+  level,
+  exp,
+  money,
+  slots,
+  selected,
+  onSelect,
+  onLogo,
+  onItem,
+}: {
+  scale: number;
+  seconds: number;
+  level: number;
+  exp: number;
+  money: number;
+  slots?: (BarSlot | null)[];
+  selected?: number;
+  onSelect?: (slot: number) => void;
+  onLogo?: () => void;
+  onItem?: () => void;
+}) {
+  const width = useViewWidth(scale);
+  const clock = [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60]
+    .map((n) => String(n).padStart(2, "0"))
+    .join(":");
+  return (
+    <Anchor corner="bl" scale={scale}>
+      <DialBar
+        clock={clock}
+        level={level}
+        exp={exp}
+        money={money}
+        slots={slots}
+        selected={selected}
+        onSelect={onSelect}
+        onLogo={onLogo}
+        onItem={onItem}
+        width={width}
+      />
+    </Anchor>
+  );
+}
+
+/* ───────── HIT counter ───────── */
+
+export function HitCounter({
+  hits,
+  id,
+  scale,
+  top = 90,
+}: {
+  hits: number;
+  id: number;
+  scale: number;
+  top?: number;
+}) {
+  return (
+    <Anchor corner="tr" scale={scale}>
+      <AnimatePresence>
+        {hits >= 2 && (
+          <motion.div
+            key={id}
+            className="relative mr-[40px] flex items-start"
+            style={{ marginTop: top }}
+            initial={{ scale: 1.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            transition={{ type: "spring", stiffness: 600, damping: 20 }}
+          >
+            <HitBadge />
+            <motion.div
+              key={hits}
+              className="-ml-[10px]"
+              initial={{ scale: 1.5, y: -6 }}
+              animate={{ scale: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 700, damping: 18 }}
+            >
+              <ComboNumber value={hits} size={42} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Anchor>
+  );
+}
+
+/* ───────── GO!! ───────── */
+
+export function GoArrow({ show, scale }: { show: boolean; scale: number }) {
+  return (
+    <div
+      className="pointer-events-none absolute top-1/2 right-0"
+      style={{ transform: `translateY(-50%) scale(${scale})`, transformOrigin: "right center" }}
+    >
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            key="go"
+            className="mr-[20px]"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: [0, 1, 1, 0], x: [-40, 0, 12, 12] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, repeat: Number.POSITIVE_INFINITY, repeatDelay: 0.2 }}
+          >
+            <GoArrowArt />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ───────── chapter card ───────── */
+
+/** show_titlepic "stageN" "<area>" → 第N話 / area name. */
+export function ChapterCard({
+  title,
+  scale,
+}: {
+  title: { top: string; bottom: string } | null;
+  scale: number;
+}) {
+  const n = Number(title?.top.match(/\d+/)?.[0] ?? 0);
+  return (
+    <AnimatePresence>
+      {title && (
+        <motion.div
+          key="card"
+          className="pointer-events-none absolute inset-0 z-30 grid place-items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 1 } }}
+        >
+          <div style={{ transform: `scale(${scale})` }}>
+            <ChapterCardArt stage={n} area={title.bottom} />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+/* ───────── key box (bottom right): the last buttons pressed ───────── */
+
+export function KeyBox({ keys, scale }: { keys: { id: number; k: string }[]; scale: number }) {
+  return (
+    <Anchor corner="br" scale={scale}>
+      <div className="relative mr-[8px] mb-[34px] h-[85px] w-[184px]">
+        <Ui
+          name="gameinterface/default/keyboxback"
+          w={175}
+          h={65}
+          className="absolute top-[6px] left-[5px]"
+        />
+        <Ui name="gameinterface/default/keybox" w={184} h={85} className="absolute inset-0" />
+        <div className="absolute top-[12px] right-[14px] left-[14px] flex flex-wrap content-start gap-[4px]">
+          <AnimatePresence initial={false}>
+            {keys.map((k) => (
+              <motion.span
+                key={k.id}
+                className="grid h-[22px] min-w-[22px] place-items-center rounded-[4px] border border-white/40 bg-white/10 px-[4px] font-bold text-[12px] text-white"
+                initial={{ opacity: 0, scale: 1.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                {k.k}
+              </motion.span>
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
+    </Anchor>
+  );
+}
+
+/* ───────── 小地圖 ───────── */
+
+/**
+ * The newer client's map (game/minimap.ts): room outlines, doors green, you white, everyone
+ * else in the room blue — just left of the chara block, above the bottom strip.
+ */
+export function MiniMap({
+  story,
+  bg,
+  me,
+  others = [],
+  scale,
+  right = 124,
+}: {
+  story: StoryData;
+  /** the room you are in */
+  bg: number;
+  /** your x in that room's own coordinates */
+  me: number | null;
+  /** the other fighters' x in the same room */
+  others?: number[];
+  scale: number;
+  /** room left for what sits in the corner (the chara block, the key box) */
+  right?: number;
+}) {
+  const boxes = layoutMap(story, bg);
+  if (!boxes.length) return null;
+  const width = Math.max(...boxes.map((b) => b.x + b.w));
+  const height = Math.max(...boxes.map((b) => b.y)) + BOX_H;
+  const here = boxes.find((b) => b.bg === bg);
+  const roomW = Number(story.rooms[String(bg)]?.width) || 1;
+  const along = (x: number) => Math.min(1, Math.max(0, x / roomW));
+  return (
+    <Anchor corner="br" scale={scale}>
+      <svg
+        width={width + 2}
+        height={height + 2}
+        viewBox={`-1 -1 ${width + 2} ${height + 2}`}
+        className="mb-[58px] overflow-visible"
+        style={{ marginRight: right }}
+        aria-hidden
+      >
+        {boxes.map((b) => (
+          <g key={b.bg}>
+            <rect
+              x={b.x}
+              y={b.y}
+              width={b.w}
+              height={BOX_H}
+              fill="none"
+              stroke="#e8ecef"
+              strokeOpacity={0.85}
+              strokeWidth={0.75}
+            />
+            {b.doors.map((d, i) => (
+              <rect
+                key={i}
+                x={b.x + d * b.w - 1.5}
+                y={b.y + BOX_H / 2 - 0.75}
+                width={3}
+                height={1.5}
+                fill="#3ddc5b"
+              />
+            ))}
+          </g>
+        ))}
+        {here &&
+          others.map((x, i) => (
+            <rect
+              key={i}
+              x={here.x + along(x) * here.w - 1.5}
+              y={here.y + BOX_H / 2 - 1}
+              width={3}
+              height={2}
+              fill="#7d8cff"
+            />
+          ))}
+        {here && me !== null && (
+          <rect
+            x={here.x + along(me) * here.w - 2}
+            y={here.y + BOX_H / 2 - 1.5}
+            width={4}
+            height={3}
+            fill="#ffffff"
+          />
+        )}
+      </svg>
+    </Anchor>
+  );
+}
