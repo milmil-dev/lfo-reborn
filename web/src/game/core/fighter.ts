@@ -1,4 +1,5 @@
 import type { Bla, Button, CharData, Frame, InputState, Move } from "./types";
+import type { Hasher } from "./hash";
 import { stepLoose } from "./items";
 import { skillBonus } from "./skills";
 import { isHeld, type StatusKind, tickStatus } from "./status";
@@ -26,6 +27,7 @@ const AIR_WAIT = new Set([103, 2151]);
 const COMBO_WINDOW = 20; // ticks allowed across a whole input sequence
 const DOUBLE_TAP = 10; // ticks between taps that start a run
 const ROLL_SPEED = 4; // px per tick along the depth while rolling on the floor
+const BUTTONS = Object.keys(EMPTY_INPUT) as Button[];
 /** SP (體力) without a level table: the att row's usual default */
 const DEFAULT_SP = 1000;
 const SP_REFILL_TICKS = 20 * 30; // empty to full in 20 s while not guarding
@@ -111,8 +113,8 @@ export class Fighter {
   pendingLevelUp = false;
   /** elements on this fighter and the ticks each has left (core/status.ts) */
   readonly status = new Map<StatusKind, number>();
-  /** 招式等級: the level of each special (by slot); the game layer fills it from the save */
-  skillLevel: (slot: number) => number = () => 1;
+  /** 招式等級 by skill slot (a missing slot is LV 1); the game layer fills it from the save */
+  skillLevels: Record<number, number> = {};
   /** damage multiplier of the special being performed (1 outside one) */
   moveBonus = 1;
 
@@ -373,7 +375,7 @@ export class Fighter {
     if (!this.infiniteMp) this.mp -= m.mp;
     this.buffer = [];
     this.vx = 0;
-    this.moveBonus = skillBonus(this.skillLevel(m.slot));
+    this.moveBonus = skillBonus(this.skillLevels[m.slot] ?? 1);
     this.goto(m.to, events);
     events.push({ type: "move", fighter: this.id, move: m, name: this.frame.n });
     return true;
@@ -699,5 +701,40 @@ export class Fighter {
       this.frame.s === 103
     )
       return this.goto(this.act("JUMPLAND"), events);
+  }
+
+  /* ───────── netcode ───────── */
+
+  /**
+   * Feeds every field that drives the simulation into `h`, always in the same order, so two
+   * fighters with the same history hash alike and any divergence shows — position, timers,
+   * the input buffer, what is held. Drawing-only state (showBars) and the frame data stay out;
+   * the data is pinned by its key.
+   */
+  hash(h: Hasher) {
+    h.num(this.id).num(this.team).str(this.data.key);
+    h.num(this.x).num(this.y).num(this.z).num(this.vx).num(this.vy).num(this.vz);
+    h.num(this.facing).num(this.frameId).num(this.ticksLeft).num(this.hp).num(this.mp).num(this.sp);
+    h.num(this.hitStop).num(this.attackSerial).num(this.fallAcc).num(this.dizzyAcc);
+    h.bool(this.infiniteMp).bool(this.effect).bool(this.dead).num(this.level).num(this.reward);
+    h.num(this.rewardScale)
+      .num(this.hpMax ?? -1)
+      .num(this.mpMax ?? -1)
+      .num(this.spMax ?? -1);
+    h.num(this.power).num(this.guard);
+    h.num(this.holding?.id ?? 0)
+      .num(this.heldBy?.id ?? 0)
+      .num(this.thrownBy?.id ?? 0);
+    h.str(this.itemState).num(this.angle).bool(this.hidden).num(this.heldAid);
+    h.bool(this.pendingLevelUp).num(this.moveBonus);
+    for (const [kind, left] of this.status) h.str(kind).num(left);
+    for (const tag of this.hitBy) h.str(tag);
+    for (const slot of Object.keys(this.skillLevels))
+      h.num(Number(slot)).num(this.skillLevels[Number(slot)]);
+    for (const b of BUTTONS) h.bool(this.prev[b]);
+    h.num(this.queued ?? -1);
+    for (const k of this.buffer) h.str(k.key).num(k.t);
+    h.num(this.lastTap?.dir ?? 0).num(this.lastTap?.t ?? -1);
+    h.bool(this.altAttack).num(this.jumpDir).bool(this.jumpRun).num(this.t);
   }
 }
