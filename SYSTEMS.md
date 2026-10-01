@@ -47,7 +47,8 @@ Legend: [x] done · [~] partial · [ ] not started · (server) needs other playe
 - [x] 角色資料 window on the client's chartable (photo, label sheet, values, AP box, medal); chara / skill / smiley / item windows float over the game with the HUD still up
 - [~] 招式等級 (`core/skills.ts`): each use of a special is a point (saved per profile), LV 2–5 at 10 / 40 / 100 / 250, +6 % damage a level (its projectiles too), shown in the 出招表. The client kept skill EXP and the per-level effects on the server: thresholds and bonus are the remake's, per-level visuals not reproduced
 - [~] 變身 / 異轉 transformation: 異轉能量計 (tranicon) in the status box fills on hits, Y / click transforms into the base id + 7000 form (its TRANSFORM burst, its own moves), drains 45 s, cancel once 30 % spent, ends on KO. Story needs LV 150 + the account's 信物 (`lfo.tokens`); the training ground always allows it. 信物 come from the card shop; the post-150 stat caps follow the form's att max
-- [ ] Team skill / 合體 (`PACKET_TEAMSKILL`, `he-ti.mdx`, 念源體 items)
+- [x] 合體 (`he-ti.mdx`, `fanscamp/76`, `game/fusion.ts`): 毛毛高 (momogo_npc, 摩摩星大街) fuses the playing character with another of the account's into a 合體戰神 (8800 – 8808: 迪格斯 密碼 德特 愛莉 獸神 巴力克 人皇 波加 卡倫) for 7 / 15 / 30 days, for the six 念源體 (5330 – 5335) + 闇 (the web shop's: its term is chosen at 毛毛高) and ＄10000; it plays with its own character's table, level and points + 800 HP / MP / SP, 400 STR / DEF / AGI, no 異轉; shown on the profile card; 分體 at 毛毛高; 娃卡卡 (wakaka_npc) counts the 念源體. Formulas are the players' table (巴哈姆特 「合體戰神公式表」), unlisted pairs fall to a fixed open one, 10 % fail into 波加 (remake's). 念源體 drop 30 % per clear where the players found them (光 story, 雷 / 地 from chapter 5, 風 / 火 missions, 冰 VS vs dark characters). Each 合體戰神's hidden move is already in its spm
+- [ ] Team skill (`PACKET_TEAMSKILL`)
 - [ ] Followers / 摩摩星 (`PACKET_CREATEFOLLOWER`, `mmsinterface/`, `momo.mdx`)
 
 ## Items and economy

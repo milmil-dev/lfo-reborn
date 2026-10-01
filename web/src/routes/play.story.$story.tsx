@@ -9,6 +9,7 @@ import { Controls } from "@/game/input";
 import { KeyConfig } from "@/game/key-config";
 import {
   applyLevel,
+  withFusionBonus,
   withTranCaps,
   expScale,
   gainExp,
@@ -36,14 +37,17 @@ import { Backpack } from "@/game/kit/backpack";
 import { HudRestore, TabBlock } from "@/game/kit/chat";
 import { CharaCard, Popup, SkillList, Smiley, SmileyBox, type SmileyDef } from "@/game/kit/panels";
 import { FloatingPanel } from "@/game/kit/floating";
+import { nianyuanDrop } from "@/game/fusion";
 import { skillLevel } from "@/game/core/skills";
 import {
   addSkillExp,
   awardExp,
   getActiveProfile,
   getSkillExp,
+  fusionOf,
   getInventory,
   hasToken,
+  playKey,
   saveInventory,
   useInventory,
   useMoney,
@@ -126,6 +130,9 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
   // read from inside the stage's loop, which must not restart when the catalog arrives
   const stageNameRef = useRef(stageName);
   stageNameRef.current = stageName;
+  // where this stage sits (story / mission, chapter), for the 念源體 a clear may give
+  const entryRef = useRef(entry);
+  entryRef.current = entry;
   const navigate = useNavigate();
   const scale = useHudScale();
   const host = useRef<HTMLDivElement>(null);
@@ -282,6 +289,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
       carried.set(f, { copy, from, max });
     };
     let settled = false;
+    let cleared = false;
     const settleCarried = () => {
       if (settled || !getActiveProfile()) return;
       settled = true;
@@ -346,6 +354,22 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         status: (s) => {
           setStatus(s);
           if (s.kind === "complete" || s.kind === "gameover") settleCarried();
+          if (s.kind === "complete" && !cleared) {
+            cleared = true;
+            // 合體's 念源體 (fusion.ts): a clear may hand one out
+            const e = entryRef.current;
+            const id =
+              e &&
+              (e.mode === "story" || e.mode === "mission") &&
+              nianyuanDrop({ mode: e.mode, chapter: e.chapter }, Math.random(), Math.random());
+            const item = id ? itemsRef.current.get(id) : undefined;
+            const next = item && getActiveProfile() && add(getInventory(), item);
+            if (item && next) {
+              saveInventory(next);
+              audio.sfx("pick.wav", { volume: 0.8 });
+              setGain({ id: Date.now() + 2, name: item.name, icon: item.icon });
+            }
+          }
           // exit arrows appear once the room's fight is over
           scene.showExits(!!s.clear && !s.enemies);
         },
@@ -445,7 +469,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         },
       },
       // the active profile plays as its own character; a guest run keeps the line's lead
-      profile ? `chars/${profile.key}` : undefined,
+      profile ? `chars/${playKey(profile)}` : undefined,
     );
     const d = director;
     d.effects = new Effects(d.world, scene);
@@ -499,28 +523,29 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
           leveled = p.id;
           const hero = p;
           hero.skillLevel = (slot) => skillLevel(getSkillExp(slot));
+          // 合體: a 合體戰神 grows by its own character's table (he-ti.mdx 7), with the bonus
+          const fused = fusionOf(getActiveProfile());
+          const statId = fused ? getActiveProfile()!.charId : hero.data.attrs.id;
           void queryClient
-            .fetchQuery(q.character(hero.data.attrs.id))
+            .fetchQuery(q.character(statId))
             .then(async (c) => {
               // qualified for 異轉: the form's higher att maximums apply (星奇 400 → 600)
               const tran =
-                unlocked(prog.lv, hasToken(hero.data.attrs.id)) &&
-                (await queryClient
-                  .fetchQuery(q.character(hero.data.attrs.id + 7000))
-                  .catch(() => null));
+                unlocked(prog.lv, hasToken(statId)) &&
+                (await queryClient.fetchQuery(q.character(statId + 7000)).catch(() => null));
               table = withTranCaps(statTable(c), tran ? statTable(tran) : null);
               const inv = getInventory();
               applyLevel(
                 hero,
                 table,
                 prog.lv,
-                equipBonus(inv, itemsRef.current),
+                withFusionBonus(equipBonus(inv, itemsRef.current), !!fused),
                 getActiveProfile()?.points,
               );
               // the weapon worn in the equipment box starts the stage in hand
-              // 異轉: at LV 150 with the account's 信物 the gauge appears
+              // 異轉: at LV 150 with the account's 信物 the gauge appears (a 合體戰神 has no form)
               const baseId = hero.data.attrs.id;
-              if (unlocked(prog.lv, hasToken(baseId)))
+              if (!fused && unlocked(prog.lv, hasToken(baseId)))
                 void Promise.all([loadChar(hero.data.key), loadForm(baseId)]).then(
                   ([base, form]) => {
                     if (!form) return;

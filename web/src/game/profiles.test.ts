@@ -45,6 +45,25 @@ describe("save store", () => {
     expect(s.awardExp(1e9)?.profile.lv).toBe(300);
   });
 
+  it("合體: seven 念源體 and the fee make a 合體戰神 for a term; 分體 ends it", async () => {
+    const s = await fresh();
+    const bag = [5330, 5331, 5332, 5333, 5334, 5335].map((id, i) => ({ uid: i + 1, id, dur: 1 }));
+    s.saveSlot(0, { ...stinky, money: 20000, inv: { bag, equip: [], next: 7 } as never });
+    s.setActiveSlot(0);
+    expect(s.startFusion("duncun", 7).ok).toBe(true);
+    const p = s.getActiveProfile()!;
+    expect(s.playKey(p)).toBe("duncun");
+    expect(s.playId(p)).toBe(8800);
+    expect(p.money).toBe(10000);
+    expect(p.inv?.bag).toEqual([]);
+    expect(s.fusionOf(p, p.fusion!.until + 1)).toBeNull(); // the term runs out
+    expect(s.startFusion("code", 7).ok).toBe(false); // already one
+    s.endFusion();
+    expect(s.playKey(s.getActiveProfile()!)).toBe("stinky");
+    // without the 念源體 nothing happens
+    expect(s.startFusion("duncun", 7)).toEqual({ ok: false, line: "你需要集齊七粒不同的念源體。" });
+  });
+
   it("carries a save from before the rename over to the new key", async () => {
     let s = await fresh();
     s.saveSlot(0, stinky);

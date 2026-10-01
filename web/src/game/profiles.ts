@@ -14,6 +14,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { emptyInventory, type Inventory, type Owned } from "./inventory";
 import { gainExp, levelCap } from "./leveling";
+import { FUSION_FEE, fusionByKey, NIANYUAN } from "./fusion";
 import { TRAN_LEVEL } from "./transform";
 
 export type Profile = {
@@ -31,6 +32,8 @@ export type Profile = {
   skills?: Record<number, number>;
   /** 能力點 put into each stat (leveling.ts) */
   points?: Partial<Record<"hp" | "mp" | "sp" | "str" | "def" | "agi", number>>;
+  /** 合體 (fusion.ts): the 合體戰神 this character plays as, until when (ms since epoch) */
+  fusion?: { key: string; id: number; until: number };
 };
 /**
  * The account's characters. The newer client lets an account keep as many as it likes, so this
@@ -252,3 +255,47 @@ export const useOwnedChars = () => useSave((s) => s.chars ?? NO_CHARS);
 const NO_SKILLS: Record<number, number> = {};
 export const useSkillExp = () =>
   useSave((s) => (s.active === null ? null : s.slots[s.active])?.skills ?? NO_SKILLS);
+
+/* ───────── 合體 (fusion.ts) ───────── */
+
+/** The 合體戰神 a character plays as right now, or null (none, or its time is up). */
+export function fusionOf(p: Profile | null | undefined, now = Date.now()) {
+  return p?.fusion && p.fusion.until > now ? p.fusion : null;
+}
+/** The sprite key / character id a profile plays with: its 合體戰神 while that lasts. */
+export const playKey = (p: Profile) => fusionOf(p)?.key ?? p.key;
+export const playId = (p: Profile) => fusionOf(p)?.id ?? p.charId;
+
+/** The 念源體 in a backpack: one bag row per kind held (風 光 雷 地 冰 火). */
+export function nianyuanIn(inv: Inventory) {
+  return NIANYUAN.map((n) => ({ ...n, row: inv.bag.find((o) => o.id === n.id) ?? null }));
+}
+
+/**
+ * 毛毛高 fuses the playing character into `fusionKey` for `days`: one of each 念源體 and the fee
+ * are taken. What 毛毛高 says back.
+ */
+export function startFusion(fusionKey: string, days: number): { ok: boolean; line: string } {
+  const p = getActiveProfile();
+  const fusion = fusionByKey(fusionKey);
+  if (!p || !fusion) return { ok: false, line: "" };
+  if (fusionOf(p)) return { ok: false, line: "你已經是合體戰神了。" };
+  const inv = p.inv ?? EMPTY_INV;
+  const held = nianyuanIn(inv);
+  if (held.some((n) => !n.row)) return { ok: false, line: "你需要集齊七粒不同的念源體。" };
+  if (p.money < FUSION_FEE)
+    return { ok: false, line: `合體需要＄${FUSION_FEE.toLocaleString()}手續費。` };
+  const used = new Set(held.map((n) => n.row!.uid));
+  updateActiveProfile((q) => ({
+    ...q,
+    money: q.money - FUSION_FEE,
+    inv: { ...inv, bag: inv.bag.filter((o) => !used.has(o.uid)) },
+    fusion: { key: fusion.key, id: fusion.id, until: Date.now() + days * 86_400_000 },
+  }));
+  return { ok: true, line: `合體成功！你成為了合體戰神「${fusion.name}」。` };
+}
+
+/** 分體: back to the character's own self before the time is up. */
+export function endFusion() {
+  updateActiveProfile(({ fusion: _, ...q }) => q);
+}
