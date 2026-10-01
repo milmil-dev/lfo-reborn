@@ -57,7 +57,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
 			}
 		}, [frontmatter.title]);
 
-		const editUrl = "https://github.com/niskan516/lfo-wiki/edit/main/";
+		const editUrl = "https://github.com/milmil-dev/lfo-reborn/edit/main/";
 
 		const loaderData = Route.useLoaderData();
 		const slugs = loaderData.slugs ?? [];

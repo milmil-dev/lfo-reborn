@@ -18,7 +18,7 @@ export function GiscusComments() {
 	return (
 		<div className="mt-12 border-t border-fd-border pt-8">
 			<Giscus
-				repo="niskan516/lfo-wiki"
+				repo="milmil-dev/lfo-reborn"
 				repoId="PLACEHOLDER"
 				category="Comments"
 				categoryId="PLACEHOLDER"
