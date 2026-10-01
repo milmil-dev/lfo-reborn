@@ -7,7 +7,7 @@ interface Settings {
 	readerMode: "slide" | "scroll";
 }
 
-const STORAGE_KEY = "lfo-wiki-settings";
+const STORAGE_KEY = "lfo-reborn-settings";
 const defaults: Settings = {
 	musicPlayerEnabled: true,
 	readerMode: "slide",
