@@ -16,7 +16,7 @@ import {
 import { useCup } from "@/game/champion-store";
 import { MetalButton } from "@/game/kit/buttons";
 import { Ui } from "@/game/kit/ui";
-import { getActiveProfile, useActiveProfile } from "@/game/profiles";
+import { getActiveProfile, playKey, useActiveProfile } from "@/game/profiles";
 import { Screen } from "@/game/screen";
 import { rosterQueries, StartGate, useRoster } from "@/game/ui";
 import { ASSETS } from "@/lib/assets";
@@ -64,7 +64,9 @@ function Champion() {
     if (bracket || !profile || !roster.length) return;
     const keys = roster.map((r) => r.key);
     const partner = keys[Math.floor(Math.random() * keys.length)];
-    setBracket(newBracket({ name: profile.name, key: profile.key, lv: profile.lv }, partner, keys));
+    setBracket(
+      newBracket({ name: profile.name, key: playKey(profile), lv: profile.lv }, partner, keys),
+    );
   }, [bracket, profile, roster, setBracket]);
 
   if (!bracket || !profile) return <div className="fixed inset-0 bg-black" />;
