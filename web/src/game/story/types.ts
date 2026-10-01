@@ -46,6 +46,8 @@ export type Command = [string, ...(string | number)[]];
 export type StoryData = {
   /** the stage's loot table (.sty itm rows): sprite / item id and drop weight */
   loot?: { sprite: number; p: number }[];
+  /** locked doors (.sty lok rows): "bg:door" → the key type it needs (701 ~ 705) */
+  locks?: Record<string, number>;
   key: string;
   area: string;
   mapId: number;

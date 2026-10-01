@@ -389,40 +389,6 @@ export function ChapterCard({
   );
 }
 
-/* ───────── key box (bottom right): the last buttons pressed ───────── */
-
-export function KeyBox({ keys, scale }: { keys: { id: number; k: string }[]; scale: number }) {
-  return (
-    <Anchor corner="br" scale={scale}>
-      <div className="relative mr-[8px] mb-[34px] h-[85px] w-[184px]">
-        <Ui
-          name="gameinterface/default/keyboxback"
-          w={175}
-          h={65}
-          className="absolute top-[6px] left-[5px]"
-        />
-        <Ui name="gameinterface/default/keybox" w={184} h={85} className="absolute inset-0" />
-        <div className="absolute top-[12px] right-[14px] left-[14px] flex flex-wrap content-start gap-[4px]">
-          <AnimatePresence initial={false}>
-            {keys.map((k) => (
-              <motion.span
-                key={k.id}
-                className="grid h-[22px] min-w-[22px] place-items-center rounded-[4px] border border-white/40 bg-white/10 px-[4px] font-bold text-[12px] text-white"
-                initial={{ opacity: 0, scale: 1.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-              >
-                {k.k}
-              </motion.span>
-            ))}
-          </AnimatePresence>
-        </div>
-      </div>
-    </Anchor>
-  );
-}
-
 /* ───────── 小地圖 ───────── */
 
 /**
@@ -445,7 +411,7 @@ export function MiniMap({
   /** the other fighters' x in the same room */
   others?: number[];
   scale: number;
-  /** room left for what sits in the corner (the chara block, the key box) */
+  /** room left for what sits in the corner (the chara block) */
   right?: number;
 }) {
   const boxes = layoutMap(story, bg);
@@ -510,6 +476,108 @@ export function MiniMap({
           />
         )}
       </svg>
+    </Anchor>
+  );
+}
+
+/* ───────── top-right key box ───────── */
+
+/** 金 / 藍 / 橙 / 綠 / 紫鑰匙 (itemname.tzw, 「(不可收藏)」 stage-only keys 701 ~ 705) */
+export const KEY_NAME: Record<number, string> = {
+  701: "金鑰匙",
+  702: "藍鑰匙",
+  703: "橙鑰匙",
+  704: "綠鑰匙",
+  705: "紫鑰匙",
+};
+
+const keySizes = new Map<number, Promise<[number, number] | null>>();
+/** A key sprite's one picture sits at (0, 0) of its page: its size from the sprite's rects. */
+function keySize(id: number) {
+  let p = keySizes.get(id);
+  if (!p) {
+    p = fetch(`${ASSETS}/game/sprites/${id}.json`)
+      .then((r) => (r.ok ? (r.json() as Promise<{ rects: Record<string, number[]> }>) : null))
+      .then((d) => {
+        const r = d && Object.values(d.rects)[0];
+        return r ? ([r[3], r[4]] as [number, number]) : null;
+      })
+      .catch(() => null);
+    keySizes.set(id, p);
+  }
+  return p;
+}
+
+function KeyIcon({ id }: { id: number }) {
+  const [size, setSize] = useState<[number, number] | null>(null);
+  useEffect(() => {
+    let on = true;
+    void keySize(id).then((s) => on && setSize(s));
+    return () => {
+      on = false;
+    };
+  }, [id]);
+  if (!size) return <span className="size-[24px]" />;
+  const [w, h] = size;
+  // fit the key into a 30 × 30 cell, at most its own size
+  const k = Math.min(1, 30 / Math.max(w, h));
+  return (
+    <span
+      className="relative grid size-[30px] place-items-center"
+      title={KEY_NAME[id] ?? undefined}
+    >
+      <span className="relative overflow-hidden" style={{ width: w * k, height: h * k }}>
+        <img
+          src={`${ASSETS}/game/sprites/${id}-0.png`}
+          alt={KEY_NAME[id] ?? ""}
+          draggable={false}
+          className="absolute top-0 left-0 max-w-none"
+          style={{ height: h * k, width: "auto", imageRendering: "auto" }}
+        />
+      </span>
+    </span>
+  );
+}
+
+/**
+ * 鑰匙: the keys held, in the client's key box (keybox over keyboxback, 184 × 85) at the top
+ * right, the status box's mirror; shown only while there is a key.
+ */
+export function KeyBox({ keys, scale }: { keys: number[]; scale: number }) {
+  return (
+    <Anchor corner="tr" scale={scale}>
+      <AnimatePresence>
+        {keys.length > 0 && (
+          <motion.div
+            className="relative m-[6px] h-[85px] w-[184px]"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+          >
+            <Ui
+              name="gameinterface/default/keyboxback"
+              w={175}
+              h={65}
+              className="absolute top-[4px] left-[6px] opacity-80"
+            />
+            <Ui name="gameinterface/default/keybox" w={184} h={85} className="absolute inset-0" />
+            <div className="absolute top-[10px] right-[14px] left-[16px] flex flex-wrap gap-[4px]">
+              <AnimatePresence>
+                {keys.map((k) => (
+                  <motion.span
+                    key={k}
+                    initial={{ scale: 0.4, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.4, opacity: 0 }}
+                  >
+                    <KeyIcon id={k} />
+                  </motion.span>
+                ))}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Anchor>
   );
 }

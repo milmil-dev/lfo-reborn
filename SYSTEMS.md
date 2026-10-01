@@ -34,7 +34,8 @@ Legend: [x] done · [~] partial · [ ] not started · (server) needs other playe
 - [x] Loot: stage `itm` tables roll on each KO (field items drop, the rest go to the backpack)
 - [x] Save store: profiles, backpack, money, bank and 信物 in one Zustand store (`game/profiles.ts`, `lfo-reborn.save`; saves from before the rename carried over), old per-key saves carried over; screens read it live
 - [x] Gamepad on every screen (`game/pad-bridge.ts`): d-pad / stick → arrows, ✕ Enter, ○ back, □ 攻, △ 異轉, Start menu, Select 出招表, L1 / R1 item / drop; in a fight the face buttons stay 攻 跳 防
-- [~] Item bar: 10 slots from the backpack's field items (1–0 pick, ` fist, I take into hand, O drop; the held item follows through room changes); key items / doors (`PACKET_KEY*`, `OPENDOOR`) pending
+- [x] Item bar: 10 slots from the backpack's field items (1–0 pick, ` fist, I take into hand, O drop; the held item follows through room changes)
+- [x] 鑰匙 and locked doors (`PACKET_KEYADD / KEYUSE / KEYITEM / OPENDOOR`): the .sty `lok BG PORTAL KEY` rows (exported as `locks`) lock a door to a key (701 ~ 705: 金 / 藍 / 橙 / 綠 / 紫鑰匙, stage-only items of type 700). 攻 by a key puts it on the key ring (hands full or not, `getkey.wav`), shown in the client's key box top right; a locked door holds (「這道門鎖上了，需要「…」。」) until its key opens it for good from both sides (`dropkey.wav`). ADDKEY / REMOVEKEY give and take the script keys (710 …); a room that turns the player back in a loop until a later REMOVEKEY (大嶼山's three gates) opens to its second take when they come with the key. The server's DoorPool said which locks were live and is lost: a lock whose key the stage never hands out (mission_school5's, the sealed 720 ~ 722) stays open
 - [x] Knock-down recovery: ↑ / ↓ on the floor rolls (LIEDOWNROLLU / D, B_ variants) and gets up; 跳 on the way down flips back (FALLRECOVERY)
 - [x] Command input: 防-led commands keep the fighter's facing (防後前攻 types), and a typed prefix (防攻 of 防攻攻) holds the normal attack / jump; every special of every character is checked typed (`moves.test.ts`)
 - [x] Stage music: each stage's .sty `bgm` is exported and played at the start (VS stages and towers have no script that plays any)
@@ -65,7 +66,7 @@ Legend: [x] done · [~] partial · [ ] not started · (server) needs other playe
 - [x] Lobby: the street rooms stitched into seamless strips (`story/stitch.ts`), doors with a push-in transition and preloading, original exit arrows
 
 - [x] Stage events by the .sty files' own names: CHANGEPHASE (10) opens another room's phase (with TIMES), HALT (11) holds a room until it does, CH_DOOR (36) re-routes or locks a door while its phase lasts, RAN_DOOR (38) and doors with several targets lead anywhere they list, TELEPORT (31) / spawn (35) like WARP / SPAWN, GAMEOVER (23); `story/progress.test.ts` checks every story with an ending can reach it (the towers' random maze, special items and self-looping doors still to do)
-- [ ] Remaining events: ADDKEY / REMOVEKEY (14/15), TIMESTAMP / TIMECHANGEPHASE (16/17), CANLEARN (18), ACTIVATECHAR (30), SP_ITEM (37), BLINKMINIBG (12); script commands giveitem, changesprite, showpicture / hidepicture, removeholder, credits
+- [ ] Remaining events: TIMESTAMP / TIMECHANGEPHASE (16/17), CANLEARN (18), ACTIVATECHAR (30), SP_ITEM (37), BLINKMINIBG (12); script commands giveitem, changesprite, showpicture / hidepicture, removeholder, credits
 
 ## Rooms and modes
 - [~] 遊戲室 waiting room (`waitplayer/`, `/play/room`): you plus up to three COM rows (◀ ▶ character, ▲ ▼ LV, team badges 獨 / 1–4), LAUNCH?, room chat with the client's room lines. The online room list (`selectroom/`) has no offline counterpart
