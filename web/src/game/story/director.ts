@@ -65,13 +65,16 @@ export function obtainableKeys(story: StoryData) {
   return keys;
 }
 
-type Kind = "enemy" | "npc" | "item" | "player" | "com";
+/** `local`: another player at this machine (a VS guest), fed from the step's `locals` */
+type Kind = "enemy" | "npc" | "item" | "player" | "com" | "local";
 
 const PLAYER_HANDLE = 9000;
 /** a defeated enemy lies still this long, then blinks this long before it is gone (ticks) */
 const DEATH_LIE = 30;
 const DEATH_BLINK = 36;
 const VIEW_H = 600; // the original client ran at 800 × 600
+/** how far from the view's edge the camera keeps the player when a VS group spreads out */
+const EDGE = 120;
 // sprite id bands: 1–99 players, 100–999 items, 3000+ creatures, 5000+ special objects
 const isItem = (sprite: number) => sprite >= 100 && sprite < 1000;
 const ms = (n: number) => Math.round((n / 1000) * TICK_HZ);
@@ -153,7 +156,14 @@ export class Director {
   }
   player: Fighter | null = null;
   readonly handles = new Map<number, Fighter>();
-  readonly camera = { x: 0, target: 0, follow: null as Fighter | null, viewW: 800 };
+  /** `group`: fighters the camera keeps between them (a VS bout's players), unless it follows one */
+  readonly camera = {
+    x: 0,
+    target: 0,
+    follow: null as Fighter | null,
+    group: null as Fighter[] | null,
+    viewW: 800,
+  };
   bound = Number.POSITIVE_INFINITY;
   effects: Effects | null = null;
   drama = false;
@@ -272,16 +282,18 @@ export class Director {
     await this.enterRoom(bg, null, x);
   }
 
-  /** One fixed tick: inputs, world, then story logic. */
-  step(playerInput: InputState) {
+  /** One fixed tick: inputs (`locals` by fighter id for the other players here), world, then story logic. */
+  step(playerInput: InputState, locals?: ReadonlyMap<number, InputState>) {
     this.tick++;
     if (this.aiGrace > 0 && !this.drama) this.aiGrace--;
     const inputs = new Map<number, InputState>();
+    const playing = !this.drama && this.status === "playing";
     for (const f of this.world.fighters) {
       const mover = this.movers.get(f);
+      const local = locals?.get(f.id);
       if (mover) inputs.set(f.id, this.moverInput(f, mover));
-      else if (f === this.player && !this.drama && this.status === "playing")
-        inputs.set(f.id, playerInput);
+      else if (f === this.player && playing) inputs.set(f.id, playerInput);
+      else if (local && this.kind.get(f) === "local" && playing) inputs.set(f.id, local);
       else if (
         (this.kind.get(f) === "enemy" || this.kind.get(f) === "com") &&
         !this.drama &&
@@ -840,6 +852,13 @@ export class Director {
     return f;
   }
 
+  /** Another player at this machine (a VS guest): fights for `team`, steered by step()'s `locals`. */
+  async addLocal(path: string, team: number, x: number, z: number) {
+    const f = await this.spawn(path, team, x, z, "local", x > this.world.stage.maxX / 2 ? -1 : 1);
+    this.report();
+    return f;
+  }
+
   /** Drop a field item (weapon, potion …) from the air at a spot, e.g. an enemy's loot. */
   async dropItem(sprite: number, x: number, z: number) {
     const f = await this.spawn(`sprites/${sprite}`, 0, x, z, "item");
@@ -912,8 +931,16 @@ export class Director {
   /** Ease the camera towards its target (or jump straight there, e.g. after a door). */
   private followCamera(snap = false) {
     const c = this.camera;
+    // a group: centre on the players still standing — and when they spread wider than the view,
+    // the one at this screen (the player) stays on it rather than everyone dropping off the edges
+    const group = this.drama || c.follow ? [] : (c.group ?? []).filter((f) => f.hp > 0 && !f.dead);
     const f = c.follow ?? (this.drama ? null : this.player);
-    if (f) c.target = f.x - c.viewW / 2;
+    if (group.length) {
+      const mid = group.reduce((s, g) => s + g.x, 0) / group.length - c.viewW / 2;
+      const p = this.player;
+      c.target =
+        p && group.includes(p) ? Math.max(p.x - c.viewW + EDGE, Math.min(p.x - EDGE, mid)) : mid;
+    } else if (f) c.target = f.x - c.viewW / 2;
     const max = Math.min(this.room?.width ?? 0, this.bound) - c.viewW;
     c.target = Math.max(0, Math.min(Math.max(0, max), c.target));
     c.x = snap ? c.target : c.x + (c.target - c.x) * 0.15;

@@ -1,6 +1,34 @@
-import { canLaunch, decided, engineTeam, rankOf, settleHonor } from "./vs";
+import {
+  canLaunch,
+  decided,
+  engineTeam,
+  type Guest,
+  rankOf,
+  seatCount,
+  settleHonor,
+  stepLevel,
+} from "./vs";
 
 describe("VS", () => {
+  it("seats the players at this machine beside the COMs, four fighters at most", () => {
+    const room = { stage: "vs_school", name: "x", team: 1, coms: [] };
+    const guest = (team: number): Guest => ({ key: "davis", team, lv: 1, device: "kb2" });
+    const com = { key: "davis", team: 2, lv: 1 };
+    expect(canLaunch({ ...room, guests: [guest(1)] })).toBe(false);
+    expect(canLaunch({ ...room, guests: [guest(2)] })).toBe(true);
+    expect(seatCount({ ...room, guests: [guest(2)], coms: [com] })).toBe(3);
+    expect(canLaunch({ ...room, guests: [guest(2), guest(2), guest(2)], coms: [com] })).toBe(false);
+  });
+
+  it("steps a level along the COM ladder and holds at the ends", () => {
+    expect(stepLevel(1, 1)).toBe(10);
+    expect(stepLevel(10, -1)).toBe(1);
+    expect(stepLevel(45, 1)).toBe(60);
+    expect(stepLevel(45, -1)).toBe(30);
+    expect(stepLevel(150, 1)).toBe(150);
+    expect(stepLevel(1, -1)).toBe(1);
+  });
+
   it("gives 獨立 fighters a side each", () => {
     expect(engineTeam(0, 0)).not.toBe(engineTeam(0, 1));
     expect(engineTeam(2, 0)).toBe(engineTeam(2, 3));

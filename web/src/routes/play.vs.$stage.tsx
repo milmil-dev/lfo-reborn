@@ -6,8 +6,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import { audio } from "@/game/audio";
 import type { Fighter } from "@/game/core/fighter";
+import type { InputState } from "@/game/core/types";
 import { Effects } from "@/game/effects";
-import { Controls } from "@/game/input";
+import { SeatControls } from "@/game/input";
 import { equipBonus } from "@/game/inventory";
 import { useItemTable } from "@/game/items-data";
 import { LoadingScreen } from "@/game/kit/loading";
@@ -22,16 +23,25 @@ import { RoomScene } from "@/game/story/room-scene";
 import { catalogQuery, stageLabel } from "@/game/stage-select";
 import type { StoryData } from "@/game/story/types";
 import { StartGate } from "@/game/ui";
-import { comSkill, decided, engineTeam, RANKS, type RoomSetup, settleHonor } from "@/game/vs";
+import {
+  comSkill,
+  decided,
+  engineTeam,
+  guestsOf,
+  RANKS,
+  type RoomSetup,
+  settleHonor,
+} from "@/game/vs";
 import { CUP_HONOR, playRound, yourTeam } from "@/game/champion";
 import { useCup } from "@/game/champion-store";
 import { q } from "@/lib/api";
 import { usePageTitle } from "@/lib/title";
 
 /*
-  A VS bout: the stage of the waiting room, you and the COM players on their teams, last team
-  standing wins (the client's default rule, 「最先打倒隊方所有成員」). The result board lists
-  everyone; a win or a loss moves your honor and, now and then, your 勳銜.
+  A VS bout: the stage of the waiting room, you, the other players at this machine (each on
+  their own device) and the COM players on their teams, last team standing wins (the client's
+  default rule, 「最先打倒隊方所有成員」). The result board lists everyone; a win or a loss moves
+  your honor and, now and then, your 勳銜 — the guests have no profile to move.
 */
 
 export const Route = createFileRoute("/play/vs/$stage")({
@@ -59,6 +69,8 @@ type Entrant = {
   lv: number;
   team: number;
   you: boolean;
+  /** a person at this machine (you or a guest) rather than a COM */
+  human: boolean;
   kos: number;
   f: Fighter | null;
 };
@@ -118,6 +130,8 @@ function VsRun({
   const host = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [vitals, setVitals] = useState<Vitals | null>(null);
+  // the first guest's box sits in the other top corner; further guests have their bars under their feet
+  const [vitals2, setVitals2] = useState<Vitals | null>(null);
   const [seconds, setSeconds] = useState(0);
   const [combo, setCombo] = useState({ n: 0, id: 0 });
   const [board, setBoard] = useState<Entrant[] | null>(null);
@@ -174,18 +188,39 @@ function VsRun({
       `chars/${me.key}`,
     );
     d.effects = new Effects(d.world, scene);
-    const controls = new Controls();
+    // seats: you on the keyboard (and any pad nobody else holds), then each guest's device
+    const guests = guestsOf(setup);
+    const controls = new SeatControls(["kb", ...guests.map((g) => g.device)]);
     const entrants: Entrant[] = [
-      { name: me.name, lv: me.lv, team: engineTeam(setup.team, 0), you: true, kos: 0, f: null },
+      {
+        name: me.name,
+        lv: me.lv,
+        team: engineTeam(setup.team, 0),
+        you: true,
+        human: true,
+        kos: 0,
+        f: null,
+      },
+      ...guests.map((g, i) => ({
+        name: `P${i + 2}`,
+        lv: g.lv,
+        team: engineTeam(g.team, 1 + i),
+        you: false,
+        human: true,
+        kos: 0,
+        f: null as Fighter | null,
+      })),
       ...setup.coms.map((c, i) => ({
         name: c.key,
         lv: c.lv,
-        team: engineTeam(c.team, i + 1),
+        team: engineTeam(c.team, 1 + guests.length + i),
         you: false,
+        human: false,
         kos: 0,
         f: null as Fighter | null,
       })),
     ];
+    const comAt = 1 + guests.length;
     const downed = new Set<number>();
     let comboN = 0;
     let comboAt = -99;
@@ -201,7 +236,9 @@ function VsRun({
     ) => {
       const c = await queryClient.fetchQuery(q.character(f.data.attrs.id)).catch(() => null);
       if (c) applyLevel(f, statTable(c), lv, bonus, points);
-      entrants.find((x) => x.f === f)!.name = c?.name ?? f.data.name;
+      const e = entrants.find((x) => x.f === f)!;
+      // a COM is named after its character; a guest keeps "玩家 n" and shows the character beside it
+      e.name = e.human ? `${e.name} · ${c?.name ?? f.data.name}` : (c?.name ?? f.data.name);
     };
 
     void d.start().then(async () => {
@@ -216,17 +253,38 @@ function VsRun({
         await level(p, me.lv, equipBonus(getInventory(), itemsRef.current), me.points);
         entrants[0].name = me.name;
       }
-      await Promise.all(
-        setup.coms.map(async (c, i) => {
+      // the people at this machine start on the left, the COM players on the right
+      await Promise.all([
+        ...guests.map(async (g, i) => {
+          const f = await d.addLocal(
+            `chars/${g.key}`,
+            entrants[1 + i].team,
+            left + 80 * (i + 1),
+            mid + i * 40,
+          );
+          if (!f) return;
+          f.showBars = i > 0;
+          entrants[1 + i].f = f;
+          await level(f, g.lv);
+        }),
+        ...setup.coms.map(async (c, i) => {
           const x = right - (i % 2) * 120;
           const z = mid + (i - 1) * 40;
-          const f = await d.addCom(`chars/${c.key}`, entrants[i + 1].team, x, z, comSkill(c.lv));
+          const f = await d.addCom(
+            `chars/${c.key}`,
+            entrants[comAt + i].team,
+            x,
+            z,
+            comSkill(c.lv),
+          );
           if (!f) return;
           f.showBars = true;
-          entrants[i + 1].f = f;
+          entrants[comAt + i].f = f;
           await level(f, c.lv);
         }),
-      );
+      ]);
+      // the camera keeps everyone at this machine in view
+      if (guests.length) d.camera.group = entrants.filter((x) => x.human && x.f).map((x) => x.f!);
       ready = true;
       setLoading(false);
     });
@@ -234,24 +292,31 @@ function VsRun({
     const stop = runLoop(
       d.world,
       () => {
-        const input = controls.sample();
+        const [input, ...rest] = controls.sample();
         if (!ready) return;
-        d.step(input);
+        const locals = new Map<number, InputState>();
+        guests.forEach((_, i) => {
+          const f = entrants[1 + i].f;
+          if (f) locals.set(f.id, rest[i]);
+        });
+        d.step(input, locals);
         const tick = d.world.tick;
         const p = entrants[0].f;
-        if (p && tick % 3 === 0)
-          setVitals({
-            name: me.name,
-            charId: p.data.attrs.id,
-            honor: getActiveProfile()?.honor ?? 0,
-            hp: p.hp,
-            maxHp: p.maxHp,
-            mp: p.mp,
-            maxMp: p.maxMp,
-            sp: p.sp,
-            maxSp: p.maxSp,
-            status: [...p.status.keys()],
-          });
+        const read = (f: Fighter, name: string, honor?: number): Vitals => ({
+          name,
+          charId: f.data.attrs.id,
+          honor,
+          hp: f.hp,
+          maxHp: f.maxHp,
+          mp: f.mp,
+          maxMp: f.maxMp,
+          sp: f.sp,
+          maxSp: f.maxSp,
+          status: [...f.status.keys()],
+        });
+        if (p && tick % 3 === 0) setVitals(read(p, me.name, getActiveProfile()?.honor ?? 0));
+        const g = guests.length ? entrants[1].f : null;
+        if (g && tick % 3 === 0) setVitals2(read(g, entrants[1].name));
         if (tick % 30 === 0) setSeconds(Math.floor(tick / 30));
         if (comboN && tick - comboAt > 60) {
           comboN = 0;
@@ -308,6 +373,7 @@ function VsRun({
       <div ref={host} className="absolute inset-0" />
       <LoadingScreen show={loading} />
       {vitals && !board && <StatusBox v={vitals} scale={scale} />}
+      {vitals2 && !board && <StatusBox v={vitals2} scale={scale} corner="tr" />}
       {!board && (
         <BottomBar
           scale={scale}
@@ -332,7 +398,7 @@ function VsRun({
                 title={outcome.line ?? t`勳銜：${RANKS[outcome.rank]}　榮譽 ${outcome.honor}`}
                 header={[t`名稱`, "LV", t`隊伍`, t`擊倒`, t`結果`, "", "", "", "", "", ""]}
                 rows={board.map((x) => [
-                  x.you ? `${x.name}` : `${x.name} COM`,
+                  x.human ? x.name : `${x.name} COM`,
                   x.lv,
                   x.team >= 10 ? t`獨立` : x.team,
                   x.kos,

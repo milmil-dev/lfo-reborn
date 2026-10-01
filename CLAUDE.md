@@ -39,7 +39,10 @@ select, `/play/$key` a training ground driven by the original frame data.
   RUN 40, JUMPSTU 400, JUMPU 450, ATTACK1 500 …); specials from `spm` (G 防 A 攻 J 跳, F/B relative to facing,
   `from` = chain source animation).
 - `game/render.ts` is the PixiJS view (swappable for a 3D/HD-2D renderer); `game/input.ts` keyboard + gamepad
-  (J 攻 K 跳 L 防, arrows/WASD); `game/audio.ts` WebAudio SFX + BGM.
+  (J 攻 K 跳 L 防, arrows/WASD; a second layout TFGH / ZXC / VB for a second player) — `SeatControls` samples one
+  device per seat (`kb`, `kb2`, `pad<n>`), `Controls` is the single-player case; `game/audio.ts` WebAudio SFX + BGM.
+- VS (`game/vs.ts`, `/play/room`, `/play/vs/$stage`): you + up to three guests at this machine and/or COM players,
+  four fighters in all; guests are `Director` fighters of kind `local`, fed through `step(input, locals)`.
 - In dev, `window.__lfo` exposes the training world for scripted checks.
 
 ## API (`api/`)
