@@ -15,9 +15,6 @@ const queryClient = new QueryClient({
 const router = createRouter({
   routeTree,
   context: { queryClient },
-  // navigations run inside document.startViewTransition, so art tagged with a
-  // view-transition-name morphs from list card into the detail hero
-  defaultViewTransition: true,
   defaultPreload: "intent",
   defaultPreloadStaleTime: 0,
   scrollRestoration: true,

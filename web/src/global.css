@@ -195,18 +195,8 @@
     var(--background);
 }
 
-/* View Transitions: shared art between list cards and detail heroes */
-::view-transition-group(*) {
-  animation-duration: 420ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
 @media (prefers-reduced-motion: reduce) {
   [style*="marquee"] {
-    animation: none !important;
-  }
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
     animation: none !important;
   }
 }
