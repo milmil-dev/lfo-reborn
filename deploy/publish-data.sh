@@ -13,16 +13,23 @@
 # Needs bun, rclone and, in the environment or a root .env:
 #   CLOUDFLARE_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY  (read+write on the bucket)
 #   R2_DATA_BUCKET (default lfo-data)
+# From a git worktree (removed when its work is done) the main checkout's .env is read too, so
+# the keys live in one place.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-if [ -f .env ]; then
+load_env() {
+  [ -f "$1" ] || return 0
   set -a
-  # shellcheck disable=SC1091
-  . ./.env
+  # shellcheck disable=SC1090
+  . "$1"
   set +a
-fi
+}
+# the main checkout first, then this checkout's own .env on top of it
+main="$(cd "$(git rev-parse --git-common-dir)/.." && pwd)"
+[ "$main" != "$PWD" ] && load_env "$main/.env"
+load_env .env
 
 : "${CLOUDFLARE_ACCOUNT_ID:?set CLOUDFLARE_ACCOUNT_ID}"
 : "${R2_ACCESS_KEY_ID:?set R2_ACCESS_KEY_ID}"
