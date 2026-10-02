@@ -44,11 +44,14 @@ describe("a 摩摩星's backpack", () => {
 });
 
 describe.skipIf(!hasData)("the 摩摩星 follower", () => {
-  const { parts } = JSON.parse(readFileSync(`${dir}/momo.json`, "utf8")) as { parts: MomoPart[] };
+  // read in the tests: a skipped describe still runs its body
+  const momoParts = () =>
+    (JSON.parse(readFileSync(`${dir}/momo.json`, "utf8")) as { parts: MomoPart[] }).parts;
   const base = () => load("sprites/3500");
 
   it("exports a base creature whose frames draw parts", () => {
     const b = base();
+    const parts = momoParts();
     expect(Object.values(b.frames).some((f) => f.eff?.length)).toBe(true);
     const own = parts.flatMap((p) => (p.attack ? [p.attack] : []));
     expect(own.filter((a) => b.actions[a] === undefined)).toEqual([]);
