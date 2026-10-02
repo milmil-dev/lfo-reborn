@@ -1,4 +1,14 @@
 import { type Brain, newBrain, think } from "../ai";
+import {
+  backpackAct,
+  type MomoBrain,
+  type MomoOutfit,
+  type MomoPart,
+  momoPath,
+  momoPower,
+  newMomoBrain,
+  thinkMomo,
+} from "../momo";
 import { pickUp } from "../core/items";
 import { type Mover, newMover, steer } from "./movers";
 import { segmentAt, type StitchedRoom, stitch, stripOf } from "./stitch";
@@ -67,7 +77,7 @@ export function obtainableKeys(story: StoryData) {
 }
 
 /** `local`: another player at this machine (a VS guest), fed from the step's `locals` */
-export type Kind = "enemy" | "npc" | "item" | "player" | "com" | "local";
+export type Kind = "enemy" | "npc" | "item" | "player" | "com" | "local" | "momo";
 
 /** The Director at one tick (rollback netcode): the world and who everyone in it is. */
 export type DirectorSnapshot = {
@@ -165,6 +175,12 @@ export class Director {
     return strip;
   }
   player: Fighter | null = null;
+  /** 摩摩星朋友 (momo.ts): the player's follower, its brain and what its backpack does */
+  momo: Fighter | null = null;
+  private momoBrain: MomoBrain = newMomoBrain();
+  private momoAct = backpackAct(undefined);
+  private momoCfg: { outfit: MomoOutfit; parts: MomoPart[]; level: number } | null = null;
+  private momoJoined = false;
   readonly handles = new Map<number, Fighter>();
   /** `group`: fighters the camera keeps between them (a VS bout's players), unless it follows one */
   readonly camera = {
@@ -303,13 +319,20 @@ export class Director {
     if (this.aiGrace > 0 && !this.drama) this.aiGrace--;
     const inputs = new Map<number, InputState>();
     const playing = !this.drama && this.status === "playing";
+    const played: FighterEvent[] = [];
     for (const f of this.world.fighters) {
       const mover = this.movers.get(f);
       const local = locals?.get(f.id);
       if (mover) inputs.set(f.id, this.moverInput(f, mover));
       else if (f === this.player && playing) inputs.set(f.id, playerInput);
       else if (local && this.kind.get(f) === "local" && playing) inputs.set(f.id, local);
-      else if (
+      else if (f === this.momo) {
+        if (!playing) continue;
+        const r = thinkMomo(f, this.player, this.world.fighters, this.momoBrain, this.momoAct);
+        // its punches are thrown objects (bla rows): their spawns go out with the step's events
+        if (r.play && f.data.actions[r.play] !== undefined) f.goto(f.action(r.play), played);
+        inputs.set(f.id, r.input);
+      } else if (
         (this.kind.get(f) === "enemy" || this.kind.get(f) === "com") &&
         !this.drama &&
         this.aiGrace <= 0
@@ -317,7 +340,7 @@ export class Director {
         inputs.set(f.id, this.aiInput(f));
     }
     const before = this.world.fighters.map((f) => [f, f.x, f.z] as const);
-    const events = this.world.step(inputs);
+    const events = [...played, ...this.world.step(inputs)];
     this.effects?.update(events);
     for (const e of events)
       if (e.type === "key" && e.fighter === this.player?.id) this.giveKey(e.key);
@@ -372,6 +395,36 @@ export class Director {
       }
   }
 
+  /** 摩摩星朋友: the follower that comes along with the player (set before or after they appear). */
+  setMomo(outfit: MomoOutfit, parts: MomoPart[], level = 1) {
+    this.momoCfg = { outfit, parts, level };
+    void this.joinMomo();
+  }
+
+  /** The 摩摩星 steps in beside the player, once there is one; it stays out once it has fallen. */
+  private async joinMomo() {
+    const p = this.player;
+    const cfg = this.momoCfg;
+    if (!p || !cfg || this.momo || this.momoJoined) return;
+    this.momoJoined = true;
+    const f = await this.spawn(
+      momoPath(cfg.outfit),
+      p.team,
+      p.x - p.facing * 50,
+      p.z,
+      "momo",
+      p.facing,
+    );
+    if (!f) return;
+    this.momo = f;
+    f.power = momoPower(cfg.level);
+    this.momoBrain = newMomoBrain();
+    this.momoAct = backpackAct(
+      cfg.parts.find((x) => x.id === cfg.outfit.backpack),
+      cfg.level,
+    );
+  }
+
   /** Puts a controllable fighter into the current room: maps with no story script (the lobby). */
   async addPlayer(path: string, x = this.story.start.x, z?: number) {
     this.playerPending = true;
@@ -389,6 +442,7 @@ export class Director {
       this.handles.set(PLAYER_HANDLE, f);
       this.camera.x = this.camera.target = f.x - this.camera.viewW / 2;
     }
+    void this.joinMomo();
     this.report();
     return f;
   }
@@ -411,7 +465,7 @@ export class Director {
     // everyone but the player (and what they carry) leaves with the old room
     if (!sameStrip)
       for (const f of [...this.world.fighters])
-        if (f !== this.player && f !== this.player?.holding) this.despawn(f);
+        if (f !== this.player && f !== this.player?.holding && f !== this.momo) this.despawn(f);
     this.spawners = [];
     this.pendingDrama = [];
     this.bg = bg;
@@ -436,6 +490,12 @@ export class Director {
       );
       this.player.facing = this.player.x - dx > room.width / 2 ? -1 : 1;
       this.player.vx = this.player.vz = 0;
+      // the 摩摩星 comes through the door right behind
+      if (this.momo) {
+        this.momo.x = this.player.x - this.player.facing * 50;
+        this.momo.z = this.player.z;
+        this.momo.vx = this.momo.vz = 0;
+      }
     }
     this.camera.x = this.camera.target = (this.player?.x ?? x ?? 0) - this.camera.viewW / 2;
     const state = this.roomState(bg);
@@ -783,7 +843,8 @@ export class Director {
    */
   private cleanup() {
     for (const f of [...this.world.fighters]) {
-      if (this.kind.get(f) !== "enemy" || f.hp > 0) continue;
+      const k = this.kind.get(f);
+      if ((k !== "enemy" && k !== "momo") || f.hp > 0) continue;
       const t = this.dying.get(f);
       if (t === undefined) {
         if (f.anim === "LIEDOWN" || f.anim === "B_LIEDOWN" || !f.data.actions.LIEDOWN) {
@@ -798,6 +859,8 @@ export class Director {
       if (t >= DEATH_LIE + DEATH_BLINK) {
         this.dying.delete(f);
         this.despawn(f);
+        // 「摩摩星朋友的HP被扣至零，他就會退出戰場」
+        if (f === this.momo) this.momo = null;
       }
     }
   }
@@ -1026,6 +1089,7 @@ export class Director {
       this.kind.set(hero, "player");
       hero.team = 1;
     }
+    void this.joinMomo();
     this.report();
   }
 

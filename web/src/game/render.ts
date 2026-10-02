@@ -45,7 +45,12 @@ export async function loadArt(rel: string, version?: string) {
   return tex;
 }
 
-export type CharAssets = { data: CharData; textures: Map<number, Texture> };
+export type CharAssets = {
+  data: CharData;
+  textures: Map<number, Texture>;
+  /** a paper doll (the 摩摩星): the part worn in each layer slot, drawn by the frames' eff rows */
+  layers?: Map<number, CharAssets>;
+};
 const charCache = new Map<string, Promise<CharAssets>>();
 
 export const loadChar = (key: string) => loadSprite(`chars/${key}`);
@@ -62,6 +67,25 @@ export async function loadForm(id: number): Promise<CharAssets | null> {
 /** Loads any exported sprite: "chars/<key>" for playable characters, "sprites/<id>" for everything else. */
 export function loadSprite(path: string): Promise<CharAssets> {
   let p = charCache.get(path);
+  if (!p && path.startsWith("momo:")) {
+    // a 摩摩星 in an outfit (game/momo.ts): the base creature with its five parts as layers
+    p = (async () => {
+      const ids = path.slice(5).split(",").map(Number);
+      const [base, ...parts] = await Promise.all([
+        loadSprite("sprites/3500"),
+        ...ids.map((id) => loadSprite(`sprites/${id}`).catch(() => null)),
+      ]);
+      const layers = new Map<number, CharAssets>();
+      ids.forEach((id, i) => {
+        const part = parts[i];
+        if (part) layers.set(Math.floor(id / 10000) * 10000, part);
+      });
+      return { ...base, layers };
+    })();
+    charCache.set(path, p);
+    p.catch(() => charCache.delete(path));
+    return p;
+  }
   if (!p) {
     const dir = path.slice(0, path.lastIndexOf("/"));
     p = (async () => {
@@ -150,6 +174,8 @@ export class FighterView extends Container {
     .ellipse(0, 0, 30, 8)
     .fill({ color: 0x000000, alpha: 0.35 });
   private readonly body = new Sprite();
+  // a paper doll's part layers, reused frame to frame
+  private readonly parts: Sprite[] = [];
   // the frame anchor (cx, cy): mirrored by facing and turned by a carried item's angle
   private readonly rig = new Container();
   // HP / MP / SP under the feet, as the client draws them for every enemy
@@ -210,9 +236,54 @@ export class FighterView extends Container {
     this.body.tint = f.status.has("poison") ? 0xb8ffb0 : 0xffffff;
   }
 
+  /** A paper doll's frame: each eff layer is its slot's part in that action, nearest last. */
+  private syncLayers() {
+    const f = this.fighter;
+    const layers = [...(f.frame.eff ?? [])].sort((a, b) => a.z - b.z);
+    let n = 0;
+    for (const l of layers) {
+      const part = this.assets.layers?.get(l.part);
+      if (!part) continue;
+      const pf = part.data.acts?.[String(l.aid)] ?? part.data.acts?.["0"] ?? 0;
+      const frame = part.data.frames[String(pf)] ?? part.data.frames["0"];
+      const rect = frame && part.data.rects[String(frame.p)];
+      const tex = frame && part.textures.get(frame.p);
+      if (!frame || !rect || !tex) continue;
+      let s = this.parts[n];
+      if (!s) {
+        s = new Sprite();
+        this.parts.push(s);
+        this.rig.addChild(s);
+      }
+      s.visible = true;
+      s.texture = tex;
+      s.rotation = l.o;
+      // the doll's own frame anchor moves every layer (its idle bob), as a picture's would
+      s.position.set(l.x - f.frame.cx + rect[5] - frame.cx, l.y - f.frame.cy + rect[6] - frame.cy);
+      this.rig.setChildIndex(s, this.rig.children.length - 1);
+      n++;
+    }
+    for (let i = n; i < this.parts.length; i++) this.parts[i].visible = false;
+    return n > 0;
+  }
+
   sync() {
     const f = this.fighter;
     const fr = f.frame;
+    if (this.assets.layers) {
+      const drawn = !f.hidden && this.syncLayers();
+      this.body.visible = false;
+      this.rig.visible = drawn;
+      this.shadow.visible = drawn;
+      if (!drawn) return;
+      this.rig.position.set(f.x, f.z + f.y);
+      this.rig.scale.x = f.facing;
+      this.shadow.position.set(f.x, f.z);
+      this.drawBars();
+      this.syncStatus();
+      this.zIndex = f.z;
+      return;
+    }
     const rect = this.assets.data.rects[String(fr.p)];
     const tex = this.assets.textures.get(fr.p);
     if (!rect || !tex || f.hidden) {
