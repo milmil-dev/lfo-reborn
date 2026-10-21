@@ -4,7 +4,7 @@ help: ## List available targets
 	@grep -hE '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*##"}{printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
 
 data: ## Rebuild data/lfo.db + data/assets from the original client (LFO_SRC)
-	cd pipeline && bun install && bun build.ts && bun sprites.ts && bun catalog.ts && bun stories.ts --effects --items --beasts --lobby --all && bun catalog.ts && bun ui.ts && bun ui-hd.ts && bun game-hd.ts && bun profile.ts && bun shops.ts && bun relics.ts
+	cd pipeline && bun install && bun build.ts && bun sprites.ts && bun catalog.ts && bun stories.ts --effects --items --beasts --lobby --all && bun momo.ts && bun catalog.ts && bun ui.ts && bun ui-hd.ts && bun game-hd.ts && bun profile.ts && bun shops.ts && bun relics.ts
 	$(MAKE) snapshot
 
 snapshot: ## Export the API responses to data/assets/api/v1 as static JSON (what the site serves)

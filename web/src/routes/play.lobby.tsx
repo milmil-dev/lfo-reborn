@@ -80,6 +80,7 @@ import { StartGate } from "@/game/ui";
 import { LoadingScreen } from "@/game/kit/loading";
 import { z } from "zod";
 import { usePageTitle } from "@/lib/title";
+import { DEFAULT_OUTFIT, loadMomoParts } from "@/game/momo";
 
 export const Route = createFileRoute("/play/lobby")({
   beforeLoad: () => {
@@ -303,6 +304,8 @@ function LobbyRun({ story, profile }: { story: StoryData; profile: Profile }) {
     const controls = new Controls();
     if (import.meta.env.DEV) Object.assign(window, { __lfo: { director, scene } });
 
+    // 摩摩星朋友 (momo.ts): the follower comes along once the player is in
+    void loadMomoParts().then((parts) => parts.length && director.setMomo(DEFAULT_OUTFIT, parts));
     let me: Fighter | null = null;
     void director.start().then(async () => {
       me = await director.addPlayer(`chars/${playKey(profile)}`);
