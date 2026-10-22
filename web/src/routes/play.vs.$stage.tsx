@@ -370,9 +370,9 @@ function VsRun({
           setBoard(entrants.map((x) => ({ ...x })));
         }
       },
-      () => {
+      (frame) => {
         d.setViewWidth((el.clientWidth * 600) / Math.max(1, el.clientHeight));
-        scene.draw();
+        scene.draw(undefined, frame);
       },
     );
     return () => {

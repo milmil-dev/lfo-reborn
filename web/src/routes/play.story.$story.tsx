@@ -613,14 +613,15 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         }
         if (tick % 30 === 0) setScore((s) => ({ ...s, seconds: Math.floor(tick / 30) }));
       },
-      () => {
+      (frame) => {
         d.setViewWidth((el.clientWidth * 600) / Math.max(1, el.clientHeight));
-        scene.draw();
-        // keep the smiley tag over the player's head
+        scene.draw(undefined, frame);
+        // keep the smiley tag over the player's head, where the sprite is drawn this frame
         const hero = d.player;
         if (hero && headTag.current) {
           const s = el.clientHeight / 600;
-          headTag.current.style.transform = `translate(${(hero.x - d.camera.x) * s}px, ${(hero.z + hero.y - 96) * s}px) translate(-50%, -100%)`;
+          const p = scene.renderPos(hero);
+          headTag.current.style.transform = `translate(${(p.x - scene.cameraX) * s}px, ${(p.z + p.y - 96) * s}px) translate(-50%, -100%)`;
         }
       },
     );

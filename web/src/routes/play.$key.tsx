@@ -133,7 +133,7 @@ function Training() {
     };
     if (import.meta.env.DEV)
       Object.assign(window, {
-        __lfo: { world, me, foe, controls, fillTran: () => (tr = charge(tr, 1e9)) },
+        __lfo: { world, me, foe, controls, scene, fillTran: () => (tr = charge(tr, 1e9)) },
       });
 
     // I drops a field item from the sky next to the player: one of each kind in turn, then the rest
@@ -280,7 +280,7 @@ function Training() {
           });
         }
       },
-      () => scene.draw(me),
+      (frame) => scene.draw(me, frame),
     );
 
     return () => {
