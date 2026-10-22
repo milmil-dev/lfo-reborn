@@ -1,0 +1,8 @@
+# LFO Reborn — https://www.lforeborn.v6.rocks
+User-agent: *
+Allow: /
+
+# the room screen is only meaningful with a live room code
+Disallow: /play/room
+
+Sitemap: https://www.lforeborn.v6.rocks/sitemap.xml

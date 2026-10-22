@@ -3,9 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>LFO Reborn</title>
-    <meta name="description" content="Little Fighter Online 角色、裝備、道具與技能圖鑑" />
+
+    <!--
+      Crawlers that do not run JavaScript (Discord, X, Facebook, WhatsApp, Slack) read only
+      this head; src/lib/seo.ts rewrites the same tags per screen once the app boots.
+      The origin is hard-coded: this file is served for every route of the SPA.
+    -->
+    <title>LFO Reborn — 小鬥士 Online 網頁重製版</title>
+    <meta
+      name="description"
+      content="《小鬥士 Online》(LFO) 網頁重製版——以原版客戶端的美術與招式資料重建，收錄歷代角色與關卡，可即時訓練、遊玩故事模式與任務。"
+    />
+    <link rel="canonical" href="https://www.lforeborn.v6.rocks/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
     <meta name="theme-color" content="#0b0d12" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="application-name" content="LFO Reborn" />
+    <meta name="apple-mobile-web-app-title" content="LFO Reborn" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LFO Reborn" />
+    <meta property="og:locale" content="zh_HK" />
+    <meta property="og:title" content="LFO Reborn — 小鬥士 Online 網頁重製版" />
+    <meta
+      property="og:description"
+      content="以原版客戶端的美術與招式資料重建的《小鬥士 Online》網頁版：歷代角色、關卡與異轉形態，訓練場、故事模式與任務。"
+    />
+    <meta property="og:url" content="https://www.lforeborn.v6.rocks/" />
+    <meta property="og:image" content="https://www.lforeborn.v6.rocks/og.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="LFO Reborn — 小鬥士 Online 網頁重製版" />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LFO Reborn — 小鬥士 Online 網頁重製版" />
+    <meta
+      name="twitter:description"
+      content="以原版客戶端的美術與招式資料重建的《小鬥士 Online》網頁版：歷代角色、關卡與異轉形態，訓練場、故事模式與任務。"
+    />
+    <meta name="twitter:image" content="https://www.lforeborn.v6.rocks/og.png" />
+    <meta name="twitter:image:alt" content="LFO Reborn — 小鬥士 Online 網頁重製版" />
+
+    <!-- Icons: the client's own lfo.ico, and its 32px art scaled up for touch screens -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <meta name="view-transition" content="same-origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,6 +68,40 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:wght@500&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@400;600&display=swap"
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.lforeborn.v6.rocks/#website",
+            "url": "https://www.lforeborn.v6.rocks/",
+            "name": "LFO Reborn",
+            "alternateName": "小鬥士 Online 網頁重製版",
+            "inLanguage": "zh-Hant-HK"
+          },
+          {
+            "@type": "VideoGame",
+            "@id": "https://www.lforeborn.v6.rocks/#game",
+            "name": "LFO Reborn",
+            "alternateName": "Little Fighter Online 網頁重製版",
+            "url": "https://www.lforeborn.v6.rocks/",
+            "image": "https://www.lforeborn.v6.rocks/og.png",
+            "description": "以原版客戶端的美術、關卡與招式資料重建的《小鬥士 Online》網頁版：訓練場、故事模式與任務。",
+            "inLanguage": "zh-Hant-HK",
+            "genre": ["Fighting", "Beat 'em up", "Action RPG"],
+            "gamePlatform": "Web browser",
+            "applicationCategory": "Game",
+            "operatingSystem": "Any",
+            "isAccessibleForFree": true,
+            "isFamilyFriendly": true,
+            "playMode": ["SinglePlayer", "MultiPlayer"],
+            "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 4 }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

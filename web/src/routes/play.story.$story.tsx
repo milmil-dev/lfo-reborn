@@ -77,8 +77,8 @@ import { LoadingScreen } from "@/game/kit/loading";
 import { KEY } from "@/lib/storage-keys";
 import { asset, q } from "@/lib/api";
 import { cn } from "@/lib/cn";
-import { usePageTitle } from "@/lib/title";
 import { DEFAULT_OUTFIT, loadMomoParts } from "@/game/momo";
+import { usePageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/play/story/$story")({
   loader: async ({ params, context: { queryClient } }) => {
@@ -107,10 +107,16 @@ type Score = {
 };
 
 function StoryPage() {
+  const { t } = useLingui();
   const story = Route.useLoaderData();
   const { data: catalog } = useQuery(catalogQuery);
   const entry = catalog?.find((e) => e.key === story.key);
-  usePageTitle(catalog ? (entry ? stageLabel(entry) : story.key) : null);
+  const label = catalog ? (entry ? stageLabel(entry) : story.key) : null;
+  // the chapter's own opening narration is the best description there is
+  usePageMeta(
+    label,
+    entry?.synopsis || (label ? t`${label} 的故事關卡：原作劇情、對白與頭目戰。` : undefined),
+  );
   const [run, setRun] = useState(0); // bumping this restarts the story from the top
   const [started, setStarted] = useState(false);
   const onStart = useCallback(() => setStarted(true), []);

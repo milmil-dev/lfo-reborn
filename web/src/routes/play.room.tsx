@@ -34,7 +34,7 @@ import {
   TEAM_COUNT,
 } from "@/game/vs";
 import { cn } from "@/lib/cn";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 /*
   遊戲室 — the VS waiting room (waitplayer/, pieces in kit/room.tsx): the line-up as the client's
@@ -70,7 +70,8 @@ function WaitingRoom() {
   const roster = useRoster().filter((r) => r.id < 7000);
   const entry = catalog.find((e) => e.key === stage);
   const roomName = name || t`${profile?.name ?? "LFO"}的遊戲室`;
-  usePageTitle(roomName);
+  // a room is one line-up, not a page: it leaves the index as soon as it empties
+  usePageMeta(roomName, t`遊戲室：排好角色與隊伍，等齊人開打。`, { noindex: true });
 
   const [team, setTeam] = useState(1);
   const [guests, setGuests] = useState<Guest[]>([]);

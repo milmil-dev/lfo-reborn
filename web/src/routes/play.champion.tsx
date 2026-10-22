@@ -21,7 +21,7 @@ import { Screen } from "@/game/screen";
 import { rosterQueries, StartGate, useRoster } from "@/game/ui";
 import { ASSETS } from "@/lib/assets";
 import { cn } from "@/lib/cn";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 /*
   王者爭霸 on the client's bracket (champion/championbox, 800 × 600): the eight teams under the
@@ -51,7 +51,7 @@ const NODE = [
 
 function Champion() {
   const { t } = useLingui();
-  usePageTitle(t`王者爭霸`);
+  usePageMeta(t`王者爭霸`, t`王者爭霸：八隊單淘汰的原作賽程，一路打上去，看誰坐上冠軍的位置。`);
   const navigate = useNavigate();
   const profile = useActiveProfile();
   const roster = useRoster().filter((r) => r.id < 7000);

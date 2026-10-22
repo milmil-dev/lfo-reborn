@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The screens a crawler can reach without playing. Character pages (/play/<key>) are left
+  out: their list lives in the game data, which is not in the repo (see CLAUDE.md), so they
+  are discovered through /play rather than enumerated here.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/</loc>
+  </url>
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/play</loc>
+  </url>
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/play/story</loc>
+  </url>
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/play/missions</loc>
+  </url>
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/play/vs</loc>
+  </url>
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/play/champion</loc>
+  </url>
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/play/online</loc>
+  </url>
+  <url>
+    <loc>https://www.lforeborn.v6.rocks/play/profile</loc>
+  </url>
+</urlset>

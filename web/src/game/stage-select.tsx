@@ -15,7 +15,7 @@ import type { StoryData } from "@/game/story/types";
 import { StartGate } from "@/game/ui";
 import { cn } from "@/lib/cn";
 import { ASSETS } from "@/lib/assets";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 /*
   STAGE / MISSION select. The entries are the client's own list (LOADSTORYLIST, exported by
@@ -85,7 +85,14 @@ function matches(e: CatalogEntry, leadName: string, words: string[]) {
 
 export function StageSelect({ mode }: { mode: "story" | "mission" | "vs" }) {
   const { t } = useLingui();
-  usePageTitle(mode === "mission" ? t`任務` : mode === "vs" ? t`對戰場地` : t`故事模式`);
+  usePageMeta(
+    mode === "mission" ? t`任務` : mode === "vs" ? t`對戰場地` : t`故事模式`,
+    mode === "mission"
+      ? t`原作的任務清單：支線任務與挑戰關卡，按原版順序排列，可搜尋標題、地區或角色。`
+      : mode === "vs"
+        ? t`對戰場地：挑一個原版場地，與朋友、同機訪客或 COM 即時對戰。`
+        : t`重玩《小鬥士 Online》的故事模式：原作的章節、開場獨白與頭目戰，由第一話開始。`,
+  );
   const navigate = useNavigate();
   const profile = useActiveProfile();
   const myLead = profile?.key ?? "stinky";

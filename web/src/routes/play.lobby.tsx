@@ -79,8 +79,8 @@ import type { StoryData } from "@/game/story/types";
 import { StartGate } from "@/game/ui";
 import { LoadingScreen } from "@/game/kit/loading";
 import { z } from "zod";
-import { usePageTitle } from "@/lib/title";
 import { DEFAULT_OUTFIT, loadMomoParts } from "@/game/momo";
+import { usePageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/play/lobby")({
   beforeLoad: () => {
@@ -137,7 +137,10 @@ type Say = { id: number; text?: string; smiley?: SmileyDef };
 
 function Lobby() {
   const { t } = useLingui();
-  usePageTitle(t`大廳`);
+  usePageMeta(
+    t`大廳`,
+    t`大廳：看角色的等級、裝備與背包，整理金錢和道具，再出發去故事、任務或對戰。`,
+  );
   const story = Route.useLoaderData();
   const [started, setStarted] = useState(false);
   const onStart = useCallback(() => {

@@ -10,7 +10,7 @@ import { Screen } from "@/game/screen";
 import { StartGate } from "@/game/ui";
 import { cn } from "@/lib/cn";
 import { ASSETS } from "@/lib/assets";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/play/server")({ component: ServerSelect });
 
@@ -40,7 +40,10 @@ const SERVERS = [
 
 function ServerSelect() {
   const { t } = useLingui();
-  usePageTitle(t`選擇伺服器`);
+  usePageMeta(
+    t`選擇伺服器`,
+    t`選擇伺服器：原作用香港地標做的伺服器地圖——鐘樓、體育館、半島酒店，選一棟進場。`,
+  );
   const navigate = useNavigate();
   const [sel, setSel] = useState(() =>
     Math.max(
