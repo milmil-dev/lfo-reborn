@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.5.0...v0.6.0) (2026-10-22)
+
+
+### Features
+
+* **game:** 摩摩星 follower fights beside the player ([#21](https://github.com/milmil-dev/lfo-reborn/issues/21)) ([97ee529](https://github.com/milmil-dev/lfo-reborn/commit/97ee5299a3e29fed2512bf59c6b7ea69b8becc16))
+* **web:** head tags, link previews and the client's favicon ([#23](https://github.com/milmil-dev/lfo-reborn/issues/23)) ([5a8a394](https://github.com/milmil-dev/lfo-reborn/commit/5a8a3943f742eec4203a49420d60c00f1b9cf161))
+
+
+### Performance Improvements
+
+* **game:** interpolate between ticks and stop rebuilding effects every frame ([#20](https://github.com/milmil-dev/lfo-reborn/issues/20)) ([0ac863c](https://github.com/milmil-dev/lfo-reborn/commit/0ac863cdc089223297774972ad13ac7d9b8c3e51))
+
 ## [0.5.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.4.0...v0.5.0) (2026-10-02)
 
 
