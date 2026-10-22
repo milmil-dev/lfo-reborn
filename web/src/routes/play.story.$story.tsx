@@ -78,6 +78,7 @@ import { KEY } from "@/lib/storage-keys";
 import { asset, q } from "@/lib/api";
 import { cn } from "@/lib/cn";
 import { usePageTitle } from "@/lib/title";
+import { DEFAULT_OUTFIT, loadMomoParts } from "@/game/momo";
 
 export const Route = createFileRoute("/play/story/$story")({
   loader: async ({ params, context: { queryClient } }) => {
@@ -484,6 +485,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         __lfo: { director: d, scene, fillTran: () => (tr = charge(tr, 1e9)) },
       });
 
+    // 摩摩星朋友 (momo.ts): the follower comes along once the player is in
+    void loadMomoParts().then((parts) => parts.length && d.setMomo(DEFAULT_OUTFIT, parts));
     let ready = false;
     void d.start().then(() => {
       ready = true;

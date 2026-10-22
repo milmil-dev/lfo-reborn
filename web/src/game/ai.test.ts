@@ -46,3 +46,34 @@ describe.skipIf(!hasData)("computer players", () => {
     expect(a.hp < a.maxHp || b.hp < b.maxHp).toBe(true);
   });
 });
+
+describe("AI and a downed target", () => {
+  it("doesn't strike a fighter lying on the floor or getting up", () => {
+    const me = {
+      x: 500,
+      z: 450,
+      facing: 1,
+      team: 2,
+      hp: 100,
+      effect: false,
+      isItem: false,
+      anim: "STAND",
+      frame: {},
+      data: { moves: [] },
+    } as never;
+    const foe = {
+      x: 530,
+      z: 450,
+      facing: -1,
+      team: 1,
+      hp: 100,
+      effect: false,
+      isItem: false,
+      anim: "LIEDOWN",
+      frame: {},
+    } as never;
+    const b = newBrain(0.5, () => 0.5);
+    b.cooldown = 0;
+    for (let i = 0; i < 30; i++) expect(think(me, [me, foe], b, () => 0.5).attack).toBe(false);
+  });
+});

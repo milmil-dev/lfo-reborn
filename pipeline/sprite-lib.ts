@@ -21,6 +21,7 @@ export type Bla = { type: number; x: number; y: number; z: number; mx: number; m
  * throw velocity (non-zero on the frame that lets go); aid = the item's action to show
  * (0 held, 100 / 110 … its attack frames with hit boxes, 300 / 310 bow draw / release).
  */
+export type Eff = { part: number; x: number; y: number; z: number; o: number; aid: number };
 export type Wpn = { type: number; x: number; y: number; z: number; o: number; dx: number; dy: number; dz: number; aid: number; facing: number };
 export type Frame = {
 	n: string; // comment / animation name
@@ -37,6 +38,8 @@ export type Frame = {
 	atk?: Atk[];
 	bla?: Bla[]; // objects spawned by this frame (projectiles, effects)
 	wpn?: Wpn;
+	/** 摩摩星 paper-doll layers: draw part slot `part` (10000 body, 20000 head, 30000 face, 40000 backpack, 50000 skin) in its action `aid` at (x, y) */
+	eff?: Eff[];
 	snd?: string;
 };
 export type Move = { keys: string[]; mp: number; from: number; to: number; slot: number };
@@ -50,6 +53,7 @@ export function parseSpt(text: string) {
 	const actionFrame: Record<number, number> = {}; // action id -> start frame
 	const moves: Move[] = [];
 	const pics = new Map<number, string>(); // picture id -> atlas file name (non-player objects)
+	const mpi: Record<string, string> = {}; // 摩摩星 parts: their mpi rows
 	let chr: string[] = [];
 	let cur: Frame | null = null;
 	let inPic = false;
@@ -87,6 +91,14 @@ export function parseSpt(text: string) {
 			case "bla":
 				// type x y z o mx my mz aid hp level mo facing …
 				if (cur) (cur.bla ??= []).push({ type: n(0), x: n(1), y: n(2), z: n(3), mx: n(5), my: n(6), mz: n(7), aid: n(8), hp: n(9), facing: n(12) });
+				break;
+			case "eff":
+				// type x y z o aid blasterID alpha …: type 1080 is a 摩摩星 part layer
+				if (cur && n(0) === 1080 && n(6)) (cur.eff ??= []).push({ part: n(6), x: n(1), y: n(2), z: n(3), o: n(4), aid: n(5) });
+				break;
+			case "mpi":
+				// 摩摩星 part info: stat mods, the backpack's reach, target and action type
+				if (f[0]) mpi[f[0]] = f[1] ?? "";
 				break;
 			case "wpn":
 				if (cur) cur.wpn = { type: n(0), x: n(1), y: n(2), z: n(3), o: n(4), dx: n(5), dy: n(6), dz: n(7), aid: n(8), facing: n(9) };
@@ -127,7 +139,7 @@ export function parseSpt(text: string) {
 		runJumpD: Number(chr[13]),
 		weight: Number(chr[16]),
 	};
-	return { attrs, nameEn: chr[0] ?? "", frames, actions, acts: actionFrame, moves, pics };
+	return { attrs, nameEn: chr[0] ?? "", frames, actions, acts: actionFrame, moves, pics, mpi };
 }
 
 /** Rewrites only the frame data of an exported sprite (atlas pages and rects stay as they are). */

@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.4.0...v0.5.0) (2026-10-02)
+
+
+### Features
+
+* **game:** hash the world state and guard the engine's determinism ([#9](https://github.com/milmil-dev/lfo-reborn/issues/9)) ([4011c34](https://github.com/milmil-dev/lfo-reborn/commit/4011c348a84b1addc01d4bfd0c8ef804c18265f2))
+* **game:** seat up to three more players at this machine in VS ([#11](https://github.com/milmil-dev/lfo-reborn/issues/11)) ([660ab27](https://github.com/milmil-dev/lfo-reborn/commit/660ab270f8f9675741a281a25726a5cc34ea7bbd))
+* **net:** a public room list — 選擇遊戲室 on the client's own art ([#15](https://github.com/milmil-dev/lfo-reborn/issues/15)) ([e88c807](https://github.com/milmil-dev/lfo-reborn/commit/e88c8078ca92ddc83b2c2c50786f46542d4ada51))
+* **net:** online game rooms on a Cloudflare Worker, fought in lockstep ([#14](https://github.com/milmil-dev/lfo-reborn/issues/14)) ([e48953a](https://github.com/milmil-dev/lfo-reborn/commit/e48953a3e8a03b3bd9674a41b5ab8a86ad8ba9c4))
+* **net:** rollback netcode — the bout runs on the local clock ([#17](https://github.com/milmil-dev/lfo-reborn/issues/17)) ([2c740b1](https://github.com/milmil-dev/lfo-reborn/commit/2c740b11afaf3ccd1c18e49406d0a4a8da6df4aa))
+
+
+### Bug Fixes
+
+* **game:** rolls, roomier commands and no pinning on the floor ([#16](https://github.com/milmil-dev/lfo-reborn/issues/16)) ([8e97124](https://github.com/milmil-dev/lfo-reborn/commit/8e971245aaf5e2da63109b8b12a3f50a62473ca9))
+
 ## [0.4.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.3.0...v0.4.0) (2026-10-01)
 
 

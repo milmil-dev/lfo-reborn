@@ -29,6 +29,11 @@ export type Frame = {
   bla?: Bla[]; // objects this frame spawns (skill effects, projectiles)
   snd?: string;
   wpn?: Wpn;
+  /**
+   * 摩摩星 paper-doll layers (sprite 3500): draw the part in slot `part` (10000 body, 20000
+   * head, 30000 face, 40000 backpack, 50000 skin) in its action `aid` at (x, y), depth z
+   */
+  eff?: { part: number; x: number; y: number; z: number; o: number; aid: number }[];
 };
 
 /**
