@@ -1,0 +1,19 @@
+{
+  "name": "LFO Reborn — 小鬥士 Online 網頁重製版",
+  "short_name": "LFO Reborn",
+  "description": "《小鬥士 Online》(Little Fighter Online) 網頁重製版：原版角色、關卡與招式，訓練場、故事模式、線上對戰。",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#0b0d12",
+  "theme_color": "#0b0d12",
+  "lang": "zh-HK",
+  "dir": "ltr",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

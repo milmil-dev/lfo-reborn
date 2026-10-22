@@ -41,7 +41,7 @@ import { statsAt, statTable } from "@/game/leveling";
 import { q } from "@/lib/api";
 import { ASSETS } from "@/lib/assets";
 import { cn } from "@/lib/cn";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/play/profile")({ component: ProfileSelect });
 
@@ -181,7 +181,7 @@ function WheelCard({
 
 function ProfileSelect() {
   const { t } = useLingui();
-  usePageTitle(t`人物檔案`);
+  usePageMeta(t`人物檔案`, t`人物檔案：帳號裡的角色卡、等級與裝備，還有儲物室裡的收藏。`);
   const navigate = useNavigate();
   const slots = useSlots();
   // the carousel: every character the account has, then an empty card for a new one

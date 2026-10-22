@@ -1,0 +1,144 @@
+<!doctype html>
+<!--
+  Source of web/public/og.png — the 1200×630 card every link preview shows.
+  Re-render after editing (Chrome, no build step involved):
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+      --screenshot=public/og.png --window-size=1200,630 --hide-scrollbars \
+      --force-device-scale-factor=1 --virtual-time-budget=6000 seo/og.html
+
+  The hero is the client's own logo (seo/lfo-logo.png = dex/logo/lfo-hk.png, composited from
+  intro/3dlogo.png in the interface atlas); seo/stage.jpg is the 學校 gate stage backdrop.
+  Palette and faces as the site (DESIGN.md): #0B0D12 ground, logo red, Noto Sans TC.
+-->
+<html lang="zh-Hant-HK">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900,900i&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Noto+Sans+TC:wght@500;700;900&display=swap"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        background: #0b0d12;
+        font-family: "Satoshi", "Noto Sans TC", sans-serif;
+        color: #f3f5f9;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* the gate stage, far behind everything: the game's own yard as the top of the card */
+      .scene {
+        position: absolute;
+        inset: 0;
+        background: url("stage.jpg") 50% 0 / cover no-repeat;
+        opacity: 0.95;
+        filter: saturate(0.75) brightness(0.5);
+      }
+      .scene::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(
+            #0b0d12 0%,
+            rgba(11, 13, 18, 0.3) 13%,
+            rgba(11, 13, 18, 0.5) 34%,
+            rgba(11, 13, 18, 0.92) 57%,
+            #0b0d12 74%
+          ),
+          radial-gradient(52% 54% at 50% 36%, rgba(232, 52, 60, 0.3), rgba(232, 52, 60, 0) 74%);
+      }
+
+      .frame {
+        position: absolute;
+        inset: 0;
+      }
+
+      .logo {
+        position: absolute;
+        top: 84px;
+        left: 50%;
+        translate: -50% 0;
+        width: 820px;
+        height: auto;
+        filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
+      }
+
+      .copy {
+        position: absolute;
+        top: 392px;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+      .tagline {
+        font-family: "Noto Sans TC", sans-serif;
+        font-weight: 700;
+        font-size: 38px;
+        letter-spacing: 0.06em;
+        color: rgba(243, 245, 249, 0.96);
+      }
+      .modes {
+        margin-top: 14px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-weight: 500;
+        font-size: 22px;
+        letter-spacing: 0.18em;
+        color: #8a92a6;
+      }
+
+      .foot {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        bottom: 46px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        padding-top: 18px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 17px;
+        letter-spacing: 0.1em;
+        color: #8a92a6;
+      }
+      .foot b {
+        color: #f3f5f9;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scene"></div>
+
+    <div class="frame">
+      <img class="logo" src="lfo-logo.png" alt="LFO Reborn" />
+      <div class="copy">
+        <p class="tagline">小鬥士 Online 網頁重製版</p>
+        <p class="modes">訓練場 · 故事模式 · 任務模式</p>
+      </div>
+      <p class="foot">
+        <span><b>www.lforeborn.v6.rocks</b></span>
+        <span>非官方粉絲重製</span>
+      </p>
+    </div>
+  </body>
+</html>

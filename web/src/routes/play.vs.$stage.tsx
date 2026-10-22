@@ -43,7 +43,7 @@ import {
 import { CUP_HONOR, playRound, yourTeam } from "@/game/champion";
 import { useCup } from "@/game/champion-store";
 import { q } from "@/lib/api";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 /*
   A VS bout: the stage of the waiting room, you, the other players at this machine (each on
@@ -85,10 +85,15 @@ type Entrant = {
 type Outcome = { won: boolean; line: string | null; honor: number; rank: number };
 
 function VsPage() {
+  const { t } = useLingui();
   const story = Route.useLoaderData();
   const { data: catalog } = useQuery(catalogQuery);
   const entry = catalog?.find((e) => e.key === story.key);
-  usePageTitle(catalog ? (entry ? stageLabel(entry) : story.key) : null);
+  const label = catalog ? (entry ? stageLabel(entry) : story.key) : null;
+  usePageMeta(
+    label,
+    entry?.synopsis || (label ? t`${label}：與朋友、同機訪客或 COM 對戰的原版場地。` : undefined),
+  );
   const { room, cup } = Route.useSearch();
   const [run, setRun] = useState(0);
   const [started, setStarted] = useState(false);

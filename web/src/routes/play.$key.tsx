@@ -20,7 +20,7 @@ import { StartGate } from "@/game/ui";
 import { LoadingScreen } from "@/game/kit/loading";
 import { q } from "@/lib/api";
 import { cn } from "@/lib/cn";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/play/$key")({
   loader: async ({ params }) => {
@@ -56,7 +56,10 @@ function Training() {
   // entered from the lobby (VS mode) with a profile, or straight from 選擇角色
   const inLobby = useActiveProfile() !== null;
   const { player, dummy, stage, form } = Route.useLoaderData();
-  usePageTitle(t`${player.data.name} · 訓練場`);
+  usePageMeta(
+    t`${player.data.name} · 訓練場`,
+    t`用 ${player.data.name} 在學校門口的訓練場練習：完整出招表、異轉形態、無限元力與沙包。`,
+  );
   const navigate = useNavigate();
   const host = useRef<HTMLDivElement>(null);
   const [me, setMe] = useState<Hud | null>(null);

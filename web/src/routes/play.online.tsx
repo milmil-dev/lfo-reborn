@@ -27,7 +27,7 @@ import { catalogQuery } from "@/game/stage-select";
 import { rosterQueries, StartGate, useRoster } from "@/game/ui";
 import { stepLevel, TEAM_COUNT } from "@/game/vs";
 import { cn } from "@/lib/cn";
-import { usePageTitle } from "@/lib/title";
+import { usePageMeta } from "@/lib/seo";
 
 /*
   連線對戰 — without a code, the client's 選擇遊戲室 list (game/net/room-list.tsx): the listed
@@ -62,7 +62,12 @@ function OnlinePage() {
   const navigate = useNavigate();
   const { code, name, listed } = Route.useSearch();
   const base = realtimeUrl();
-  usePageTitle(code ? t`連線遊戲室 ${code}` : t`選擇遊戲室`);
+  usePageMeta(
+    code ? t`連線遊戲室 ${code}` : t`選擇遊戲室`,
+    code
+      ? t`線上遊戲室：選角色、選隊伍，等齊人開打。`
+      : t`線上遊戲室：加入朋友開的房間，或自己開一間，四人同場即時對戰。`,
+  );
   return (
     <div className="fixed inset-0 overflow-hidden bg-black text-foreground select-none">
       <StartGate onStart={() => audio.music("lfo_character.ogg", 0.35)} />

@@ -92,6 +92,15 @@ select, `/play/$key` a training ground driven by the original frame data.
   stays unset and the build must never write under `dist/assets/{game,ui-hd,dex}`. Never hard-code `/assets` in components. Assets the game loads must be in the deploy's keep list
   (`deploy/publish-data.sh`: game/, ui-hd/, dex/items|skills|logo).
 - File routes in `src/routes/`; `src/routeTree.gen.ts` is generated — don't edit or format it.
+- Head tags: `index.html` carries the title screen's tags for the crawlers that never run the app
+  (Discord, X, Facebook, Google's first pass); each screen then calls `usePageMeta` (`src/lib/seo.ts`)
+  with its own name and description, which rewrites the title, description, canonical and og/twitter
+  tags. Dev and live-room screens pass `noindex`. Icons, `og.png` (source: `web/seo/og.html`,
+  drawn from the client's own logo and 學校 gate stage in `web/seo/`), `robots.txt`, `sitemap.xml`
+  and the manifest live in `web/public/`; the sitemap lists the static
+  screens only — character pages come from the data and are found through `/play`. The favicon is
+  the client's own `lfo.ico`, and `icon-{192,512}.png` / `apple-touch-icon.png` are that 32 px art
+  scaled up with nearest-neighbour (`magick public/favicon.ico -filter point -resize 512x512 …`).
 - UI components come from the coss registry: `pnpm dlx shadcn@latest add @coss/<name> --overwrite --yes` (lands in `src/components/ui/`).
 - UI copy is authored in zh-HK through Lingui macros; run `pnpm run i18n:extract && pnpm run i18n:compile` after changing strings.
 - Motion primitives live in `src/components/motion.tsx`; respect `prefers-reduced-motion`.
