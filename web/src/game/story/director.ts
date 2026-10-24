@@ -13,7 +13,7 @@ import { pickUp } from "../core/items";
 import { type Mover, newMover, steer } from "./movers";
 import { segmentAt, type StitchedRoom, stitch, stripOf } from "./stitch";
 import { crossesWall, type Point, type Segment, slide, wallSegments } from "./walls";
-import type { Fighter, FighterEvent } from "../core/fighter";
+import { FIELD_ITEM_TYPES, type Fighter, type FighterEvent } from "../core/fighter";
 import type { Effects } from "../effects";
 import { type CharData, type InputState, TICK_HZ } from "../core/types";
 import { World, type WorldSnapshot } from "../core/world";
@@ -231,6 +231,8 @@ export class Director {
   private waiters: Waiter[] = [];
   private movers = new Map<Fighter, Mover>();
   private ai = new Map<Fighter, Brain>();
+  /** sprite path → is it a field item (read from its .spt once, see spawnGroup) */
+  private itemPaths = new Map<string, boolean>();
   private tick = 0;
   // after a scene hands control back, enemies wait a beat so the player is never hit before they can act
   private aiGrace = 0;
@@ -696,7 +698,11 @@ export class Director {
       for (let i = 0; i < m.qty; i++) {
         const path = this.story.sprites[String(m.sprite)];
         if (!path) continue;
-        const item = isItem(m.sprite);
+        // the id band is only a guess: plenty of ids under 1000 are characters (Skeleton_blue,
+        // Habo) and a few over it are weapons. The sprite's own .spt decides — an item can never
+        // be killed, so a wave that holds one would never clear, and a pickup spawned as an
+        // enemy is a wave that never empties either.
+        const item = await this.isItemPath(path, isItem(m.sprite));
         let x = s.x;
         if (s.random) {
           // arrive from just outside the view, or anywhere on screen for pickups
@@ -725,6 +731,16 @@ export class Director {
         }
       }
     }
+  }
+
+  /** Is this sprite a field item? Its .spt type says so; with no data to read, the id band. */
+  private async isItemPath(path: string, byBand: boolean) {
+    const known = this.itemPaths.get(path);
+    if (known !== undefined) return known;
+    const assets = await this.ui.load(path).catch(() => null);
+    const item = assets ? FIELD_ITEM_TYPES.has(assets.data.attrs?.type ?? 0) : byBand;
+    this.itemPaths.set(path, item);
+    return item;
   }
 
   private checkDrama() {
@@ -831,7 +847,7 @@ export class Director {
   }
 
   private checkDeath() {
-    if (this.player && this.player.hp <= 0 && this.player.anim.includes("LIEDOWN")) {
+    if (this.player && this.player.finished) {
       this.status = "gameover";
       this.report();
     }
@@ -847,7 +863,7 @@ export class Director {
       if ((k !== "enemy" && k !== "momo") || f.hp > 0) continue;
       const t = this.dying.get(f);
       if (t === undefined) {
-        if (f.anim === "LIEDOWN" || f.anim === "B_LIEDOWN" || !f.data.actions.LIEDOWN) {
+        if (f.finished) {
           this.dying.set(f, 0);
           for (const s of this.spawners) s.alive.delete(f);
           this.report();

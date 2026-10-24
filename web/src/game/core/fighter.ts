@@ -21,7 +21,7 @@ export const GRAVITY = 1.7;
  * too (800 …), so "has a type" is not "is an item".
  */
 /** 700: the stage keys (金 / 藍 / 橙 / 綠 / 紫鑰匙 and the script keys), picked up onto the key ring */
-const FIELD_ITEM_TYPES = new Set([100, 200, 300, 400, 500, 600, 700, 900, 1000]);
+export const FIELD_ITEM_TYPES = new Set([100, 200, 300, 400, 500, 600, 700, 900, 1000]);
 /** frame states that loop in the air until touching the floor */
 const AIR_WAIT = new Set([103, 2151]);
 /**
@@ -61,6 +61,71 @@ export type FighterEvent =
 
 const EFFECT_LIFE = 150; // ticks: a safety net for effects that loop forever
 
+/**
+ * A frame name reduced to its family: letters only, lower case, the back-fall prefix kept as a
+ * leading b (`BOU0NCE1` → `bounce`, `B_LIEDOWN` → `bliedown`). The .spt data spells the fall
+ * chain a dozen ways — lower case, a stray digit, a numbered step — and they all mean the same.
+ */
+const family = (n: string) =>
+  n
+    .replace(/[^A-Za-z_]/g, "")
+    .toLowerCase()
+    .replace("_", "");
+
+/** What a frame name says it is: a fall, a bounce, a lie-down, and whether it is the B_ (on the back) one. */
+type Kin = { fall: boolean; bounce: boolean; lie: boolean; back: boolean };
+const kins = new Map<string, Kin>();
+function kin(n: string): Kin {
+  let k = kins.get(n);
+  if (!k) {
+    const f = family(n);
+    k = {
+      fall: /^b?fall/.test(f),
+      bounce: /^b?bounce/.test(f),
+      lie: /^b?liedown$/.test(f),
+      back: /^b(bounce|fall|liedown)/.test(f),
+    };
+    kins.set(n, k);
+  }
+  return k;
+}
+
+/**
+ * Does a frame belong to the animation an action asks for? Compared on the family's stem — its
+ * letters up to the step number — so FALL1A may start on FALL2C, BOUNCE1 on a `BOU0NCE1`, but a
+ * FALL1A never starts on FALLRECOVERY (a different animation that merely shares the prefix).
+ */
+function frameMatches(action: string, frame: string) {
+  const stem = (s: string) => family(s).match(/^[a-z]+/)![0];
+  return stem(frame) === stem(action);
+}
+
+/** Resolved action → frame lookups per sprite, memoised (a pure function of the data). */
+const resolved = new WeakMap<CharData, Map<string, number | undefined>>();
+
+/**
+ * The frame a fall-chain action should really start on. `.spt` tables point some actions at
+ * frames they do not have, or at a frame of another animation altogether (a FALL1A on STAND);
+ * a name that does not match falls back to the first frame whose name does, so the chain runs.
+ */
+function actionFrame(data: CharData, name: string): number | undefined {
+  let memo = resolved.get(data);
+  if (!memo) resolved.set(data, (memo = new Map()));
+  if (memo.has(name)) return memo.get(name);
+  let id: number | undefined = data.actions[name];
+  const f = id === undefined ? undefined : data.frames[String(id)];
+  if (!f || !frameMatches(name, f.n)) {
+    id = undefined;
+    for (const [key, frame] of Object.entries(data.frames))
+      if (frameMatches(name, frame.n)) {
+        id = Number(key);
+        break;
+      }
+  }
+  memo.set(name, id);
+  return id;
+}
+
 export type Stage = { minX: number; maxX: number; minZ: number; maxZ: number };
 
 /**
@@ -90,6 +155,7 @@ export type FighterSnapshot = {
   infiniteMp: boolean;
   effect: boolean;
   dead: boolean;
+  knockedOut: boolean;
   level: number;
   reward: number;
   rewardScale: number;
@@ -145,6 +211,8 @@ export class Fighter {
   /** a spawned effect/projectile: no gravity, no control, removed when its frame chain ends */
   effect = false;
   dead = false;
+  /** the 0-HP fall has been started (knockOut), so it is never launched a second time */
+  knockedOut = false;
   /** level (a story monster's, or the player's profile) and the EXP a KO is worth */
   level = 1;
   reward = 0;
@@ -253,15 +321,64 @@ export class Fighter {
   }
   /** Falling, bouncing or lying on the floor. */
   get down() {
-    return /^(B_)?(FALL|BOUNCE|LIEDOWN)/i.test(this.anim);
+    const k = kin(this.anim);
+    return k.fall || k.bounce || k.lie || this.lieDown;
   }
-  /** Out of HP but still on its feet (the last point went to chip damage, a potion misfire …): fall now. */
+  /**
+   * Out of HP but still on its feet (the last point went to chip damage, a potion misfire …): fall
+   * now. Only once — a sprite whose fall chain cannot reach LIEDOWN (no BOUNCE1, a FALL1A that is
+   * really its STAND) would otherwise be relaunched every time it lands, and never be seen as dead.
+   */
   knockOut() {
-    if (this.hp > 0 || this.down || this.airborne || this.effect || this.isItem) return;
+    if (this.hp > 0 || this.knockedOut || this.down || this.airborne || this.effect || this.isItem)
+      return;
     this.hp = 0;
+    this.knockedOut = true;
     this.vy = -6;
     this.y = Math.min(this.y, -1);
-    this.goto(this.action("FALL1A"));
+    // no fall and no lie-down to go to: it simply drops where it stands, and lands
+    this.goto(this.fallFrame(false) ?? this.frameId);
+  }
+  /**
+   * The frame a knock-down starts on. Some sprites' FALL1A points at their STAND (or their HIT):
+   * with no fall of their own they go straight to the floor.
+   */
+  fallFrame(back: boolean): number | undefined {
+    return actionFrame(this.data, back ? "B_FALL1A" : "FALL1A") ?? this.lieFrame(back);
+  }
+  /**
+   * Out of the fight for good: it has lain down, or it never had a lie-down to reach and has
+   * come to rest. What the story waits for before it clears a wave, and what tells it the player
+   * has lost. (A sprite with no LIEDOWN still has to land: a fighter in mid-air is not finished
+   * just because its animation has nowhere to go.)
+   */
+  get finished() {
+    if (this.hp > 0) return false;
+    if (this.lieDown) return true;
+    // a sprite with no lie-down at all is out once it is back on the floor
+    return actionFrame(this.data, "LIEDOWN") === undefined && !this.airborne;
+  }
+  /** Lying on the floor, by frame name or by the action table (chars/karl names its frames in lower case). */
+  private get lieDown() {
+    if (kin(this.anim).lie) return true;
+    // an action table may point LIEDOWN at a frame named something else; never at frame 0 by
+    // default (a sprite with no LIEDOWN would otherwise read its STAND as a lie-down)
+    const lie = actionFrame(this.data, "LIEDOWN");
+    return lie !== undefined && this.frameId === lie;
+  }
+  /**
+   * The frame to lie down on, or undefined for a sprite that has no lie-down at all (it stays
+   * where it fell, and `finished` counts it out on HP and rest).
+   */
+  private lieFrame(back = false): number | undefined {
+    return (
+      actionFrame(this.data, back ? "B_LIEDOWN" : "LIEDOWN") ?? actionFrame(this.data, "LIEDOWN")
+    );
+  }
+  /** Go and lie down, or — with no lie-down to go to — stay where it is. */
+  private lieOrStay(back: boolean, events: FighterEvent[]) {
+    const lie = this.lieFrame(back);
+    return this.goto(lie ?? this.frameId, events);
   }
   /**
    * 異轉: become another form in place — same fighter, HP, level and position, the new form's
@@ -517,9 +634,9 @@ export class Fighter {
     events: FighterEvent[],
   ): boolean {
     if (this.hp <= 0) return false;
-    const n = this.anim;
+    const k = kin(this.anim);
     if (
-      /^(B_)?FALL/.test(n) &&
+      k.fall &&
       this.airborne &&
       this.vy > 0 &&
       pressed("jump") &&
@@ -531,8 +648,8 @@ export class Fighter {
       return true;
     }
     // not from a roll already under way (LIEDOWNROLL…): a held ↑ / ↓ would restart it every tick
-    if (/^(B_)?(LIEDOWN|BOUNCE\d)$/.test(n) && !this.airborne && (input.up || input.down)) {
-      const roll = `${n.startsWith("B_") ? "B_" : ""}LIEDOWNROLL${input.up ? "U" : "D"}`;
+    if ((k.lie || k.bounce) && !this.airborne && (input.up || input.down)) {
+      const roll = `${k.back ? "B_" : ""}LIEDOWNROLL${input.up ? "U" : "D"}`;
       if (this.data.actions[roll] === undefined) return false;
       this.vx = 0;
       this.goto(this.action(roll), events);
@@ -740,26 +857,32 @@ export class Fighter {
       (AIR_WAIT.has(f.s) || (target && AIR_WAIT.has(target.s) && target.nx === f.nx))
     )
       return this.goto(this.act("JUMPLAND"), events);
+    // a bounce that ends on the floor goes down rather than on to whatever its nx points at: some
+    // point it at a HIT frame (Tower2Boss1's BOUNCE1 → HIT2), which would stand a 0-HP fighter up.
+    // A bounce that goes on to another bounce (BOUNCE1 → BOUNCE2 → BOUNCE3) still bounces.
+    if (kin(f.n).bounce && !this.airborne && !(target && kin(target.n).bounce))
+      return this.lieOrStay(kin(f.n).back, events);
     if (f.nx !== -1) return this.goto(f.nx, events);
     // default action
     // a fall frame that ends in mid-air holds until the landing (some creatures' FALL frames
     // have no loop of their own)
     // (a hard landing's bounce, too, holds until it comes back down)
-    if (/^(B_)?(FALL|BOUNCE)/.test(f.n) && this.airborne) return this.goto(this.frameId);
+    if ((kin(f.n).fall || kin(f.n).bounce) && this.airborne) return this.goto(this.frameId);
     // at 0 HP a fighter stays down: it is out (the story removes it, training revives it)
-    if ((f.n === "LIEDOWN" || f.n === "B_LIEDOWN") && this.hp <= 0) return this.goto(this.frameId);
+    if (this.lieDown && this.hp <= 0) return this.goto(this.frameId);
     // the raised shield stays up while 防 is held
     if (f.n === "SHIELDUSE" && input.defend && this.holding?.itemType === 600)
       return this.goto(this.frameId, events);
-    if (f.n === "LIEDOWN" || f.n === "B_LIEDOWN")
-      return this.goto(this.action(f.n === "LIEDOWN" ? "GETUP" : "B_GETUP"), events);
+    // a sprite with no GETUP gets up on its default action (the client's own fallback)
+    if (this.lieDown) {
+      const up = actionFrame(this.data, kin(f.n).back ? "B_GETUP" : "GETUP");
+      return this.goto(up ?? this.act("STAND"), events);
+    }
     // a roll ends getting up
     if (/LIEDOWNROLL[UD]$/.test(f.n)) {
       this.vz = 0;
       return this.goto(this.action(f.n.startsWith("B_") ? "B_GETUP" : "GETUP"), events);
     }
-    if (/^B?_?BOUNCE/.test(f.n) && !this.airborne)
-      return this.goto(this.action(f.n.startsWith("B_") ? "B_LIEDOWN" : "LIEDOWN"), events);
     // GUARDST ends in the default action; with 防 still held the client settles into GUARD,
     // which loops until 防 is let go (control() then plays GUARDEN)
     if (f.n === "GUARDST" || f.n === "GUARD")
@@ -814,10 +937,13 @@ export class Fighter {
         this.vy = -falling * 0.35;
         this.y = -1;
       }
-      return this.goto(this.action(n.startsWith("B_") ? "B_BOUNCE1" : "BOUNCE1"), events);
+      const back = kin(n).back;
+      // not every creature ships a bounce: without one it goes straight to lying down (a bounce
+      // frame that is really its STAND would drop it into the 0-HP loop knockOut() guards against)
+      const bounce = actionFrame(this.data, back ? "B_BOUNCE1" : "BOUNCE1");
+      return bounce === undefined ? this.lieOrStay(back, events) : this.goto(bounce, events);
     }
-    if (n === "BOUNCE1" || n === "B_BOUNCE1")
-      return this.goto(this.action(n.startsWith("B_") ? "B_LIEDOWN" : "LIEDOWN"), events);
+    if (kin(n).bounce) return this.lieOrStay(kin(n).back, events);
     // a special that loops in the air has its own landing frame right after it
     const next = this.frameAt(this.frameId + 1);
     if (next && /land/i.test(next.n)) return this.goto(this.frameId + 1, events);
@@ -844,7 +970,12 @@ export class Fighter {
     h.num(this.x).num(this.y).num(this.z).num(this.vx).num(this.vy).num(this.vz);
     h.num(this.facing).num(this.frameId).num(this.ticksLeft).num(this.hp).num(this.mp).num(this.sp);
     h.num(this.hitStop).num(this.attackSerial).num(this.fallAcc).num(this.dizzyAcc);
-    h.bool(this.infiniteMp).bool(this.effect).bool(this.dead).num(this.level).num(this.reward);
+    h.bool(this.infiniteMp)
+      .bool(this.effect)
+      .bool(this.dead)
+      .bool(this.knockedOut)
+      .num(this.level)
+      .num(this.reward);
     h.num(this.rewardScale)
       .num(this.hpMax ?? -1)
       .num(this.mpMax ?? -1)
@@ -891,6 +1022,7 @@ export class Fighter {
       infiniteMp: this.infiniteMp,
       effect: this.effect,
       dead: this.dead,
+      knockedOut: this.knockedOut,
       level: this.level,
       reward: this.reward,
       rewardScale: this.rewardScale,
@@ -948,6 +1080,7 @@ export class Fighter {
     this.infiniteMp = s.infiniteMp;
     this.effect = s.effect;
     this.dead = s.dead;
+    this.knockedOut = s.knockedOut;
     this.level = s.level;
     this.reward = s.reward;
     this.rewardScale = s.rewardScale;
