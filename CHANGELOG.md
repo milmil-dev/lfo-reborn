@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.6.0...v0.7.0) (2026-10-24)
+
+
+### Features
+
+* **game:** faithful 異轉 marker, an honest 出招表, and specials that continue past their wind-up ([#32](https://github.com/milmil-dev/lfo-reborn/issues/32)) ([bf4eab5](https://github.com/milmil-dev/lfo-reborn/commit/bf4eab515dda8764127a2d1d000e8836a69943a5))
+* **realtime:** rejoin a room, refresh mid-bout, and show the bout's roster and chat ([#29](https://github.com/milmil-dev/lfo-reborn/issues/29)) ([29c2ea6](https://github.com/milmil-dev/lfo-reborn/commit/29c2ea6da5576b136c43fe3da4d6134cded8bc17))
+
+
+### Bug Fixes
+
+* **story:** 蜜蜂等 47 種敵人打唔死，房間清唔到，故事模式卡關 ([#31](https://github.com/milmil-dev/lfo-reborn/issues/31)) ([37f6e5a](https://github.com/milmil-dev/lfo-reborn/commit/37f6e5ae84154d44966a58950884846061e0cbd6))
+
 ## [0.6.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.5.0...v0.6.0) (2026-10-22)
 
 
