@@ -42,7 +42,7 @@ export type Frame = {
 	eff?: Eff[];
 	snd?: string;
 };
-export type Move = { keys: string[]; mp: number; from: number; to: number; slot: number };
+export type Move = { keys: string[]; mp: number; from: number; to: number; slot: number; fx?: number[] };
 
 export type Spt = ReturnType<typeof parseSpt>;
 
@@ -199,6 +199,23 @@ export function parseSpt(text: string) {
 			}
 		}
 		for (const [last, next] of cand) cont[last] = next;
+	}
+	// What each special can spawn: walk its frame chain (following nx and the act table's
+	// continuation) and collect the `bla` types. The client fetches a move's art when it starts
+	// rather than loading every effect a character owns up front — 星奇's are 787 MB decoded.
+	for (const m of moves) {
+		const fx = new Set<number>();
+		const seen = new Set<number>();
+		let id: number = m.to;
+		for (let i = 0; i < 4000; i++) {
+			if (id === -1 || seen.has(id)) break;
+			seen.add(id);
+			const f = frames[id];
+			if (!f) break;
+			for (const b of f.bla ?? []) if (b.type) fx.add(b.type);
+			id = f.nx !== -1 ? f.nx : (cont[id] ?? -1);
+		}
+		if (fx.size) m.fx = [...fx];
 	}
 	const attrs = {
 		id: Number(chr[1]),
