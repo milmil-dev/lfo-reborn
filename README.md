@@ -49,7 +49,7 @@
 | sqlc | latest | 改咗 query 先要（`make sqlc`） |
 | Real-ESRGAN | — | 出 HD 圖（`pipeline/ui-hd.ts`、`game-hd.ts`），要自己裝 |
 
-仲要**原版客戶端**（`LFO_SRC`，預設 `/Volumes/Pie/Downloads/lfo-master`）。`data/` 係由佢拆出嚟嘅，
+仲要**原版客戶端**：自己設 `LFO_SRC`（例如 `/path/to/lfo-master`）。`data/` 係由佢拆出嚟嘅，
 唔會入 git，所以冇客戶端就跑唔到 `make data`；冇 `data/` 嘅話，靠真實資料嘅測試會自己 skip。
 
 Real-ESRGAN 嘅 binary 放喺 `.cache/tools/realesrgan/`，或者用 `REALESRGAN=/path/to/realesrgan-ncnn-vulkan` 指過去。
