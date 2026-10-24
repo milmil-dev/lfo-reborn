@@ -64,7 +64,7 @@ type Strip = {
 const LEAD = 3;
 type Outcome = { won: boolean; line: string | null; honor: number; rank: number };
 
-export type ChatLine = { seat: number; text: string };
+export type ChatLine = { seat: number; name: string; text: string };
 
 /** The bout's own chrome: who is in it and how they stand, and the room's chat. */
 function Roster({ rows, scale }: { rows: Strip[]; scale: number }) {
@@ -119,12 +119,10 @@ function Roster({ rows, scale }: { rows: Strip[]; scale: number }) {
 /** The room's chat during a bout: the last few lines, and a box to add one. */
 function BoutChat({
   lines,
-  seats,
   scale,
   onSend,
 }: {
   lines: ChatLine[];
-  seats: RoomState["seats"];
   scale: number;
   onSend: (text: string) => void;
 }) {
@@ -167,7 +165,7 @@ function BoutChat({
           {lines.length === 0 && <p className="text-white/40">{t`（還沒有人說話）`}</p>}
           {lines.slice(-6).map((l, i) => (
             <p key={`${i}-${l.text}`} className="text-[#ffe9a8]">
-              <span className="text-[#ffb27a]">{seats[l.seat]?.name ?? `P${l.seat + 1}`}：</span>
+              <span className="text-[#ffb27a]">{l.name}：</span>
               {l.text}
             </p>
           ))}
@@ -242,7 +240,7 @@ export function NetRun({
         lastFrameAt = now;
       } else if (msg.t === "desync") setDesync(msg.k);
       else if (msg.t === "chat")
-        setChat((c) => [...c, { seat: msg.seat, text: msg.text }].slice(-40));
+        setChat((c) => [...c, { seat: msg.seat, name: msg.name, text: msg.text }].slice(-40));
       else if (msg.t === "resume-end") resumeEnd = msg.k;
     });
 
@@ -535,12 +533,7 @@ export function NetRun({
       )}
       {!board && <Roster rows={strip} scale={scale} />}
       {!board && (
-        <BoutChat
-          lines={chat}
-          seats={room.seats}
-          scale={scale}
-          onSend={(text) => client.send({ t: "chat", text })}
-        />
+        <BoutChat lines={chat} scale={scale} onSend={(text) => client.send({ t: "chat", text })} />
       )}
       <HitCounter hits={combo.n} id={combo.id} scale={scale} />
       {(desync !== null || lost) && (

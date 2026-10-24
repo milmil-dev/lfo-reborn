@@ -7,12 +7,12 @@ msgstr ""
 "X-Generator: @lingui/cli\n"
 "Language: en\n"
 
-#. placeholder {0}: skillToNext(exp[chosen.slot] ?? 0)
-#: src/game/kit/skill-table.tsx:188
+#. placeholder {0}: skillToNext(exp[chosen.move.slot] ?? 0)
+#: src/game/kit/skill-table.tsx:183
 msgid "　再使用 {0} 次升級"
 msgstr ""
 
-#: src/game/kit/skill-table.tsx:189
+#: src/game/kit/skill-table.tsx:184
 msgid "　已達最高等級"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgid "{0}：{1} 對 {2}"
 msgstr ""
 
 #. placeholder {0}: vitals?.name ?? ""
-#: src/routes/play.story.$story.tsx:865
+#: src/routes/play.story.$story.tsx:885
 msgid "{0}倒下了……"
 msgstr ""
 
@@ -86,7 +86,7 @@ msgstr ""
 msgid "{d}天"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:118
+#: src/routes/play.story.$story.tsx:126
 msgid "{label} 的故事關卡：原作劇情、對白與頭目戰。"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 msgid "{label}：與朋友、同機訪客或 COM 對戰的原版場地。"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:866
+#: src/routes/play.story.$story.tsx:886
 msgid "{stageName} · 完成"
 msgstr ""
 
@@ -140,8 +140,8 @@ msgstr ""
 #~ msgid "<0><1>重新登入<2><3/></2></1></0><4><5>小朋友齊打交</5></4>"
 #~ msgstr ""
 
+#: src/routes/play.online.tsx:336
 #: src/routes/play.online.tsx:339
-#: src/routes/play.online.tsx:342
 msgid "✓ 準備好"
 msgstr ""
 
@@ -183,7 +183,7 @@ msgid "下一個"
 msgstr ""
 
 #: src/game/net/room-list.tsx:182
-#: src/routes/play.online.tsx:329
+#: src/routes/play.online.tsx:326
 msgid "主持"
 msgstr ""
 
@@ -232,7 +232,7 @@ msgstr ""
 #~ msgid "任務模式沿用故事模式的關卡引擎，正在從原版任務資料逐一重建。先到故事模式玩第一話吧。"
 #~ msgstr ""
 
-#: src/routes/play.online.tsx:330
+#: src/routes/play.online.tsx:327
 msgid "你"
 msgstr ""
 
@@ -253,13 +253,17 @@ msgstr ""
 msgid "你的名字"
 msgstr ""
 
-#: src/routes/play.online.tsx:248
+#: src/routes/play.online.tsx:245
 msgid "你的遊戲版本和主持不同，請重新整理頁面再加入。"
 msgstr ""
 
 #. placeholder {0}: cur.name
 #: src/routes/play.profile.tsx:527
 msgid "你要刪除「{0}」嗎？"
+msgstr ""
+
+#: src/game/kit/skill-table.tsx:207
+msgid "使用要求"
 msgstr ""
 
 #: src/routes/play.lobby.tsx:713
@@ -300,6 +304,11 @@ msgstr ""
 #~ msgid "元力"
 #~ msgstr ""
 
+#. placeholder {0}: chosen.move.mp
+#: src/game/kit/skill-table.tsx:214
+msgid "元力 {0}"
+msgstr ""
+
 #: src/game/kit/smith-box.tsx:83
 msgid "先讓老子看看要修理的東西吧！"
 msgstr ""
@@ -318,7 +327,7 @@ msgstr ""
 #~ msgid "全部主要角色"
 #~ msgstr ""
 
-#: src/routes/play.online.tsx:397
+#: src/routes/play.online.tsx:394
 msgid "公開"
 msgstr ""
 
@@ -346,11 +355,11 @@ msgstr ""
 msgid "再來一屆"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:902
+#: src/routes/play.story.$story.tsx:922
 msgid "再玩一次"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:897
+#: src/routes/play.story.$story.tsx:917
 msgid "再試一次"
 msgstr ""
 
@@ -358,7 +367,7 @@ msgstr ""
 msgid "最新"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:872
+#: src/routes/play.story.$story.tsx:892
 msgid "最高連擊"
 msgstr ""
 
@@ -369,6 +378,10 @@ msgstr ""
 #. placeholder {0}: keys.join(" / ")
 #: src/components/lfo.tsx:64
 msgid "出招：{0}"
+msgstr ""
+
+#: src/game/kit/skill-table.tsx:216
+msgid "出招按鍵"
 msgstr ""
 
 #: src/routes/play.$key.tsx:311
@@ -416,7 +429,7 @@ msgstr ""
 #~ msgid "加入至少一位不同隊伍的電腦玩家才能開始。"
 #~ msgstr ""
 
-#: src/routes/play.online.tsx:407
+#: src/routes/play.online.tsx:404
 #: src/routes/play.room.tsx:291
 msgid "加入電腦玩家"
 msgstr ""
@@ -443,6 +456,24 @@ msgstr ""
 #: src/game/kit/new-game.tsx:125
 #: src/game/net/room-list.tsx:384
 msgid "取消"
+msgstr ""
+
+#. placeholder {0}: formDetail.name
+#. placeholder {1}: formDetail.skills.length
+#: src/game/kit/panels.tsx:307
+msgid "另有異轉形態「{0}」的 {1} 招，按 Y 變身後使出"
+msgstr ""
+
+#. placeholder {0}: formDetail.name
+#. placeholder {1}: formDetail.skills.length
+#: src/game/kit/panels.tsx:309
+msgid "另有異轉形態「{0}」的 {1} 招，達到 LV150 後變身使出"
+msgstr ""
+
+#. placeholder {0}: formDetail.name
+#. placeholder {1}: formDetail.skills.length
+#: src/game/kit/panels.tsx:310
+msgid "另有異轉形態「{0}」的 {1} 招，需異轉信物及 LV150"
 msgstr ""
 
 #. placeholder {0}: nameOf(myLead)
@@ -482,7 +513,7 @@ msgid "同步失敗（第 {desync} 格）：各人看到的戰況已不一致。
 msgstr ""
 
 #: src/game/net/net-run.tsx:565
-#: src/routes/play.story.$story.tsx:869
+#: src/routes/play.story.$story.tsx:889
 #: src/routes/play.vs.$stage.tsx:428
 msgid "名稱"
 msgstr ""
@@ -538,12 +569,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/play.lobby.tsx:785
-#: src/routes/play.story.$story.tsx:741
+#: src/routes/play.story.$story.tsx:760
 msgid "好友"
 msgstr ""
 
 #: src/routes/play.lobby.tsx:550
-#: src/routes/play.story.$story.tsx:750
+#: src/routes/play.story.$story.tsx:769
 msgid "好友名單：單機重現中沒有其他玩家在線。"
 msgstr ""
 
@@ -561,7 +592,7 @@ msgid "對戰場地：挑一個原版場地，與朋友、同機訪客或 COM �
 msgstr ""
 
 #: src/routes/play.lobby.tsx:526
-#: src/routes/play.story.$story.tsx:720
+#: src/routes/play.story.$story.tsx:739
 msgid "展開介面"
 msgstr ""
 
@@ -576,6 +607,10 @@ msgstr ""
 #: src/game/kit/shop-box.tsx:77
 msgid "已出售 {name}"
 msgstr ""
+
+#: src/game/kit/skill-table.tsx:218
+#~ msgid "已學會（此版本沒有學習點數）"
+#~ msgstr ""
 
 #: src/game/net/room-list.tsx:268
 msgid "已滿"
@@ -594,7 +629,7 @@ msgstr ""
 msgid "已重現 · 原版關卡、劇本與對白"
 msgstr ""
 
-#: src/routes/play.online.tsx:254
+#: src/routes/play.online.tsx:251
 msgid "已離開遊戲室。"
 msgstr ""
 
@@ -638,7 +673,7 @@ msgid "恭喜！{0}成為 LFO 皇者！"
 msgstr ""
 
 #: src/components/lfo.tsx:68
-#: src/game/kit/skill-table.tsx:179
+#: src/game/kit/skill-table.tsx:174
 msgid "或"
 msgstr ""
 
@@ -651,11 +686,11 @@ msgstr ""
 msgid "房號"
 msgstr ""
 
-#: src/routes/play.online.tsx:416
+#: src/routes/play.online.tsx:413
 msgid "所有人準備好了，按 LAUNCH? 開始。"
 msgstr ""
 
-#: src/routes/play.online.tsx:243
+#: src/routes/play.online.tsx:240
 msgid "所有人都會以房間的等級出戰，招式等級一律 LV 1。"
 msgstr ""
 
@@ -694,7 +729,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/play.lobby.tsx:784
-#: src/routes/play.story.$story.tsx:740
+#: src/routes/play.story.$story.tsx:759
 msgid "技能"
 msgstr ""
 
@@ -723,9 +758,13 @@ msgstr ""
 #~ msgid "投擲"
 #~ msgstr ""
 
-#. placeholder {0}: chosen.slot
-#: src/game/kit/skill-table.tsx:165
+#. placeholder {0}: chosen.move.slot
+#: src/game/kit/skill-table.tsx:160
 msgid "招式 {0}"
+msgstr ""
+
+#: src/game/kit/skill-table.tsx:219
+msgid "指令取自招式表"
 msgstr ""
 
 #: src/routes/play.room.tsx:308
@@ -761,7 +800,7 @@ msgid "按手掣按鈕…"
 msgstr ""
 
 #: src/routes/play.lobby.tsx:584
-#: src/routes/play.story.$story.tsx:851
+#: src/routes/play.story.$story.tsx:871
 msgid "按鍵設定"
 msgstr ""
 
@@ -769,11 +808,11 @@ msgstr ""
 msgid "挑戰"
 msgstr ""
 
-#: src/routes/play.$key.tsx:454
+#: src/routes/play.$key.tsx:471
 msgid "掉落道具"
 msgstr ""
 
-#: src/game/kit/skill-table.tsx:194
+#: src/game/kit/skill-table.tsx:189
 msgid "接續"
 msgstr ""
 
@@ -830,13 +869,13 @@ msgid "撤回"
 msgstr ""
 
 #: src/game/net/net-run.tsx:565
-#: src/routes/play.story.$story.tsx:874
+#: src/routes/play.story.$story.tsx:894
 #: src/routes/play.vs.$stage.tsx:428
 msgid "擊倒"
 msgstr ""
 
 #: src/routes/play.lobby.tsx:789
-#: src/routes/play.story.$story.tsx:745
+#: src/routes/play.story.$story.tsx:764
 msgid "收起介面"
 msgstr ""
 
@@ -844,7 +883,7 @@ msgstr ""
 msgid "收起聊天"
 msgstr ""
 
-#: src/routes/play.$key.tsx:450
+#: src/routes/play.$key.tsx:467
 msgid "攻"
 msgstr ""
 
@@ -904,12 +943,12 @@ msgstr ""
 msgid "是"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:871
+#: src/routes/play.story.$story.tsx:891
 msgid "時間"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:743
-#: src/routes/play.story.$story.tsx:848
+#: src/routes/play.story.$story.tsx:762
+#: src/routes/play.story.$story.tsx:868
 msgid "暫停"
 msgstr ""
 
@@ -936,7 +975,7 @@ msgstr ""
 msgid "有新版本"
 msgstr ""
 
-#: src/routes/play.online.tsx:342
+#: src/routes/play.online.tsx:339
 msgid "未準備"
 msgstr ""
 
@@ -968,7 +1007,7 @@ msgstr ""
 msgid "武器店"
 msgstr ""
 
-#: src/routes/play.online.tsx:417
+#: src/routes/play.online.tsx:414
 msgid "每個人都要選好角色並按「準備」，而且要有兩個隊伍。"
 msgstr ""
 
@@ -1004,11 +1043,11 @@ msgstr ""
 #~ msgid "沒有符合的項目"
 #~ msgstr ""
 
-#: src/routes/play.$key.tsx:463
+#: src/routes/play.$key.tsx:480
 msgid "沙包防禦 開"
 msgstr ""
 
-#: src/routes/play.$key.tsx:463
+#: src/routes/play.$key.tsx:480
 msgid "沙包防禦 關"
 msgstr ""
 
@@ -1016,7 +1055,7 @@ msgstr ""
 msgid "注意︰其他玩家不准在遊戲開始後加入。"
 msgstr ""
 
-#: src/routes/play.online.tsx:339
+#: src/routes/play.online.tsx:336
 msgid "準備"
 msgstr ""
 
@@ -1028,11 +1067,11 @@ msgstr ""
 #~ msgid "瀏覽角色"
 #~ msgstr ""
 
-#: src/routes/play.$key.tsx:458
+#: src/routes/play.$key.tsx:475
 msgid "無限元力 開"
 msgstr ""
 
-#: src/routes/play.$key.tsx:458
+#: src/routes/play.$key.tsx:475
 msgid "無限元力 關"
 msgstr ""
 
@@ -1056,7 +1095,7 @@ msgid "獨立"
 msgstr ""
 
 #. placeholder {0}: gain.name
-#: src/routes/play.story.$story.tsx:820
+#: src/routes/play.story.$story.tsx:840
 msgid "獲得 {0}"
 msgstr ""
 
@@ -1092,12 +1131,17 @@ msgstr ""
 #~ msgid "由原版遊戲檔案直接還原的 LFO 圖鑑——每個角色的能力與出招、每件裝備的屬性，都來自當年的數據。"
 #~ msgstr ""
 
-#: src/routes/play.$key.tsx:455
+#: src/routes/play.$key.tsx:472
 msgid "異轉"
 msgstr ""
 
 #: src/game/kit/card-box.tsx:110
 msgid "異轉信物"
+msgstr ""
+
+#. placeholder {0}: formDetail.name
+#: src/game/kit/panels.tsx:305
+msgid "異轉形態「{0}」的招式；再按 Y 變回"
 msgstr ""
 
 #: src/game/key-config.tsx:230
@@ -1113,11 +1157,11 @@ msgstr ""
 msgid "確定提取人物「{0}」嗎？"
 msgstr ""
 
-#: src/routes/play.online.tsx:397
+#: src/routes/play.online.tsx:394
 msgid "私人"
 msgstr ""
 
-#: src/routes/play.$key.tsx:449
+#: src/routes/play.$key.tsx:466
 msgid "移動（連按 → 跑）"
 msgstr ""
 
@@ -1125,7 +1169,7 @@ msgstr ""
 msgid "移除玩家"
 msgstr ""
 
-#: src/routes/play.online.tsx:298
+#: src/routes/play.online.tsx:295
 #: src/routes/play.room.tsx:251
 msgid "移除電腦"
 msgstr ""
@@ -1167,7 +1211,7 @@ msgstr ""
 msgid "等候開始「{0}」！"
 msgstr ""
 
-#: src/routes/play.online.tsx:419
+#: src/routes/play.online.tsx:416
 msgid "等待主持開始…"
 msgstr ""
 
@@ -1194,7 +1238,7 @@ msgid "系統選單"
 msgstr ""
 
 #: src/game/net/net-run.tsx:565
-#: src/routes/play.story.$story.tsx:877
+#: src/routes/play.story.$story.tsx:897
 #: src/routes/play.vs.$stage.tsx:428
 msgid "結果"
 msgstr ""
@@ -1215,7 +1259,7 @@ msgstr ""
 #~ msgid "編號"
 #~ msgstr ""
 
-#: src/routes/play.story.$story.tsx:873
+#: src/routes/play.story.$story.tsx:893
 msgid "總傷害"
 msgstr ""
 
@@ -1227,7 +1271,7 @@ msgstr ""
 msgid "繼續"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:850
+#: src/routes/play.story.$story.tsx:870
 msgid "繼續遊戲"
 msgstr ""
 
@@ -1239,7 +1283,7 @@ msgstr ""
 #: src/game/net/net-run.tsx:156
 #: src/routes/play.lobby.tsx:788
 #: src/routes/play.lobby.tsx:851
-#: src/routes/play.story.$story.tsx:744
+#: src/routes/play.story.$story.tsx:763
 msgid "聊天"
 msgstr ""
 
@@ -1260,7 +1304,7 @@ msgstr ""
 #~ msgid "能力"
 #~ msgstr ""
 
-#: src/game/kit/panels.tsx:178
+#: src/game/kit/panels.tsx:181
 msgid "能力點"
 msgstr ""
 
@@ -1277,7 +1321,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/play.lobby.tsx:786
-#: src/routes/play.story.$story.tsx:742
+#: src/routes/play.story.$story.tsx:761
 msgid "表情"
 msgstr ""
 
@@ -1321,7 +1365,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/play.lobby.tsx:783
-#: src/routes/play.story.$story.tsx:739
+#: src/routes/play.story.$story.tsx:758
 msgid "角色資料"
 msgstr ""
 
@@ -1329,7 +1373,7 @@ msgstr ""
 msgid "請先選擇一個空的角色欄。"
 msgstr ""
 
-#: src/routes/play.online.tsx:298
+#: src/routes/play.online.tsx:295
 msgid "請離"
 msgstr ""
 
@@ -1355,7 +1399,7 @@ msgstr ""
 #~ msgid "跑步"
 #~ msgstr ""
 
-#: src/routes/play.$key.tsx:451
+#: src/routes/play.$key.tsx:468
 msgid "跳"
 msgstr ""
 
@@ -1387,12 +1431,12 @@ msgstr ""
 #: src/game/net/room-list.tsx:347
 #: src/game/stage-select.tsx:407
 #: src/routes/play.index.tsx:556
-#: src/routes/play.online.tsx:274
+#: src/routes/play.online.tsx:271
 #: src/routes/play.profile.tsx:514
 msgid "返回"
 msgstr ""
 
-#: src/routes/play.$key.tsx:370
+#: src/routes/play.$key.tsx:387
 #: src/routes/play.lobby.tsx:583
 #: src/routes/play.online.tsx:107
 msgid "返回大廳"
@@ -1402,21 +1446,21 @@ msgstr ""
 msgid "返回遊戲室"
 msgstr ""
 
-#: src/routes/play.$key.tsx:370
+#: src/routes/play.$key.tsx:387
 msgid "返回選角"
 msgstr ""
 
 #. placeholder {0}: KEY_NAME[key] ?? t`鑰匙`
-#: src/routes/play.story.$story.tsx:166
-#: src/routes/play.story.$story.tsx:167
+#: src/routes/play.story.$story.tsx:174
+#: src/routes/play.story.$story.tsx:175
 msgid "這道門鎖上了，需要「{0}」。"
 msgstr ""
 
-#: src/routes/play.online.tsx:250
+#: src/routes/play.online.tsx:247
 msgid "這間遊戲室已滿。"
 msgstr ""
 
-#: src/routes/play.online.tsx:252
+#: src/routes/play.online.tsx:249
 msgid "這間遊戲室已經開始了，要等這一局結束才能加入。"
 msgstr ""
 
@@ -1432,7 +1476,7 @@ msgstr ""
 msgid "連接不到對戰伺服器。"
 msgstr ""
 
-#: src/routes/play.online.tsx:279
+#: src/routes/play.online.tsx:276
 msgid "連接中…"
 msgstr ""
 
@@ -1449,7 +1493,7 @@ msgstr ""
 msgid "連線對戰尚未開放：這個版本沒有設定對戰伺服器。"
 msgstr ""
 
-#: src/routes/play.online.tsx:262
+#: src/routes/play.online.tsx:259
 msgid "連線遊戲室"
 msgstr ""
 
@@ -1481,11 +1525,11 @@ msgstr ""
 #~ msgid "遊戲室「{code}」：把這個房號告訴朋友，他們在「連線對戰」輸入就能加入。"
 #~ msgstr ""
 
-#: src/routes/play.online.tsx:241
+#: src/routes/play.online.tsx:238
 msgid "遊戲室「{code}」不在列表上：把這個房號告訴朋友，他們在「選擇遊戲室」輸入就能加入。"
 msgstr ""
 
-#: src/routes/play.online.tsx:240
+#: src/routes/play.online.tsx:237
 msgid "遊戲室「{code}」已公開在列表；朋友也可以在「選擇遊戲室」輸入房號加入。"
 msgstr ""
 
@@ -1506,7 +1550,7 @@ msgstr ""
 msgid "道具店"
 msgstr ""
 
-#: src/routes/play.online.tsx:420
+#: src/routes/play.online.tsx:417
 msgid "選好角色、隊伍，按「準備」。"
 msgstr ""
 
@@ -1544,7 +1588,7 @@ msgstr ""
 #~ msgid "重新登入<0/>小朋友齊打交"
 #~ msgstr ""
 
-#: src/routes/play.story.$story.tsx:852
+#: src/routes/play.story.$story.tsx:872
 msgid "重新開始"
 msgstr ""
 
@@ -1556,11 +1600,11 @@ msgstr ""
 msgid "重玩《小鬥士 Online》的故事模式：原作的章節、開場獨白與頭目戰，由第一話開始。"
 msgstr ""
 
-#: src/routes/play.$key.tsx:453
+#: src/routes/play.$key.tsx:470
 msgid "重置"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:876
+#: src/routes/play.story.$story.tsx:896
 msgid "金錢"
 msgstr ""
 
@@ -1584,8 +1628,8 @@ msgstr ""
 #~ msgid "鐵匠（修理 / 合成）：還在重建中。"
 #~ msgstr ""
 
-#: src/routes/play.story.$story.tsx:166
-#: src/routes/play.story.$story.tsx:167
+#: src/routes/play.story.$story.tsx:174
+#: src/routes/play.story.$story.tsx:175
 msgid "鑰匙"
 msgstr ""
 
@@ -1622,7 +1666,7 @@ msgstr ""
 msgid "闇"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:753
+#: src/routes/play.story.$story.tsx:772
 msgid "關卡中不能聊天，回到大廳再聊吧。"
 msgstr ""
 
@@ -1631,8 +1675,8 @@ msgstr ""
 #: src/game/kit/equip-box.tsx:204
 #: src/game/kit/release-notes.tsx:89
 #: src/game/kit/release-notes.tsx:144
-#: src/game/kit/skill-table.tsx:211
-#: src/game/kit/skill-table.tsx:220
+#: src/game/kit/skill-table.tsx:230
+#: src/game/kit/skill-table.tsx:239
 #: src/game/kit/storage-room.tsx:99
 msgid "關閉"
 msgstr ""
@@ -1641,7 +1685,7 @@ msgstr ""
 #~ msgid "關閉聲音"
 #~ msgstr ""
 
-#: src/routes/play.$key.tsx:452
+#: src/routes/play.$key.tsx:469
 msgid "防"
 msgstr ""
 
@@ -1659,7 +1703,7 @@ msgid "隊伍"
 msgstr ""
 
 #: src/game/net/net-run.tsx:111
-#: src/routes/play.online.tsx:331
+#: src/routes/play.online.tsx:328
 msgid "離線"
 msgstr ""
 
@@ -1675,13 +1719,13 @@ msgstr ""
 msgid "離開"
 msgstr ""
 
-#: src/routes/play.story.$story.tsx:853
-#: src/routes/play.story.$story.tsx:898
-#: src/routes/play.story.$story.tsx:901
+#: src/routes/play.story.$story.tsx:873
+#: src/routes/play.story.$story.tsx:918
+#: src/routes/play.story.$story.tsx:921
 msgid "離開故事"
 msgstr ""
 
-#: src/routes/play.online.tsx:441
+#: src/routes/play.online.tsx:438
 #: src/routes/play.room.tsx:334
 #: src/routes/play.vs.$stage.tsx:447
 msgid "離開遊戲室"

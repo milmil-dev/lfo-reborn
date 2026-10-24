@@ -8,7 +8,8 @@ import type { ClientMsg, ErrorCode, RoomState, RoomSummary, ServerMsg } from "./
 import { parse } from "./protocol";
 
 export type NetStatus = "connecting" | "open" | "closed";
-export type ChatLine = { seat: number; text: string };
+/** A chat line as the room sent it: the speaker's name rides along (seats renumber as people leave). */
+export type ChatLine = { seat: number; name: string; text: string };
 export type NetSnapshot = {
   status: NetStatus;
   room: RoomState | null;
@@ -106,7 +107,9 @@ export class RoomClient {
     else if (msg.t === "resume-end") this.set({ resuming: false });
     else if (msg.t === "chat")
       this.set({
-        chat: [...this.snap.chat, { seat: msg.seat, text: msg.text }].slice(-MAX_CHAT_LINES),
+        chat: [...this.snap.chat, { seat: msg.seat, name: msg.name, text: msg.text }].slice(
+          -MAX_CHAT_LINES,
+        ),
       });
     else if (msg.t === "error") this.set({ error: msg.code });
     for (const h of this.handlers) h(msg);

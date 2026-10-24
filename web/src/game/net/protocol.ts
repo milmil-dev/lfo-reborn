@@ -145,7 +145,12 @@ export type ServerMsg =
   | { t: "resume"; k: number }
   /** the replay is over: frames from now on are live */
   | { t: "resume-end"; k: number }
-  | { t: "chat"; seat: number; text: string }
+  /**
+   * A chat line. The name travels with it: seats renumber when someone leaves, so a line that
+   * only knew its seat index would later be shown under whoever moved into that index — or, for
+   * a seat past the end of the line-up, under a bare `P3`.
+   */
+  | { t: "chat"; seat: number; name: string; text: string }
   | { t: "start"; seed: number }
   /** the inputs of tick k, one mask per seat */
   | { t: "f"; k: number; m: number[] }

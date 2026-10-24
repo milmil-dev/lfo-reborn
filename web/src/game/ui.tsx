@@ -9,7 +9,7 @@ import { ASSETS } from "@/lib/assets";
 
 export type RosterEntry = CharacterRow & { key: string };
 
-const spriteIndex = queryOptions({
+export const spriteIndex = queryOptions({
   queryKey: ["game", "index"],
   queryFn: () =>
     fetch(`${ASSETS}/game/chars/index.json`).then(

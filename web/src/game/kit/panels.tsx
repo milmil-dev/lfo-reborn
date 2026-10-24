@@ -8,6 +8,7 @@ import { RANKS, rankOf } from "@/game/vs";
 import {
   allocatePoint,
   fusionOf,
+  hasToken,
   playId,
   playKey,
   type Profile,
@@ -15,6 +16,8 @@ import {
   useSkillExp,
 } from "@/game/profiles";
 import { audio } from "@/game/audio";
+import { formId, unlocked } from "@/game/transform";
+import { spriteIndex } from "@/game/ui";
 import { Screen } from "@/game/screen";
 import { q } from "@/lib/api";
 import { ASSETS } from "@/lib/assets";
@@ -238,20 +241,31 @@ export function SkillList({
   mp,
   onCast,
   onClose,
+  form = false,
 }: {
   /** the fighter's MP right now (the table's glow); the character's base MP without it */
   mp?: number;
   onCast?: (move: Move) => void;
   onClose: () => void;
+  /** 異轉: show the transformed form's own table, as the character is in it right now */
+  form?: boolean;
 }) {
+  const { t } = useLingui();
   const profile = useActiveProfile();
   const exp = useSkillExp();
   // the moves of whoever the profile plays as: its 合體戰神 while that lasts
   const key = profile ? playKey(profile) : undefined;
-  const { data: detail } = useQuery({
-    ...q.character(profile ? playId(profile) : 0),
-    enabled: !!profile,
+  const id = profile ? playId(profile) : 0;
+  // 異轉: the transformed form (base id + 7000) has its own character data and its own rows
+  const tranId = formId(id);
+  const { data: detail } = useQuery({ ...q.character(id), enabled: !!profile });
+  const { data: formDetail } = useQuery({
+    ...q.character(tranId ?? 0),
+    enabled: !!tranId && !!profile,
   });
+  // the form's sprite key lives in the sprite index (the API's character row has no key)
+  const { data: index } = useQuery(spriteIndex);
+  const formKey = index?.find((c) => c.id === tranId)?.key;
   const { data: char } = useQuery({
     queryKey: ["game", "char", key],
     queryFn: () =>
@@ -259,17 +273,44 @@ export function SkillList({
     enabled: !!profile,
     staleTime: Number.POSITIVE_INFINITY,
   });
-  if (!char) return null;
-  const skills = new Map((detail?.skills ?? []).map((s) => [s.slot, s]));
+  const { data: formChar } = useQuery({
+    queryKey: ["game", "char", formKey],
+    queryFn: () =>
+      fetch(`${ASSETS}/game/chars/${formKey}.json`).then((r) => r.json() as Promise<CharData>),
+    enabled: !!formKey,
+    staleTime: Number.POSITIVE_INFINITY,
+  });
+  const tranOpen = !!profile && unlocked(profile.lv, hasToken(profile.charId));
+  const hasRelic = !!profile && hasToken(profile.charId);
+  // transformed: the form's data and rows replace the character's, once its sprite has loaded
+  const inForm = form && !!formChar;
+  const shown = inForm ? formChar : char;
+  if (!shown) return null;
+  const rows = inForm ? formDetail : detail;
+  const skills = new Map((rows?.skills ?? []).map((s) => [s.slot, s]));
   return (
-    <SkillTable
-      data={char}
-      skills={skills}
-      mp={mp ?? char.attrs.mp}
-      exp={exp}
-      onCast={onCast}
-      onClose={onClose}
-    />
+    <div className="relative">
+      <SkillTable
+        data={shown}
+        skills={skills}
+        mp={mp ?? shown.attrs.mp}
+        exp={exp}
+        onCast={onCast}
+        onClose={onClose}
+      />
+      {/* the form's table replaces the character's while transformed; otherwise say how to reach it */}
+      {formDetail && (
+        <p className="absolute top-[136px] left-[220px] w-[100px] text-[9px] text-white/75 leading-[12px]">
+          {inForm
+            ? t`異轉形態「${formDetail.name}」的招式；再按 Y 變回`
+            : tranOpen
+              ? t`另有異轉形態「${formDetail.name}」的 ${formDetail.skills.length} 招，按 Y 變身後使出`
+              : hasRelic
+                ? t`另有異轉形態「${formDetail.name}」的 ${formDetail.skills.length} 招，達到 LV150 後變身使出`
+                : t`另有異轉形態「${formDetail.name}」的 ${formDetail.skills.length} 招，需異轉信物及 LV150`}
+        </p>
+      )}
+    </div>
   );
 }
 

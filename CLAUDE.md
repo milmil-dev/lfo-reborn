@@ -40,7 +40,9 @@ select, `/play/$key` a training ground driven by the original frame data.
   `Math.sin/cos/pow/exp/log…`, `Date.now` and locale APIs in `core/`. Chance the game needs goes through a
   seeded generator kept in the world state. Everything that drives a fighter must be data on it (so
   `skillLevels`, not a callback) and must be fed to `Fighter.hash()`.
-- Frame rules: a frame lasts `d + 1` ticks; `nx = -1` returns to the default action; entering a frame sets
+- Frame rules: a frame lasts `d + 1` ticks; `nx = -1` ends the chain — the act table's next-action column
+  (`cont` in the sprite JSON) says what the client enters then, and without it a special stops after its
+  wind-up (新生迪雲's 散彈氣功波); entering a frame sets
   `vx = dvx * facing` / `vy = dvy` when non-zero; basic actions come from the `act` table (STAND 0, WALK 10,
   RUN 40, JUMPSTU 400, JUMPU 450, ATTACK1 500 …); specials from `spm` (G 防 A 攻 J 跳, F/B relative to facing,
   `from` = chain source animation).
@@ -78,7 +80,9 @@ select, `/play/$key` a training ground driven by the original frame data.
   `HASH_EVERY`. Spawn every fighter identically on every peer (team, facing by seat) and set `Director.arena`
   for a bout — any per-client difference is a desync. New fighter state goes into `save/load` as well as `hash`.
   The bout keeps the lobby's social furniture: a roster strip (each seat's name, team, COM/★, KOs, HP/MP, 離線)
-  and the chat, both drawn in the HUD's units so they scale with the stage.
+  and the chat, both drawn in the HUD's units so they scale with the stage. A chat line carries the
+  speaker's name from the room: seats renumber as people leave, so a line looked up by seat index later
+  would be credited to whoever holds that index (or shown as a bare `P3`).
 - `VITE_REALTIME_URL` points the site at the Worker (deploy/README.md); unset in production the door stays shut.
 - In dev, `window.__lfo` exposes the training world for scripted checks.
 

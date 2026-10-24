@@ -52,7 +52,15 @@ import {
   useInventory,
   useMoney,
 } from "@/game/profiles";
-import { charge, drain, NO_TRAN, press, ready as tranReady, unlocked } from "@/game/transform";
+import {
+  charge,
+  drain,
+  NO_TRAN,
+  press,
+  ready as tranReady,
+  showsGauge,
+  unlocked,
+} from "@/game/transform";
 import { Screen } from "@/game/screen";
 import { BASE, type CharAssets, loadChar, loadForm, loadSprite, runLoop } from "@/game/render";
 import { catalogQuery, stageLabel } from "@/game/stage-select";
@@ -202,8 +210,10 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
   const headTag = useRef<HTMLDivElement>(null);
   // the block's corner triangle folds the HUD away, leaving only the triangle
   const [hudHidden, setHudHidden] = useState(false);
-  // 異轉能量計 (shown once the character may transform), mirrored from the loop
+  // 異轉能量計 (shown once the account holds the 信物), mirrored from the loop
   const [tran, setTran] = useState<typeof NO_TRAN | null>(null);
+  // whether LV 150 has armed it: below that the gauge is there but stores nothing (tran.mdx)
+  const [tranArmed, setTranArmed] = useState(false);
   const tranRef = useRef<() => void>(() => {});
   // 出招表: a click on a skill icon performs it
   const castRef = useRef<(slot: number) => void>(() => {});
@@ -268,9 +278,12 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
         raid = forced ? (list[0] ?? null) : rollRaid(list);
       })
       .catch(() => {});
-    // 異轉: the base and transformed sprites once the character qualifies (LV 150 + 信物)
+    // 異轉: the base and transformed sprites. The account's 信物 puts the gauge in the status box
+    // at any level (tran.mdx); LV 150 is what lets it hold energy.
     let tr = NO_TRAN;
     let forms: { base: CharAssets; form: CharAssets } | null = null;
+    let armed = false;
+    let hasRelic = false;
     const become = (to: CharAssets, action?: string) => {
       const me = director?.player;
       if (!me) return;
@@ -279,7 +292,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
       void scene.add(me, to);
     };
     tranRef.current = () => {
-      if (!forms || director?.drama) return;
+      if (!forms || !armed || director?.drama) return;
       const next = press(tr);
       if (next.active && !tr.active) become(forms.form);
       else if (!next.active && tr.active) become(forms.base, "STAND");
@@ -401,7 +414,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
                 combo = { n: d.world.tick - combo.last < 45 ? combo.n + 1 : 1, last: d.world.tick };
                 if (forms) {
                   const was = tranReady(tr);
-                  tr = charge(tr, e.damage);
+                  tr = charge(tr, e.damage, armed);
                   if (!was && tranReady(tr)) audio.sfx("ready_transform.wav", { volume: 0.9 });
                 }
                 damage += e.damage;
@@ -559,11 +572,15 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
                 getActiveProfile()?.points,
               );
               // the weapon worn in the equipment box starts the stage in hand
-              // 異轉: at LV 150 with the account's 信物 the gauge appears (a 合體戰神 has no form)
+              // 異轉: the account's 信物 shows the gauge; LV 150 arms it (a 合體戰神 has no form)
               const baseId = hero.data.attrs.id;
-              if (!fused && unlocked(prog.lv, hasToken(baseId)))
+              hasRelic = hasToken(baseId);
+              armed = unlocked(prog.lv, hasRelic);
+              setTranArmed(armed);
+              if (!fused && showsGauge(hasRelic))
                 void Promise.all([loadChar(hero.data.key), loadForm(baseId)]).then(
                   ([base, form]) => {
+                    // no transformed form in the client's data: no gauge to press
                     if (!form) return;
                     forms = { base, form };
                     setTran(tr);
@@ -680,6 +697,8 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
                     ready: tranReady(tran),
                     icon: vitals.charId,
                     keyHint: "Y",
+                    // the 信物 shows the gauge; below LV 150 it can't hold anything yet
+                    locked: tranArmed ? undefined : "level",
                     onPress: () => tranRef.current(),
                   }
                 : undefined
@@ -780,6 +799,7 @@ function StoryRun({ story, onRetry }: { story: StoryData; onRetry: () => void })
       <FloatingPanel open={menu === "skill"} scale={Math.min(1.25, scale * 1.1)}>
         <SkillList
           mp={vitals?.mp}
+          form={!!tran?.active}
           onCast={(m) => castRef.current(m.slot)}
           onClose={() => setMenu("none")}
         />
