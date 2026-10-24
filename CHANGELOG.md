@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/milmil-dev/lfo-reborn/compare/v0.7.0...v0.7.1) (2026-10-24)
+
+
+### Bug Fixes
+
+* **net:** line the room list's headers up with the table, and seat six ([#34](https://github.com/milmil-dev/lfo-reborn/issues/34)) ([3ee2aa5](https://github.com/milmil-dev/lfo-reborn/commit/3ee2aa51093b0143abb4011519c51958dae49c04))
+
 ## [0.7.0](https://github.com/milmil-dev/lfo-reborn/compare/v0.6.0...v0.7.0) (2026-10-24)
 
 
