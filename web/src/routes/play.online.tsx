@@ -238,7 +238,9 @@ function ConnectedRoom({
         : t`遊戲室「${code}」不在列表上：把這個房號告訴朋友，他們在「選擇遊戲室」輸入就能加入。`,
     },
     { who: null, text: t`所有人都會以房間的等級出戰，招式等級一律 LV 1。` },
-    ...net.chat.map((l) => ({ who: room?.seats[l.seat]?.name ?? `P${l.seat + 1}`, text: l.text })),
+    // the name came with the line: seats renumber as people leave, so looking it up now would
+    // credit an old line to whoever holds that index today
+    ...net.chat.map((l) => ({ who: l.name, text: l.text })),
   ];
   const problem =
     net.error === "version"

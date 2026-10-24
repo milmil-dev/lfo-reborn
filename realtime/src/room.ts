@@ -174,7 +174,9 @@ export class Room extends DurableObject<Env> {
         const text = String(msg.text ?? "")
           .trim()
           .slice(0, MAX_CHAT);
-        if (text) this.broadcast({ t: "chat", seat, text });
+        // the speaker's name goes out with the line: seats renumber as people leave, so the
+        // clients cannot look it up later (they would credit the line to whoever took the index)
+        if (text) this.broadcast({ t: "chat", seat, name: room.seats[seat]?.name ?? `P${seat + 1}`, text });
         return;
       }
       case "end":

@@ -107,4 +107,25 @@ describe("RoomClient's seat token", () => {
     expect(c.getSnapshot().resuming).toBe(false);
     c.dispose();
   });
+
+  /*
+    Seats renumber when someone leaves, so a chat line cannot be credited from its seat index
+    later: the room sends the speaker's name with the line and that is what is shown. Before,
+    "P2: hi" turned into "P3: hi" once P2 left and the last seat took its index — or into a bare
+    "P2" once the speaker was gone.
+  */
+  it("keeps each chat line's speaker name, whatever the seats do afterwards", () => {
+    const c = new RoomClient("ws://room", "ABCD", "阿強");
+    const ws = FakeSocket.last!;
+    ws.open();
+    ws.receive({ t: "chat", seat: 1, name: "小明", text: "hi" });
+    ws.receive({ t: "chat", seat: 2, name: "大文", text: "hello" });
+    // 小明 leaves: the seats shrink and 大文 moves into index 1
+    ws.receive(room(0));
+    expect(c.getSnapshot().chat).toEqual([
+      { seat: 1, name: "小明", text: "hi" },
+      { seat: 2, name: "大文", text: "hello" },
+    ]);
+    c.dispose();
+  });
 });

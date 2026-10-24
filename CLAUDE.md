@@ -80,7 +80,9 @@ select, `/play/$key` a training ground driven by the original frame data.
   `HASH_EVERY`. Spawn every fighter identically on every peer (team, facing by seat) and set `Director.arena`
   for a bout — any per-client difference is a desync. New fighter state goes into `save/load` as well as `hash`.
   The bout keeps the lobby's social furniture: a roster strip (each seat's name, team, COM/★, KOs, HP/MP, 離線)
-  and the chat, both drawn in the HUD's units so they scale with the stage.
+  and the chat, both drawn in the HUD's units so they scale with the stage. A chat line carries the
+  speaker's name from the room: seats renumber as people leave, so a line looked up by seat index later
+  would be credited to whoever holds that index (or shown as a bare `P3`).
 - `VITE_REALTIME_URL` points the site at the Worker (deploy/README.md); unset in production the door stays shut.
 - In dev, `window.__lfo` exposes the training world for scripted checks.
 
