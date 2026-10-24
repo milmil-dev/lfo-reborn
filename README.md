@@ -24,7 +24,9 @@
 - **任務**：59 / 60 個（`mission_school2hard` 喺客戶端本身冇 `.sty`）。
 - **VS**：14 個 VS 場地，一部機坐到四個 fighter——你加三個朋友（第二套鍵盤／手掣）同／或者 COM。
 - **王者爭霸**：原作八隊單淘汰賽程，你同一個 COM 拍檔打 2 對 2。
-- **連線遊戲室**：最多四個座位，Cloudflare Worker 上面開房，rollback netcode。
+- **連線遊戲室**（`/play/online`）：正式站已經駁住 Cloudflare Worker（`realtime/`）——選擇遊戲室、開房、
+  最多四個座位，rollback netcode 即時對戰。未做斷線重連（開打中途走咗就冇得返）同觀戰；
+  免費額度大約一日四至五個四人房小時。
 - **大廳同世界**：原作 41 間房嘅大街地圖、小地圖、NPC 對話、商店、銀行、維修、卡片店、摩摩星。
 - **養成同戰鬥系統**：等級同能力點、招式等級、體力 (SP)、異轉、合體、勳銜、兇獸突襲、死亡之塔。
 - **畫面**：原版 UI 用 AI 放大 4×（`ui-hd`），遊戲世界 2×（`@2x`），照 800 × 600 嘅原版面排。
@@ -77,7 +79,8 @@ cd realtime && pnpm run dev    # ws://localhost:8787
 ```
 
 `vp dev` 冇 `VITE_REALTIME_URL` 就會自動指去 `ws://localhost:8787`；正式環境就要喺 build 時畀
-`VITE_REALTIME_URL`（GitHub variable `REALTIME_URL`）。冇設就「連線 VS 對戰」道門唔開。
+`VITE_REALTIME_URL`（GitHub variable `REALTIME_URL`）。正式站已經設好，所以 `/play/online` 玩得；
+如果個 build 冇呢個 variable，道門就會顯示「連線對戰尚未開放」。
 
 ### 常用指令
 
@@ -126,9 +129,11 @@ UTF-16 字串表、`.spt` 角色／道具定義、`skill.tzw.bin`。拆出嚟嘅
   `core/determinism.test.ts` 會 replay 同一段 script 落兩個 world，仲會禁 `Math.random`、`Math.sin/cos/…`、
   `Date.now` 同 locale API。要隨機就經 world state 入面嘅 seeded generator。
 - `web/src/game/render.ts` 係 PixiJS 畫面層，可以換做第個 renderer；`game/input.ts` 係鍵盤 + 手掣。
-- 連線：`realtime/` 嘅 `Room` 只係做 sequencer——每 tick 幫每個座位蓋印輸入做一格 frame，唔會跑遊戲。
+- 連線：`realtime/` 係一個 Cloudflare Worker，`Room` 係每個房一個 Durable Object，只做 sequencer——每 tick
+  幫每個座位蓋印輸入做一格 frame，唔會跑遊戲；`Directory` 一個 object 存公開房列表（`GET /rooms`）。
   客戶端用 rollback（`game/net/rollback.ts`）：世界跟本機時鐘行，猜錯就 restore 快照再靜靜 replay。
   所有 peer 要用同一個方法 spawn fighter（team、facing 跟座位），任何一邊唔同就會 desync。
+  連線中有人走咗，sequencer 會重複佢最後一個輸入；但**未做重連**，走咗就返唔到去打緊嗰局。
 
 鍵盤預設：方向鍵／WASD 移動，**J 攻、K 跳、L 防**，I 攞道具、O 放低；第二個玩家用 TFGH + ZXC + VB。
 手掣：選單用 ✕ 確定、○ 返回，Start 開選單、Select 開出招表；打鬥時 □ 攻、✕ 跳、○ 防、△ 異轉。
@@ -153,7 +158,9 @@ Pages 嘅靜態請求——免費而且唔計流量。成個免費額度、R2、
 
 - **魔法使命者（BOC@HK）** 同原 LFO 資料博物館——本站嘅內容根基，`legacy/` 就係由嗰度嚟。
   特別鳴謝 Chik、Stanley、Andi、Break。
-- **LFE 討論區**——原版封包嘅解壓密碼係喺嗰度搵到嘅。
+- **Little Fighter Empire（LFE，[lf-empire.de](https://lf-empire.de)）討論區**——原版封包嘅解壓密碼嚟自
+  theunderdark 嘅「Community Project: Little Fighter Online – English Translation & Modding Initiative」帖
+  （[thread 11429](https://lf-empire.de/forum/archive/index.php?thread-11429.html)）。
 - **巴哈姆特**玩家整理嘅合體戰神公式表。
 - 所有仍然記得呢隻遊戲嘅玩家。
 
