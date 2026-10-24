@@ -5,7 +5,15 @@ import zlib from "node:zlib";
 import { mkdir } from "node:fs/promises";
 import sharp from "sharp";
 
-export const SRC = process.env.LFO_SRC ?? "/Volumes/Pie/Downloads/lfo-master";
+export const SRC = (() => {
+  const src = process.env.LFO_SRC;
+  if (!src) {
+    throw new Error(
+      "Set LFO_SRC to your original LFO client path (e.g. /path/to/lfo-master).",
+    );
+  }
+  return src;
+})();
 export const CACHE = `${import.meta.dir}/../.cache`; // repo-root .cache, shared by all pipeline steps
 
 // Per-archive ZipCrypto passwords, published by theunderdark's "Community Project: Little
