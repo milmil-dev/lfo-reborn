@@ -11,7 +11,8 @@ Players only ever hit the `lfo-reborn` Cloudflare Pages project. The game's art,
 each deployment under `/assets` (the default `ASSETS` base), and Pages static requests are free and
 unmetered, so traffic cannot run up a bill. R2 is never public: it only holds the two archives CI copies from.
 
-- production: push to `main` → https://www.lforeborn.v6.rocks (also https://lfo-reborn.pages.dev)
+- production: push to `main` → https://lfo-reborn.pages.dev
+- custom domain: https://www.lforeborn.v6.rocks (only once its DNS resolves — see step 6)
 - previews: same-repo PRs → `https://<branch>.lfo-reborn.pages.dev` (wrangler prints the exact URL)
 
 It is classic Pages rather than Workers static assets on purpose: a Worker custom domain needs the zone on
@@ -80,12 +81,17 @@ that run them count against the metered 100k/day Workers budget.
    Also: Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests"
    (release-please).
 
-6. **Custom domain** `www.lforeborn.v6.rocks`:
+6. **Custom domain** `www.lforeborn.v6.rocks` (optional — the site runs on `lfo-reborn.pages.dev`):
    - Cloudflare: Pages project `lfo-reborn` → Custom domains → `www.lforeborn.v6.rocks`
    - dynv6: zone `lforeborn.v6.rocks` → Records → CNAME, name `www`, data `lfo-reborn.pages.dev`
 
    Cloudflare verifies the CNAME and issues the certificate (minutes, sometimes longer). The zone root
    `lforeborn.v6.rocks` can only hold A/AAAA at dynv6, so it is not used.
+
+   As of 2026-10-24 the zone answers no A/AAAA/CNAME for `www`, so the custom domain does not resolve
+   and the site's own URLs (canonical, og:url, `robots.txt`, `sitemap.xml`, `src/lib/seo.ts`) all point at
+   `https://lfo-reborn.pages.dev`. Adding the record is not enough on its own: change `SITE_URL` and the
+   tags in `web/index.html` back to the custom domain, or search engines will keep the pages.dev URL.
 
 Without the R2 secrets CI still passes, but skips the data-backed tests (with a warning) and does not deploy.
 
