@@ -21,6 +21,12 @@ export const BASE = `${ASSETS}/game`;
 /*
   HD art: pipeline/game-hd.ts writes <file>@2x.webp next to atlases, room layers and stages and
   lists them in hd.json. Pixi reads "@2x" as resolution 2, so frame rects stay in original pixels.
+
+  A character page is 4096 × 3166 at 2× — about 50 MB decoded. A driver whose MAX_TEXTURE_SIZE
+  is 4096 can hold that page only exactly at its limit, and some make a mess of it: the Mali-G72
+  (Kirin 970, driver r18p0) turns one such page into gigabytes of its own memory, so the tab hits
+  the OS's low-memory killer and reloads (measured on a BLA-L29: 3.7 GB resident at 2×, 1.1 GB at
+  1×, and the crash goes away). So the 2× twin is only used when the GPU has room to spare.
 */
 let hdSet: Promise<Set<string>> | null = null;
 function hdFiles() {
@@ -31,9 +37,30 @@ function hdFiles() {
   return hdSet;
 }
 
-/** URL of an asset under /assets/game, preferring its 2× HD twin when the pipeline made one. */
+/** The GPU's largest texture edge, or 0 when WebGL is unavailable (jsdom, a locked-down browser). */
+function maxTextureSize() {
+  const canvas = document.createElement("canvas");
+  const gl = (canvas.getContext("webgl2") ??
+    canvas.getContext("webgl")) as WebGLRenderingContext | null;
+  if (!gl) return 0;
+  const size = gl.getParameter(gl.MAX_TEXTURE_SIZE) as number;
+  // a phone keeps only a handful of live contexts: let this probe's go
+  gl.getExtension("WEBGL_lose_context")?.loseContext();
+  return size;
+}
+
+/** 2× pages are 4096 px wide; only a driver that can hold twice that is given one. */
+const HD_MIN_TEXTURE = 8192;
+
+let hdAllowed: boolean | null = null;
+function hdEnabled() {
+  hdAllowed ??= typeof document !== "undefined" && maxTextureSize() >= HD_MIN_TEXTURE;
+  return hdAllowed;
+}
+
+/** URL of an asset under /assets/game, preferring its 2× HD twin when the GPU can hold it. */
 export async function gameArt(rel: string) {
-  return (await hdFiles()).has(rel)
+  return hdEnabled() && (await hdFiles()).has(rel)
     ? `${BASE}/${rel.replace(/\.(png|webp)$/, "@2x.webp")}`
     : `${BASE}/${rel}`;
 }

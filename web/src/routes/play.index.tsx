@@ -371,6 +371,10 @@ function SelectScreen() {
     }
   }, [index, list]);
   useEffect(() => {
+    // Every full-body picture is 1–30 MB decoded and the roster's is about a gigabyte together,
+    // which a phone's renderer cannot hold (the tab gets low-memory-killed). So the whole roster
+    // is only decoded ahead where there is room for it: on a fine pointer, i.e. a desktop.
+    if (matchMedia("(pointer: coarse)").matches) return;
     const idle = window.requestIdleCallback ?? ((f: () => void) => setTimeout(f, 300));
     const id = idle(() => {
       for (const p of list) preloadArt(`${P}/${p.big}`);
