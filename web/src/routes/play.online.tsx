@@ -133,7 +133,8 @@ function RoomView({
     const c = new RoomClient(base, code, name);
     setClient(c);
     return () => {
-      c.close();
+      // not close(): the seat stays ours for a refresh to come back to
+      c.dispose();
       setClient(null);
     };
   }, [base, code, name]);
@@ -178,6 +179,14 @@ function ConnectedRoom({
       }),
     [client],
   );
+  // a refreshed tab that comes back mid-bout: the room replays its frames, and the bout resumes.
+  // Read off the snapshot rather than the message, which may land before this screen is listening
+  const resuming = net.resuming;
+  useEffect(() => {
+    if (!resuming) return;
+    const s = client.getSnapshot();
+    if (s.room && s.room.phase === "fight" && s.you >= 0) setFight({ room: s.room, you: s.you });
+  }, [client, resuming]);
   // sit down as the character the profile plays
   const picked = me?.key;
   useEffect(() => {
@@ -237,7 +246,7 @@ function ConnectedRoom({
       : net.error === "full"
         ? t`這間遊戲室已滿。`
         : net.error === "started"
-          ? t`這間遊戲室已經開始了。`
+          ? t`這間遊戲室已經開始了，要等這一局結束才能加入。`
           : net.status === "closed"
             ? t`已離開遊戲室。`
             : null;

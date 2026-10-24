@@ -65,9 +65,9 @@ export class Rollback {
     );
   }
 
-  /** Simulate the next local tick. */
-  advance() {
-    this.run(false);
+  /** Simulate the next local tick. `silent` while replaying a bout (no sounds twice). */
+  advance(silent = false) {
+    this.run(silent);
   }
 
   private run(silent: boolean) {

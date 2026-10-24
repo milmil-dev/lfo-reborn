@@ -60,6 +60,14 @@ select, `/play/$key` a training ground driven by the original frame data.
   themselves when they empty), `GET /rooms` reads it for the 選擇遊戲室 screen (`game/net/room-list.tsx`,
   built from the client's `selectroom/` art), and an entry quiet for ten minutes is checked against its room
   before it is shown. `wrangler types` writes `worker-configuration.d.ts` (gitignored).
+- A seat is the player's, not the socket's: `hello` carries the seat's token (the browser keeps it in
+  `lfo-reborn.seat.<CODE>`), so a refreshed tab comes back to the same seat. In the lobby a dropped socket keeps
+  its seat for `SEAT_GRACE_MS`; `bye` (leaving on purpose, `Client.dispose` vs `close`) frees it at once. Mid-bout
+  the line-up cannot change, so the seat stays, the room keeps stamping its last input and marks it `online: false`;
+  a peer that comes back sends `resume` and gets the frame log from tick 0 in chunks, live frames held back until
+  `resume-end` (`rollback.ts` replays it silently, `advance(true)`). A bout with no person online is called off
+  after `ABANDON_TICKS`, checked in `step()` rather than by a timer (a socket-less object can be evicted between
+  ticks and take the timer with it). Joining a room whose phase is `fight` is refused, and the list says why.
 - `web/src/game/net/protocol.ts` is the wire (JSON; inputs as 9-bit masks) and is compiled by both sides: keep it
   free of DOM and `@/` imports. `client.ts` is the socket + snapshot; `net-run.tsx` the bout, with rollback
   (`rollback.ts`): the World runs on the local clock at the room's frame rate, `LEAD` ticks ahead of its latest
@@ -69,6 +77,8 @@ select, `/play/$key` a training ground driven by the original frame data.
   replays silently. The host runs COM brains; everyone reports `World.hash()` of confirmed ticks every
   `HASH_EVERY`. Spawn every fighter identically on every peer (team, facing by seat) and set `Director.arena`
   for a bout — any per-client difference is a desync. New fighter state goes into `save/load` as well as `hash`.
+  The bout keeps the lobby's social furniture: a roster strip (each seat's name, team, COM/★, KOs, HP/MP, 離線)
+  and the chat, both drawn in the HUD's units so they scale with the stage.
 - `VITE_REALTIME_URL` points the site at the Worker (deploy/README.md); unset in production the door stays shut.
 - In dev, `window.__lfo` exposes the training world for scripted checks.
 
