@@ -3,7 +3,15 @@
 import zlib from "node:zlib";
 import { copyFile, mkdir } from "node:fs/promises";
 
-const SRC = process.env.LFO_SRC ?? "/Volumes/Pie/Downloads/lfo-master";
+const SRC = (() => {
+  const src = process.env.LFO_SRC;
+  if (!src) {
+    throw new Error(
+      "Set LFO_SRC to your original LFO client path (e.g. /path/to/lfo-master).",
+    );
+  }
+  return src;
+})();
 const OUT = `${import.meta.dir}/assets`;
 
 const IMAGES = new Set([
