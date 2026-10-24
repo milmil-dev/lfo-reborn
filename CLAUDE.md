@@ -19,7 +19,7 @@ hero, entity colour comes from the art, GSAP scroll motion, no decorative border
 
 ## Data pipeline (`pipeline/`)
 
-- Needs the original client: `LFO_SRC=/path/to/lfo-master` (default `/Volumes/Pie/Downloads/lfo-master`).
+- Needs the original client: set `LFO_SRC=/path/to/lfo-master` (required; no machine-specific default).
 - `make data` (or `cd pipeline && bun build.ts`) rebuilds `data/lfo.db` and `data/assets/dex/**`. `data/` and `.cache/` are gitignored.
 - The schema lives in `api/internal/db/schema.sql` and is shared with sqlc — change it there, then rebuild data and run `make sqlc`.
 - Formats: `.lfo` = ZipCrypto zips (passwords in `pipeline/lfo.ts`, from the Little Fighter Empire forum); `.tzw` image packs;
