@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export const APP_NAME = "LFO Reborn";
 /** The origin the site is served from: the head in index.html is static, so it is written out. */
-export const SITE_URL = "https://www.lforeborn.v6.rocks";
+export const SITE_URL = "https://lfo-reborn.pages.dev";
 export const OG_IMAGE = `${SITE_URL}/og.png`;
 export const HOME_TITLE = `${APP_NAME} — 小鬥士 Online 網頁重製版`;
 export const DEFAULT_DESCRIPTION =

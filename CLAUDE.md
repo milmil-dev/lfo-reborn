@@ -113,7 +113,7 @@ select, `/play/$key` a training ground driven by the original frame data.
 ## CI, deploy and versions
 
 - GitHub repo `milmil-dev/lfo-reborn`. `.github/workflows/web.yml` (install, `check`, `test`, `build`, deploy to
-  Cloudflare Pages `lfo-reborn`: main → production at www.lforeborn.v6.rocks, other branches → `<branch>.lfo-reborn.pages.dev`) and `api.yml` (`go vet`, `go test`, `go build`; not deployed) run on
+  Cloudflare Pages `lfo-reborn`: main → production at lfo-reborn.pages.dev, other branches → `<branch>.lfo-reborn.pages.dev`) and `api.yml` (`go vet`, `go test`, `go build`; not deployed) run on
   `web/**` / `api/**` changes. `data/` is not in git: `make publish-data` uploads the asset tarball and the test fixtures
   (`data/lfo.db` + `data/assets/game/**/*.json`) to private R2 (keys in the main checkout's `.env`, read from any worktree), which CI unpacks — a test reading another path needs the
   fixture list in `deploy/publish-data.sh` updated.
