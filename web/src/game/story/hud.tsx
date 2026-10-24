@@ -122,6 +122,10 @@ function Fill({
 /**
  * 異轉能量計: the character's tranformicon, dark and filling from the bottom as hits land,
  * pulsing when full; while transformed it drains. Clicking it transforms / cancels.
+ *
+ * The icon is there as soon as the account holds the 信物 (tran.mdx), and stays empty and dim
+ * until LV 150 arms it — so a player who has the relic can see the marker and read why it does
+ * nothing yet, instead of the gauge appearing out of nowhere one day.
  */
 export type TranGaugeState = {
   gauge: number;
@@ -131,12 +135,15 @@ export type TranGaugeState = {
   icon: number;
   /** the key that presses it, shown on the icon */
   keyHint: string;
+  /** why it can't be used yet: the level, or the missing 信物 (undefined when it is armed) */
+  locked?: "level" | "relic";
   onPress: () => void;
 };
 
 function TranGauge({ t }: { t: TranGaugeState }) {
   const src = (id: number) => `${ASSETS}/ui-hd/interface/tranformicon/tranicon${id}.webp`;
   const fill = Math.max(0, Math.min(100, t.gauge));
+  const locked = t.locked;
   const img = (className: string, style?: CSSProperties) => (
     <img
       src={src(t.icon)}
@@ -155,11 +162,15 @@ function TranGauge({ t }: { t: TranGaugeState }) {
     <button
       type="button"
       onClick={t.onPress}
-      className="pointer-events-auto absolute top-[61px] left-[122px] size-[30px] rounded-full"
-      aria-label={`異轉 ${Math.floor(fill)}%`}
+      className={cn(
+        "group pointer-events-auto absolute top-[61px] left-[122px] size-[30px] rounded-full",
+        locked && "cursor-help",
+      )}
+      aria-label={locked ? `異轉（未開放）` : `異轉 ${Math.floor(fill)}%`}
     >
       {img("opacity-70 grayscale brightness-50")}
       {img("", { clipPath: `inset(${100 - fill}% 0 0 0)` })}
+      {locked && <span className="absolute inset-0 rounded-full bg-black/55" />}
       {(t.ready || t.active) && (
         <motion.span
           className={cn(
@@ -173,6 +184,18 @@ function TranGauge({ t }: { t: TranGaugeState }) {
       {t.ready && (
         <span className="absolute -right-[4px] -bottom-[4px] rounded-[3px] bg-black/80 px-[3px] font-lfo text-[8px] text-[#7fe3ff]">
           {t.keyHint}
+        </span>
+      )}
+      {locked && (
+        <span className="absolute -right-[4px] -bottom-[4px] rounded-[3px] bg-black/85 px-[3px] font-lfo text-[8px] text-[#ffd27a]">
+          LV150
+        </span>
+      )}
+      {locked && (
+        <span className="pointer-events-none absolute top-[34px] left-0 z-10 w-[150px] -translate-x-[58px] rounded-[4px] bg-black/90 px-2 py-1 text-[10px] text-white leading-[14px] opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100">
+          {locked === "level"
+            ? `異轉需要 LV150；達到後能量計才會儲存能量。`
+            : `異轉需要角色的異轉信物（卡片店）。`}
         </span>
       )}
     </button>

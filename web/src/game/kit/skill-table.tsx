@@ -1,5 +1,6 @@
 import { useLingui } from "@lingui/react/macro";
 import { skillLevel, skillToNext } from "@/game/core/skills";
+import { cells as tableCells } from "@/game/core/table";
 import { useEffect, useState } from "react";
 import type { CharData, Move } from "@/game/core/types";
 import type { Skill } from "@/lib/api";
@@ -12,7 +13,12 @@ import { Ui } from "./ui";
   LFO.exe draws it: one row per skill tier, tier 1 at the bottom (y = 155 − (tier − 1) · 68),
   slots 69 px apart from x = 20, a 55 px hit area each; usable skills glow with skilllight0–3
   cycling every 200 ms; the chosen one is framed by skilltableselect and described in the box
-  below the grid.
+  below the grid. Which moves fill the nine cells is core/table.ts's business.
+
+  The right-hand column of the frame is the client's skill detail: 學習要求 / 使用要求 / 出招按鍵.
+  The remake has no 學習點數 economy, so a move is known from the start; what the column says is
+  the MP cost, the command, and — for a move the client's own table has no row for — that its
+  command comes straight from the sprite.
 */
 
 const G = "gameinterface/default";
@@ -63,30 +69,19 @@ export function SkillTable({
   className?: string;
 }) {
   const { t } = useLingui();
-  const specials = data.moves.filter((m) => !m.from && data.frames[String(m.to)]);
-  // rows by tier (1 at the bottom), three slots a row; anything past that fills the next free slot
-  const cells: { move: Move; x: number; y: number }[] = [];
-  const used = new Set<string>();
-  const byTier = [...specials].sort(
-    (a, b) => (skills.get(a.slot)?.tier ?? 1) - (skills.get(b.slot)?.tier ?? 1) || a.slot - b.slot,
-  );
-  for (const move of byTier) {
-    const tier = Math.min(3, Math.max(1, skills.get(move.slot)?.tier ?? 1));
-    let row = tier - 1;
-    let col = [0, 1, 2].find((c) => !used.has(`${row}:${c}`));
-    for (let r = 0; col === undefined && r < 3; r++) {
-      row = r;
-      col = [0, 1, 2].find((c) => !used.has(`${r}:${c}`));
-    }
-    if (col === undefined) break;
-    used.add(`${row}:${col}`);
-    cells.push({ move, x: 20 + col * 69, y: 155 - row * 68 });
-  }
+  // the nine cells, the client's own rows first (core/table.ts), laid out as LFO.exe draws them
+  const tiers = new Map<number, number>();
+  for (const [slot, s] of skills) tiers.set(slot, s.tier);
+  const cells = tableCells(data, tiers).cells.map((c) => ({
+    ...c,
+    x: 20 + c.col * 69,
+    y: 155 - (c.tier - 1) * 68,
+  }));
 
   const [sel, setSel] = useState(0);
-  const chosen = cells[Math.min(sel, cells.length - 1)]?.move;
-  const skill = chosen && skills.get(chosen.slot);
-  const chains = chosen ? followUps(data, chosen, data.moves) : [];
+  const chosen = cells[Math.min(sel, cells.length - 1)];
+  const skill = chosen && skills.get(chosen.move.slot);
+  const chains = chosen ? followUps(data, chosen.move, data.moves) : [];
 
   // the glow cycles through its four frames every 200 ms, like the client
   const [light, setLight] = useState(0);
@@ -98,13 +93,13 @@ export function SkillTable({
   return (
     <div className={cn("relative h-[336px] w-[342px] select-none", className)}>
       <Ui name={`${G}/skilltable`} w={342} h={336} className="absolute inset-0" />
-      {cells.map(({ move, x, y }, i) => {
+      {cells.map(({ move, x, y, tier }, i) => {
         const s = skills.get(move.slot);
         const usable = mp >= move.mp;
         const flash = lit && lit.to === move.to;
         return (
           <button
-            key={move.to}
+            key={`${move.slot}-${move.to}`}
             type="button"
             onMouseEnter={() => setSel(i)}
             onFocus={() => setSel(i)}
@@ -117,7 +112,7 @@ export function SkillTable({
             aria-label={s?.name ?? move.keys.join(" / ")}
           >
             <Ui
-              name={`${G}/skilltablebox${1 + (Math.min(3, s?.tier ?? 1) - 1)}`}
+              name={`${G}/skilltablebox${Math.min(3, Math.max(1, tier))}`}
               w={51}
               h={51}
               className="absolute top-[7px] left-[8px]"
@@ -162,19 +157,19 @@ export function SkillTable({
         <div className="absolute top-[236px] left-[36px] flex h-[68px] w-[228px] flex-col gap-[5px] text-white">
           <p className="flex items-baseline gap-2">
             <span className="truncate font-bold text-[15px] [text-shadow:0_1px_1px_#000]">
-              {skill?.name ?? t`招式 ${chosen.slot}`}
+              {skill?.name ?? t`招式 ${chosen.move.slot}`}
             </span>
             <span
               className={cn(
                 "ml-auto shrink-0 font-lfo text-[11px] tabular-nums",
-                mp >= chosen.mp ? "text-[#9fd3ff]" : "text-[#ff9b9b]",
+                mp >= chosen.move.mp ? "text-[#9fd3ff]" : "text-[#ff9b9b]",
               )}
             >
-              MP {chosen.mp}
+              MP {chosen.move.mp}
             </span>
           </p>
           <p className="flex flex-wrap items-center gap-[3px]">
-            {chosen.keys.map((k, i) => (
+            {chosen.move.keys.map((k, i) => (
               <span key={k} className="flex items-center gap-[3px]">
                 {i > 0 && <span className="px-[2px] text-[10px] text-white/70">{t`或`}</span>}
                 {keyGlyphs(k)}
@@ -183,9 +178,9 @@ export function SkillTable({
           </p>
           {exp && (
             <p className="font-lfo text-[9px] text-[#ffe08a]/90">
-              LV {skillLevel(exp[chosen.slot] ?? 0)}
-              {skillToNext(exp[chosen.slot] ?? 0) > 0
-                ? t`　再使用 ${skillToNext(exp[chosen.slot] ?? 0)} 次升級`
+              LV {skillLevel(exp[chosen.move.slot] ?? 0)}
+              {skillToNext(exp[chosen.move.slot] ?? 0) > 0
+                ? t`　再使用 ${skillToNext(exp[chosen.move.slot] ?? 0)} 次升級`
                 : t`　已達最高等級`}
             </p>
           )}
@@ -198,6 +193,30 @@ export function SkillTable({
                 </span>
               ))}
             </p>
+          )}
+        </div>
+      )}
+
+      {/*
+        the frame's right-hand column, as the client's skill detail reads it: 使用要求 (the MP),
+        出招按鍵 (the command). Every move is known from the start — the remake has no 學習點數 —
+        so there is no 學習要求 to print.
+      */}
+      {chosen && (
+        <div className="absolute top-[30px] left-[220px] flex w-[92px] flex-col gap-[4px] text-white">
+          <p className="font-bold text-[10px] text-white/85 leading-none">{t`使用要求`}</p>
+          <p
+            className={cn(
+              "font-lfo text-[11px] tabular-nums leading-none",
+              mp >= chosen.move.mp ? "text-[#9fd3ff]" : "text-[#ff9b9b]",
+            )}
+          >
+            {t`元力 ${chosen.move.mp}`}
+          </p>
+          <p className="mt-[8px] font-bold text-[10px] text-white/85 leading-none">{t`出招按鍵`}</p>
+          <p className="flex flex-wrap items-center gap-[2px]">{keyGlyphs(chosen.move.keys[0])}</p>
+          {!chosen.listed && (
+            <p className="mt-[8px] text-[9px] text-[#ffe08a] leading-[12px]">{t`指令取自招式表`}</p>
           )}
         </div>
       )}

@@ -57,6 +57,8 @@ export function parseSpt(text: string) {
 	let chr: string[] = [];
 	let cur: Frame | null = null;
 	let inPic = false;
+	/** act rows: [action id, the action it continues into] */
+	const actNext: [number, number][] = [];
 	for (const raw of lines) {
 		const line = raw.trim();
 		if (!line || line.startsWith("//")) continue;
@@ -109,6 +111,8 @@ export function parseSpt(text: string) {
 			case "act":
 				actions[f[0]] = n(3);
 				actionFrame[n(1)] = n(3);
+				// the row's 5th number is the action this one continues into once its frames run out
+				if (n(4)) actNext.push([n(1), n(4)]);
 				break;
 			case "spm": {
 				moves.push({
@@ -126,6 +130,76 @@ export function parseSpt(text: string) {
 		m.to = actionFrame[m.to] ?? m.to;
 		if (m.from) m.from = actionFrame[m.from] ?? m.from;
 	}
+	// The act table's next-action column. An action's frames end on nx = -1, which only says
+	// "this chain is over": the client then enters the action named in that column
+	// (SUPER2START → SUPER2LOOP_R: 散彈氣功波's wind-up goes on into the loop that fires it).
+	// Only actions a special starts (the spm rows' target frames) are considered — the basic
+	// actions have their own rules in the engine — and only where every act row ending there
+	// agrees: an ambiguous frame keeps the plain reading. A continuation that loops on its own
+	// (a sustained power-up or super) is left out, since the client holds it until something
+	// else ends it and the remake has no such rule.
+	const cont: Record<number, number> = {};
+	{
+		/** the last frame of the chain starting at `start`, or undefined when it never ends */
+		const ends = (start: number) => {
+			let id = start;
+			let last = start;
+			const seen = new Set<number>();
+			while (id !== -1 && frames[id] && !seen.has(id)) {
+				seen.add(id);
+				last = id;
+				id = frames[id].nx;
+			}
+			return id === -1 ? last : undefined;
+		};
+		const terminal = new Map<number, number>(); // special start frame -> its chain's last frame
+		for (const m of moves) {
+			if (m.from || !frames[m.to]) continue;
+			const last = ends(m.to);
+			if (last !== undefined) terminal.set(m.to, last);
+		}
+		const agreed = new Map<number, number | null>(); // last frame -> its continuation (null: rows disagree)
+		for (const [aID, nextID] of actNext) {
+			const start = actionFrame[aID];
+			const next = actionFrame[nextID] ?? nextID;
+			const last = terminal.get(start);
+			if (last === undefined || next === start || next === last || !frames[next]) continue;
+			if (ends(next) === undefined) continue;
+			const was = agreed.get(last);
+			agreed.set(last, was === undefined || was === next ? next : null);
+		}
+		// Drop any continuation that comes back round to where it started: a sustained move the
+		// client repeats until something else interrupts it (kiki's SUPER6, a held power-up). The
+		// remake has no rule for "until something else", so those keep the plain reading. Removing
+		// one can expose another loop, so this runs until nothing changes.
+		const cand = new Map<number, number>();
+		for (const [last, next] of agreed) if (next !== null) cand.set(last, next);
+		for (let changed = true; changed; ) {
+			changed = false;
+			for (const [last, next] of cand) {
+				let id: number = next;
+				const seen = new Set<number>([last]);
+				let looped = false;
+				for (let i = 0; i < 4000; i++) {
+					if (id === -1) break;
+					if (seen.has(id)) {
+						looped = true;
+						break;
+					}
+					seen.add(id);
+					const f = frames[id];
+					if (!f) break;
+					id = f.nx !== -1 ? f.nx : (cand.get(id) ?? -1);
+				}
+				if (looped) {
+					cand.delete(last);
+					changed = true;
+					break;
+				}
+			}
+		}
+		for (const [last, next] of cand) cont[last] = next;
+	}
 	const attrs = {
 		id: Number(chr[1]),
 		type: Number(chr[2]),
@@ -139,13 +213,13 @@ export function parseSpt(text: string) {
 		runJumpD: Number(chr[13]),
 		weight: Number(chr[16]),
 	};
-	return { attrs, nameEn: chr[0] ?? "", frames, actions, acts: actionFrame, moves, pics, mpi };
+	return { attrs, nameEn: chr[0] ?? "", frames, actions, acts: actionFrame, cont, moves, pics, mpi };
 }
 
 /** Rewrites only the frame data of an exported sprite (atlas pages and rects stay as they are). */
 export async function refreshFrames(json: string, spt: Spt) {
 	const cur = await Bun.file(json).json();
-	await Bun.write(json, JSON.stringify({ ...cur, attrs: spt.attrs, actions: spt.actions, acts: spt.acts, moves: spt.moves, frames: spt.frames }));
+	await Bun.write(json, JSON.stringify({ ...cur, attrs: spt.attrs, actions: spt.actions, acts: spt.acts, cont: spt.cont, moves: spt.moves, frames: spt.frames }));
 }
 
 /* ───────── atlas building (raw RGBA in memory) ───────── */
@@ -321,6 +395,8 @@ export async function exportSprite(opts: { dir: string; key: string; spt: Spt; s
 		actions: spt.actions,
 		// action id -> start frame (a held weapon is driven by its holder's wpn.aid)
 		acts: spt.acts,
+		// a chain's last frame -> the action the client enters after it (the act table's next column)
+		cont: spt.cont,
 		moves: spt.moves,
 		frames: spt.frames,
 		pages: pages.map((_, i) => `${key}-${i}.png`),

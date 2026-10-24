@@ -95,6 +95,11 @@ export type CharData = {
   actions: Record<string, number>; // action name -> start frame
   /** action id -> start frame (items: 0 held, 50 sky, 60 ground, 100… attack, 200 thrown) */
   acts?: Record<string, number>;
+  /**
+   * A frame whose chain ends here (nx = -1) and what the client enters next: the act table's
+   * next-action column. 散彈氣功波's wind-up ends at 8202 and continues into its loop at 8210.
+   */
+  cont?: Record<string, number>;
   moves: Move[];
   frames: Record<string, Frame>;
   pages: string[];

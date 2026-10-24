@@ -771,6 +771,12 @@ export class Fighter {
       );
     if (f.n.startsWith("DIZZY")) return this.goto(this.action("STAND"), events);
 
+    // the act table's next action: where an action's frames run out, the client enters the one
+    // its row names (SUPER2START → SUPER2LOOP_R: 散彈氣功波's wind-up continues into its loop).
+    // Last, so the rules above — a held 防, a landing, a knock-down — keep their say.
+    const cont = this.data.cont?.[String(this.frameId)];
+    if (!this.airborne && cont !== undefined && this.frameAt(cont)) return this.goto(cont, events);
+
     this.goto(this.act(this.airborne ? "JUMPU" : "STAND"), events);
   }
 

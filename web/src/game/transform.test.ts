@@ -1,10 +1,30 @@
-import { charge, drain, GAUGE_MAX, NO_TRAN, press, ready, unlocked } from "./transform";
+import {
+  charge,
+  drain,
+  GAUGE_MAX,
+  lockedHint,
+  NO_TRAN,
+  press,
+  ready,
+  showsGauge,
+  unlocked,
+} from "./transform";
 
 describe("異轉", () => {
   it("needs LV 150 and the 信物", () => {
     expect(unlocked(149, true)).toBe(false);
     expect(unlocked(150, false)).toBe(false);
     expect(unlocked(150, true)).toBe(true);
+  });
+
+  // tran.mdx Q&A: the 信物 puts the gauge in the status box; LV 150 is what makes it hold energy
+  it("shows the gauge for a 信物 holder at any level, and arms it at LV 150", () => {
+    expect(showsGauge(false)).toBe(false);
+    expect(showsGauge(true)).toBe(true);
+    expect(charge(NO_TRAN, 5000, false)).toBe(NO_TRAN);
+    expect(charge(NO_TRAN, 5000, true).gauge).toBeGreaterThan(0);
+    expect(lockedHint(true)).toBe("level");
+    expect(lockedHint(false)).toBe("relic");
   });
 
   it("fills on hits, transforms when full, drains and ends", () => {

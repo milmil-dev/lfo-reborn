@@ -15,7 +15,7 @@ import { MetalButton } from "@/game/kit/buttons";
 import { SkillTable } from "@/game/kit/skill-table";
 import { HitCounter, StatusBox, useHudScale } from "@/game/story/hud";
 import { useActiveProfile } from "@/game/profiles";
-import { charge, drain, NO_TRAN, press, ready } from "@/game/transform";
+import { charge, drain, formId, NO_TRAN, press, ready } from "@/game/transform";
 import { StartGate } from "@/game/ui";
 import { LoadingScreen } from "@/game/kit/loading";
 import { q } from "@/lib/api";
@@ -88,10 +88,17 @@ function Training() {
   }, [inLobby, navigate, player.data.key]);
 
   const { data: detail } = useQuery(q.character(player.data.attrs.id));
+  // 異轉: the transformed form has its own rows, so the table reads the form's while it lasts
+  const tranId = formId(player.data.attrs.id);
+  const { data: formDetail } = useQuery({
+    ...q.character(tranId ?? 0),
+    enabled: !!tranId,
+  });
   const skillBySlot = new Map((detail?.skills ?? []).map((s) => [s.slot, s]));
+  const formSkillBySlot = new Map((formDetail?.skills ?? []).map((s) => [s.slot, s]));
   // the game loop is created once; it reads skill names (which load later) through this ref
   const skillsRef = useRef(skillBySlot);
-  skillsRef.current = skillBySlot;
+  skillsRef.current = tran.active && form ? formSkillBySlot : skillBySlot;
 
   const onStart = useCallback(() => audio.music("lfo_school1.ogg", 0.3), []);
 
@@ -335,6 +342,8 @@ function Training() {
           }}
           scale={scale}
           tran={
+            // the training ground always lets a character with a transformed form use the gauge;
+            // without a form in the client's data there is nothing to press, and the icon says so
             form
               ? {
                   gauge: tran.gauge,
@@ -344,7 +353,15 @@ function Training() {
                   keyHint: "Y",
                   onPress: () => tranRef.current(),
                 }
-              : undefined
+              : {
+                  gauge: 0,
+                  active: false,
+                  ready: false,
+                  icon: player.data.attrs.id,
+                  keyHint: "Y",
+                  locked: "relic",
+                  onPress: () => {},
+                }
           }
         />
       )}
@@ -425,7 +442,7 @@ function Training() {
             >
               <SkillTable
                 data={tran.active && form ? form.data : player.data}
-                skills={skillBySlot}
+                skills={tran.active && form ? formSkillBySlot : skillBySlot}
                 mp={me?.mp ?? 0}
                 lit={lit}
                 onCast={(m) => fighterRef.current?.cast(m.slot)}

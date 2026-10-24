@@ -261,6 +261,29 @@ describe.skipIf(!existsSync(`${propDir}/5006.json`))("story props", () => {
   });
 });
 
+describe.skipIf(!existsSync(`${dir}/davis_r.json`))(
+  "異轉 specials that continue past their wind-up",
+  () => {
+    // 新生迪雲's 散彈氣功波 (GFA, slot 1) opens on Super2 8200 → 8202, whose chain ends at nx = -1;
+    // the act row SUPER2START says the action goes on into SUPER2LOOP_R at 8210, which is where the
+    // ball is fired. Without that column the move stopped after the wind-up and did nothing.
+    it("散彈氣功波 runs into its loop and spawns its projectiles", () => {
+      const world = new World(stage);
+      const hero = world.spawn(load("davis_r"), 1, 500, 450, 1);
+      hero.infiniteMp = true;
+      const move = hero.data.moves.find((m) => m.keys.includes("GFA"))!;
+      hero.cast(move.slot);
+      const events = play(world, hero.id, [], 40);
+      const spawned = events
+        .filter((e) => e.type === "spawn")
+        .map((e) => (e as { bla: { type: number } }).bla.type);
+      expect(spawned.length).toBeGreaterThan(0);
+      // and the move is over rather than stuck on its wind-up
+      expect(["STAND", "WALK"]).toContain(hero.anim);
+    });
+  },
+);
+
 describe.skipIf(!existsSync(`${dir}/diluns.json`))("出招表 clicks", () => {
   it("cast() performs the slot's special on the next tick and pays its MP", () => {
     const world = new World(stage);
