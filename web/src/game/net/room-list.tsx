@@ -180,13 +180,16 @@ export function RoomList({
   };
 
   const headerText = [t`遊戲室`, t`主持`, t`人數`, t`場地`, "LV", t`狀態`];
-  // the header pieces carry a knob at each join (x ≈ 69, 230, 391, 552): titles step past them
+  // Each title sits over the middle of the column it names. The bar's knobs (x ≈ 121, 282, 443,
+  // 604) fall inside some columns: 主持, 場地 and 狀態 clear theirs at that centre, but the level
+  // column's knob sits near its left edge, so LV centres in the free span after it — where the
+  // client draws it too. 遊戲室 keeps its own grey box at the head of the bar.
   const headerCols: Col[] = [
     CELL.name,
-    CELL.host,
+    { ...CELL.host, align: "center" },
     CELL.seats,
-    { x: CELL.stage.x + 22, w: CELL.stage.w - 22 },
-    { x: CELL.level.x + 48, w: CELL.level.w - 48 },
+    { ...CELL.stage, align: "center" },
+    { x: CELL.level.x + 49, w: CELL.level.w - 49, align: "center" },
     CELL.phase,
   ];
 
@@ -310,7 +313,7 @@ export function RoomList({
       <div className="absolute flex items-end gap-[10px]" style={{ left: TABLE_X, top: 508 }}>
         <div className="relative h-[61px] w-[186px]">
           <Ui name="selectroom/bottomroomsearch0" w={186} h={61} className="absolute inset-0" />
-          <span className="absolute top-[7px] left-[14px] font-bold text-[11px] text-white">{t`房號`}</span>
+          <span className="absolute top-[3px] left-[32px] font-bold text-[11px] text-white">{t`房號`}</span>
           <input
             type="text"
             value={code}
@@ -320,12 +323,12 @@ export function RoomList({
             aria-label={t`房號`}
             onChange={(e) => setCode(e.target.value.toUpperCase())}
             onKeyDown={(e) => e.key === "Enter" && code.trim().length >= 4 && join(code)}
-            className="absolute top-[31px] left-[12px] h-[23px] w-[162px] bg-transparent text-center font-lfo text-[14px] text-[#1b1f2a] tracking-[0.3em] outline-none placeholder:text-[#9aa0aa]"
+            className="absolute top-[36px] left-[12px] h-[22px] w-[162px] bg-transparent text-center font-lfo text-[14px] text-[#1b1f2a] tracking-[0.3em] outline-none placeholder:text-[#9aa0aa]"
           />
         </div>
         <div className="relative h-[55px] w-[195px]">
           <Ui name="selectroom/bottomroomselected" w={195} h={55} className="absolute inset-0" />
-          <span className="absolute top-[24px] right-[16px] left-[16px] truncate text-center font-bold text-[12px] text-[#1b1f2a]">
+          <span className="absolute top-[30px] right-[18px] left-[18px] h-[17px] truncate text-center font-bold text-[12px] leading-[17px] text-[#1b1f2a]">
             {chosen ? chosen.name : code.trim().length >= 4 ? code.trim() : t`（未選擇）`}
           </span>
         </div>

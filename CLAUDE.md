@@ -55,13 +55,13 @@ select, `/play/$key` a training ground driven by the original frame data.
 ## Online rooms (`realtime/`, `web/src/game/net/`, route `/play/online`)
 
 - `realtime/` is a Cloudflare Worker (`pnpm run dev` → ws://localhost:8787, `check`, `test`, `deploy`): `Room`
-  is one Durable Object per room code — the waiting room (seats, rules: stage + one level for all, COM seats,
-  chat, WebSocket hibernation, line-up persisted in storage) and, once started, the `Sequencer`: a 30 Hz clock
-  that stamps each seat's input for tick k into frame k, repeating a late seat's last input. It never runs the
-  game. `Directory` is one object for the whole site: listed rooms report to it on every change (and remove
-  themselves when they empty), `GET /rooms` reads it for the 選擇遊戲室 screen (`game/net/room-list.tsx`,
-  built from the client's `selectroom/` art), and an entry quiet for ten minutes is checked against its room
-  before it is shown. `wrangler types` writes `worker-configuration.d.ts` (gitignored).
+  is one Durable Object per room code — the waiting room (up to `MAX_SEATS` = 6 seats, rules: stage + one level
+  for all, COM seats, chat, WebSocket hibernation, line-up persisted in storage) and, once started, the
+  `Sequencer`: a 30 Hz clock that stamps each seat's input for tick k into frame k, repeating a late seat's last
+  input. It never runs the game. `Directory` is one object for the whole site: listed rooms report to it on every
+  change (and remove themselves when they empty), `GET /rooms` reads it for the 選擇遊戲室 screen
+  (`game/net/room-list.tsx`, built from the client's `selectroom/` art), and an entry quiet for ten minutes is
+  checked against its room before it is shown. `wrangler types` writes `worker-configuration.d.ts` (gitignored).
 - A seat is the player's, not the socket's: `hello` carries the seat's token (the browser keeps it in
   `lfo-reborn.seat.<CODE>`), so a refreshed tab comes back to the same seat. In the lobby a dropped socket keeps
   its seat for `SEAT_GRACE_MS`; `bye` (leaving on purpose, `Client.dispose` vs `close`) frees it at once. Mid-bout

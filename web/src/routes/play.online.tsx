@@ -66,7 +66,7 @@ function OnlinePage() {
     code ? t`連線遊戲室 ${code}` : t`選擇遊戲室`,
     code
       ? t`線上遊戲室：選角色、選隊伍，等齊人開打。`
-      : t`線上遊戲室：加入朋友開的房間，或自己開一間，四人同場即時對戰。`,
+      : t`線上遊戲室：加入朋友開的房間，或自己開一間，最多六人同場即時對戰。`,
   );
   return (
     <div className="fixed inset-0 overflow-hidden bg-black text-foreground select-none">
@@ -224,6 +224,8 @@ function ConnectedRoom({
   const stageAt = stages.findIndex((e) => e.key === room?.rules.stage);
   const entry = stages[stageAt];
   const ok = !!room && canStart(room.seats);
+  // the host's controls sit under the line-up, which a six-seat room makes taller
+  const controlsY = ROW_Y + Math.max(4, room?.seats.length ?? 4) * ROW_STEP;
   const start = () => {
     if (!isHost) return;
     if (!ok) return audio.sfx("guard.wav");
@@ -354,7 +356,10 @@ function ConnectedRoom({
 
           {/* the host's controls: stage, level, COM players */}
           {isHost && (
-            <div className="absolute top-[330px] left-[24px] flex w-[433px] flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-white">
+            <div
+              className="absolute left-[24px] flex w-[433px] flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-white"
+              style={{ top: controlsY }}
+            >
               <span className="flex items-center gap-1">
                 <Arrow
                   dir="l"
@@ -409,7 +414,10 @@ function ConnectedRoom({
             </div>
           )}
 
-          <div className="absolute top-[366px] left-[24px] w-[433px] text-[11px] text-white/70 leading-relaxed">
+          <div
+            className="absolute left-[24px] w-[433px] text-[11px] text-white/70 leading-relaxed"
+            style={{ top: controlsY + 36 }}
+          >
             {isHost
               ? ok
                 ? t`所有人準備好了，按 LAUNCH? 開始。`
@@ -424,16 +432,18 @@ function ConnectedRoom({
               type="button"
               onClick={start}
               className={cn(
-                "absolute top-[392px] left-[24px] h-[25px] w-[143px] transition",
+                "absolute left-[24px] h-[25px] w-[143px] transition",
                 !ok && "opacity-40 grayscale",
               )}
+              style={{ top: controlsY + 62 }}
               aria-label="LAUNCH"
             >
               <Ui name="waitplayer/launch" w={143} h={25} />
             </button>
           )}
           <Pill
-            className="absolute top-[392px] left-[184px] h-[25px] px-4 text-[12px]"
+            className="absolute left-[184px] h-[25px] px-4 text-[12px]"
+            style={{ top: controlsY + 62 }}
             onClick={leave}
             dim
           >

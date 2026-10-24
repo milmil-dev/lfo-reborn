@@ -20,7 +20,9 @@ export const PROTOCOL = 1;
 export const INPUT_DELAY = 2;
 /** Every peer reports its World.hash() this often; the room compares them. */
 export const HASH_EVERY = 30;
-export const MAX_SEATS = 4;
+/** Seats in a room, host included. The client's line-up rows and the joingamelv bars stop at
+ *  four, so 5 and 6 reuse the fullest bar. */
+export const MAX_SEATS = 6;
 
 export const BUTTON_BITS: Button[] = [
   "up",
