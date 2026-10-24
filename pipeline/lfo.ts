@@ -1,5 +1,6 @@
 // Readers for the original LFO client data.
-// Formats are documented inline; see also the LFE forum thread for archive passwords.
+// Formats are documented inline; see also the Little Fighter Empire (LFE) forum thread for
+// archive passwords.
 import zlib from "node:zlib";
 import { mkdir } from "node:fs/promises";
 import sharp from "sharp";
@@ -7,7 +8,8 @@ import sharp from "sharp";
 export const SRC = process.env.LFO_SRC ?? "/Volumes/Pie/Downloads/lfo-master";
 export const CACHE = `${import.meta.dir}/../.cache`; // repo-root .cache, shared by all pipeline steps
 
-// Per-archive ZipCrypto passwords, published at
+// Per-archive ZipCrypto passwords, published by theunderdark's "Community Project: Little
+// Fighter Online – English Translation & Modding Initiative" on the Little Fighter Empire forum:
 // https://lf-empire.de/forum/archive/index.php?thread-11429.html
 const PASSWORDS: Record<string, string> = {
 	"pak.lfo": "e350M2321204{372J417y370l263/3907210q174=216l2632299`345+386v367",

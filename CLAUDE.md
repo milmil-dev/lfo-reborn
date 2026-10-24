@@ -22,7 +22,7 @@ hero, entity colour comes from the art, GSAP scroll motion, no decorative border
 - Needs the original client: `LFO_SRC=/path/to/lfo-master` (default `/Volumes/Pie/Downloads/lfo-master`).
 - `make data` (or `cd pipeline && bun build.ts`) rebuilds `data/lfo.db` and `data/assets/dex/**`. `data/` and `.cache/` are gitignored.
 - The schema lives in `api/internal/db/schema.sql` and is shared with sqlc — change it there, then rebuild data and run `make sqlc`.
-- Formats: `.lfo` = ZipCrypto zips (passwords in `pipeline/lfo.ts`, from the LFE forum); `.tzw` image packs;
+- Formats: `.lfo` = ZipCrypto zips (passwords in `pipeline/lfo.ts`, from the Little Fighter Empire forum); `.tzw` image packs;
   `.pak` atlas definitions; UTF-16 string tables; `.spt` character/item definitions; `skill.tzw.bin`. See comments in `pipeline/lfo.ts`.
 - Use Bun here (`bun`, `bun:sqlite`, `Bun.file`), not Node.
 

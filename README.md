@@ -153,7 +153,9 @@ Pages 嘅靜態請求——免費而且唔計流量。成個免費額度、R2、
 
 - **魔法使命者（BOC@HK）** 同原 LFO 資料博物館——本站嘅內容根基，`legacy/` 就係由嗰度嚟。
   特別鳴謝 Chik、Stanley、Andi、Break。
-- **LFE 討論區**——原版封包嘅解壓密碼係喺嗰度搵到嘅。
+- **Little Fighter Empire（LFE，[lf-empire.de](https://lf-empire.de)）討論區**——原版封包嘅解壓密碼嚟自
+  theunderdark 嘅「Community Project: Little Fighter Online – English Translation & Modding Initiative」帖
+  （[thread 11429](https://lf-empire.de/forum/archive/index.php?thread-11429.html)）。
 - **巴哈姆特**玩家整理嘅合體戰神公式表。
 - 所有仍然記得呢隻遊戲嘅玩家。
 
