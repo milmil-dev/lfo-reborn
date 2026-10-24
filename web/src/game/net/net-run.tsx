@@ -20,6 +20,8 @@ import { BottomBar, HitCounter, StatusBox, useHudScale, type Vitals } from "../s
 import { RoomScene } from "../story/room-scene";
 import type { StoryData } from "../story/types";
 import { comSkill, decided, engineTeam, RANKS, settleHonor } from "../vs";
+import { TEAM_COLOR } from "../kit/room";
+import { cn } from "@/lib/cn";
 import type { RoomClient } from "./client";
 import { HASH_EVERY, INPUT_DELAY, packInput, type RoomState, unpackInput } from "./protocol";
 import { MAX_AHEAD, Rollback, type Sim } from "./rollback";
@@ -43,9 +45,149 @@ type Entrant = {
   f: Fighter | null;
 };
 
+/** One row of the roster strip: who is in the bout and how they stand. */
+type Strip = {
+  name: string;
+  team: number;
+  com: boolean;
+  you: boolean;
+  online: boolean;
+  charId: number | null;
+  hp: number;
+  maxHp: number;
+  mp: number;
+  maxMp: number;
+  kos: number;
+};
+
 /** ticks the local clock keeps ahead of the room's latest frame: the horizon of guessed presses */
 const LEAD = 3;
 type Outcome = { won: boolean; line: string | null; honor: number; rank: number };
+
+export type ChatLine = { seat: number; text: string };
+
+/** The bout's own chrome: who is in it and how they stand, and the room's chat. */
+function Roster({ rows, scale }: { rows: Strip[]; scale: number }) {
+  const { t } = useLingui();
+  return (
+    <div
+      className="pointer-events-none absolute top-0 right-0 z-20 flex flex-col items-end gap-[2px] p-[6px]"
+      style={{ transform: `scale(${scale})`, transformOrigin: "top right" }}
+    >
+      {rows.map((r) => (
+        <div
+          key={`${r.name}-${r.team}-${r.com ? "c" : "p"}`}
+          className="flex w-[186px] items-center gap-[5px] rounded bg-black/45 px-[6px] py-[2px] font-bold text-[11px] text-white"
+        >
+          <span
+            className="grid size-[13px] shrink-0 place-items-center rounded-[2px] text-[9px] text-black"
+            style={{ background: TEAM_COLOR[r.team] ?? "#9aa0aa" }}
+          >
+            {r.team >= 10 ? t`獨` : r.team}
+          </span>
+          <span className={cn("truncate", !r.online && !r.com && "text-white/40 line-through")}>
+            {r.name}
+            {r.com && <span className="text-[9px] text-white/60"> COM</span>}
+            {r.you && <span className="text-[#ffe08a]"> ★</span>}
+          </span>
+          {r.kos > 0 && (
+            <span className="shrink-0 font-lfo text-[9px] text-[#ffe08a]">KO {r.kos}</span>
+          )}
+          <span className="ml-auto flex shrink-0 flex-col gap-px">
+            <span className="block h-[3px] w-[34px] bg-black/60">
+              <span
+                className="block h-full bg-[#ff2b2b]"
+                style={{ width: `${(34 * Math.max(0, r.hp)) / Math.max(1, r.maxHp)}px` }}
+              />
+            </span>
+            <span className="block h-[3px] w-[34px] bg-black/60">
+              <span
+                className="block h-full bg-[#3e8ef7]"
+                style={{ width: `${(34 * Math.max(0, r.mp)) / Math.max(1, r.maxMp)}px` }}
+              />
+            </span>
+          </span>
+          {!r.com && !r.online && (
+            <span className="shrink-0 text-[9px] text-white/50">{t`離線`}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** The room's chat during a bout: the last few lines, and a box to add one. */
+function BoutChat({
+  lines,
+  seats,
+  scale,
+  onSend,
+}: {
+  lines: ChatLine[];
+  seats: RoomState["seats"];
+  scale: number;
+  onSend: (text: string) => void;
+}) {
+  const { t } = useLingui();
+  const [open, setOpen] = useState(false);
+  // laid out in the HUD's 800 × 600 units like the rest of the chrome, above the bottom dial
+  const box = {
+    left: 24 * scale,
+    bottom: 158 * scale,
+    transform: `scale(${scale})`,
+    transformOrigin: "bottom left",
+  };
+  if (!open)
+    return (
+      <div className="absolute z-20" style={box}>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="rounded-full bg-black/55 px-3 py-1 font-bold text-[12px] text-white/85 hover:bg-black/75"
+        >
+          {t`聊天`}
+        </button>
+      </div>
+    );
+  return (
+    <div className="absolute z-20" style={box}>
+      <div className="flex h-[150px] w-[236px] flex-col rounded-[8px] bg-black/70 p-[6px] text-[11px] text-white">
+        <div className="mb-[3px] flex items-center justify-between">
+          <span className="font-bold text-white/70">{t`聊天`}</span>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="px-1 text-white/60 hover:text-white"
+            aria-label={t`收起聊天`}
+          >
+            ✕
+          </button>
+        </div>
+        <div className="flex-1 space-y-[2px] overflow-hidden">
+          {lines.length === 0 && <p className="text-white/40">{t`（還沒有人說話）`}</p>}
+          {lines.slice(-6).map((l, i) => (
+            <p key={`${i}-${l.text}`} className="text-[#ffe9a8]">
+              <span className="text-[#ffb27a]">{seats[l.seat]?.name ?? `P${l.seat + 1}`}：</span>
+              {l.text}
+            </p>
+          ))}
+        </div>
+        <input
+          type="text"
+          maxLength={120}
+          placeholder={t`輸入訊息，Enter 送出`}
+          className="mt-[3px] h-[22px] rounded border border-white/20 bg-black/40 px-2 text-[11px] text-white outline-none placeholder:text-white/30 focus:border-[#ffd27a]"
+          onKeyDown={(e) => {
+            if (e.key !== "Enter") return;
+            const el = e.currentTarget;
+            if (el.value.trim()) onSend(el.value);
+            el.value = "";
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
 export function NetRun({
   client,
@@ -71,6 +213,9 @@ export function NetRun({
   const [desync, setDesync] = useState<number | null>(null);
   // a correction arrived from further back than the snapshots kept: this peer fell too far behind
   const [lost, setLost] = useState(false);
+  // the roster strip: everyone's bars as of the last tick (the scene draws only other players' bars)
+  const [strip, setStrip] = useState<Strip[]>([]);
+  const [chat, setChat] = useState<ChatLine[]>([]);
   const profile = getActiveProfile();
 
   useEffect(() => {
@@ -85,6 +230,10 @@ export function NetRun({
     // timer is not exactly 30 Hz) and LEAD ticks ahead of it, which is as far as presses are guessed
     let interval = 1000 / TICK_HZ;
     let lastFrameAt = 0;
+    // a bout this peer is coming back into: the room said so (client.resuming), and it replays
+    // its log once this peer's world is up. The clock must not run until the replay is through.
+    let resuming = client.getSnapshot().resuming;
+    let resumeEnd = -1;
     const off = client.onMessage((msg) => {
       if (msg.t === "f") {
         queue.push(msg);
@@ -92,6 +241,9 @@ export function NetRun({
         if (lastFrameAt) interval = interval * 0.9 + Math.min(100, now - lastFrameAt) * 0.1;
         lastFrameAt = now;
       } else if (msg.t === "desync") setDesync(msg.k);
+      else if (msg.t === "chat")
+        setChat((c) => [...c, { seat: msg.seat, text: msg.text }].slice(-40));
+      else if (msg.t === "resume-end") resumeEnd = msg.k;
     });
 
     const run = async () => {
@@ -199,6 +351,9 @@ export function NetRun({
       }
       setLoading(false);
       client.send({ t: "loaded" });
+      // a bout this peer is coming back into: ask for the frames from tick 0 (the world above is
+      // the bout's start, so the replay rebuilds exactly what everyone else has)
+      if (resuming) client.send({ t: "resume" });
 
       // the bout runs on the local clock; the room's frames confirm or correct it (rollback.ts)
       const sim: Sim = {
@@ -245,7 +400,15 @@ export function NetRun({
         while (queue.length) {
           const fr = queue.shift()!;
           rb.frame(fr.k, fr.m);
+          // a replay runs the world up to the room's tick, silently: the bout already happened
+          if (resuming && rb.tick <= fr.k) while (rb.tick <= fr.k) rb.advance(true);
         }
+        // a replay is done once the room says the log is through (its frames up to that tick)
+        if (resuming && resumeEnd >= 0 && rb.tick >= resumeEnd) {
+          resuming = false;
+          client.setResumed();
+        }
+        if (resuming) return;
         while (nextHash <= rb.confirmed) {
           const x = rb.hashAfter(nextHash);
           if (x !== null) client.send({ t: "h", k: nextHash, x });
@@ -256,7 +419,7 @@ export function NetRun({
 
       const afterTick = (k: number) => {
         const p = entrants[you].f;
-        if (p && k % 3 === 0)
+        if (p && k % 3 === 0) {
           setVitals({
             name: me.name,
             charId: p.data.attrs.id,
@@ -269,6 +432,23 @@ export function NetRun({
             maxSp: p.maxSp,
             status: [...p.status.keys()],
           });
+          // the strip keeps everyone (the scene draws only the other players' bars)
+          setStrip(
+            entrants.map((e, i) => ({
+              name: e.name,
+              team: e.team,
+              com: e.com,
+              you: e.you,
+              online: room.seats[i]?.online ?? true,
+              charId: e.f?.data.attrs.id ?? null,
+              hp: e.f?.hp ?? 0,
+              maxHp: e.f?.maxHp ?? 1,
+              mp: e.f?.mp ?? 0,
+              maxMp: e.f?.maxMp ?? 1,
+              kos: e.kos,
+            })),
+          );
+        }
         if (k % 30 === 0) setSeconds(Math.floor(k / 30));
         if (comboN && k - comboAt > 60) {
           comboN = 0;
@@ -298,6 +478,14 @@ export function NetRun({
         acc += Math.min(250, now - last);
         last = now;
         takeFrames();
+        if (resuming) {
+          // the room is replaying: the world is already at the start, so no tick may run yet
+          acc = 0;
+          d.setViewWidth((el.clientWidth * 600) / Math.max(1, el.clientHeight));
+          scene.draw(undefined, { alpha: 0, tick: d.world.tick });
+          raf = requestAnimationFrame(frame);
+          return;
+        }
         // the local clock follows the room's rate (24 – 36 Hz), holding LEAD ticks ahead of its
         // latest frame: too far ahead it waits, too far behind (we loaded late, or stalled) it
         // catches up a few ticks a frame — and never past what the snapshots can take back
@@ -343,6 +531,15 @@ export function NetRun({
           level={profile?.lv ?? 1}
           exp={profile?.exp ?? 0}
           money={profile?.money ?? 0}
+        />
+      )}
+      {!board && <Roster rows={strip} scale={scale} />}
+      {!board && (
+        <BoutChat
+          lines={chat}
+          seats={room.seats}
+          scale={scale}
+          onSend={(text) => client.send({ t: "chat", text })}
         />
       )}
       <HitCounter hits={combo.n} id={combo.id} scale={scale} />

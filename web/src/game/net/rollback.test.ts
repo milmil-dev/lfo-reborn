@@ -100,4 +100,26 @@ describe("rollback", () => {
     expect(rb.lost).toBe(true);
     expect(rb.ahead).toBe(29);
   });
+
+  it("replays a resumed bout silently, from the start to the room's tick", () => {
+    const t = toy();
+    const rb = new Rollback(t.sim, 2);
+    // a peer that comes back mid-bout: frames from tick 0, stepped one by one without a sound
+    for (let k = 0; k < 5; k++) {
+      rb.frame(k, [k, 9]);
+      rb.advance(true);
+    }
+    expect(rb.tick).toBe(5);
+    expect(rb.confirmed).toBe(4);
+    expect(t.log).toEqual([]);
+    expect(t.sim.hash()).toBe(
+      straight([
+        [0, 9],
+        [1, 9],
+        [2, 9],
+        [3, 9],
+        [4, 9],
+      ]),
+    );
+  });
 });

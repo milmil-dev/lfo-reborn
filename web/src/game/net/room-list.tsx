@@ -155,6 +155,14 @@ export function RoomList({
   const shown = all.slice(page * ROWS, page * ROWS + ROWS);
   const chosen = all.find((r) => r.code === picked) ?? null;
   const joinable = (r: RoomSummary) => r.phase === "lobby" && r.seats < MAX_SEATS;
+  /** Why 加入 is off for the chosen room — a bout in progress cannot take a new fighter. */
+  const blocked = chosen
+    ? chosen.phase === "fight"
+      ? t`「${chosen.name}」正在對戰中，要等這一局結束才能加入。`
+      : chosen.seats >= MAX_SEATS
+        ? t`「${chosen.name}」已經滿了（${chosen.seats}/${MAX_SEATS}）。`
+        : null
+    : null;
 
   const join = (c: string) => {
     audio.sfx("johnnyconfirm.wav");
@@ -194,7 +202,9 @@ export function RoomList({
             ? t`連接不到對戰伺服器。`
             : rooms === null
               ? t`讀取中…`
-              : t`${all.length} 間公開的遊戲室。點一間再按「加入」，或輸入朋友的房號。`}
+              : blocked
+                ? blocked
+                : t`${all.length} 間公開的遊戲室。點一間再按「加入」，或輸入朋友的房號。`}
         </p>
       </div>
 

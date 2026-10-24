@@ -16,9 +16,29 @@ export type NetSnapshot = {
   you: number;
   error: ErrorCode | "network" | null;
   chat: ChatLine[];
+  /** the room is replaying a bout this peer came back into (it has frames to catch up on) */
+  resuming: boolean;
 };
 
 const MAX_CHAT_LINES = 60;
+/** The seat's secret, by room code: a refreshed tab sends it and gets its seat back. */
+const TOKEN_KEY = (code: string) => `lfo-reborn.seat.${code}`;
+
+function readToken(code: string): string | null {
+  try {
+    return localStorage.getItem(TOKEN_KEY(code));
+  } catch {
+    return null;
+  }
+}
+function writeToken(code: string, token: string | null) {
+  try {
+    if (token) localStorage.setItem(TOKEN_KEY(code), token);
+    else localStorage.removeItem(TOKEN_KEY(code));
+  } catch {
+    // blocked storage: the tab cannot come back to its seat, and joins afresh
+  }
+}
 
 /** Where the realtime Worker is: VITE_REALTIME_URL, or wrangler dev's port in development. */
 export function realtimeUrl(): string | null {
@@ -45,7 +65,14 @@ export async function listRooms(base: string): Promise<RoomSummary[]> {
 
 export class RoomClient {
   private ws: WebSocket | null = null;
-  private snap: NetSnapshot = { status: "connecting", room: null, you: -1, error: null, chat: [] };
+  private snap: NetSnapshot = {
+    status: "connecting",
+    room: null,
+    you: -1,
+    error: null,
+    chat: [],
+    resuming: false,
+  };
   private readonly subs = new Set<() => void>();
   private readonly handlers = new Set<(m: ServerMsg) => void>();
 
@@ -58,7 +85,10 @@ export class RoomClient {
     this.ws = ws;
     ws.onopen = () => {
       this.set({ status: "open" });
-      this.send({ t: "hello", name, build: BUILD });
+      const token = readToken(code);
+      this.send(
+        token ? { t: "hello", name, build: BUILD, token } : { t: "hello", name, build: BUILD },
+      );
     };
     ws.onmessage = (e) => {
       const msg = parse<ServerMsg>(e.data as string);
@@ -69,7 +99,11 @@ export class RoomClient {
   }
 
   private receive(msg: ServerMsg) {
-    if (msg.t === "room") this.set({ room: msg.room, you: msg.you });
+    if (msg.t === "room") {
+      if (msg.token) writeToken(this.code, msg.token);
+      this.set({ room: msg.room, you: msg.you });
+    } else if (msg.t === "resume") this.set({ resuming: true });
+    else if (msg.t === "resume-end") this.set({ resuming: false });
     else if (msg.t === "chat")
       this.set({
         chat: [...this.snap.chat, { seat: msg.seat, text: msg.text }].slice(-MAX_CHAT_LINES),
@@ -100,8 +134,25 @@ export class RoomClient {
   };
   getSnapshot = () => this.snap;
 
+  /** The replay of a resumed bout is through: the clock may run. */
+  setResumed() {
+    this.set({ resuming: false });
+  }
+
+  /** Leave the room for good: the seat goes now, and this tab keeps no claim on it. */
   close() {
+    if (this.ws?.readyState === WebSocket.OPEN) this.send({ t: "bye" });
+    writeToken(this.code, null);
     this.ws?.close(1000, "left");
+    this.ws = null;
+  }
+
+  /**
+   * Drop the socket without giving up the seat (the effect unmounting: a refresh, StrictMode's
+   * second mount, a route change). The room keeps the seat for SEAT_GRACE_MS.
+   */
+  dispose() {
+    this.ws?.close(1000, "away");
     this.ws = null;
   }
 }

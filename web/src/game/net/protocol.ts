@@ -116,7 +116,12 @@ export function canStart(seats: Seat[]) {
 }
 
 export type ClientMsg =
-  | { t: "hello"; name: string; build: string }
+  /** `token` reclaims the seat a previous socket held (a refreshed tab), whatever the phase */
+  | { t: "hello"; name: string; build: string; token?: string }
+  /** leaving on purpose: the seat goes at once instead of waiting to be reclaimed */
+  | { t: "bye" }
+  /** a peer back mid-bout: the room replays the frames from tick 0 (frames · resume-end) */
+  | { t: "resume" }
   | { t: "seat"; key?: string; team?: number }
   | { t: "ready"; on: boolean }
   | { t: "rules"; rules: Partial<Rules> }
@@ -135,7 +140,11 @@ export type ClientMsg =
 export type ErrorCode = "version" | "full" | "started" | "not-host" | "bad" | "not-ready";
 
 export type ServerMsg =
-  | { t: "room"; room: RoomState; you: number }
+  | { t: "room"; room: RoomState; you: number; token?: string }
+  /** the seat is reclaimed: this is the fight it is in (the frames follow when they ask) */
+  | { t: "resume"; k: number }
+  /** the replay is over: frames from now on are live */
+  | { t: "resume-end"; k: number }
   | { t: "chat"; seat: number; text: string }
   | { t: "start"; seed: number }
   /** the inputs of tick k, one mask per seat */
