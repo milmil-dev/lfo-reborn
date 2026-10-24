@@ -72,7 +72,19 @@ export type Bla = {
 };
 
 /** A special move from the .spt `spm` table: inputs, MP cost, optional chain source, target frame. */
-export type Move = { keys: string[]; mp: number; from: number; to: number; slot: number };
+export type Move = {
+  keys: string[];
+  mp: number;
+  from: number;
+  to: number;
+  slot: number;
+  /**
+   * Sprite ids the move's own frame chain can spawn, following `nx` and the act table's
+   * continuation (`cont`). Filled by the pipeline so the renderer can fetch a move's art when
+   * it starts instead of when it fires.
+   */
+  fx?: number[];
+};
 
 export type CharData = {
   key: string;

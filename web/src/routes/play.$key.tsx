@@ -199,6 +199,8 @@ function Training() {
           ]),
         );
         fx.update(events);
+        // the keys typed so far may still become a special: fetch its art while the player types
+        for (const m of me.pendingMoves()) fx.warm(m);
 
         // input history: one entry per newly pressed button group
         const fresh = (Object.keys(input) as (keyof InputState)[]).filter(

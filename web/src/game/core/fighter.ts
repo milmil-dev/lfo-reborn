@@ -606,6 +606,20 @@ export class Fighter {
     );
   }
 
+  /**
+   * The specials the keys typed so far could still become: their command is longer than what is
+   * in the buffer and begins with it. Read-only — the renderer uses it to fetch the art a move
+   * will need while the player is still typing, since a 200 MB sheet takes half a second to
+   * decode and a move's wind-up is only a few ticks.
+   */
+  pendingMoves(): Move[] {
+    const seq = this.buffer.map((k) => k.key).join("");
+    if (!seq) return [];
+    return this.data.moves.filter((m) =>
+      m.keys.some((k) => k.length > seq.length && k.startsWith(seq)),
+    );
+  }
+
   private canTurn() {
     return this.groundNeutral() || this.anim === "JUMPU";
   }

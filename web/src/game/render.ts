@@ -80,6 +80,7 @@ export type CharAssets = {
   layers?: Map<number, CharAssets>;
 };
 const charCache = new Map<string, Promise<CharAssets>>();
+const dataCache = new Map<string, Promise<CharData>>();
 
 export const loadChar = (key: string) => loadSprite(`chars/${key}`);
 
@@ -115,26 +116,59 @@ export function loadSprite(path: string): Promise<CharAssets> {
     return p;
   }
   if (!p) {
-    const dir = path.slice(0, path.lastIndexOf("/"));
-    p = (async () => {
-      const data = (await fetch(`${BASE}/${path}.json`, { cache: "no-cache" }).then((r) => {
-        if (!r.ok) throw new Error(`no sprite data for ${path}`);
-        return r.json();
-      })) as CharData;
-      const pages = await Promise.all(data.pages.map((f) => loadArt(`${dir}/${f}`, data.version)));
-      for (const pg of pages) pg.source.scaleMode = "linear";
-      const textures = new Map<number, Texture>();
-      for (const [pid, [page, x, y, w, h]] of Object.entries(data.rects))
-        textures.set(
-          Number(pid),
-          new Texture({ source: pages[page].source, frame: new Rectangle(x, y, w, h) }),
-        );
-      return { data, textures };
-    })();
+    p = loadData(path).then((data) => cachedAtlas(path, data));
     charCache.set(path, p);
     p.catch(() => charCache.delete(path));
   }
   return p;
+}
+
+/**
+ * Frame data alone, without its atlas. A skill's effects are preloaded from the frames that
+ * spawn them (`bla` rows), and one character can name dozens of them: 星奇's list is fifteen
+ * sheets whose pages decode to 787 MB, which a phone cannot hold. The data is what the tick
+ * needs — a few hundred KB of JSON — so that is fetched ahead; the pictures follow on first use.
+ */
+export function loadData(path: string): Promise<CharData> {
+  let p = dataCache.get(path);
+  if (!p) {
+    p = fetch(`${BASE}/${path}.json`, { cache: "no-cache" }).then((r) => {
+      if (!r.ok) throw new Error(`no sprite data for ${path}`);
+      return r.json() as Promise<CharData>;
+    });
+    dataCache.set(path, p);
+    p.catch(() => dataCache.delete(path));
+  }
+  return p;
+}
+
+/**
+ * The atlas for frame data already in hand (the counterpart of `loadData`). Shares `charCache`
+ * with `loadSprite`, so a sprite fetched both ways is still decoded once.
+ */
+export function atlasFor(path: string, data: CharData): Promise<CharAssets> {
+  let p = charCache.get(path);
+  if (!p) {
+    p = cachedAtlas(path, data);
+    charCache.set(path, p);
+    p.catch(() => charCache.delete(path));
+  }
+  return p;
+}
+
+/** Decodes the pages of `data` into a texture per picture rect (no cache: see `atlasFor`). */
+function cachedAtlas(path: string, data: CharData): Promise<CharAssets> {
+  const dir = path.slice(0, path.lastIndexOf("/"));
+  return Promise.all(data.pages.map((f) => loadArt(`${dir}/${f}`, data.version))).then((pages) => {
+    for (const pg of pages) pg.source.scaleMode = "linear";
+    const textures = new Map<number, Texture>();
+    for (const [pid, [page, x, y, w, h]] of Object.entries(data.rects))
+      textures.set(
+        Number(pid),
+        new Texture({ source: pages[page].source, frame: new Rectangle(x, y, w, h) }),
+      );
+    return { data, textures };
+  });
 }
 
 export type StageArt = { url: string; width: number; height: number };
