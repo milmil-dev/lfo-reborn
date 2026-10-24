@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.2](https://github.com/milmil-dev/lfo-reborn/compare/v0.7.1...v0.7.2) (2026-10-24)
+
+
+### Bug Fixes
+
+* **web:** keep phones off the 2× art so the tab stops being OOM-killed ([#37](https://github.com/milmil-dev/lfo-reborn/issues/37)) ([614a46f](https://github.com/milmil-dev/lfo-reborn/commit/614a46f380510445dc9740e8a8a65859ce08eb50))
+
 ## [0.7.1](https://github.com/milmil-dev/lfo-reborn/compare/v0.7.0...v0.7.1) (2026-10-24)
 
 
