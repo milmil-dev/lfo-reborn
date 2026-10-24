@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.3](https://github.com/milmil-dev/lfo-reborn/compare/v0.7.2...v0.7.3) (2026-10-24)
+
+
+### Performance Improvements
+
+* **web:** fetch a skill's art when it is used, not when the fighter joins ([#39](https://github.com/milmil-dev/lfo-reborn/issues/39)) ([0fca245](https://github.com/milmil-dev/lfo-reborn/commit/0fca245c6ae631ba8e0f8dac7cfd561df2adfebf))
+
 ## [0.7.2](https://github.com/milmil-dev/lfo-reborn/compare/v0.7.1...v0.7.2) (2026-10-24)
 
 
