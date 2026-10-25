@@ -180,16 +180,16 @@ export function RoomList({
   };
 
   const headerText = [t`遊戲室`, t`主持`, t`人數`, t`場地`, "LV", t`狀態`];
-  // Each title sits over the middle of the column it names. The bar's knobs (x ≈ 121, 282, 443,
-  // 604) fall inside some columns: 主持, 場地 and 狀態 clear theirs at that centre, but the level
-  // column's knob sits near its left edge, so LV centres in the free span after it — where the
-  // client draws it too. 遊戲室 keeps its own grey box at the head of the bar.
+  // Each title sits over the middle of the column it names, clear of the bar's knobs (x ≈ 63, 220,
+  // 381, 542). Two columns carry a knob at an edge rather than the middle, so those titles centre in
+  // the free span: 人數 before the knob at its right edge, LV after the knob at its left edge — where
+  // the client draws it too. 遊戲室 keeps its own grey box at the head of the bar.
   const headerCols: Col[] = [
     CELL.name,
     { ...CELL.host, align: "center" },
-    CELL.seats,
+    { x: CELL.seats.x, w: 40, align: "center" },
     { ...CELL.stage, align: "center" },
-    { x: CELL.level.x + 49, w: CELL.level.w - 49, align: "center" },
+    { x: CELL.level.x + 37, w: CELL.level.w - 37, align: "center" },
     CELL.phase,
   ];
 
